@@ -3,7 +3,7 @@ AUS-Cash Core Wallet
 
 ####    Windows Install and Mining Instructions
 
->        First proceed to the releases section of this GitHub or click [here](https://github.com/AustraliaCash/AustraliaCash-Core/releases)
+>        First proceed to the releases section of this GitHub or click https://github.com/AustraliaCash/AustraliaCash-Core/releases
 >        For the Wallet download australiacash-qt.exe or click [here](https://github.com/AustraliaCash/AustraliaCash-Core/releases/download/0.16.3/australiacash-qt.exe)
 >       Double click the downloaded file to start AustraliaCash Core (for cpu mining, install to default directories)
 >       
