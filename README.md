@@ -16,4 +16,4 @@ AUS-Cash Core Wallet
 >       rpcuser=username
 >       rpcpassword=password
 >       server=1
->       addnode = 104.156.233.160
+>       addnode=104.156.233.160
