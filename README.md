@@ -16,3 +16,6 @@ AUS-Cash Core Wallet
 >       rpcuser=username
 >       rpcpassword=password
 >       server=1
+>       
+>       
+>       Restart wallet and double click mine.bat
