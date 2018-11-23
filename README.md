@@ -17,5 +17,5 @@ AUS-Cash Core Wallet
 >       rpcpassword=password
 >       server=1
 >       
->       
+>       Open ports 1986-1987 via the routers port forwarding or virtual server option.
 >       Restart wallet and double click mine.bat
