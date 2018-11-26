@@ -3,7 +3,7 @@ AUS-Cash Core Wallet
 
 ####    Windows Install and Mining Instructions
 
->       First proceed to the releases section of this GitHub (Latest 0.17.1)
+>       First proceed to the releases section of this GitHub (Latest 0.17.2)
 >       Find the latest release at top of page.
 >       For the Wallet, download australiacash-qt.exe
 >       Double click the downloaded file to start AustraliaCash Core (for cpu mining, install to default directories)
@@ -17,5 +17,5 @@ AUS-Cash Core Wallet
 >       rpcpassword=password
 >       server=1
 >       
->       Open ports 1986-1987 via the routers port forwarding or virtual server option.
+>       Open ports 1986-1987 via the routers port forwarding or virtual server option for better peers connectivity.
 >       Restart wallet and double click mine.bat
