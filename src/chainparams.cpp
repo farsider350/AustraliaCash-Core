@@ -93,10 +93,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1576195200; // December 13, 2019
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0000000000000000000000000000000000000000000000000027660b11bb0b48");
+        consensus.nMinimumChainWork = uint256S("00000000000000000000000000000000000000000000000000824d9a1fbdea39");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x83448c832918d6a7d4c7195ed53506f0f4d7da25323abf2c7e6fb6959aba0257"); //29500
+        consensus.defaultAssumeValid = uint256S("0xa829fcf7a8d050f25d706944f4ac8428c0327bc286f0ac01535bc71b07fff1c0"); //62000
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -120,6 +120,7 @@ public:
         vSeeds.emplace_back("104.156.233.160");
         vSeeds.emplace_back("104.156.239.75");
         vSeeds.emplace_back("45.32.244.142");
+		vSeeds.emplace_back("207.148.85.226");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,23);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
@@ -153,6 +154,9 @@ public:
 		{  31502, uint256S("0xd5bc86ab92257f0e3eb149f69ba180410092c6465639d8fd5ab8525c1a2a0200")},
 		{  32985, uint256S("0x58815a2fdec8b91cf0e84197cb0eea88dd705edd962e4784a43d6783fe03963f")},
 		{  37846, uint256S("0x1e7d1f67de29e32e06c23426f9346a99876a24d664fcddbdd2705e8054dc5530")},
+		{  40000, uint256S("0xf2243cce020a8354758e4f26d4398656e80b2b91add91681d8a729248ff3e473")},
+		{  45000, uint256S("0x49f2754bc381ac77c1cc36210e8862935de2ff5346a66b9817906bb9223c0c90")},
+		{  50000, uint256S("0xfb09f0e9fc709c22e84b014bfbe11eb1a8ede673ab0873f03bf1bc70662b2a62")},
 		
 		}
         };
