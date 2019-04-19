@@ -9,6 +9,28 @@
 #include <primitives/transaction.h>
 #include <serialize.h>
 #include <uint256.h>
+#include <util.h>
+
+enum { 
+    ALGO_SCRYPT   = 0,
+    //ALGO_EQUIHASH = 1,
+    //ALGO_ETHASH   = 2,
+    NUM_ALGOS_IMPL };
+
+const int NUM_ALGOS = 2;
+
+enum {
+    // primary version
+    BLOCK_VERSION_DEFAULT        = 2, 
+
+    // algo
+    BLOCK_VERSION_ALGO           = (15 << 8),
+    BLOCK_VERSION_SCRYPT         = (0 << 9),
+    //BLOCK_VERSION_EQUIHASH       = (5 << 9),
+    //BLOCK_VERSION_ETHASH         = (6 << 9),
+};
+
+std::string GetAlgoName(int Algo);
 
 /** Nodes collect new transactions into a block, hash them into a hash tree,
  * and scan through nonce values to make the block's hash satisfy proof-of-work
