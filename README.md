@@ -3,10 +3,10 @@ AUS-Cash Core Wallet
 
 ####	About
 
->		Australiacash is a free open source peer-to-peer electronic cash system that is
+>		Australiacash is a free open source peer-to-peer electronic system that is
 >		completely decentralized, without the need for a central server or trusted
->		parties.  Users hold the crypto keys to their own money and transact directly
->		with each other, with the help of a P2P network to check for double-spending.
+>		parties.  Users hold the crypto keys to their own Australia Cash and transact directly
+>		with each other, with the help of a peer-to-peer network to check for double-spending.
 >
 >		Australia Cash is a peer-to-peer cryptocurrency and open-source software project released 
 >		under the MIT/X11 license. Creation and transfer of coins is based on an open source 
