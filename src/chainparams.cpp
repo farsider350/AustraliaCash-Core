@@ -93,10 +93,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1576195200; // December 13, 2019
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("00000000000000000000000000000000000000000000000000c7fd7e7e6afeea");
+        consensus.nMinimumChainWork = uint256S("00000000000000000000000000000000000000000000000001e141e789aa81f2");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x3f5157f0817b9c1a1f820218a811d6b95c8f78499f23844563ac9a80c2eaaf67"); //62000
+        consensus.defaultAssumeValid = uint256S("0x233f0791e8beab0ea34af5aa4db4f9e9e78b4e6f570e7af3a26a94432019d697"); //130000
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -169,16 +169,17 @@ public:
 		{  85000, uint256S("0xd410c1187292bb4e1a17e88a499fbd727cf1742b2eab2eb3257135e4522e6a77")},
 		{  90000, uint256S("0x8d4c267b390daa0913397f4357dd6b38f119f1d463bfcdcb1d5c4457eec6c2ec")},
 		{  95000, uint256S("0x16ae3b52e588a4750d1670127a66b428b64396709824e6b08d8050369b932c54")},
+		{  130000, uint256S("0x233f0791e8beab0ea34af5aa4db4f9e9e78b4e6f570e7af3a26a94432019d697")},
 		
 		}
         };
 
         chainTxData = ChainTxData{
             // Data as of block e96047466dfd1915fe4917c33c26f99cf28da86f57ed5a59617596fabcaacbba (height 95798).
-            1557739989, // * UNIX timestamp of last known number of transactions
-            102397,  // * total number of transactions between genesis and that timestamp
+            1573515220, // * UNIX timestamp of last known number of transactions
+            145080,  // * total number of transactions between genesis and that timestamp
                     //   (the tx=... number in the SetBestChain debug.log lines)
-            0.006187061434454094     // * estimated number of transactions per second after that timestamp
+            0.001629134215346749     // * estimated number of transactions per second after that timestamp
         };
     }
 };
