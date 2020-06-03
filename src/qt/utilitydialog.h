@@ -10,6 +10,7 @@
 #include "walletmodel.h"
 
 class BitcoinGUI;
+class ClientModel;
 
 namespace Ui {
     class HelpMessageDialog;
