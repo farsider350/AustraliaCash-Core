@@ -312,7 +312,7 @@ p, li { white-space: pre-wrap; }
   <customwidget>
    <class>VerticalLabel</class>
    <extends>QLabel</extends>
-   <header>verticallabel.h</header>
+   <header>../verticallabel.h</header>
   </customwidget>
  </customwidgets>
  <resources>
