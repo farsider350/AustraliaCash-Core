@@ -13,6 +13,7 @@
 #include <qt/recentrequeststablemodel.h>
 #include <qt/sendcoinsdialog.h>
 #include <qt/transactiontablemodel.h>
+#include <qt/messagetablemodel.h>
 
 #include <base58.h>
 #include <chain.h>
@@ -40,6 +41,7 @@
 WalletModel::WalletModel(const PlatformStyle *platformStyle, CWallet *_wallet, OptionsModel *_optionsModel, QObject *parent) :
     QObject(parent), wallet(_wallet), optionsModel(_optionsModel), addressTableModel(0),
     transactionTableModel(0),
+    messageTableModel(0),
     recentRequestsTableModel(0),
     cachedBalance(0), cachedUnconfirmedBalance(0), cachedImmatureBalance(0),
     cachedEncryptionStatus(Unencrypted),
@@ -50,6 +52,7 @@ WalletModel::WalletModel(const PlatformStyle *platformStyle, CWallet *_wallet, O
 
     addressTableModel = new AddressTableModel(wallet, this);
     transactionTableModel = new TransactionTableModel(platformStyle, wallet, this);
+    messageTableModel = new MessageTableModel(platformStyle, wallet, this);
     recentRequestsTableModel = new RecentRequestsTableModel(wallet, this);
 
     // This timer will be fired repeatedly to update the balance
@@ -191,6 +194,18 @@ bool WalletModel::validateAddress(const QString &address)
     return IsValidDestinationString(address.toStdString());
 }
 
+std::string WalletModel::getFirstOwnAddress()
+{
+    LOCK(wallet->cs_wallet);
+    BOOST_FOREACH(const PAIRTYPE(CTxDestination, CAddressBookData)& item, wallet->mapAddressBook)
+    {
+        const CBitcoinAddress& address = item.first;
+        if (item.second.purpose == "receive") return address.ToString();
+    }
+
+    return std::string("");
+}
+
 WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransaction &transaction, const CCoinControl& coinControl)
 {
     CAmount total = 0;
@@ -224,7 +239,7 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
                 const unsigned char* scriptStr = (const unsigned char*)out.script().data();
                 CScript scriptPubKey(scriptStr, scriptStr+out.script().size());
                 CAmount nAmount = out.amount();
-                CRecipient recipient = {scriptPubKey, nAmount, rcp.fSubtractFeeFromAmount};
+                CRecipient recipient = {scriptPubKey, nAmount, rcp.fSubtractFeeFromAmount, rpc.calcAndAddFee};
                 vecSend.push_back(recipient);
             }
             if (subtotal <= 0)
@@ -247,7 +262,7 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
             ++nAddresses;
 
             CScript scriptPubKey = GetScriptForDestination(DecodeDestination(rcp.address.toStdString()));
-            CRecipient recipient = {scriptPubKey, rcp.amount, rcp.fSubtractFeeFromAmount};
+            CRecipient recipient = {scriptPubKey, rcp.amount, rcp.fSubtractFeeFromAmount, rcp.calcAndAddFee};
             vecSend.push_back(recipient);
 
             total += rcp.amount;
@@ -278,6 +293,7 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
         CReserveKey *keyChange = transaction.getPossibleKeyChange();
         bool fCreated = wallet->CreateTransaction(vecSend, *newTx, *keyChange, nFeeRequired, nChangePosRet, strFailReason, coinControl);
         transaction.setTransactionFee(nFeeRequired);
+        qDebug() << "nFeeRequired = " << nFeeRequired;
         if (fSubtractFeeFromAmount && fCreated)
             transaction.reassignAmounts(nChangePosRet);
 
@@ -385,6 +401,11 @@ AddressTableModel *WalletModel::getAddressTableModel()
 TransactionTableModel *WalletModel::getTransactionTableModel()
 {
     return transactionTableModel;
+}
+
+MessageTableModel *WalletModel::getMessageTableModel()
+{
+    return messageTableModel;
 }
 
 RecentRequestsTableModel *WalletModel::getRecentRequestsTableModel()

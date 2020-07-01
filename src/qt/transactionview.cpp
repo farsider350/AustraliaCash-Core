@@ -125,7 +125,7 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
 
     QVBoxLayout *vlayout = new QVBoxLayout(this);
     vlayout->setContentsMargins(0,0,0,0);
-    vlayout->setSpacing(0);
+    vlayout->setSpacing(3); // Old = 0
 
     QTableView *view = new QTableView(this);
     vlayout->addLayout(hlayout);

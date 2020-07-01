@@ -168,6 +168,7 @@ struct CRecipient
     CScript scriptPubKey;
     CAmount nAmount;
     bool fSubtractFeeFromAmount;
+    bool calcAndAddFee;
 };
 
 typedef std::map<std::string, std::string> mapValue_t;

@@ -17,6 +17,8 @@
 #include <qt/signverifymessagedialog.h>
 #include <qt/transactiontablemodel.h>
 #include <qt/transactionview.h>
+#include <qt/messagetablemodel.h>
+#include <qt/messageview.h>
 #include <qt/walletmodel.h>
 
 #include <ui_interface.h>
@@ -53,6 +55,21 @@ WalletView::WalletView(const PlatformStyle *_platformStyle, QWidget *parent):
     vbox->addLayout(hbox_buttons);
     transactionsPage->setLayout(vbox);
 
+    messagesPage = new QWidget(this);
+    QVBoxLayout *vboxm = new QVBoxLayout();
+    QHBoxLayout *hbox_buttonsm = new QHBoxLayout();
+    messageView = new MessageView(platformStyle, this);
+    vboxm->addWidget(messageView);
+    QPushButton *exportButtonm = new QPushButton(tr("&Export"), this);
+    exportButtonm->setToolTip(tr("Export the data in the current tab to a file"));
+    if (platformStyle->getImagesOnButtons()) {
+        exportButtonm->setIcon(platformStyle->SingleColorIcon(":/icons/export"));
+    }
+    hbox_buttonsm->addStretch();
+    hbox_buttonsm->addWidget(exportButtonm);
+    vboxm->addLayout(hbox_buttonsm);
+    messagesPage->setLayout(vboxm);
+
     receiveCoinsPage = new ReceiveCoinsDialog(platformStyle);
     sendCoinsPage = new SendCoinsDialog(platformStyle);
 
@@ -61,6 +78,7 @@ WalletView::WalletView(const PlatformStyle *_platformStyle, QWidget *parent):
 
     addWidget(overviewPage);
     addWidget(transactionsPage);
+    addWidget(messagesPage);
     addWidget(receiveCoinsPage);
     addWidget(sendCoinsPage);
 
@@ -74,10 +92,15 @@ WalletView::WalletView(const PlatformStyle *_platformStyle, QWidget *parent):
     // Clicking on "Export" allows to export the transaction list
     connect(exportButton, SIGNAL(clicked()), transactionView, SLOT(exportClicked()));
 
+    // Clicking on "Export" allows to export the messages list
+    connect(exportButtonm, SIGNAL(clicked()), messageView, SLOT(exportClicked()));
+
     // Pass through messages from sendCoinsPage
     connect(sendCoinsPage, SIGNAL(message(QString,QString,unsigned int)), this, SIGNAL(message(QString,QString,unsigned int)));
     // Pass through messages from transactionView
     connect(transactionView, SIGNAL(message(QString,QString,unsigned int)), this, SIGNAL(message(QString,QString,unsigned int)));
+    // Pass through messages from messageView
+    connect(messageView, SIGNAL(message(QString,QString,unsigned int)), this, SIGNAL(message(QString,QString,unsigned int)));
 }
 
 WalletView::~WalletView()
@@ -117,6 +140,7 @@ void WalletView::setWalletModel(WalletModel *_walletModel)
 {
     this->walletModel = _walletModel;
 
+    messageView->setModel(walletModel);
     // Put transaction list in tabs
     transactionView->setModel(_walletModel);
     overviewPage->setWalletModel(_walletModel);
@@ -177,6 +201,11 @@ void WalletView::gotoOverviewPage()
 void WalletView::gotoHistoryPage()
 {
     setCurrentWidget(transactionsPage);
+}
+
+void WalletView::gotoMessagesPage()
+{
+    setCurrentWidget(messagesPage);
 }
 
 void WalletView::gotoReceiveCoinsPage()
