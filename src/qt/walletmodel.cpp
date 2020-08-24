@@ -18,6 +18,7 @@
 #include <base58.h>
 #include <chain.h>
 #include <keystore.h>
+#include <key.h>
 #include <validation.h>
 #include <net.h> // for g_connman
 #include <policy/fees.h>
@@ -204,6 +205,18 @@ std::string WalletModel::getFirstOwnAddress()
     }
 
     return std::string("");
+}
+
+bool WalletModel::isOwnAddress(const std::string& address)
+{
+    LOCK(wallet->cs_wallet);
+    BOOST_FOREACH(const PAIRTYPE(CTxDestination, CAddressBookData)& item, wallet->mapAddressBook)
+    {
+        const CBitcoinAddress& lAddress = item.first;
+        if (item.second.purpose == "receive" && lAddress.ToString() == address) return true;
+    }
+
+    return false;
 }
 
 WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransaction &transaction, const CCoinControl& coinControl)
@@ -676,6 +689,11 @@ bool WalletModel::abandonTransaction(uint256 hash) const
 {
     LOCK2(cs_main, wallet->cs_wallet);
     return wallet->AbandonTransaction(hash);
+}
+
+bool WalletModel::getKey(const CKeyID &address, CKey &keyOut)
+{
+    return wallet->GetKey(address, keyOut);
 }
 
 bool WalletModel::transactionCanBeBumped(uint256 hash) const

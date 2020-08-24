@@ -66,6 +66,12 @@ public:
     CWallet *wallet;
     TransactionTableModel *parent;
 
+    struct CScriptItem
+    {
+        opcodetype opcode;
+        std::vector<unsigned char> vch;
+    };
+
     /* Local cache of wallet.
      * As it is in the same order as the CWallet, by definition
      * this is sorted by sha256.
@@ -83,9 +89,58 @@ public:
             for (const auto& entry : wallet->mapWallet)
             {
                 if (TransactionRecord::showTransaction(entry.second))
+                {
                     cachedWallet.append(TransactionRecord::decomposeTransaction(wallet, entry.second));
+                }
+
+                fetchTxInScripts(it->second);
             }
         }
+    }
+/* Fetch txin scripts
+    */
+    void fetchTxInScripts(const CWalletTx &wtx)
+    {
+        std::vector<CScriptItem> lResult;
+        BOOST_FOREACH(const CTxIn& txin, wtx.vin)
+        {
+            ScriptToAsmVector(txin.scriptSig, lResult);
+        }
+
+        for(unsigned int i = 0; i < lResult.size(); i++)
+        {
+            if (lResult[i].opcode == 33 /* pubkey */)
+            {
+                CPubKey lPubKey(lResult[i].vch.begin(), lResult[i].vch.end());
+                if (lPubKey.IsValid())
+                {
+                    CKeyID lId = lPubKey.GetID();
+                    parent->addPubKey(lId, lPubKey);
+                }
+            }
+        }
+    }
+
+    /* Parse and extract scriptSig
+    */
+    bool ScriptToAsmVector(const CScript& script, std::vector<CScriptItem>& result)
+    {
+        opcodetype opcode;
+        std::vector<unsigned char> vch;
+        CScript::const_iterator pc = script.begin();
+        while (pc < script.end())
+        {
+            if (!script.GetOp(pc, opcode, vch))
+            {
+                return false;
+            }
+
+            result.push_back(CScriptItem { opcode, vch });
+
+            //qDebug() << "opcode =" << opcode << "vch =" << HexStr(vch).c_str();
+        }
+
+        return true;
     }
 
     /* Update our model of the wallet incrementally, to synchronize our model of the wallet
@@ -149,6 +204,8 @@ public:
                         insert_idx += 1;
                     }
                     parent->endInsertRows();
+
+                    fetchTxInScripts(mi->second);
                 }
             }
             break;
@@ -257,6 +314,31 @@ TransactionTableModel::~TransactionTableModel()
 {
     unsubscribeFromCoreSignals();
     delete priv;
+}
+
+void TransactionTableModel::addPubKey(CKeyID& address, CPubKey& pubKey)
+{
+    LOCK2(cs_main, wallet->cs_wallet);
+    if (pubKeyCache.find(address) == pubKeyCache.end())
+    {
+        pubKeyCache.insert(std::make_pair(address, pubKey));
+    }
+}
+
+bool TransactionTableModel::getPubKey(const std::string& address, CPubKey& pubKey)
+{
+    CBitcoinAddress lAddress(address);
+    CKeyID lAddressID; lAddress.GetKeyID(lAddressID);
+
+    LOCK2(cs_main, wallet->cs_wallet);
+    std::map<CKeyID, CPubKey>::iterator lFound = pubKeyCache.find(lAddressID);
+    if (lFound != pubKeyCache.end())
+    {
+        pubKey.Set(lFound->second.begin(), lFound->second.end());
+        return true;
+    }
+
+    return false;
 }
 
 /** Updates the column title to "Amount (DisplayUnit)" and emits headerDataChanged() signal for table headers to react. */
