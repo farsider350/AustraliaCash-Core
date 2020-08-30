@@ -1012,7 +1012,33 @@ NOTE:   unlike bitcoin we are using PREVIOUS block height here,
 CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params& consensusParams, bool fSuperblockPartOnly)
 {
     double dDiff;
-    CAmount nSubsidyBase;
+
+    // Supply and Reward Halvings
+    if (nPrevHeight <= 840000) {
+         return 50 * COIN;
+    } else if (nPrevHeight <= 1680000) {
+	     return 25 * COIN;
+    } else if (nPrevHeight <= 3360000) {
+         return 12.5 * COIN;
+    } else if (nPrevHeight <= 6720000) {
+         return 6.25 * COIN;
+    } else if (nPrevHeight <= 13440000) {
+         return 3.125 * COIN;
+    } else if (nPrevHeight <= 26880000) {
+         return 1.5 * COIN;
+    } else if (nPrevHeight <= 53760000) {
+         return 1 * COIN;
+    } else if (nPrevHeight <= 107520000) {
+         return 0.5 * COIN;
+    } else if (nPrevHeight <= 215040000) {
+         return 0.25 * COIN;
+    } else  {
+	return 0.001 * COIN;
+	}
+    // Total supply 209,600,000
+    if (nPrevHeight >= 430080000) {
+        return 0;
+    }
 
     if (nPrevHeight <= 4500 && Params().NetworkIDString() == CBaseChainParams::MAIN) {
         /* a bug which caused diff to not be correctly calculated */
@@ -1021,36 +1047,17 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
         dDiff = ConvertBitsToDouble(nPrevBits);
     }
 
-    if (nPrevHeight < 5465) {
-        // Early ages...
-        // 1111/((x+1)^2)
-        nSubsidyBase = (1111.0 / (pow((dDiff+1.0),2.0)));
-        if(nSubsidyBase > 500) nSubsidyBase = 500;
-        else if(nSubsidyBase < 1) nSubsidyBase = 1;
-    } else if (nPrevHeight < 17000 || (dDiff <= 75 && nPrevHeight < 24000)) {
-        // CPU mining era
-        // 11111/(((x+51)/6)^2)
-        nSubsidyBase = (11111.0 / (pow((dDiff+51.0)/6.0,2.0)));
-        if(nSubsidyBase > 500) nSubsidyBase = 500;
-        else if(nSubsidyBase < 25) nSubsidyBase = 25;
-    } else {
-        // GPU/ASIC mining era
-        // 2222222/(((x+2600)/9)^2)
-        nSubsidyBase = (2222222.0 / (pow((dDiff+2600.0)/9.0,2.0)));
-        if(nSubsidyBase > 25) nSubsidyBase = 25;
-        else if(nSubsidyBase < 5) nSubsidyBase = 5;
-    }
+    // LogPrintf("height %u diff %4.2f reward %d\n", nPrevHeight, dDiff, nSubsidyBase);
+    // Block reward starts at 500 and declines 50% every year, getting in 18 years ~210M GENIX.
+    CAmount nSubsidy = 50 * COIN;
 
-    CAmount nSubsidy = nSubsidyBase * COIN;
-
-    // yearly decline of production by ~7.1% per year, projected ~18M coins max by year 2050+.
     for (int i = consensusParams.nSubsidyHalvingInterval; i <= nPrevHeight; i += consensusParams.nSubsidyHalvingInterval) {
-        nSubsidy -= nSubsidy/14;
+        nSubsidy = nSubsidy/2;
     }
 
-    // this is only active on devnets
-    if (nPrevHeight < consensusParams.nHighSubsidyBlocks) {
-        nSubsidy *= consensusParams.nHighSubsidyFactor;
+    // Minimum reward is 1.25
+    if (nSubsidy < (0.001 * COIN)) {
+        nSubsidy = 0.001 * COIN;
     }
 
     // Hard fork to reduce the block reward by 10 extra percent (allowing budget/superblocks)
