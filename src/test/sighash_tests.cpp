@@ -1,19 +1,19 @@
-// Copyright (c) 2013-2017 The Bitcoin Core developers
+// Copyright (c) 2013-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <consensus/tx_verify.h>
-#include <consensus/validation.h>
-#include <test/data/sighash.json.h>
-#include <hash.h>
-#include <script/interpreter.h>
-#include <script/script.h>
-#include <serialize.h>
-#include <streams.h>
-#include <test/test_bitcoin.h>
-#include <util.h>
-#include <utilstrencodings.h>
-#include <version.h>
+#include "consensus/tx_verify.h"
+#include "consensus/validation.h"
+#include "data/sighash.json.h"
+#include "hash.h"
+#include "script/interpreter.h"
+#include "script/script.h"
+#include "serialize.h"
+#include "streams.h"
+#include "test/test_auscash.h"
+#include "util.h"
+#include "utilstrencodings.h"
+#include "version.h"
 
 #include <iostream>
 
@@ -79,7 +79,7 @@ uint256 static SignatureHashOld(CScript scriptCode, const CTransaction& txTo, un
     }
 
     // Serialize and hash
-    CHashWriter ss(SER_GETHASH, SERIALIZE_TRANSACTION_NO_WITNESS);
+    CHashWriter ss(SER_GETHASH, 0);
     ss << txTmp << nHashType;
     return ss.GetHash();
 }
@@ -93,7 +93,7 @@ void static RandomScript(CScript &script) {
 }
 
 void static RandomTransaction(CMutableTransaction &tx, bool fSingle) {
-    tx.nVersion = InsecureRand32();
+    tx.nVersion = InsecureRandRange(2) + 1;
     tx.vin.clear();
     tx.vout.clear();
     tx.nLockTime = (InsecureRandBool()) ? InsecureRand32() : 0;
@@ -124,9 +124,11 @@ BOOST_AUTO_TEST_CASE(sighash_test)
     #if defined(PRINT_SIGHASH_JSON)
     std::cout << "[\n";
     std::cout << "\t[\"raw_transaction, script, input_index, hashType, signature_hash (result)\"],\n";
-    int nRandomTests = 500;
-    #else
+    #endif
     int nRandomTests = 50000;
+
+    #if defined(PRINT_SIGHASH_JSON)
+    nRandomTests = 500;
     #endif
     for (int i=0; i<nRandomTests; i++) {
         int nHashType = InsecureRand32();

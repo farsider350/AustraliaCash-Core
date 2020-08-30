@@ -1,18 +1,18 @@
-// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2009-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <core_io.h>
+#include "core_io.h"
 
-#include <primitives/block.h>
-#include <primitives/transaction.h>
-#include <script/script.h>
-#include <serialize.h>
-#include <streams.h>
+#include "primitives/block.h"
+#include "primitives/transaction.h"
+#include "script/script.h"
+#include "serialize.h"
+#include "streams.h"
 #include <univalue.h>
-#include <util.h>
-#include <utilstrencodings.h>
-#include <version.h>
+#include "util.h"
+#include "utilstrencodings.h"
+#include "version.h"
 
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/predicate.hpp>
@@ -87,60 +87,23 @@ CScript ParseScript(const std::string& s)
     return result;
 }
 
-// Check that all of the input and output scripts of a transaction contains valid opcodes
-bool CheckTxScriptsSanity(const CMutableTransaction& tx)
+bool DecodeHexTx(CMutableTransaction& tx, const std::string& strHexTx)
 {
-    // Check input scripts for non-coinbase txs
-    if (!CTransaction(tx).IsCoinBase()) {
-        for (unsigned int i = 0; i < tx.vin.size(); i++) {
-            if (!tx.vin[i].scriptSig.HasValidOps() || tx.vin[i].scriptSig.size() > MAX_SCRIPT_SIZE) {
-                return false;
-            }
-        }
-    }
-    // Check output scripts
-    for (unsigned int i = 0; i < tx.vout.size(); i++) {
-        if (!tx.vout[i].scriptPubKey.HasValidOps() || tx.vout[i].scriptPubKey.size() > MAX_SCRIPT_SIZE) {
-            return false;
-        }
-    }
-    
-    return true;
-}
+    if (!IsHex(strHexTx))
+        return false;
 
-bool DecodeHexTx(CMutableTransaction& tx, const std::string& hex_tx, bool try_no_witness, bool try_witness)
-{
-    if (!IsHex(hex_tx)) {
+    std::vector<unsigned char> txData(ParseHex(strHexTx));
+    CDataStream ssData(txData, SER_NETWORK, PROTOCOL_VERSION);
+    try {
+        ssData >> tx;
+        if (!ssData.empty())
+            return false;
+    }
+    catch (const std::exception&) {
         return false;
     }
 
-    std::vector<unsigned char> txData(ParseHex(hex_tx));
-
-    if (try_no_witness) {
-        CDataStream ssData(txData, SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS);
-        try {
-            ssData >> tx;
-            if (ssData.eof() && (!try_witness || CheckTxScriptsSanity(tx))) {
-                return true;
-            }
-        } catch (const std::exception&) {
-            // Fall through.
-        }
-    }
-
-    if (try_witness) {
-        CDataStream ssData(txData, SER_NETWORK, PROTOCOL_VERSION);
-        try {
-            ssData >> tx;
-            if (ssData.empty()) {
-                return true;
-            }
-        } catch (const std::exception&) {
-            // Fall through.
-        }
-    }
-    
-    return false;
+    return true;
 }
 
 bool DecodeHexBlk(CBlock& block, const std::string& strHexBlk)

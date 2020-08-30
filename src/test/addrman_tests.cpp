@@ -1,21 +1,21 @@
-// Copyright (c) 2012-2017 The Bitcoin Core developers
+// Copyright (c) 2012-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <addrman.h>
-#include <test/test_bitcoin.h>
+#include "addrman.h"
+#include "test/test_auscash.h"
 #include <string>
 #include <boost/test/unit_test.hpp>
 
-#include <hash.h>
-#include <netbase.h>
-#include <random.h>
+#include "hash.h"
+#include "netbase.h"
+#include "random.h"
 
 class CAddrManTest : public CAddrMan
 {
     uint64_t state;
 
 public:
-    explicit CAddrManTest(bool makeDeterministic = true)
+    CAddrManTest(bool makeDeterministic = true)
     {
         state = 1;
 
@@ -38,7 +38,7 @@ public:
         return (unsigned int)(state % nMax);
     }
 
-    CAddrInfo* Find(const CNetAddr& addr, int* pnId = nullptr)
+    CAddrInfo* Find(const CService& addr, int* pnId = nullptr)
     {
         return CAddrMan::Find(addr, pnId);
     }

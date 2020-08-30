@@ -1,12 +1,12 @@
-// Copyright (c) 2011-2017 The Bitcoin Core developers
+// Copyright (c) 2011-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_QT_GUIUTIL_H
 #define BITCOIN_QT_GUIUTIL_H
 
-#include <amount.h>
-#include <fs.h>
+#include "amount.h"
+#include "fs.h"
 
 #include <QEvent>
 #include <QHeaderView>
@@ -29,10 +29,51 @@ class QUrl;
 class QWidget;
 QT_END_NAMESPACE
 
-/** Utility functions used by the Bitcoin Qt UI.
+/** Utility functions used by the AusCash Qt UI.
  */
 namespace GUIUtil
 {
+    /* Enumeration of possible "colors" */
+    enum class ThemedColor {
+        /* Transaction list -- TX status decoration - default color */
+        DEFAULT,
+        /* Transaction list -- unconfirmed transaction */
+        UNCONFIRMED,
+        /* Transaction list -- negative amount */
+        NEGATIVE,
+        /* Transaction list -- bare address (without label) */
+        BAREADDRESS,
+        /* Transaction list -- TX status decoration - open until date */
+        TX_STATUS_OPENUNTILDATE,
+        /* Transaction list -- TX status decoration - offline */
+        TX_STATUS_OFFLINE,
+        /* Transaction list -- TX status decoration - danger, tx needs attention */
+        TX_STATUS_DANGER,
+        /* Transaction list -- TX status decoration - LockedByInstantSend color */
+        TX_STATUS_LOCKED,
+    };
+
+    /* Enumeration of possible "styles" */
+    enum class ThemedStyle {
+        /* Invalid field background style */
+        TS_INVALID,
+        /* Failed operation text style */
+        TS_ERROR,
+        /* Failed operation text style */
+        TS_SUCCESS,
+        /* Comand text style */
+        TS_COMMAND,
+        /* General text styles */
+        TS_PRIMARY,
+        TS_SECONDARY,
+    };
+
+    /** Helper to get colors for various themes which can't be applied via css for some reason */
+    QColor getThemedQColor(ThemedColor color);
+
+    /** Helper to get css style strings which are injected into rich text through qt */
+    QString getThemedStyleQString(ThemedStyle style);
+
     // Create human-readable string from date
     QString dateTimeStr(const QDateTime &datetime);
     QString dateTimeStr(qint64 nTime);
@@ -44,7 +85,7 @@ namespace GUIUtil
     void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent);
     void setupAmountWidget(QLineEdit *widget, QWidget *parent);
 
-    // Parse "bitcoin:" URI into recipient object, return true on successful parsing
+    // Parse "auscash:" URI into recipient object, return true on successful parsing
     bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out);
     bool parseBitcoinURI(QString uri, SendCoinsRecipient *out);
     QString formatBitcoinURI(const SendCoinsRecipient &info);
@@ -112,9 +153,12 @@ namespace GUIUtil
 
     // Open debug.log
     void openDebugLogfile();
+	
+    // Open auscash.conf
+    void openConfigfile();	
 
-    // Open the config file
-    bool openBitcoinConf();
+    // Browse backup folder
+    void showBackups();
 
     // Replace invalid default fonts with known good ones
     void SubstituteFonts(const QString& language);
@@ -179,6 +223,12 @@ namespace GUIUtil
     bool GetStartOnSystemStartup();
     bool SetStartOnSystemStartup(bool fAutoStart);
 
+    /** Modify Qt network specific settings on migration */
+    void migrateQtSettings();
+
+    /** Load global CSS theme */
+    QString loadStyleSheet();
+
     /* Convert QString to OS specific boost path through UTF-8 */
     fs::path qstringToBoostPath(const QString &path);
 
@@ -198,10 +248,6 @@ namespace GUIUtil
     QString formatTimeOffset(int64_t nTimeOffset);
 
     QString formatNiceTimeOffset(qint64 secs);
-
-    QString formatBytes(uint64_t bytes);
-
-    qreal calculateIdealFontSize(int width, const QString& text, QFont font, qreal minPointSize = 4, qreal startPointSize = 14);
 
     class ClickableLabel : public QLabel
     {

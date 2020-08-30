@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2017 The Bitcoin Core developers
+// Copyright (c) 2011-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,7 +6,7 @@
 #define BITCOIN_QT_PAYMENTSERVER_H
 
 // This class handles payment requests from clicking on
-// bitcoin: URIs
+// auscash: URIs
 //
 // This is somewhat tricky, because we have to deal with
 // the situation where the user clicks on a link during
@@ -32,8 +32,8 @@
 // sends them to the server.
 //
 
-#include <qt/paymentrequestplus.h>
-#include <qt/walletmodel.h>
+#include "paymentrequestplus.h"
+#include "walletmodel.h"
 
 #include <QObject>
 #include <QString>
@@ -72,7 +72,7 @@ public:
     static bool ipcSendCommandLine();
 
     // parent should be QApplication object
-    explicit PaymentServer(QObject* parent, bool startLocalServer = true);
+    PaymentServer(QObject* parent, bool startLocalServer = true);
     ~PaymentServer();
 
     // Load root certificate authorities. Pass nullptr (default)
@@ -113,7 +113,7 @@ public Q_SLOTS:
     void uiReady();
 
     // Submit Payment message to a merchant, get back PaymentACK:
-    void fetchPaymentACK(CWallet* wallet, const SendCoinsRecipient& recipient, QByteArray transaction);
+    void fetchPaymentACK(CWallet* wallet, SendCoinsRecipient recipient, QByteArray transaction);
 
     // Handle an incoming URI, URI with local file scheme or file
     void handleURIOrFile(const QString& s);

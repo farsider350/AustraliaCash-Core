@@ -1,0 +1,25 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="ar">locale/auscash_ar.qm</file>
+        <file alias="bg">locale/auscash_bg.qm</file>
+        <file alias="de">locale/auscash_de.qm</file>
+        <file alias="en">locale/auscash_en.qm</file>
+        <file alias="es">locale/auscash_es.qm</file>
+        <file alias="fi">locale/auscash_fi.qm</file>
+        <file alias="fr">locale/auscash_fr.qm</file>
+        <file alias="it">locale/auscash_it.qm</file>
+        <file alias="ja">locale/auscash_ja.qm</file>
+        <file alias="ko">locale/auscash_ko.qm</file>
+        <file alias="nl">locale/auscash_nl.qm</file>
+        <file alias="pl">locale/auscash_pl.qm</file>
+        <file alias="pt">locale/auscash_pt.qm</file>
+        <file alias="ro">locale/auscash_ro.qm</file>
+        <file alias="ru">locale/auscash_ru.qm</file>
+        <file alias="sk">locale/auscash_sk.qm</file>
+        <file alias="th">locale/auscash_th.qm</file>
+        <file alias="tr">locale/auscash_tr.qm</file>
+        <file alias="vi">locale/auscash_vi.qm</file>
+        <file alias="zh_CN">locale/auscash_zh_CN.qm</file>
+        <file alias="zh_TW">locale/auscash_zh_TW.qm</file>
+    </qresource>
+</RCC>

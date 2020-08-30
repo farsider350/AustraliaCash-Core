@@ -1,11 +1,9 @@
 Release Process
 ====================
 
-Before every release candidate:
+* Update translations, see [translation_process.md](https://github.com/auscashpay/auscash/blob/master/doc/translation_process.md#synchronising-translations).
 
-* Update translations (ping wumpus on IRC) see [translation_process.md](https://github.com/bitcoin/bitcoin/blob/master/doc/translation_process.md#synchronising-translations).
-
-* Update manpages, see [gen-manpages.sh](https://github.com/australiacash/australiacash-core/blob/master/contrib/devtools/README.md#gen-manpagessh).
+* Update manpages, see [gen-manpages.sh](https://github.com/auscashpay/auscash/blob/master/contrib/devtools/README.md#gen-manpagessh).
 
 Before every minor and major release:
 
@@ -21,31 +19,28 @@ Before every minor and major release:
 
 Before every major release:
 
-* Update hardcoded [seeds](/contrib/seeds/README.md), see [this pull request](https://github.com/bitcoin/bitcoin/pull/7415) for an example.
+* Update hardcoded [seeds](/contrib/seeds/README.md). TODO: Give example PR for AusCash
 * Update [`BLOCK_CHAIN_SIZE`](/src/qt/intro.cpp) to the current size plus some overhead.
 * Update `src/chainparams.cpp` chainTxData with statistics about the transaction count and rate.
 * Update version of `contrib/gitian-descriptors/*.yml`: usually one'd want to do this on master after branching off the release - but be sure to at least do it before a new major release
 
 ### First time / New builders
 
-If you're using the automated script (found in [contrib/gitian-build.sh](/contrib/gitian-build.sh)), then at this point you should run it with the "--setup" command. Otherwise ignore this.
+If you're using the automated script (found in [contrib/gitian-build.py](/contrib/gitian-build.py)), then at this point you should run it with the "--setup" command. Otherwise ignore this.
 
 Check out the source code in the following directory hierarchy.
 
-    cd /path/to/your/toplevel/build
-    git clone https://github.com/australiacash/gitian.sigs.ltc.git
-    git clone https://github.com/australiacash/australiacash-detached-sigs.git
-    git clone https://github.com/devrandom/gitian-builder.git
-    git clone https://github.com/australiacash/australiacash-core.git
+	cd /path/to/your/toplevel/build
+	git clone https://github.com/auscashpay/gitian.sigs.git
+	git clone https://github.com/auscashpay/auscash-detached-sigs.git
+	git clone https://github.com/devrandom/gitian-builder.git
+	git clone https://github.com/auscashpay/auscash.git
 
-### Australiacash maintainers/release engineers, suggestion for writing release notes
+### AusCash Core maintainers/release engineers, suggestion for writing release notes
 
 Write release notes. git shortlog helps a lot, for example:
 
-    git shortlog --no-merges v(current version, e.g. 0.7.2)..v(new version, e.g. 0.8.0)
-
-(or ping @wumpus on IRC, he has specific tooling to generate the list of merged pulls
-and sort them into categories based on labels)
+    git shortlog --no-merges v(current version, e.g. 0.12.2)..v(new version, e.g. 0.12.3)
 
 Generate list of authors:
 
@@ -53,24 +48,24 @@ Generate list of authors:
 
 Tag version (or release candidate) in git
 
-    git tag -s v(new version, e.g. 0.8.0)
+    git tag -s v(new version, e.g. 0.12.3)
 
 ### Setup and perform Gitian builds
 
-If you're using the automated script (found in [contrib/gitian-build.sh](/contrib/gitian-build.sh)), then at this point you should run it with the "--build" command. Otherwise ignore this.
+If you're using the automated script (found in [contrib/gitian-build.py](/contrib/gitian-build.py)), then at this point you should run it with the "--build" command. Otherwise ignore this.
 
 Setup Gitian descriptors:
 
-    pushd ./australiacash
+    pushd ./auscash
     export SIGNER=(your Gitian key, ie bluematt, sipa, etc)
-    export VERSION=(new version, e.g. 0.8.0)
+    export VERSION=(new version, e.g. 0.12.3)
     git fetch
     git checkout v${VERSION}
     popd
 
-Ensure your gitian.sigs.ltc are up-to-date if you wish to gverify your builds against other Gitian signatures.
+Ensure your gitian.sigs are up-to-date if you wish to gverify your builds against other Gitian signatures.
 
-    pushd ./gitian.sigs.ltc
+    pushd ./gitian.sigs
     git pull
     popd
 
@@ -80,12 +75,13 @@ Ensure gitian-builder is up-to-date:
     git pull
     popd
 
+
 ### Fetch and create inputs: (first time, or when dependency versions change)
 
     pushd ./gitian-builder
     mkdir -p inputs
-    wget -P inputs https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
-    wget -P inputs http://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
+    wget -O inputs/osslsigncode-2.0.tar.gz https://github.com/mtrojnar/osslsigncode/archive/2.0.tar.gz
+    echo '5a60e0a4b3e0b4d655317b2f12a810211c50242138322b16e7e01c6fbb89d92f inputs/osslsigncode-2.0.tar.gz' | sha256sum -c
     popd
 
 Create the OS X SDK tarball, see the [OS X readme](README_osx.md) for details, and copy it into the inputs directory.
@@ -95,7 +91,7 @@ Create the OS X SDK tarball, see the [OS X readme](README_osx.md) for details, a
 By default, Gitian will fetch source files as needed. To cache them ahead of time:
 
     pushd ./gitian-builder
-    make -C ../australiacash/depends download SOURCES_PATH=`pwd`/cache/common
+    make -C ../auscash/depends download SOURCES_PATH=`pwd`/cache/common
     popd
 
 Only missing files will be fetched, so this is safe to re-run for each build.
@@ -103,62 +99,62 @@ Only missing files will be fetched, so this is safe to re-run for each build.
 NOTE: Offline builds must use the --url flag to ensure Gitian fetches only from local URLs. For example:
 
     pushd ./gitian-builder
-    ./bin/gbuild --url australiacash=/path/to/australiacash,signature=/path/to/sigs {rest of arguments}
+    ./bin/gbuild --url auscash=/path/to/auscash,signature=/path/to/sigs {rest of arguments}
     popd
 
 The gbuild invocations below <b>DO NOT DO THIS</b> by default.
 
-### Build and sign Australiacash Core for Linux, Windows, and OS X:
+### Build and sign AusCash Core for Linux, Windows, and OS X:
 
     pushd ./gitian-builder
-    ./bin/gbuild --num-make 2 --memory 3000 --commit australiacash=v${VERSION} ../australiacash/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs.ltc/ ../australiacash/contrib/gitian-descriptors/gitian-linux.yml
-    mv build/out/australiacash-*.tar.gz build/out/src/australiacash-*.tar.gz ../
+    ./bin/gbuild --num-make 2 --memory 3000 --commit auscash=v${VERSION} ../auscash/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../auscash/contrib/gitian-descriptors/gitian-linux.yml
+    mv build/out/auscash-*.tar.gz build/out/src/auscash-*.tar.gz ../
 
-    ./bin/gbuild --num-make 2 --memory 3000 --commit australiacash=v${VERSION} ../australiacash/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs.ltc/ ../australiacash/contrib/gitian-descriptors/gitian-win.yml
-    mv build/out/australiacash-*-win-unsigned.tar.gz inputs/australiacash-win-unsigned.tar.gz
-    mv build/out/australiacash-*.zip build/out/australiacash-*.exe ../
+    ./bin/gbuild --num-make 2 --memory 3000 --commit auscash=v${VERSION} ../auscash/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../auscash/contrib/gitian-descriptors/gitian-win.yml
+    mv build/out/auscash-*-win-unsigned.tar.gz inputs/auscash-win-unsigned.tar.gz
+    mv build/out/auscash-*.zip build/out/auscash-*.exe ../
 
-    ./bin/gbuild --num-make 2 --memory 3000 --commit australiacash=v${VERSION} ../australiacash/contrib/gitian-descriptors/gitian-osx.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs.ltc/ ../australiacash/contrib/gitian-descriptors/gitian-osx.yml
-    mv build/out/australiacash-*-osx-unsigned.tar.gz inputs/australiacash-osx-unsigned.tar.gz
-    mv build/out/australiacash-*.tar.gz build/out/australiacash-*.dmg ../
+    ./bin/gbuild --num-make 2 --memory 3000 --commit auscash=v${VERSION} ../auscash/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../auscash/contrib/gitian-descriptors/gitian-osx.yml
+    mv build/out/auscash-*-osx-unsigned.tar.gz inputs/auscash-osx-unsigned.tar.gz
+    mv build/out/auscash-*.tar.gz build/out/auscash-*.dmg ../
     popd
 
 Build output expected:
 
-  1. source tarball (`australiacash-${VERSION}.tar.gz`)
-  2. linux 32-bit and 64-bit dist tarballs (`australiacash-${VERSION}-linux[32|64].tar.gz`)
-  3. windows 32-bit and 64-bit unsigned installers and dist zips (`australiacash-${VERSION}-win[32|64]-setup-unsigned.exe`, `australiacash-${VERSION}-win[32|64].zip`)
-  4. OS X unsigned installer and dist tarball (`australiacash-${VERSION}-osx-unsigned.dmg`, `australiacash-${VERSION}-osx64.tar.gz`)
-  5. Gitian signatures (in `gitian.sigs.ltc/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/`)
+  1. source tarball (`auscash-${VERSION}.tar.gz`)
+  2. linux 32-bit and 64-bit dist tarballs (`auscash-${VERSION}-linux[32|64].tar.gz`)
+  3. windows 32-bit and 64-bit unsigned installers and dist zips (`auscash-${VERSION}-win[32|64]-setup-unsigned.exe`, `auscash-${VERSION}-win[32|64].zip`)
+  4. OS X unsigned installer and dist tarball (`auscash-${VERSION}-osx-unsigned.dmg`, `auscash-${VERSION}-osx64.tar.gz`)
+  5. Gitian signatures (in `gitian.sigs/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/`)
 
 ### Verify other gitian builders signatures to your own. (Optional)
 
 Add other gitian builders keys to your gpg keyring, and/or refresh keys.
 
-    gpg --import australiacash/contrib/gitian-keys/*.pgp
+    gpg --import auscash/contrib/gitian-keys/*.pgp
     gpg --refresh-keys
 
 Verify the signatures
 
     pushd ./gitian-builder
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-linux ../australiacash/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-win-unsigned ../australiacash/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-osx-unsigned ../australiacash/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../auscash/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../auscash/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../auscash/contrib/gitian-descriptors/gitian-osx.yml
     popd
 
 ### Next steps:
 
-Commit your signature to gitian.sigs.ltc:
+Commit your signature to gitian.sigs:
 
-    pushd gitian.sigs.ltc
+    pushd gitian.sigs
     git add ${VERSION}-linux/${SIGNER}
     git add ${VERSION}-win-unsigned/${SIGNER}
     git add ${VERSION}-osx-unsigned/${SIGNER}
     git commit -a
-    git push  # Assuming you can push to the gitian.sigs.ltc tree
+    git push  # Assuming you can push to the gitian.sigs tree
     popd
 
 Codesigner only: Create Windows/OS X detached signatures:
@@ -167,22 +163,22 @@ Codesigner only: Create Windows/OS X detached signatures:
 
 Codesigner only: Sign the osx binary:
 
-    transfer australiacash-osx-unsigned.tar.gz to osx for signing
-    tar xf australiacash-osx-unsigned.tar.gz
-    ./detached-sig-create.sh -s "Key ID"
+    transfer auscashcore-osx-unsigned.tar.gz to osx for signing
+    tar xf auscashcore-osx-unsigned.tar.gz
+    ./detached-sig-create.sh -s "Key ID" -o runtime
     Enter the keychain password and authorize the signature
     Move signature-osx.tar.gz back to the gitian host
 
 Codesigner only: Sign the windows binaries:
 
-    tar xf australiacash-win-unsigned.tar.gz
+    tar xf auscashcore-win-unsigned.tar.gz
     ./detached-sig-create.sh -key /path/to/codesign.key
     Enter the passphrase for the key when prompted
     signature-win.tar.gz will be created
 
 Codesigner only: Commit the detached codesign payloads:
 
-    cd ~/australiacash-detached-sigs
+    cd ~/auscashcore-detached-sigs
     checkout the appropriate branch for this release series
     rm -rf *
     tar xf signature-osx.tar.gz
@@ -195,34 +191,34 @@ Codesigner only: Commit the detached codesign payloads:
 Non-codesigners: wait for Windows/OS X detached signatures:
 
 - Once the Windows/OS X builds each have 3 matching signatures, they will be signed with their respective release keys.
-- Detached signatures will then be committed to the [australiacash-detached-sigs](https://github.com/australiacash/australiacash-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
+- Detached signatures will then be committed to the [auscash-detached-sigs](https://github.com/auscashpay/auscash-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
 
 Create (and optionally verify) the signed OS X binary:
 
     pushd ./gitian-builder
-    ./bin/gbuild -i --commit signature=v${VERSION} ../australiacash/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs.ltc/ ../australiacash/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-osx-signed ../australiacash/contrib/gitian-descriptors/gitian-osx-signer.yml
-    mv build/out/australiacash-osx-signed.dmg ../australiacash-${VERSION}-osx.dmg
+    ./bin/gbuild -i --commit signature=v${VERSION} ../auscash/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../auscash/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../auscash/contrib/gitian-descriptors/gitian-osx-signer.yml
+    mv build/out/auscash-osx-signed.dmg ../auscash-${VERSION}-osx.dmg
     popd
 
 Create (and optionally verify) the signed Windows binaries:
 
     pushd ./gitian-builder
-    ./bin/gbuild -i --commit signature=v${VERSION} ../australiacash/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs.ltc/ ../australiacash/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-win-signed ../australiacash/contrib/gitian-descriptors/gitian-win-signer.yml
-    mv build/out/australiacash-*win64-setup.exe ../australiacash-${VERSION}-win64-setup.exe
-    mv build/out/australiacash-*win32-setup.exe ../australiacash-${VERSION}-win32-setup.exe
+    ./bin/gbuild -i --commit signature=v${VERSION} ../auscash/contrib/gitian-descriptors/gitian-win-signer.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../auscash/contrib/gitian-descriptors/gitian-win-signer.yml
+    ./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../auscash/contrib/gitian-descriptors/gitian-win-signer.yml
+    mv build/out/auscash-*win64-setup.exe ../auscash-${VERSION}-win64-setup.exe
+    mv build/out/auscash-*win32-setup.exe ../auscash-${VERSION}-win32-setup.exe
     popd
 
 Commit your signature for the signed OS X/Windows binaries:
 
-    pushd gitian.sigs.ltc
+    pushd gitian.sigs
     git add ${VERSION}-osx-signed/${SIGNER}
     git add ${VERSION}-win-signed/${SIGNER}
     git commit -a
-    git push  # Assuming you can push to the gitian.sigs.ltc tree
+    git push  # Assuming you can push to the gitian.sigs tree
     popd
 
 ### After 3 or more people have gitian-built and their results match:
@@ -235,23 +231,23 @@ sha256sum * > SHA256SUMS
 
 The list of files should be:
 ```
-australiacash-${VERSION}-aarch64-linux-gnu.tar.gz
-australiacash-${VERSION}-arm-linux-gnueabihf.tar.gz
-australiacash-${VERSION}-i686-pc-linux-gnu.tar.gz
-australiacash-${VERSION}-x86_64-linux-gnu.tar.gz
-australiacash-${VERSION}-osx64.tar.gz
-australiacash-${VERSION}-osx.dmg
-australiacash-${VERSION}.tar.gz
-australiacash-${VERSION}-win32-setup.exe
-australiacash-${VERSION}-win32.zip
-australiacash-${VERSION}-win64-setup.exe
-australiacash-${VERSION}-win64.zip
+auscash-${VERSION}-aarch64-linux-gnu.tar.gz
+auscash-${VERSION}-arm-linux-gnueabihf.tar.gz
+auscash-${VERSION}-i686-pc-linux-gnu.tar.gz
+auscash-${VERSION}-x86_64-linux-gnu.tar.gz
+auscash-${VERSION}-osx64.tar.gz
+auscash-${VERSION}-osx.dmg
+auscash-${VERSION}.tar.gz
+auscash-${VERSION}-win32-setup.exe
+auscash-${VERSION}-win32.zip
+auscash-${VERSION}-win64-setup.exe
+auscash-${VERSION}-win64.zip
 ```
 The `*-debug*` files generated by the gitian build contain debug symbols
 for troubleshooting by developers. It is assumed that anyone that is interested
 in debugging can run gitian to generate the files for themselves. To avoid
 end-user confusion about which file to pick, as well as save storage
-space *do not upload these to the australiacash.org server, nor put them in the torrent*.
+space *do not upload these to the auscash.org server*.
 
 - GPG-sign it, delete the unsigned file:
 ```
@@ -261,24 +257,20 @@ rm SHA256SUMS
 (the digest algorithm is forced to sha256 to avoid confusion of the `Hash:` header that GPG adds with the SHA256 used for the files)
 Note: check that SHA256SUMS itself doesn't end up in SHA256SUMS, which is a spurious/nonsensical entry.
 
-- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the australiacash.org server.
+- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the auscash.org server
 
-```
-
-- Update australiacash.org version
+- Update auscash.org
 
 - Announce the release:
 
-  - australiacash-dev and australiacash-dev mailing list
+  - Release on AusCash forum: https://www.auscash.org/forum/topic/official-announcements.54/
 
-  - blog.australiacash.org blog post
+  - Optionally Discord, twitter, reddit /r/AusCashpay, ... but this will usually sort out itself
 
-  - Update title of #australiacash on Freenode IRC
-
-  - Optionally twitter, reddit /r/Australiacash, ... but this will usually sort out itself
+  - Notify flare so that he can start building [the PPAs](https://launchpad.net/~auscash.org/+archive/ubuntu/auscash)
 
   - Archive release notes for the new version to `doc/release-notes/` (branch `master` and branch of the release)
 
-  - Create a [new GitHub release](https://github.com/australiacash/australiacash-core/releases/new) with a link to the archived release notes.
+  - Create a [new GitHub release](https://github.com/auscashpay/auscash/releases/new) with a link to the archived release notes.
 
   - Celebrate

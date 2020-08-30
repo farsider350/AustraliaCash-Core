@@ -6,7 +6,7 @@
 set -e
 
 ROOTDIR=dist
-BUNDLE="${ROOTDIR}/Australiacash-Qt.app"
+BUNDLE="${ROOTDIR}/AusCash-Qt.app"
 CODESIGN=codesign
 TEMPDIR=sign.temp
 TEMPLIST=${TEMPDIR}/signatures.txt
@@ -40,7 +40,7 @@ grep CodeResources < "${TEMPLIST}" | while read i; do
   RESOURCE="${TEMPDIR}/${OUTROOT}/${TARGETFILE}"
   DIRNAME="`dirname "${RESOURCE}"`"
   mkdir -p "${DIRNAME}"
-  echo "Adding resource for: \"${TARGETFILE}\""
+  echo "Adding resource for: "${TARGETFILE}""
   cp "${i}" "${RESOURCE}"
 done
 

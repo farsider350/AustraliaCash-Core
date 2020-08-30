@@ -1,21 +1,23 @@
-// Copyright (c) 2011-2017 The Bitcoin Core developers
+// Copyright (c) 2011-2015 The Bitcoin Core developers
+// Copyright (c) 2014-2020 The AusCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <qt/guiutil.h>
+#include "guiutil.h"
 
-#include <qt/bitcoinaddressvalidator.h>
-#include <qt/bitcoinunits.h>
-#include <qt/qvalidatedlineedit.h>
-#include <qt/walletmodel.h>
+#include "bitcoinaddressvalidator.h"
+#include "bitcoinunits.h"
+#include "qvalidatedlineedit.h"
+#include "walletmodel.h"
 
-#include <primitives/transaction.h>
-#include <init.h>
-#include <policy/policy.h>
-#include <protocol.h>
-#include <script/script.h>
-#include <script/standard.h>
-#include <util.h>
+#include "fs.h"
+#include "primitives/transaction.h"
+#include "init.h"
+#include "policy/policy.h"
+#include "protocol.h"
+#include "script/script.h"
+#include "script/standard.h"
+#include "util.h"
 
 #ifdef WIN32
 #ifdef _WIN32_WINNT
@@ -30,9 +32,9 @@
 #ifndef NOMINMAX
 #define NOMINMAX
 #endif
-#include <shellapi.h>
-#include <shlobj.h>
-#include <shlwapi.h>
+#include "shellapi.h"
+#include "shlobj.h"
+#include "shlwapi.h"
 #endif
 
 #include <boost/scoped_array.hpp>
@@ -76,6 +78,63 @@ extern double NSAppKitVersionNumber;
 
 namespace GUIUtil {
 
+// The theme to set by default if settings are missing or incorrect
+static const QString defaultTheme = "Light";
+// The prefix a theme name should have if we want to apply dark colors and styles to it
+static const QString darkThemePrefix = "Dark";
+
+static const std::map<ThemedColor, QColor> themedColors = {
+    { ThemedColor::DEFAULT, QColor(0, 0, 0) },
+    { ThemedColor::UNCONFIRMED, QColor(128, 128, 128) },
+    { ThemedColor::NEGATIVE, QColor(255, 0, 0) },
+    { ThemedColor::BAREADDRESS, QColor(140, 140, 140) },
+    { ThemedColor::TX_STATUS_OPENUNTILDATE, QColor(64, 64, 255) },
+    { ThemedColor::TX_STATUS_OFFLINE, QColor(192, 192, 192) },
+    { ThemedColor::TX_STATUS_DANGER, QColor(200, 100, 100) },
+    { ThemedColor::TX_STATUS_LOCKED, QColor(0, 128, 255) },
+};
+
+static const std::map<ThemedColor, QColor> themedDarkColors = {
+    { ThemedColor::DEFAULT, QColor(170, 170, 170) },
+    { ThemedColor::UNCONFIRMED, QColor(204, 204, 204) },
+    { ThemedColor::NEGATIVE, QColor(255, 69, 0) },
+    { ThemedColor::BAREADDRESS, QColor(140, 140, 140) },
+    { ThemedColor::TX_STATUS_OPENUNTILDATE, QColor(64, 64, 255) },
+    { ThemedColor::TX_STATUS_OFFLINE, QColor(192, 192, 192) },
+    { ThemedColor::TX_STATUS_DANGER, QColor(200, 100, 100) },
+    { ThemedColor::TX_STATUS_LOCKED, QColor(0, 128, 255) },
+};
+
+static const std::map<ThemedStyle, QString> themedStyles = {
+    { ThemedStyle::TS_INVALID, "background:#FF8080;" },
+    { ThemedStyle::TS_ERROR, "color:red;" },
+    { ThemedStyle::TS_SUCCESS, "color:green;" },
+    { ThemedStyle::TS_COMMAND, "color:#006060;" },
+    { ThemedStyle::TS_PRIMARY, "color:black;" },
+    { ThemedStyle::TS_SECONDARY, "color:#808080;" },
+};
+
+static const std::map<ThemedStyle, QString> themedDarkStyles = {
+    { ThemedStyle::TS_INVALID, "background:#ff4500;" },
+    { ThemedStyle::TS_ERROR, "color:#ff4500;" },
+    { ThemedStyle::TS_SUCCESS, "color:green;" },
+    { ThemedStyle::TS_COMMAND, "color:#0cc;" },
+    { ThemedStyle::TS_PRIMARY, "color:#ccc;" },
+    { ThemedStyle::TS_SECONDARY, "color:#aaa;" },
+};
+
+QColor getThemedQColor(ThemedColor color)
+{
+    QString theme = QSettings().value("theme", "").toString();
+    return theme.startsWith(darkThemePrefix) ? themedDarkColors.at(color) : themedColors.at(color);
+}
+
+QString getThemedStyleQString(ThemedStyle style)
+{
+    QString theme = QSettings().value("theme", "").toString();
+    return theme.startsWith(darkThemePrefix) ? themedDarkStyles.at(style) : themedStyles.at(style);
+}
+
 QString dateTimeStr(const QDateTime &date)
 {
     return date.date().toString(Qt::SystemLocaleShortDate) + QString(" ") + date.toString("hh:mm");
@@ -111,9 +170,8 @@ static std::string DummyAddress(const CChainParams &params)
     sourcedata.insert(sourcedata.end(), dummydata, dummydata + sizeof(dummydata));
     for(int i=0; i<256; ++i) { // Try every trailing byte
         std::string s = EncodeBase58(sourcedata.data(), sourcedata.data() + sourcedata.size());
-        if (!IsValidDestinationString(s)) {
+        if (!CBitcoinAddress(s).IsValid())
             return s;
-        }
         sourcedata[sourcedata.size()-1] += 1;
     }
     return "";
@@ -127,7 +185,7 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 #if QT_VERSION >= 0x040700
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
-    widget->setPlaceholderText(QObject::tr("Enter a Australiacash address (e.g. %1)").arg(
+    widget->setPlaceholderText(QObject::tr("Enter a AusCash address (e.g. %1)").arg(
         QString::fromStdString(DummyAddress(Params()))));
 #endif
     widget->setValidator(new BitcoinAddressEntryValidator(parent));
@@ -145,8 +203,8 @@ void setupAmountWidget(QLineEdit *widget, QWidget *parent)
 
 bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
 {
-    // return if URI is not valid or is no bitcoin: URI
-    if(!uri.isValid() || uri.scheme() != QString("australiacash"))
+    // return if URI is not valid or is no auscash: URI
+    if(!uri.isValid() || uri.scheme() != QString("auscash"))
         return false;
 
     SendCoinsRecipient rv;
@@ -163,6 +221,7 @@ bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
     QUrlQuery uriQuery(uri);
     QList<QPair<QString, QString> > items = uriQuery.queryItems();
 #endif
+
     for (QList<QPair<QString, QString> >::iterator i = items.begin(); i != items.end(); i++)
     {
         bool fShouldReturnFalse = false;
@@ -177,6 +236,11 @@ bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
             rv.label = i->second;
             fShouldReturnFalse = false;
         }
+        if (i->first == "IS")
+        {
+            // we simply ignore IS
+            fShouldReturnFalse = false;
+        }
         if (i->first == "message")
         {
             rv.message = i->second;
@@ -186,7 +250,7 @@ bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
         {
             if(!i->second.isEmpty())
             {
-                if(!BitcoinUnits::parse(BitcoinUnits::BTC, i->second, &rv.amount))
+                if(!BitcoinUnits::parse(BitcoinUnits::AUSCASH, i->second, &rv.amount))
                 {
                     return false;
                 }
@@ -206,13 +270,13 @@ bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
 
 bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
 {
-    // Convert bitcoin:// to bitcoin:
+    // Convert auscash:// to auscash:
     //
-    //    Cannot handle this later, because bitcoin:// will cause Qt to see the part after // as host,
+    //    Cannot handle this later, because auscash:// will cause Qt to see the part after // as host,
     //    which will lower-case it (and thus invalidate the address).
-    if(uri.startsWith("australiacash://", Qt::CaseInsensitive))
+    if(uri.startsWith("auscash://", Qt::CaseInsensitive))
     {
-        uri.replace(0, 11, "australiacash:");
+        uri.replace(0, 7, "auscash:");
     }
     QUrl uriInstance(uri);
     return parseBitcoinURI(uriInstance, out);
@@ -220,12 +284,12 @@ bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
 
 QString formatBitcoinURI(const SendCoinsRecipient &info)
 {
-    QString ret = QString("australiacash:%1").arg(info.address);
+    QString ret = QString("auscash:%1").arg(info.address);
     int paramCount = 0;
 
     if (info.amount)
     {
-        ret += QString("?amount=%1").arg(BitcoinUnits::format(BitcoinUnits::BTC, info.amount, false, BitcoinUnits::separatorNever));
+        ret += QString("?amount=%1").arg(BitcoinUnits::format(BitcoinUnits::AUSCASH, info.amount, false, BitcoinUnits::separatorNever));
         paramCount++;
     }
 
@@ -248,7 +312,7 @@ QString formatBitcoinURI(const SendCoinsRecipient &info)
 
 bool isDust(const QString& address, const CAmount& amount)
 {
-    CTxDestination dest = DecodeDestination(address.toStdString());
+    CTxDestination dest = CBitcoinAddress(address.toStdString()).Get();
     CScript script = GetScriptForDestination(dest);
     CTxOut txOut(amount, script);
     return IsDust(txOut, ::dustRelayFee);
@@ -261,6 +325,7 @@ QString HtmlEscape(const QString& str, bool fMultiLine)
 #else
     QString escaped = str.toHtmlEscaped();
 #endif
+    escaped = escaped.replace(" ", "&nbsp;");
     if(fMultiLine)
     {
         escaped = escaped.replace("\n", "<br>\n");
@@ -415,20 +480,22 @@ void openDebugLogfile()
         QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathDebug)));
 }
 
-bool openBitcoinConf()
+void openConfigfile()
 {
-    boost::filesystem::path pathConfig = GetConfigFile(BITCOIN_CONF_FILENAME);
+    fs::path pathConfig = GetConfigFile(gArgs.GetArg("-conf", BITCOIN_CONF_FILENAME));
 
-    /* Create the file */
-    boost::filesystem::ofstream configFile(pathConfig, std::ios_base::app);
-    
-    if (!configFile.good())
-        return false;
-    
-    configFile.close();
-    
-    /* Open bitcoin.conf with the associated application */
-    return QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig)));
+    /* Open auscash.conf with the associated application */
+    if (fs::exists(pathConfig))
+        QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig)));
+}
+
+void showBackups()
+{
+    fs::path backupsDir = GetBackupsDir();
+
+    /* Open folder with default browser */
+    if (fs::exists(backupsDir))
+        QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(backupsDir)));
 }
 
 void SubstituteFonts(const QString& language)
@@ -480,11 +547,14 @@ bool ToolTipToRichTextFilter::eventFilter(QObject *obj, QEvent *evt)
     {
         QWidget *widget = static_cast<QWidget*>(obj);
         QString tooltip = widget->toolTip();
-        if(tooltip.size() > size_threshold && !tooltip.startsWith("<qt") && !Qt::mightBeRichText(tooltip))
+        if(tooltip.size() > size_threshold && !tooltip.startsWith("<qt"))
         {
-            // Envelop with <qt></qt> to make sure Qt detects this as rich text
-            // Escape the current message as HTML and replace \n by <br>
-            tooltip = "<qt>" + HtmlEscape(tooltip, true) + "</qt>";
+            // Escape the current message as HTML and replace \n by <br> if it's not rich text
+            if(!Qt::mightBeRichText(tooltip))
+                tooltip = HtmlEscape(tooltip, true);
+            // Envelop with <qt></qt> to make sure Qt detects every tooltip as rich text
+            // and style='white-space:pre' to preserve line composition
+            tooltip = "<qt style='white-space:pre'>" + tooltip + "</qt>";
             widget->setToolTip(tooltip);
             return true;
         }
@@ -615,15 +685,15 @@ fs::path static StartupShortcutPath()
 {
     std::string chain = ChainNameFromCommandLine();
     if (chain == CBaseChainParams::MAIN)
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Australiacash.lnk";
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "AusCash Core.lnk";
     if (chain == CBaseChainParams::TESTNET) // Remove this special case when CBaseChainParams::TESTNET = "testnet4"
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Australiacash (testnet).lnk";
-    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("Australiacash (%s).lnk", chain);
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "AusCash Core (testnet).lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("AusCash Core (%s).lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
 {
-    // check for Bitcoin*.lnk
+    // check for "AusCash Core*.lnk"
     return fs::exists(StartupShortcutPath());
 }
 
@@ -713,8 +783,8 @@ fs::path static GetAutostartFilePath()
 {
     std::string chain = ChainNameFromCommandLine();
     if (chain == CBaseChainParams::MAIN)
-        return GetAutostartDir() / "australiacash.desktop";
-    return GetAutostartDir() / strprintf("australiacash-%s.lnk", chain);
+        return GetAutostartDir() / "auscashcore.desktop";
+    return GetAutostartDir() / strprintf("auscashcore-%s.lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
@@ -743,10 +813,9 @@ bool SetStartOnSystemStartup(bool fAutoStart)
     else
     {
         char pszExePath[MAX_PATH+1];
-        ssize_t r = readlink("/proc/self/exe", pszExePath, sizeof(pszExePath) - 1);
-        if (r == -1)
+        memset(pszExePath, 0, sizeof(pszExePath));
+        if (readlink("/proc/self/exe", pszExePath, sizeof(pszExePath)-1) == -1)
             return false;
-        pszExePath[r] = '\0';
 
         fs::create_directories(GetAutostartDir());
 
@@ -754,13 +823,13 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         if (!optionFile.good())
             return false;
         std::string chain = ChainNameFromCommandLine();
-        // Write a bitcoin.desktop file to the autostart directory:
+        // Write a auscashcore.desktop file to the autostart directory:
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
         if (chain == CBaseChainParams::MAIN)
-            optionFile << "Name=Australiacash\n";
+            optionFile << "Name=AusCash Core\n";
         else
-            optionFile << strprintf("Name=Australiacash (%s)\n", chain);
+            optionFile << strprintf("Name=AusCash Core (%s)\n", chain);
         optionFile << "Exec=" << pszExePath << strprintf(" -min -testnet=%d -regtest=%d\n", gArgs.GetBoolArg("-testnet", false), gArgs.GetBoolArg("-regtest", false));
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";
@@ -781,77 +850,58 @@ bool SetStartOnSystemStartup(bool fAutoStart)
 LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef findUrl);
 LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef findUrl)
 {
+    // loop through the list of startup items and try to find the AusCash Core app
     CFArrayRef listSnapshot = LSSharedFileListCopySnapshot(list, nullptr);
-    if (listSnapshot == nullptr) {
-        return nullptr;
-    }
-    
-    // loop through the list of startup items and try to find the bitcoin app
     for(int i = 0; i < CFArrayGetCount(listSnapshot); i++) {
         LSSharedFileListItemRef item = (LSSharedFileListItemRef)CFArrayGetValueAtIndex(listSnapshot, i);
         UInt32 resolutionFlags = kLSSharedFileListNoUserInteraction | kLSSharedFileListDoNotMountVolumes;
         CFURLRef currentItemURL = nullptr;
 
 #if defined(MAC_OS_X_VERSION_MAX_ALLOWED) && MAC_OS_X_VERSION_MAX_ALLOWED >= 10100
-        if(&LSSharedFileListItemCopyResolvedURL)
-            currentItemURL = LSSharedFileListItemCopyResolvedURL(item, resolutionFlags, nullptr);
+    if(&LSSharedFileListItemCopyResolvedURL)
+        currentItemURL = LSSharedFileListItemCopyResolvedURL(item, resolutionFlags, nullptr);
 #if defined(MAC_OS_X_VERSION_MIN_REQUIRED) && MAC_OS_X_VERSION_MIN_REQUIRED < 10100
-        else
-            LSSharedFileListItemResolve(item, resolutionFlags, &currentItemURL, nullptr);
-#endif
-#else
+    else
         LSSharedFileListItemResolve(item, resolutionFlags, &currentItemURL, nullptr);
 #endif
+#else
+    LSSharedFileListItemResolve(item, resolutionFlags, &currentItemURL, nullptr);
+#endif
 
+        if(currentItemURL && CFEqual(currentItemURL, findUrl)) {
+            // found
+            CFRelease(currentItemURL);
+            return item;
+        }
         if(currentItemURL) {
-            if (CFEqual(currentItemURL, findUrl)) {
-                // found
-                CFRelease(listSnapshot);
-                CFRelease(currentItemURL);
-                return item;
-            }
             CFRelease(currentItemURL);
         }
     }
-    
-    CFRelease(listSnapshot);
     return nullptr;
 }
 
 bool GetStartOnSystemStartup()
 {
     CFURLRef bitcoinAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
-    if (bitcoinAppUrl == nullptr) {
-        return false;
-    }
-    
     LSSharedFileListRef loginItems = LSSharedFileListCreate(nullptr, kLSSharedFileListSessionLoginItems, nullptr);
     LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, bitcoinAppUrl);
-
-    CFRelease(bitcoinAppUrl);
     return !!foundItem; // return boolified object
 }
 
 bool SetStartOnSystemStartup(bool fAutoStart)
 {
     CFURLRef bitcoinAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
-    if (bitcoinAppUrl == nullptr) {
-        return false;
-    }
-    
     LSSharedFileListRef loginItems = LSSharedFileListCreate(nullptr, kLSSharedFileListSessionLoginItems, nullptr);
     LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, bitcoinAppUrl);
 
     if(fAutoStart && !foundItem) {
-        // add bitcoin app to startup item list
+        // add AusCash Core app to startup item list
         LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemBeforeFirst, nullptr, nullptr, bitcoinAppUrl, nullptr, nullptr);
     }
     else if(!fAutoStart && foundItem) {
         // remove item
         LSSharedFileListItemRemove(loginItems, foundItem);
     }
-    
-    CFRelease(bitcoinAppUrl);
     return true;
 }
 #pragma GCC diagnostic pop
@@ -861,6 +911,39 @@ bool GetStartOnSystemStartup() { return false; }
 bool SetStartOnSystemStartup(bool fAutoStart) { return false; }
 
 #endif
+
+void migrateQtSettings()
+{
+    // Migration (12.1)
+    QSettings settings;
+    if(!settings.value("fMigrationDone121", false).toBool()) {
+        settings.remove("theme");
+        settings.remove("nWindowPos");
+        settings.remove("nWindowSize");
+        settings.setValue("fMigrationDone121", true);
+    }
+}
+
+// Open CSS when configured
+QString loadStyleSheet()
+{
+    QSettings settings;
+    QString theme = settings.value("theme", "").toString();
+
+    QDir themes(":themes");
+    // Make sure settings are pointing to an existent theme
+    if (theme.isEmpty() || !themes.exists(theme)) {
+        theme = defaultTheme;
+        settings.setValue("theme", theme);
+    }
+
+    QFile qFile(":themes/" + theme);
+    if (qFile.open(QFile::ReadOnly)) {
+        return QLatin1String(qFile.readAll());
+    }
+
+    return QString();
+}
 
 void setClipboard(const QString& str)
 {
@@ -917,9 +1000,6 @@ QString formatServicesStr(quint64 mask)
                 break;
             case NODE_BLOOM:
                 strList.append("BLOOM");
-                break;
-            case NODE_WITNESS:
-                strList.append("WITNESS");
                 break;
             case NODE_XTHIN:
                 strList.append("XTHIN");
@@ -981,30 +1061,6 @@ QString formatNiceTimeOffset(qint64 secs)
         timeBehindText = QObject::tr("%1 and %2").arg(QObject::tr("%n year(s)", "", years)).arg(QObject::tr("%n week(s)","", remainder/WEEK_IN_SECONDS));
     }
     return timeBehindText;
-}
-
-QString formatBytes(uint64_t bytes)
-{
-    if(bytes < 1024)
-        return QString(QObject::tr("%1 B")).arg(bytes);
-    if(bytes < 1024 * 1024)
-        return QString(QObject::tr("%1 KB")).arg(bytes / 1024);
-    if(bytes < 1024 * 1024 * 1024)
-        return QString(QObject::tr("%1 MB")).arg(bytes / 1024 / 1024);
-
-    return QString(QObject::tr("%1 GB")).arg(bytes / 1024 / 1024 / 1024);
-}
-
-qreal calculateIdealFontSize(int width, const QString& text, QFont font, qreal minPointSize, qreal font_size) {
-    while(font_size >= minPointSize) {
-        font.setPointSizeF(font_size);
-        QFontMetrics fm(font);
-        if (fm.width(text) < width) {
-            break;
-        }
-        font_size -= 0.5;
-    }
-    return font_size;
 }
 
 void ClickableLabel::mouseReleaseEvent(QMouseEvent *event)

@@ -1,25 +1,27 @@
-// Copyright (c) 2011-2017 The Bitcoin Core developers
+// Copyright (c) 2011-2015 The Bitcoin Core developers
+// Copyright (c) 2014-2019 The AusCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
+#include "config/auscash-config.h"
 #endif
 
-#include <qt/utilitydialog.h>
+#include "utilitydialog.h"
 
-#include <qt/forms/ui_helpmessagedialog.h>
+#include "ui_helpmessagedialog.h"
 
-#include <qt/bitcoingui.h>
-#include <qt/clientmodel.h>
-#include <qt/guiconstants.h>
-#include <qt/intro.h>
-#include <qt/paymentrequestplus.h>
-#include <qt/guiutil.h>
+#include "bitcoingui.h"
+#include "clientmodel.h"
+#include "guiconstants.h"
+#include "guiutil.h"
+#include "intro.h"
+#include "paymentrequestplus.h"
+#include "guiutil.h"
 
-#include <clientversion.h>
-#include <init.h>
-#include <util.h>
+#include "clientversion.h"
+#include "init.h"
+#include "util.h"
 
 #include <stdio.h>
 
@@ -31,7 +33,7 @@
 #include <QVBoxLayout>
 
 /** "Help message" or "About" dialog box */
-HelpMessageDialog::HelpMessageDialog(QWidget *parent, bool about) :
+HelpMessageDialog::HelpMessageDialog(QWidget *parent, HelpMode helpMode) :
     QDialog(parent),
     ui(new Ui::HelpMessageDialog)
 {
@@ -47,13 +49,14 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent, bool about) :
     version += " " + tr("(%1-bit)").arg(32);
 #endif
 
-    if (about)
+    if (helpMode == about)
     {
         setWindowTitle(tr("About %1").arg(tr(PACKAGE_NAME)));
 
         /// HTML-format the license message from the core
         QString licenseInfo = QString::fromStdString(LicenseInfo());
         QString licenseInfoHTML = licenseInfo;
+
         // Make URLs clickable
         QRegExp uri("<(.*)>", Qt::CaseSensitive, QRegExp::RegExp2);
         uri.setMinimal(true); // use non-greedy matching
@@ -67,10 +70,10 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent, bool about) :
         ui->aboutMessage->setText(version + "<br><br>" + licenseInfoHTML);
         ui->aboutMessage->setWordWrap(true);
         ui->helpMessage->setVisible(false);
-    } else {
+    } else if (helpMode == cmdline) {
         setWindowTitle(tr("Command-line options"));
         QString header = tr("Usage:") + "\n" +
-            "  australiacash-qt [" + tr("command-line options") + "]                     " + "\n";
+            "  auscash-qt [" + tr("command-line options") + "]                     " + "\n";
         QTextCursor cursor(ui->helpMessage->document());
         cursor.insertText(version);
         cursor.insertBlock();
@@ -128,7 +131,40 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent, bool about) :
 
         ui->helpMessage->moveCursor(QTextCursor::Start);
         ui->scrollArea->setVisible(false);
-        ui->aboutLogo->setVisible(false);
+    } else if (helpMode == pshelp) {
+        setWindowTitle(tr("PrivateSend information"));
+
+        ui->aboutMessage->setTextFormat(Qt::RichText);
+        ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        ui->aboutMessage->setText(tr("\
+<h3>PrivateSend Basics</h3> \
+PrivateSend gives you true financial privacy by obscuring the origins of your funds. \
+All the AusCash in your wallet is comprised of different \"inputs\" which you can think of as separate, discrete coins.<br> \
+PrivateSend uses an innovative process to mix your inputs with the inputs of two other people, without having your coins ever leave your wallet. \
+You retain control of your money at all times.<hr> \
+<b>The PrivateSend process works like this:</b>\
+<ol type=\"1\"> \
+<li>PrivateSend begins by breaking your transaction inputs down into standard denominations. \
+These denominations are 0.001 AUSCASH, 0.01 AUSCASH, 0.1 AUSCASH, 1 AUSCASH and 10 AUSCASH -- sort of like the paper money you use every day.</li> \
+<li>Your wallet then sends requests to specially configured software nodes on the network, called \"masternodes.\" \
+These masternodes are informed then that you are interested in mixing a certain denomination. \
+No identifiable information is sent to the masternodes, so they never know \"who\" you are.</li> \
+<li>When two other people send similar messages, indicating that they wish to mix the same denomination, a mixing session begins. \
+The masternode mixes up the inputs and instructs all three users' wallets to pay the now-transformed input back to themselves. \
+Your wallet pays that denomination directly to itself, but in a different address (called a change address).</li> \
+<li>In order to fully obscure your funds, your wallet must repeat this process a number of times with each denomination. \
+Each time the process is completed, it's called a \"round.\" Each round of PrivateSend makes it exponentially more difficult to determine where your funds originated.</li> \
+<li>This mixing process happens in the background without any intervention on your part. When you wish to make a transaction, \
+your funds will already be mixed. No additional waiting is required.</li> \
+</ol> <hr>\
+<b>IMPORTANT:</b> Your wallet only contains 1000 of these \"change addresses.\" Every time a mixing event happens, up to 9 of your addresses are used up. \
+This means those 1000 addresses last for about 100 mixing events. When 900 of them are used, your wallet must create more addresses. \
+It can only do this, however, if you have automatic backups enabled.<br> \
+Consequently, users who have backups disabled will also have PrivateSend disabled. <hr>\
+For more information, see the <a href=\"https://docs.auscash.org/en/stable/wallets/auscashcore/privatesend-instantsend.html\">PrivateSend documentation</a>."
+        ));
+        ui->aboutMessage->setWordWrap(true);
+        ui->helpMessage->setVisible(false);
     }
 }
 
@@ -164,6 +200,11 @@ void HelpMessageDialog::on_okButton_accepted()
 ShutdownWindow::ShutdownWindow(QWidget *parent, Qt::WindowFlags f):
     QWidget(parent, f)
 {
+    setObjectName("ShutdownWindow");
+
+    /* Open CSS when configured */
+    this->setStyleSheet(GUIUtil::loadStyleSheet());
+
     QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(new QLabel(
         tr("%1 is shutting down...").arg(tr(PACKAGE_NAME)) + "<br /><br />" +

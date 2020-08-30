@@ -1,13 +1,13 @@
 // Copyright (c) 2012 Pieter Wuille
-// Copyright (c) 2012-2017 The Bitcoin Core developers
+// Copyright (c) 2012-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <addrman.h>
+#include "addrman.h"
 
-#include <hash.h>
-#include <serialize.h>
-#include <streams.h>
+#include "hash.h"
+#include "serialize.h"
+#include "streams.h"
 
 int CAddrInfo::GetTriedBucket(const uint256& nKey) const
 {
@@ -65,9 +65,14 @@ double CAddrInfo::GetChance(int64_t nNow) const
     return fChance;
 }
 
-CAddrInfo* CAddrMan::Find(const CNetAddr& addr, int* pnId)
+CAddrInfo* CAddrMan::Find(const CService& addr, int* pnId)
 {
-    std::map<CNetAddr, int>::iterator it = mapAddr.find(addr);
+    CService addr2 = addr;
+    if (!discriminatePorts) {
+        addr2.SetPort(0);
+    }
+
+    std::map<CService, int>::iterator it = mapAddr.find(addr2);
     if (it == mapAddr.end())
         return nullptr;
     if (pnId)
@@ -80,9 +85,14 @@ CAddrInfo* CAddrMan::Find(const CNetAddr& addr, int* pnId)
 
 CAddrInfo* CAddrMan::Create(const CAddress& addr, const CNetAddr& addrSource, int* pnId)
 {
+    CService addr2 = addr;
+    if (!discriminatePorts) {
+        addr2.SetPort(0);
+    }
+
     int nId = nIdCount++;
     mapInfo[nId] = CAddrInfo(addr, addrSource);
-    mapAddr[addr] = nId;
+    mapAddr[addr2] = nId;
     mapInfo[nId].nRandomPos = vRandom.size();
     vRandom.push_back(nId);
     if (pnId)
@@ -117,9 +127,14 @@ void CAddrMan::Delete(int nId)
     assert(!info.fInTried);
     assert(info.nRefCount == 0);
 
+    CService addr = info;
+    if (!discriminatePorts) {
+        addr.SetPort(0);
+    }
+
     SwapRandom(info.nRandomPos, vRandom.size() - 1);
     vRandom.pop_back();
-    mapAddr.erase(info);
+    mapAddr.erase(addr);
     mapInfo.erase(nId);
     nNew--;
 }
@@ -233,7 +248,9 @@ void CAddrMan::Good_(const CService& addr, int64_t nTime)
     if (nUBucket == -1)
         return;
 
-    LogPrint(BCLog::ADDRMAN, "Moving %s to tried\n", addr.ToString());
+    if (fLogIPs) {
+        LogPrint(BCLog::ADDRMAN, "Moving %s to tried\n", addr.ToString());
+    }
 
     // move nId to the tried tables
     MakeTried(info, nId);
@@ -387,12 +404,12 @@ int CAddrMan::Check_()
     std::set<int> setTried;
     std::map<int, int> mapNew;
 
-    if (vRandom.size() != (size_t)(nTried + nNew))
+    if (vRandom.size() != nTried + nNew)
         return -7;
 
-    for (const auto& entry : mapInfo) {
-        int n = entry.first;
-        const CAddrInfo& info = entry.second;
+    for (std::map<int, CAddrInfo>::iterator it = mapInfo.begin(); it != mapInfo.end(); it++) {
+        int n = (*it).first;
+        CAddrInfo& info = (*it).second;
         if (info.fInTried) {
             if (!info.nLastSuccess)
                 return -1;
@@ -408,7 +425,7 @@ int CAddrMan::Check_()
         }
         if (mapAddr[info] != n)
             return -5;
-        if (info.nRandomPos < 0 || (size_t)info.nRandomPos >= vRandom.size() || vRandom[info.nRandomPos] != n)
+        if (info.nRandomPos < 0 || info.nRandomPos >= vRandom.size() || vRandom[info.nRandomPos] != n)
             return -14;
         if (info.nLastTry < 0)
             return -6;
@@ -416,9 +433,9 @@ int CAddrMan::Check_()
             return -8;
     }
 
-    if (setTried.size() != (size_t)nTried)
+    if (setTried.size() != nTried)
         return -9;
-    if (mapNew.size() != (size_t)nNew)
+    if (mapNew.size() != nNew)
         return -10;
 
     for (int n = 0; n < ADDRMAN_TRIED_BUCKET_COUNT; n++) {
@@ -516,6 +533,23 @@ void CAddrMan::SetServices_(const CService& addr, ServiceFlags nServices)
 
     // update info
     info.nServices = nServices;
+}
+
+CAddrInfo CAddrMan::GetAddressInfo_(const CService& addr)
+{
+    CAddrInfo* pinfo = Find(addr);
+
+    // if not found, bail out
+    if (!pinfo)
+        return CAddrInfo();
+
+    CAddrInfo& info = *pinfo;
+
+    // check whether we are talking about the exact same CService (including same port)
+    if (info != addr)
+        return CAddrInfo();
+
+    return *pinfo;
 }
 
 int CAddrMan::RandomInt(int nMax){

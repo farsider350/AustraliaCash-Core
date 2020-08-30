@@ -1,5 +1,5 @@
-Building Australiacash
-================
+Building AusCash
+=============
 
 See doc/build-*.md for instructions on building the various
-elements of the Australiacash Core reference implementation of Australiacash.
+elements of the AusCash Core reference implementation of AusCash.

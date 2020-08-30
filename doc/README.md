@@ -1,42 +1,40 @@
-Australiacash Core
-=============
+AusCash Core
+==========
 
-Setup
----------------------
-Australiacash Core is the original Australiacash client and it builds the backbone of the network. It downloads and, by default, stores the entire history of Australiacash transactions (which is currently more than 7 GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
-
-To download Australiacash Core, visit [australiacash.org](https://australiacash.org).
+This is the official reference wallet for AusCash digital currency and comprises the backbone of the AusCash peer-to-peer network. You can [download AusCash Core](https://www.auscash.org/downloads/) or [build it yourself](#building) using the guides below.
 
 Running
 ---------------------
-The following are some helpful notes on how to run Australiacash on your native platform.
+The following are some helpful notes on how to run AusCash on your native platform.
 
 ### Unix
 
 Unpack the files into a directory and run:
 
-- `bin/australiacash-qt` (GUI) or
-- `bin/australiacashd` (headless)
+- `bin/auscash-qt` (GUI) or
+- `bin/auscashd` (headless)
 
 ### Windows
 
-Unpack the files into a directory, and then run australiacash-qt.exe.
+Unpack the files into a directory, and then run auscash-qt.exe.
 
 ### OS X
 
-Drag Australiacash-Core to your applications folder, and then run Australiacash-Core.
+Drag AusCash-Qt to your applications folder, and then run AusCash-Qt.
 
 ### Need Help?
 
-* See the documentation at the [Australiacash Wiki](https://australiacash.org/info/)
+* See the [AusCash documentation](https://docs.auscash.org)
 for help and more information.
-* Ask for help on [#australiacash](http://webchat.freenode.net?channels=australiacash) on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net?channels=australiacash).
+* See the [AusCash Developer Documentation](https://auscash-docs.github.io/) 
+for technical specifications and implementation details.
+* Ask for help on [AusCash Nation Discord](http://auscashchat.org)
+* Ask for help on the [AusCash Forum](https://auscash.org/forum)
 
 Building
 ---------------------
-The following are developer notes on how to build Australiacash on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
+The following are developer notes on how to build AusCash Core on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
 
-- [Dependencies](dependencies.md)
 - [OS X Build Notes](build-osx.md)
 - [Unix Build Notes](build-unix.md)
 - [Windows Build Notes](build-windows.md)
@@ -45,11 +43,12 @@ The following are developer notes on how to build Australiacash on your native p
 
 Development
 ---------------------
-The Australiacash repo's [root README](/README.md) contains relevant information on the development process and automated testing.
+The AusCash Core repo's [root README](/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
 - [Release Notes](release-notes.md)
 - [Release Process](release-process.md)
+- Source Code Documentation ***TODO***
 - [Translation Process](translation_process.md)
 - [Translation Strings Policy](translation_strings_policy.md)
 - [Travis CI](travis-ci.md)
@@ -60,8 +59,8 @@ The Australiacash repo's [root README](/README.md) contains relevant information
 - [Benchmarking](benchmarking.md)
 
 ### Resources
-
-* Discuss general Australiacash development on #australiacash on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net/?channels=australiacash).
+* Discuss on the [AusCash Forum](https://auscash.org/forum), in the Development & Technical Discussion board.
+* Discuss on [AusCash Nation Discord](http://auscashchat.org)
 
 ### Miscellaneous
 - [Assets Attribution](assets-attribution.md)

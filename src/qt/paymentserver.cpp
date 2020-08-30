@@ -1,22 +1,22 @@
-// Copyright (c) 2011-2017 The Bitcoin Core developers
+// Copyright (c) 2011-2015 The Bitcoin Core developers
+// Copyright (c) 2014-2020 The AusCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <qt/paymentserver.h>
+#include "paymentserver.h"
 
-#include <qt/bitcoinunits.h>
-#include <qt/guiutil.h>
-#include <qt/optionsmodel.h>
+#include "bitcoinunits.h"
+#include "guiutil.h"
+#include "optionsmodel.h"
 
-#include <base58.h>
-#include <chainparams.h>
-#include <policy/policy.h>
-#include <ui_interface.h>
-#include <util.h>
-#include <wallet/wallet.h>
+#include "base58.h"
+#include "chainparams.h"
+#include "policy/policy.h"
+#include "ui_interface.h"
+#include "util.h"
+#include "wallet/wallet.h"
 
 #include <cstdlib>
-#include <memory>
 
 #include <openssl/x509_vfy.h>
 
@@ -48,14 +48,14 @@
 #endif
 
 const int BITCOIN_IPC_CONNECT_TIMEOUT = 1000; // milliseconds
-const QString BITCOIN_IPC_PREFIX("australiacash:");
+const QString BITCOIN_IPC_PREFIX("auscash:");
 // BIP70 payment protocol messages
 const char* BIP70_MESSAGE_PAYMENTACK = "PaymentACK";
 const char* BIP70_MESSAGE_PAYMENTREQUEST = "PaymentRequest";
 // BIP71 payment protocol media types
-const char* BIP71_MIMETYPE_PAYMENT = "application/australiacash-payment";
-const char* BIP71_MIMETYPE_PAYMENTACK = "application/australiacash-paymentack";
-const char* BIP71_MIMETYPE_PAYMENTREQUEST = "application/australiacash-paymentrequest";
+const char* BIP71_MIMETYPE_PAYMENT = "application/auscash-payment";
+const char* BIP71_MIMETYPE_PAYMENTACK = "application/auscash-paymentack";
+const char* BIP71_MIMETYPE_PAYMENTREQUEST = "application/auscash-paymentrequest";
 
 struct X509StoreDeleter {
       void operator()(X509_STORE* b) {
@@ -79,7 +79,7 @@ namespace // Anon namespace
 //
 static QString ipcServerName()
 {
-    QString name("AustraliacashQt");
+    QString name("AusCashQt");
 
     // Append a simple hash of the datadir
     // Note that GetDataDir(true) returns a different path
@@ -208,26 +208,28 @@ void PaymentServer::ipcParseCommandLine(int argc, char* argv[])
         if (arg.startsWith("-"))
             continue;
 
-        // If the bitcoin: URI contains a payment request, we are not able to detect the
+        // If the auscash: URI contains a payment request, we are not able to detect the
         // network as that would require fetching and parsing the payment request.
         // That means clicking such an URI which contains a testnet payment request
         // will start a mainnet instance and throw a "wrong network" error.
-        if (arg.startsWith(BITCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // bitcoin: URI
+        if (arg.startsWith(BITCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // auscash: URI
         {
             savedPaymentRequests.append(arg);
 
             SendCoinsRecipient r;
             if (GUIUtil::parseBitcoinURI(arg, &r) && !r.address.isEmpty())
             {
+                CBitcoinAddress address(r.address.toStdString());
                 auto tempChainParams = CreateChainParams(CBaseChainParams::MAIN);
 
-                if (IsValidDestinationString(r.address.toStdString(), *tempChainParams)) {
+                if (address.IsValid(*tempChainParams))
+                {
                     SelectParams(CBaseChainParams::MAIN);
-                } else {
+                }
+                else {
                     tempChainParams = CreateChainParams(CBaseChainParams::TESTNET);
-                    if (IsValidDestinationString(r.address.toStdString(), *tempChainParams)) {
+                    if (address.IsValid(*tempChainParams))
                         SelectParams(CBaseChainParams::TESTNET);
-                    }
                 }
             }
         }
@@ -308,7 +310,7 @@ PaymentServer::PaymentServer(QObject* parent, bool startLocalServer) :
     GOOGLE_PROTOBUF_VERIFY_VERSION;
 
     // Install global event filter to catch QFileOpenEvents
-    // on Mac: sent when you click bitcoin: links
+    // on Mac: sent when you click auscash: links
     // other OSes: helpful when dealing with payment request files
     if (parent)
         parent->installEventFilter(this);
@@ -325,7 +327,7 @@ PaymentServer::PaymentServer(QObject* parent, bool startLocalServer) :
         if (!uriServer->listen(name)) {
             // constructor is called early in init, so don't use "Q_EMIT message()" here
             QMessageBox::critical(0, tr("Payment request error"),
-                tr("Cannot start australiacash: click-to-pay handler"));
+                tr("Cannot start auscash: click-to-pay handler"));
         }
         else {
             connect(uriServer, SIGNAL(newConnection()), this, SLOT(handleURIConnection()));
@@ -340,7 +342,7 @@ PaymentServer::~PaymentServer()
 }
 
 //
-// OSX-specific way of handling bitcoin: URIs and PaymentRequest mime types.
+// OSX-specific way of handling auscash: URIs and PaymentRequest mime types.
 // Also used by paymentservertests.cpp and when opening a payment request file
 // via "Open URI..." menu entry.
 //
@@ -363,9 +365,10 @@ void PaymentServer::initNetManager()
 {
     if (!optionsModel)
         return;
-    delete netManager;
+    if (netManager != nullptr)
+        delete netManager;
 
-    // netManager is used to fetch paymentrequests given in bitcoin: URIs
+    // netManager is used to fetch paymentrequests given in auscash: URIs
     netManager = new QNetworkAccessManager(this);
 
     QNetworkProxy proxy;
@@ -405,7 +408,7 @@ void PaymentServer::handleURIOrFile(const QString& s)
         return;
     }
 
-    if (s.startsWith(BITCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // bitcoin: URI
+    if (s.startsWith(BITCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // auscash: URI
     {
 #if QT_VERSION < 0x050000
         QUrl uri(s);
@@ -439,7 +442,8 @@ void PaymentServer::handleURIOrFile(const QString& s)
             SendCoinsRecipient recipient;
             if (GUIUtil::parseBitcoinURI(s, &recipient))
             {
-                if (!IsValidDestinationString(recipient.address.toStdString())) {
+                CBitcoinAddress address(recipient.address.toStdString());
+                if (!address.IsValid()) {
                     Q_EMIT message(tr("URI handling"), tr("Invalid payment address %1").arg(recipient.address),
                         CClientUIInterface::MSG_ERROR);
                 }
@@ -448,7 +452,7 @@ void PaymentServer::handleURIOrFile(const QString& s)
             }
             else
                 Q_EMIT message(tr("URI handling"),
-                    tr("URI cannot be parsed! This can be caused by an invalid Australiacash address or malformed URI parameters."),
+                    tr("URI cannot be parsed! This can be caused by an invalid AusCash address or malformed URI parameters."),
                     CClientUIInterface::ICON_WARNING);
 
             return;
@@ -557,10 +561,10 @@ bool PaymentServer::processPaymentRequest(const PaymentRequestPlus& request, Sen
         CTxDestination dest;
         if (ExtractDestination(sendingTo.first, dest)) {
             // Append destination address
-            addresses.append(QString::fromStdString(EncodeDestination(dest)));
+            addresses.append(QString::fromStdString(CBitcoinAddress(dest).ToString()));
         }
         else if (!recipient.authenticatedMerchant.isEmpty()) {
-            // Unauthenticated payment requests to custom bitcoin addresses are not supported
+            // Unauthenticated payment requests to custom auscash addresses are not supported
             // (there is no good way to tell the user where they are paying in a way they'd
             // have a chance of understanding).
             Q_EMIT message(tr("Payment request rejected"),
@@ -569,7 +573,7 @@ bool PaymentServer::processPaymentRequest(const PaymentRequestPlus& request, Sen
             return false;
         }
 
-        // Bitcoin amounts are stored as (optional) uint64 in the protobuf messages (see paymentrequest.proto),
+        // AusCash amounts are stored as (optional) uint64 in the protobuf messages (see paymentrequest.proto),
         // but CAmount is defined as int64_t. Because of that we need to verify that amounts are in a valid range
         // and no overflow has happened.
         if (!verifyAmount(sendingTo.second)) {
@@ -617,7 +621,7 @@ void PaymentServer::fetchRequest(const QUrl& url)
     netManager->get(netRequest);
 }
 
-void PaymentServer::fetchPaymentACK(CWallet* wallet, const SendCoinsRecipient& recipient, QByteArray transaction)
+void PaymentServer::fetchPaymentACK(CWallet* wallet, SendCoinsRecipient recipient, QByteArray transaction)
 {
     const payments::PaymentDetails& details = recipient.paymentRequest.getDetails();
     if (!details.has_payment_url())
@@ -637,25 +641,27 @@ void PaymentServer::fetchPaymentACK(CWallet* wallet, const SendCoinsRecipient& r
     // Create a new refund address, or re-use:
     QString account = tr("Refund from %1").arg(recipient.authenticatedMerchant);
     std::string strAccount = account.toStdString();
-    CPubKey newKey;
-    if (wallet->GetKeyFromPool(newKey)) {
-        // BIP70 requests encode the scriptPubKey directly, so we are not restricted to address
-        // types supported by the receiver. As a result, we choose the address format we also
-        // use for change. Despite an actual payment and not change, this is a close match:
-        // it's the output type we use subject to privacy issues, but not restricted by what
-        // other software supports.
-        const OutputType change_type = g_change_type != OUTPUT_TYPE_NONE ? g_change_type : g_address_type;
-        wallet->LearnRelatedScripts(newKey, change_type);
-        CTxDestination dest = GetDestinationForKey(newKey, change_type);
-        wallet->SetAddressBook(dest, strAccount, "refund");
-
-        CScript s = GetScriptForDestination(dest);
+    std::set<CTxDestination> refundAddresses = wallet->GetAccountAddresses(strAccount);
+    if (!refundAddresses.empty()) {
+        CScript s = GetScriptForDestination(*refundAddresses.begin());
         payments::Output* refund_to = payment.add_refund_to();
         refund_to->set_script(&s[0], s.size());
-    } else {
-        // This should never happen, because sending coins should have
-        // just unlocked the wallet and refilled the keypool.
-        qWarning() << "PaymentServer::fetchPaymentACK: Error getting refund key, refund_to not set";
+    }
+    else {
+        CPubKey newKey;
+        if (wallet->GetKeyFromPool(newKey, false)) {
+            CKeyID keyID = newKey.GetID();
+            wallet->SetAddressBook(keyID, strAccount, "refund");
+
+            CScript s = GetScriptForDestination(keyID);
+            payments::Output* refund_to = payment.add_refund_to();
+            refund_to->set_script(&s[0], s.size());
+        }
+        else {
+            // This should never happen, because sending coins should have
+            // just unlocked the wallet and refilled the keypool.
+            qWarning() << "PaymentServer::fetchPaymentACK: Error getting refund key, refund_to not set";
+        }
     }
 
     int length = payment.ByteSize();

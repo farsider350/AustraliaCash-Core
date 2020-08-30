@@ -1,0 +1,6 @@
+usr/local/bin/auscash-qt usr/bin
+share/pixmaps/auscash32.xpm usr/share/pixmaps
+share/pixmaps/auscash16.xpm usr/share/pixmaps
+share/pixmaps/auscash128.png usr/share/pixmaps
+debian/auscash-qt.desktop usr/share/applications
+debian/auscash-qt.protocol usr/share/kde4/services/

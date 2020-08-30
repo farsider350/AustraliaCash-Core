@@ -1,18 +1,18 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2009-2015 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <random.h>
+#include "random.h"
 
-#include <crypto/sha512.h>
-#include <support/cleanse.h>
+#include "crypto/sha512.h"
+#include "support/cleanse.h"
 #ifdef WIN32
-#include <compat.h> // for Windows API
+#include "compat.h" // for Windows API
 #include <wincrypt.h>
 #endif
-#include <util.h>             // for LogPrint()
-#include <utilstrencodings.h> // for GetTime()
+#include "util.h"             // for LogPrint()
+#include "utilstrencodings.h" // for GetTime()
 
 #include <stdlib.h>
 #include <limits>
@@ -46,10 +46,10 @@
 #include <openssl/err.h>
 #include <openssl/rand.h>
 
-[[noreturn]] static void RandFailure()
+static void RandFailure()
 {
     LogPrintf("Failed to read randomness, aborting\n");
-    std::abort();
+    abort();
 }
 
 static inline int64_t GetPerformanceCounter()
@@ -164,7 +164,7 @@ static void RandAddSeedPerfmon()
     if (ret == ERROR_SUCCESS) {
         RAND_add(vData.data(), nSize, nSize / 100.0);
         memory_cleanse(vData.data(), nSize);
-        LogPrint(BCLog::RAND, "%s: %lu bytes\n", __func__, nSize);
+        LogPrint(BCLog::RANDOM, "%s: %lu bytes\n", __func__, nSize);
     } else {
         static bool warned = false; // Warn only once
         if (!warned) {
@@ -376,6 +376,17 @@ uint256 GetRandHash()
     return hash;
 }
 
+bool GetRandBool(double rate)
+{
+    if (rate == 0.0) {
+        return false;
+    }
+
+    const uint64_t v = 100000000;
+    uint64_t r = GetRand(v + 1);
+    return r <= v * rate;
+}
+
 void FastRandomContext::RandomSeed()
 {
     uint256 seed = GetRandHash();
@@ -398,7 +409,7 @@ std::vector<unsigned char> FastRandomContext::randbytes(size_t len)
 {
     std::vector<unsigned char> ret(len);
     if (len > 0) {
-        rng.Output(&ret[0], len);
+        rng.Keystream(&ret[0], len);
     }
     return ret;
 }

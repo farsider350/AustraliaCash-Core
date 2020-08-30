@@ -1,0 +1,22 @@
+[Unit]
+Description=AusCash's distributed currency daemon
+After=network.target
+
+[Service]
+User=auscashcore
+Group=auscashcore
+
+Type=forking
+PIDFile=/var/lib/auscashd/auscashd.pid
+ExecStart=/usr/bin/auscashd -daemon -pid=/var/lib/auscashd/auscashd.pid \
+-conf=/etc/auscashcore/auscash.conf -datadir=/var/lib/auscashd -disablewallet
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

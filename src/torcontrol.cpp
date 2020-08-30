@@ -1,14 +1,14 @@
-// Copyright (c) 2015-2017 The Bitcoin Core developers
+// Copyright (c) 2015 The Bitcoin Core developers
 // Copyright (c) 2017 The Zcash developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <torcontrol.h>
-#include <utilstrencodings.h>
-#include <netbase.h>
-#include <net.h>
-#include <util.h>
-#include <crypto/hmac_sha256.h>
+#include "torcontrol.h"
+#include "utilstrencodings.h"
+#include "netbase.h"
+#include "net.h"
+#include "util.h"
+#include "crypto/hmac_sha256.h"
 
 #include <vector>
 #include <deque>
@@ -76,7 +76,7 @@ public:
 
     /** Create a new TorControlConnection.
      */
-    explicit TorControlConnection(struct event_base *base);
+    TorControlConnection(struct event_base *base);
     ~TorControlConnection();
 
     /**
@@ -121,7 +121,7 @@ private:
 };
 
 TorControlConnection::TorControlConnection(struct event_base *_base):
-    base(_base), b_conn(nullptr)
+    base(_base), b_conn(0)
 {
 }
 
@@ -227,7 +227,7 @@ bool TorControlConnection::Disconnect()
 {
     if (b_conn)
         bufferevent_free(b_conn);
-    b_conn = nullptr;
+    b_conn = 0;
     return true;
 }
 
@@ -476,7 +476,7 @@ TorController::~TorController()
 {
     if (reconnect_ev) {
         event_free(reconnect_ev);
-        reconnect_ev = nullptr;
+        reconnect_ev = 0;
     }
     if (service.IsValid()) {
         RemoveLocal(service);
@@ -767,10 +767,15 @@ void InterruptTorControl()
 
 void StopTorControl()
 {
+    // timed_join() avoids the wallet not closing during a repair-restart. For a 'normal' wallet exit
+    // it behaves for our cases exactly like the normal join()
     if (gBase) {
-        torControlThread.join();
+#if BOOST_VERSION >= 105000
+        torControlThread.try_join_for(boost::chrono::seconds(1));
+#else
+        torControlThread.timed_join(boost::posix_time::seconds(1));
+#endif
         event_base_free(gBase);
-        gBase = nullptr;
+        gBase = 0;
     }
 }
-
