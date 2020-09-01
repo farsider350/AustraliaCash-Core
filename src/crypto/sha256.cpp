@@ -19,6 +19,26 @@ void Transform(uint32_t* s, const unsigned char* chunk, size_t blocks);
 #endif
 #endif
 
+namespace sha256d64_sse41
+{
+void Transform_4way(unsigned char* out, const unsigned char* in);
+}
+
+namespace sha256d64_avx2
+{
+void Transform_8way(unsigned char* out, const unsigned char* in);
+}
+
+namespace sha256d64_shani
+{
+void Transform_2way(unsigned char* out, const unsigned char* in);
+}
+
+namespace sha256_shani
+{
+void Transform(uint32_t* s, const unsigned char* chunk, size_t blocks);
+}
+
 // Internal implementation code.
 namespace
 {

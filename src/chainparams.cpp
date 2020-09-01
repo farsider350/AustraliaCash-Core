@@ -253,7 +253,7 @@ public:
         consensus.BIP66Height = 0;
         consensus.DIP0001Height = 250000;
         consensus.DIP0003Height = 255000;
-        consensus.DIP0003EnforcementHeight = 275000;
+        consensus.DIP0003EnforcementHeight = 375000;
         consensus.DIP0003EnforcementHash = uint256S("0x");
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~uint256(0) >> 20
         consensus.nPowTargetTimespan = 0.5 * 24 * 60 * 60; // 0.5 days
@@ -446,7 +446,7 @@ public:
         consensus.DIP0001Height = 5500;
         consensus.DIP0003Height = 7000;
         consensus.DIP0003EnforcementHeight = 7300;
-        consensus.DIP0003EnforcementHash = uint256S();
+        consensus.DIP0003EnforcementHash = uint256S("0x");
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~uint256(0) >> 20
         consensus.nPowTargetTimespan = 0.5 * 24 * 60 * 60; // 0.5 days
         consensus.nPowTargetSpacing = 2.5 * 60;
@@ -560,14 +560,15 @@ public:
             }
         };
 
-        chainTxData = ChainTxData{
+//        chainTxData = ChainTxData{
             // Data as of block  (height 0)
-            1516406749,
-            0,
-            0.0
-        };
+//            1516406749,
+//            0,
 
-    }
+//            0.0
+//        };
+
+    };
 };
 
 /**

@@ -22,7 +22,7 @@ depends()
 {
     echo "depends not built, building now"
     cd depends/
-    make $*
+    make HOST=x86_64-pc-linux-gnu -j4 $*
     cd ..
 }
 
