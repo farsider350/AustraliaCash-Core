@@ -98,17 +98,17 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x233f0791e8beab0ea34af5aa4db4f9e9e78b4e6f570e7af3a26a94432019d697"); //130000
 
-        /* Start DigiShield params */
+        /* Start AusShield params */
         consensus.nAveragingInterval = 10; // 10 blocks
-        consensus.multiAlgoTargetSpacingV4 = consensus.nPowTargetSpacing; // 2.5 mins
+        consensus.targetSpacingV4 = consensus.nPowTargetSpacing; // 2.5 mins
         consensus.nMaxAdjustDownV4 = 16;
         consensus.nMaxAdjustUpV4 = 8;
-        consensus.nAveragingTargetTimespanV4 = consensus.nAveragingInterval * consensus.multiAlgoTargetSpacingV4; // 10 * 30
+        consensus.nAveragingTargetTimespanV4 = consensus.nAveragingInterval * consensus.targetSpacingV4; // 10 * 30
         consensus.nMinActualTimespanV4 = consensus.nAveragingTargetTimespanV4 * (100 - consensus.nMaxAdjustUpV4) / 100;
         consensus.nMaxActualTimespanV4 = consensus.nAveragingTargetTimespanV4 * (100 + consensus.nMaxAdjustDownV4) / 100;
         consensus.nLocalTargetAdjustment = 4; //target adjustment per algo
-        /* End DigiShield params */
-        consensus.nDigiSheildHFHeight = 250000; // 250k blocks
+        /* End AusShield params */
+        consensus.nAusShieldHFHeight = 250000; // 250k blocks
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -236,17 +236,17 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x32fbb5ecde32b9506eec7e75efd9d390f7e9d3dc06aa7a9a430f0a131307be7e"); //0
 
-        /* Start DigiShield params */
+        /* Start AusShield params */
         consensus.nAveragingInterval = 10; // 10 blocks
-        consensus.multiAlgoTargetSpacingV4 = consensus.nPowTargetSpacing; // 2.5 mins
+        consensus.targetSpacingV4 = consensus.nPowTargetSpacing; // 150 seconds
         consensus.nMaxAdjustDownV4 = 16;
         consensus.nMaxAdjustUpV4 = 8;
-        consensus.nAveragingTargetTimespanV4 = consensus.nAveragingInterval * consensus.multiAlgoTargetSpacingV4; // 10 * 30
+        consensus.nAveragingTargetTimespanV4 = consensus.nAveragingInterval * consensus.targetSpacingV4; // 10 * 30
         consensus.nMinActualTimespanV4 = consensus.nAveragingTargetTimespanV4 * (100 - consensus.nMaxAdjustUpV4) / 100;
         consensus.nMaxActualTimespanV4 = consensus.nAveragingTargetTimespanV4 * (100 + consensus.nMaxAdjustDownV4) / 100;
         consensus.nLocalTargetAdjustment = 4; //target adjustment per algo
-        /* End DigiShield params */
-        consensus.nDigiSheildHFHeight = 100;
+        /* End AusShield params */
+        consensus.nAusShieldHFHeight = 100;
 
         pchMessageStart[0] = 0xfd;
         pchMessageStart[1] = 0xd2;
@@ -334,17 +334,17 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x00");
 
-        /* Start DigiShield params */
+        /* Start AusShield params */
         consensus.nAveragingInterval = 10; // 10 blocks
-        consensus.multiAlgoTargetSpacingV4 = consensus.nPowTargetSpacing; // 30 seconds
+        consensus.targetSpacingV4 = consensus.nPowTargetSpacing; // 150 seconds
         consensus.nMaxAdjustDownV4 = 16;
         consensus.nMaxAdjustUpV4 = 8;
-        consensus.nAveragingTargetTimespanV4 = consensus.nAveragingInterval * consensus.multiAlgoTargetSpacingV4; // 10 * 30
+        consensus.nAveragingTargetTimespanV4 = consensus.nAveragingInterval * consensus.targetSpacingV4; // 10 * 30
         consensus.nMinActualTimespanV4 = consensus.nAveragingTargetTimespanV4 * (100 - consensus.nMaxAdjustUpV4) / 100;
         consensus.nMaxActualTimespanV4 = consensus.nAveragingTargetTimespanV4 * (100 + consensus.nMaxAdjustDownV4) / 100;
         consensus.nLocalTargetAdjustment = 4; //target adjustment per algo
-        /* End DigiShield params */
-        consensus.nDigiSheildHFHeight = INT_MAX;
+        /* End AusShield params */
+        consensus.nAusShieldHFHeight = INT_MAX;
 
         pchMessageStart[0] = 0xfa;
         pchMessageStart[1] = 0xbf;

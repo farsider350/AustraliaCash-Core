@@ -14,13 +14,13 @@
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
     //Get next height and compare to forkheight
-    if (pindexLast->nHeight + 1 > params.nDigiSheildHFHeight){
-        return DigiShieldV4(pindexLast,params);
+    if (pindexLast->nHeight + 1 > params.nAusShieldHFHeight){
+        return AusShieldV4(pindexLast,params);
     }
     return GetNextWorkRequiredLegacy(pindexLast,pblock,params);
 }
 
-unsigned int DigiShieldV4(const CBlockIndex* pindexLast, const Consensus::Params& params)
+unsigned int AusShieldV4(const CBlockIndex* pindexLast, const Consensus::Params& params)
 {
 	// find first block in averaging interval
 	// Go back by what we want to be nAveragingInterval blocks per algo
