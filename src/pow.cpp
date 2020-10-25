@@ -13,6 +13,56 @@
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
+    //Get next height and compare to forkheight
+    if (pindexLast->nHeight + 1 > params.nDigiSheildHFHeight){
+        return DigiShieldV4(pindexLast,params);
+    }
+    return GetNextWorkRequiredLegacy(pindexLast,pblock,params);
+}
+
+unsigned int DigiShieldV4(const CBlockIndex* pindexLast, const Consensus::Params& params)
+{
+	// find first block in averaging interval
+	// Go back by what we want to be nAveragingInterval blocks per algo
+	const CBlockIndex* pindexFirst = pindexLast;
+	for (int i = 0; pindexFirst && i < params.nAveragingInterval; i++)
+	{
+		pindexFirst = pindexFirst->pprev;
+	}
+
+	const CBlockIndex* pindexPrev = pindexLast->pprev;
+	if (pindexPrev == nullptr || pindexFirst == nullptr)
+	{
+		return UintToArith256(params.powLimit).GetCompact();
+	}
+
+	// Limit adjustment step
+	// Use medians to prevent time-warp attacks
+	int64_t nActualTimespan = pindexLast->GetMedianTimePast() - pindexFirst->GetMedianTimePast();
+	nActualTimespan = params.nAveragingTargetTimespanV4 + (nActualTimespan - params.nAveragingTargetTimespanV4);
+
+	if (nActualTimespan < params.nMinActualTimespanV4)
+		nActualTimespan = params.nMinActualTimespanV4;
+	if (nActualTimespan > params.nMaxActualTimespanV4)
+		nActualTimespan = params.nMaxActualTimespanV4;
+
+	//Global retarget
+	arith_uint256 bnNew;
+	bnNew.SetCompact(pindexPrev->nBits);
+
+	bnNew *= nActualTimespan;
+	bnNew /= params.nAveragingTargetTimespanV4;
+
+	if (bnNew > UintToArith256(params.powLimit))
+	{
+		bnNew = UintToArith256(params.powLimit);
+	}
+
+	return bnNew.GetCompact();
+}
+
+unsigned int GetNextWorkRequiredLegacy(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
+{
     assert(pindexLast != nullptr);
     unsigned int nProofOfWorkLimit = UintToArith256(params.powLimit).GetCompact();
 
