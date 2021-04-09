@@ -22,7 +22,7 @@ AUS-Cash Core Wallet
 ####    Install Instructions
 
 >       Proceed to the releases section of this GitHub
->       Find the latest release at top of page (Latest 0.17.4.0)
+>       Find the latest release at top of page (Latest 0.17.4.2)
 >       Download the compressed file for your operating system
 >       Unzip and double click the AustraliaCash-qt file
 >       
