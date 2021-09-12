@@ -1162,7 +1162,7 @@ bool AppInitParameterInteraction()
     }
 
 
-    nMaxReorgLength = GetArg("-maxreorglength", DEFAULT_MAX_REORG_LENGTH);
+    nMaxReorgLength = gArgs.GetArg("-maxreorglength", DEFAULT_MAX_REORG_LENGTH);
 
 
     return true;
