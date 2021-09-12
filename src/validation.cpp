@@ -232,6 +232,8 @@ arith_uint256 nMinimumChainWork;
 CFeeRate minRelayTxFee = CFeeRate(DEFAULT_MIN_RELAY_TX_FEE);
 CAmount maxTxFee = DEFAULT_TRANSACTION_MAXFEE;
 
+uint64_t nMaxReorgLength = DEFAULT_MAX_REORG_LENGTH;
+
 CBlockPolicyEstimator feeEstimator;
 CTxMemPool mempool(&feeEstimator);
 
@@ -2392,6 +2394,12 @@ bool CChainState::ConnectTip(CValidationState& state, const CChainParams& chainp
     return true;
 }
 
+static bool CheckMaxReorgLength(const CBlockIndex* pindexOldTip, const CBlockIndex* pindexNew) {
+    const CBlockIndex *pindexFork = chainActive.FindFork(pindexNew);
+    auto reorgLength = pindexOldTip ? pindexOldTip->nHeight - (pindexFork ? pindexFork->nHeight : -1) : 0;
+    return reorgLength <= nMaxReorgLength;
+}
+
 /**
  * Return the tip of the chain with the most work in it, that isn't
  * known to be invalid (it's however far from certain to be valid).
@@ -2472,6 +2480,9 @@ bool CChainState::ActivateBestChainStep(CValidationState& state, const CChainPar
 
     const CBlockIndex *pindexOldTip = chainActive.Tip();
     const CBlockIndex *pindexFork = chainActive.FindFork(pindexMostWork);
+
+    // Reject fork if reorg is too long.
+    assert(CheckMaxReorgLength(pindexOldTip, pindexFork));
 
     // Disconnect active blocks which are no longer in the best chain.
     bool fBlocksDisconnected = false;
@@ -3284,6 +3295,8 @@ bool CChainState::AcceptBlockHeader(const CBlockHeader& block, CValidationState&
             return state.DoS(100, error("%s: prev block invalid", __func__), REJECT_INVALID, "bad-prevblk");
         if (!ContextualCheckBlockHeader(block, state, chainparams, pindexPrev, GetAdjustedTime()))
             return error("%s: Consensus::ContextualCheckBlockHeader: %s, %s", __func__, hash.ToString(), FormatStateMessage(state));
+        if (!CheckMaxReorgLength(chainActive.Tip(), pindexPrev))
+            return state.DoS(100, error("%s: prev chain violates max reorg length", __func__), 0, "bad-prevblk");
 
         if (!pindexPrev->IsValid(BLOCK_VALID_SCRIPTS)) {
             for (const CBlockIndex* failedit : g_failed_blocks) {
