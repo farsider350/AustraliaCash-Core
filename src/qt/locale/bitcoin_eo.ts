@@ -62,12 +62,12 @@
         <translation>Ricevaj adresoj</translation>
     </message>
     <message>
-        <source>These are your Australiacash addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Jen viaj Australiacash-adresoj por sendi pagojn. Zorge kontrolu la sumon kaj la alsendan adreson antaŭ ol sendi.</translation>
+        <source>These are your Coin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Jen viaj Coin-adresoj por sendi pagojn. Zorge kontrolu la sumon kaj la alsendan adreson antaŭ ol sendi.</translation>
     </message>
     <message>
-        <source>These are your Australiacash addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Jen viaj australiacashj adresoj por ricevi pagojn. Estas konsilinde uzi apartan ricevan adreson por ĉiu transakcio.</translation>
+        <source>These are your Coin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Jen viaj coinj adresoj por ricevi pagojn. Estas konsilinde uzi apartan ricevan adreson por ĉiu transakcio.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -176,7 +176,7 @@
         <translation>La monujo estas ĉifrita</translation>
     </message>
     <message>
-        <source>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your australiacashs from being stolen by malware infecting your computer.</source>
+        <source>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your coins from being stolen by malware infecting your computer.</source>
         <translation>%1 nun fermiĝos por fini la ĉifradon. Memoru, ke eĉ ĉifrado ne protektas kontraŭ ĉiu atako, ekz. se viruso infektus vian komputilon.</translation>
     </message>
     <message>
@@ -270,8 +270,8 @@
         <translation>Reindeksado de blokoj sur disko...</translation>
     </message>
     <message>
-        <source>Send coins to a Australiacash address</source>
-        <translation>Sendi monon al Australiacash-adreso</translation>
+        <source>Send coins to a Coin address</source>
+        <translation>Sendi monon al Coin-adreso</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -294,8 +294,8 @@
         <translation>&amp;Kontroli mesaĝon...</translation>
     </message>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
+        <source>Coin</source>
+        <translation>Coin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -322,12 +322,12 @@
         <translation>Ĉifri la privatajn ŝlosilojn de via monujo</translation>
     </message>
     <message>
-        <source>Sign messages with your Australiacash addresses to prove you own them</source>
-        <translation>Subskribi mesaĝojn per via Australiacash-adresoj por pravigi, ke vi estas la posedanto</translation>
+        <source>Sign messages with your Coin addresses to prove you own them</source>
+        <translation>Subskribi mesaĝojn per via Coin-adresoj por pravigi, ke vi estas la posedanto</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Australiacash addresses</source>
-        <translation>Kontroli mesaĝojn por kontroli ĉu ili estas subskribitaj per specifaj Australiacash-adresoj</translation>
+        <source>Verify messages to ensure they were signed with specified Coin addresses</source>
+        <translation>Kontroli mesaĝojn por kontroli ĉu ili estas subskribitaj per specifaj Coin-adresoj</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -346,8 +346,8 @@
         <translation>Langeto-breto</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and australiacash: URIs)</source>
-        <translation>Peti pagon (kreas QR-kodojn kaj URI-ojn kun prefikso australiacash:)</translation>
+        <source>Request payments (generates QR codes and coin: URIs)</source>
+        <translation>Peti pagon (kreas QR-kodojn kaj URI-ojn kun prefikso coin:)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -358,8 +358,8 @@
         <translation>Vidigi la liston de uzitaj ricevaj adresoj kaj etikedoj</translation>
     </message>
     <message>
-        <source>Open a australiacash: URI or payment request</source>
-        <translation>Malfermi australiacash:-URI-on aŭ pagpeton</translation>
+        <source>Open a coin: URI or payment request</source>
+        <translation>Malfermi coin:-URI-on aŭ pagpeton</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
@@ -599,8 +599,8 @@
         <translation>Uzi alian dosierujon por datumoj:</translation>
     </message>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
+        <source>Coin</source>
+        <translation>Coin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -680,8 +680,8 @@
         <translation>Fakulo</translation>
     </message>
     <message>
-        <source>Automatically open the Australiacash client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Aŭtomate malfermi la kursilan pordon por Australiacash. Tio funkcias nur se via kursilo havas la UPnP-funkcion, kaj se tiu ĉi estas ŝaltita.</translation>
+        <source>Automatically open the Coin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Aŭtomate malfermi la kursilan pordon por Coin. Tio funkcias nur se via kursilo havas la UPnP-funkcion, kaj se tiu ĉi estas ŝaltita.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -737,7 +737,7 @@
     </message>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Elekti la defaŭltan manieron por montri australiacashjn sumojn en la interfaco, kaj kiam vi sendos bitmonon.</translation>
+        <translation>Elekti la defaŭltan manieron por montri coinjn sumojn en la interfaco, kaj kiam vi sendos bitmonon.</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -779,8 +779,8 @@
         <translation>Formularo</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Australiacash network after a connection is established, but this process has not completed yet.</source>
-        <translation>Eblas, ke la informoj videblaj ĉi tie estas eksdataj. Via monujo aŭtomate sinkoniĝas kun la australiacash reto kiam ili konektiĝas, sed tiu procezo ankoraŭ ne finfariĝis.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Coin network after a connection is established, but this process has not completed yet.</source>
+        <translation>Eblas, ke la informoj videblaj ĉi tie estas eksdataj. Via monujo aŭtomate sinkoniĝas kun la coin reto kiam ili konektiĝas, sed tiu procezo ankoraŭ ne finfariĝis.</translation>
     </message>
     <message>
         <source>Your current spendable balance</source>
@@ -1134,7 +1134,7 @@
     <name>SendCoinsDialog</name>
     <message>
         <source>Send Coins</source>
-        <translation>Sendi Australiacashn</translation>
+        <translation>Sendi Coinn</translation>
     </message>
     <message>
         <source>Coin Control Features</source>
@@ -1277,8 +1277,8 @@
         <translation>Kreo de transakcio fiaskis!</translation>
     </message>
     <message>
-        <source>Warning: Invalid Australiacash address</source>
-        <translation>Averto: Nevalida Australiacash-adreso</translation>
+        <source>Warning: Invalid Coin address</source>
+        <translation>Averto: Nevalida Coin-adreso</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -1393,8 +1393,8 @@
         <translation>Kopii la aktualan subskribon al la tondejo</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Australiacash address</source>
-        <translation>Subskribi la mesaĝon por pravigi, ke vi estas la posedanto de tiu Australiacash-adreso</translation>
+        <source>Sign the message to prove you own this Coin address</source>
+        <translation>Subskribi la mesaĝon por pravigi, ke vi estas la posedanto de tiu Coin-adreso</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -1413,8 +1413,8 @@
         <translation>&amp;Kontroli Mesaĝon</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Australiacash address</source>
-        <translation>Kontroli la mesaĝon por pravigi, ke ĝi ja estas subskribita per la specifa Australiacash-adreso</translation>
+        <source>Verify the message to ensure it was signed with the specified Coin address</source>
+        <translation>Kontroli la mesaĝon por pravigi, ke ĝi ja estas subskribita per la specifa Coin-adreso</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -1833,7 +1833,7 @@
     <name>WalletModel</name>
     <message>
         <source>Send Coins</source>
-        <translation>Sendi Australiacashn</translation>
+        <translation>Sendi Coinn</translation>
     </message>
     </context>
 <context>
@@ -1890,8 +1890,8 @@
         <translation>Ruli fone kiel demono kaj akcepti komandojn</translation>
     </message>
     <message>
-        <source>Australiacash Core</source>
-        <translation>Kerno de Australiacash</translation>
+        <source>Coin Core</source>
+        <translation>Kerno de Coin</translation>
     </message>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>

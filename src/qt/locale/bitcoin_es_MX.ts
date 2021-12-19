@@ -62,12 +62,12 @@
         <translation>Direcciones de recibo</translation>
     </message>
     <message>
-        <source>These are your Australiacash addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Estas son tus direcciones de Australiacash para enviar pagos. Siempre revisa el monto y la dirección de envío antes de enviar monedas.</translation>
+        <source>These are your Coin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Estas son tus direcciones de Coin para enviar pagos. Siempre revisa el monto y la dirección de envío antes de enviar monedas.</translation>
     </message>
     <message>
-        <source>These are your Australiacash addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Estas son sus direcciones de Australiacash para recibir pagos. Se recomienda utilizar una nueva dirección de recepción para cada transacción.</translation>
+        <source>These are your Coin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Estas son sus direcciones de Coin para recibir pagos. Se recomienda utilizar una nueva dirección de recepción para cada transacción.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -194,8 +194,8 @@
         <translation>Reindexando bloques en el disco...</translation>
     </message>
     <message>
-        <source>Send coins to a Australiacash address</source>
-        <translation>Enviar monedas a una dirección Australiacash</translation>
+        <source>Send coins to a Coin address</source>
+        <translation>Enviar monedas a una dirección Coin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -218,8 +218,8 @@
         <translation>&amp;Verificar mensaje...</translation>
     </message>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
+        <source>Coin</source>
+        <translation>Coin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -381,8 +381,8 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
+        <source>Coin</source>
+        <translation>Coin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -474,8 +474,8 @@
         <translation>Mensaje:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Australiacash network.</source>
-        <translation>Mensaje opcional para agregar a la solicitud de pago, el cual será mostrado cuando la solicitud este abierta. Nota: El mensaje no se manda con el pago a travéz de la red de Australiacash.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Coin network.</source>
+        <translation>Mensaje opcional para agregar a la solicitud de pago, el cual será mostrado cuando la solicitud este abierta. Nota: El mensaje no se manda con el pago a travéz de la red de Coin.</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
@@ -660,8 +660,8 @@
         <translation>Opciones:</translation>
     </message>
     <message>
-        <source>Australiacash Core</source>
-        <translation>nucleo Australiacash</translation>
+        <source>Coin Core</source>
+        <translation>nucleo Coin</translation>
     </message>
     <message>
         <source>&lt;category&gt; can be:</source>

@@ -1508,7 +1508,7 @@ void ThreadMapPort()
             }
         }
 
-        std::string strDesc = "Australiacash " + FormatFullVersion();
+        std::string strDesc = "Coin " + FormatFullVersion();
 
         try {
             while (true) {

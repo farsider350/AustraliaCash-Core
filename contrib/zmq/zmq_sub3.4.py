@@ -6,8 +6,8 @@
 """
     ZMQ example using python3's asyncio
 
-    Australiacash should be started with the command line arguments:
-        australiacashd -testnet -daemon \
+    Coin should be started with the command line arguments:
+        coind -testnet -daemon \
                 -zmqpubrawtx=tcp://127.0.0.1:28332 \
                 -zmqpubrawblock=tcp://127.0.0.1:28332 \
                 -zmqpubhashtx=tcp://127.0.0.1:28332 \

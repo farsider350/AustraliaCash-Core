@@ -44,17 +44,17 @@ from the root of the repository.
 
 **Note**: You only need Berkeley DB if the wallet is enabled (see the section *Disable-Wallet mode* below).
 
-Build Australiacash Core
+Build Coin Core
 ------------------------
 
-1. Clone the australiacash source code and cd into `australiacash`
+1. Clone the coin source code and cd into `coin`
 
-        git clone https://github.com/australiacash/australiacash-core
-        cd australiacash-core
+        git clone https://github.com/coin/coin-core
+        cd coin-core
 
-2.  Build australiacash-core:
+2.  Build coin-core:
 
-    Configure and build the headless australiacash binaries as well as the GUI (if Qt is found).
+    Configure and build the headless coin binaries as well as the GUI (if Qt is found).
 
     You can disable the GUI build by passing `--without-gui` to configure.
 
@@ -76,44 +76,44 @@ Build Australiacash Core
 
     or
 
-        cd ~/australiacash/src
-        cp australiacashd /usr/local/bin/
-        cp australiacash-cli /usr/local/bin/
+        cd ~/coin/src
+        cp coind /usr/local/bin/
+        cp coin-cli /usr/local/bin/
 
 Running
 -------
 
-Australiacash Core is now available at `./src/australiacashd`
+Coin Core is now available at `./src/coind`
 
 Before running, it's recommended you create an RPC configuration file.
 
-    echo -e "rpcuser=australiacashrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/Australiacash/australiacash.conf"
+    echo -e "rpcuser=coinrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/Coin/coin.conf"
 
-    chmod 600 "/Users/${USER}/Library/Application Support/Australiacash/australiacash.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/Coin/coin.conf"
 
-The first time you run australiacashd, it will start downloading the blockchain. This process could take several hours.
+The first time you run coind, it will start downloading the blockchain. This process could take several hours.
 
 You can monitor the download process by looking at the debug.log file:
 
-    tail -f $HOME/Library/Application\ Support/Australiacash/debug.log
+    tail -f $HOME/Library/Application\ Support/Coin/debug.log
 
 Other commands:
 -------
 
-    ./src/australiacashd -daemon # Starts the australiacash daemon.
-    ./src/australiacash-cli --help # Outputs a list of command-line options.
-    ./src/australiacash-cli help # Outputs a list of RPC commands when the daemon is running.
+    ./src/coind -daemon # Starts the coin daemon.
+    ./src/coin-cli --help # Outputs a list of command-line options.
+    ./src/coin-cli help # Outputs a list of RPC commands when the daemon is running.
 
 Using Qt Creator as IDE
 ------------------------
-You can use Qt Creator as an IDE, for australiacash development.
+You can use Qt Creator as an IDE, for coin development.
 Download and install the community edition of [Qt Creator](https://www.qt.io/download/).
 Uncheck everything except Qt Creator during the installation process.
 
 1. Make sure you installed everything through Homebrew mentioned above
 2. Do a proper ./configure --enable-debug
 3. In Qt Creator do "New Project" -> Import Project -> Import Existing Project
-4. Enter "australiacash-qt" as project name, enter src/qt as location
+4. Enter "coin-qt" as project name, enter src/qt as location
 5. Leave the file selection as it is
 6. Confirm the "summary page"
 7. In the "Projects" tab select "Manage Kits..."

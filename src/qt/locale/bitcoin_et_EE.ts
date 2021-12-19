@@ -130,8 +130,8 @@
         <translation>Kõvakettal olevate plokkide reindekseerimine...</translation>
     </message>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
+        <source>Coin</source>
+        <translation>Coin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -273,8 +273,8 @@
         <translation>Tere tulemast</translation>
     </message>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
+        <source>Coin</source>
+        <translation>Coin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -768,8 +768,8 @@
         <translation>Valikud:</translation>
     </message>
     <message>
-        <source>Australiacash Core</source>
-        <translation>Australiacash Core</translation>
+        <source>Coin Core</source>
+        <translation>Coin Core</translation>
     </message>
     <message>
         <source>Information</source>

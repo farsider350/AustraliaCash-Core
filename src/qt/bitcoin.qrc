@@ -2,7 +2,7 @@
   <qresource prefix="/icons">
     <file>res/src/transparent_logo_small.png</file>
     <file alias="bitcoin">res/icons/bitcoin.png</file>
-    <file alias="australiacash_splash">res/icons/australiacash_splash.png</file>
+    <file alias="coin_splash">res/icons/coin_splash.png</file>
     <file alias="address-book">res/icons/address-book.png</file>
     <file alias="quit">res/icons/quit.png</file>
     <file alias="send">res/icons/send.png</file>

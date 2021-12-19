@@ -98,8 +98,8 @@
         <translation>Vhura &amp;URI</translation>
     </message>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
+        <source>Coin</source>
+        <translation>Coin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -165,8 +165,8 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
+        <source>Coin</source>
+        <translation>Coin</translation>
     </message>
     </context>
 <context>
@@ -194,8 +194,8 @@
         <translation>Marii </translation>
     </message>
     <message>
-        <source>Enter a Australiacash address (e.g. %1)</source>
-        <translation>Nyora kero ye Australiacash (sekuti %1)</translation>
+        <source>Enter a Coin address (e.g. %1)</source>
+        <translation>Nyora kero ye Coin (sekuti %1)</translation>
     </message>
     <message>
         <source>%1 d</source>

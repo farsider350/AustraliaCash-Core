@@ -16,14 +16,14 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Australiacash"
-            VALUE "FileDescription",    "australiacashd (Australiacash node with a JSON-RPC server)"
+            VALUE "CompanyName",        "Coin"
+            VALUE "FileDescription",    "coind (Coin node with a JSON-RPC server)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "australiacashd"
+            VALUE "InternalName",       "coind"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "australiacashd.exe"
-            VALUE "ProductName",        "australiacashd"
+            VALUE "OriginalFilename",   "coind.exe"
+            VALUE "ProductName",        "coind"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END

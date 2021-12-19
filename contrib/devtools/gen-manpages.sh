@@ -4,10 +4,10 @@ TOPDIR=${TOPDIR:-$(git rev-parse --show-toplevel)}
 SRCDIR=${SRCDIR:-$TOPDIR/src}
 MANDIR=${MANDIR:-$TOPDIR/doc/man}
 
-LITECOIND=${LITECOIND:-$SRCDIR/australiacashd}
-LITECOINCLI=${LITECOINCLI:-$SRCDIR/australiacash-cli}
-LITECOINTX=${LITECOINTX:-$SRCDIR/australiacash-tx}
-LITECOINQT=${LITECOINQT:-$SRCDIR/qt/australiacash-qt}
+LITECOIND=${LITECOIND:-$SRCDIR/coind}
+LITECOINCLI=${LITECOINCLI:-$SRCDIR/coin-cli}
+LITECOINTX=${LITECOINTX:-$SRCDIR/coin-tx}
+LITECOINQT=${LITECOINQT:-$SRCDIR/qt/coin-qt}
 
 [ ! -x $LITECOIND ] && echo "$LITECOIND not found or not executable." && exit 1
 

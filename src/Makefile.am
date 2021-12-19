@@ -65,11 +65,11 @@ TESTS =
 BENCHMARKS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += australiacashd
+  bin_PROGRAMS += coind
 endif
 
 if BUILD_BITCOIN_UTILS
-  bin_PROGRAMS += australiacash-cli australiacash-tx
+  bin_PROGRAMS += coin-cli coin-tx
 endif
 
 .PHONY: FORCE check-symbols check-security
@@ -381,16 +381,16 @@ nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
 # bitcoind binary #
-australiacashd_SOURCES = bitcoind.cpp
-australiacashd_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-australiacashd_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-australiacashd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+coind_SOURCES = bitcoind.cpp
+coind_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+coind_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+coind_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-australiacashd_SOURCES += bitcoind-res.rc
+coind_SOURCES += bitcoind-res.rc
 endif
 
-australiacashd_LDADD = \
+coind_LDADD = \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_COMMON) \
   $(LIBUNIVALUE) \
@@ -404,38 +404,38 @@ australiacashd_LDADD = \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
-australiacashd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+coind_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
 # bitcoin-cli binary #
-australiacash_cli_SOURCES = bitcoin-cli.cpp
-australiacash_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
-australiacash_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-australiacash_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+coin_cli_SOURCES = bitcoin-cli.cpp
+coin_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
+coin_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+coin_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-australiacash_cli_SOURCES += bitcoin-cli-res.rc
+coin_cli_SOURCES += bitcoin-cli-res.rc
 endif
 
-australiacash_cli_LDADD = \
+coin_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_CRYPTO)
 
-australiacash_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
+coin_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
 # bitcoin-tx binary #
-australiacash_tx_SOURCES = bitcoin-tx.cpp
-australiacash_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-australiacash_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-australiacash_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+coin_tx_SOURCES = bitcoin-tx.cpp
+coin_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+coin_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+coin_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-australiacash_tx_SOURCES += bitcoin-tx-res.rc
+coin_tx_SOURCES += bitcoin-tx-res.rc
 endif
 
-australiacash_tx_LDADD = \
+coin_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
@@ -443,7 +443,7 @@ australiacash_tx_LDADD = \
   $(LIBBITCOIN_CRYPTO) \
   $(LIBSECP256K1)
 
-australiacash_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+coin_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
 # bitcoinconsensus library #

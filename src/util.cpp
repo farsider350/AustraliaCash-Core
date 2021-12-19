@@ -82,8 +82,8 @@
 // Application startup time (used for uptime calculation)
 const int64_t nStartupTime = GetTime();
 
-const char * const BITCOIN_CONF_FILENAME = "australiacash.conf";
-const char * const BITCOIN_PID_FILENAME = "australiacashd.pid";
+const char * const BITCOIN_CONF_FILENAME = "coin.conf";
+const char * const BITCOIN_PID_FILENAME = "coind.pid";
 const char * const DEFAULT_DEBUGLOGFILE = "debug.log";
 
 ArgsManager gArgs;
@@ -558,7 +558,7 @@ static std::string FormatException(const std::exception* pex, const char* pszThr
     char pszModule[MAX_PATH] = "";
     GetModuleFileNameA(nullptr, pszModule, sizeof(pszModule));
 #else
-    const char* pszModule = "australiacash";
+    const char* pszModule = "coin";
 #endif
     if (pex)
         return strprintf(
@@ -583,7 +583,7 @@ fs::path GetDefaultDataDir()
     // Unix: ~/.bitcoin
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "Australiacash";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "Coin";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -593,10 +593,10 @@ fs::path GetDefaultDataDir()
         pathRet = fs::path(pszHome);
 #ifdef MAC_OSX
     // Mac
-    return pathRet / "Library/Application Support/Australiacash";
+    return pathRet / "Library/Application Support/Coin";
 #else
     // Unix
-    return pathRet / ".australiacash";
+    return pathRet / ".coin";
 #endif
 #endif
 }

@@ -13,7 +13,7 @@
 - (NSString *)__bundleIdentifier
 {
     if (self == [NSBundle mainBundle]) {
-        return @"org.australiacash.Australiacash-Qt";
+        return @"org.coin.Coin-Qt";
     } else {
         return [self __bundleIdentifier];
     }

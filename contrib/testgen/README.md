@@ -1,6 +1,6 @@
 ### TestGen ###
 
-Utilities to generate test vectors for the data-driven Australiacash tests.
+Utilities to generate test vectors for the data-driven Coin tests.
 
 Usage: 
 

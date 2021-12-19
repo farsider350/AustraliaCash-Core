@@ -116,8 +116,8 @@ public:
         assert(genesis.hashMerkleRoot == uint256S("0x273a20070d7cb57e4c77354d8bd5e01c1cf7d96ad32d91a7b7d183e30da12ef5"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
-        vSeeds.emplace_back("australiacash.org");
-        vSeeds.emplace_back("recovery.australiacash.org");
+        vSeeds.emplace_back("coin.org");
+        vSeeds.emplace_back("recovery.coin.org");
         vSeeds.emplace_back("161.43.201.255");
         vSeeds.emplace_back("165.232.173.117");
         vSeeds.emplace_back("104.156.233.160");
@@ -243,7 +243,7 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("australiacash.org");
+        vSeeds.emplace_back("coin.org");
         vSeeds.emplace_back("");
         vSeeds.emplace_back("");
 

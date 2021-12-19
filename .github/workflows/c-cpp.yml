@@ -43,7 +43,7 @@ jobs:
     - name: Prepare Files for Artifact
       run: |
         mkdir -p $ARTIFACT_DIR
-        mv depends.tar.gz australiacash-*.tar.gz $ARTIFACT_DIR
+        mv depends.tar.gz coin-*.tar.gz $ARTIFACT_DIR
     - name: Upload Artifact
       uses: actions/upload-artifact@v1
       with:
@@ -64,7 +64,7 @@ jobs:
     - name: Extract Archives
       run: |
         tar -xzf depends.tar.gz
-        tar -xzf australiacash-*.tar.gz --strip-components=1
+        tar -xzf coin-*.tar.gz --strip-components=1
       working-directory: ${{ env.SOURCE_ARTIFACT }}
     - name: Install Required Packages
       run: |
@@ -73,7 +73,7 @@ jobs:
     - name: Build Dependencies
       run: make -C depends -j$(nproc)
       working-directory: ${{ env.SOURCE_ARTIFACT }}
-    - name: Build Australiacash
+    - name: Build Coin
       run: |
         ./configure --prefix=$(realpath depends/x86_64-pc-linux-gnu)
         make -j$(nproc)
@@ -81,7 +81,7 @@ jobs:
     - name: Prepare Files for Artifact
       run: |
         mkdir -p $ARTIFACT_DIR
-        mv $SOURCE_ARTIFACT/src/{australiacash-cli,australiacash-tx,australiacashd,qt/australiacash-qt} $ARTIFACT_DIR
+        mv $SOURCE_ARTIFACT/src/{coin-cli,coin-tx,coind,qt/coin-qt} $ARTIFACT_DIR
     - name: Upload Artifact
       uses: actions/upload-artifact@v1
       with:
@@ -101,7 +101,7 @@ jobs:
     - name: Extract Archives
       run: |
         tar -xzf depends.tar.gz
-        tar -xzf australiacash-*.tar.gz --strip-components=1
+        tar -xzf coin-*.tar.gz --strip-components=1
       working-directory: ${{ env.SOURCE_ARTIFACT }}
     - name: Install Required Packages
       run: |
@@ -114,7 +114,7 @@ jobs:
     - name: Build Dependencies
       run: make -C depends -j$(nproc) HOST=x86_64-w64-mingw32
       working-directory: ${{ env.SOURCE_ARTIFACT }}
-    - name: Build Australiacash
+    - name: Build Coin
       run: |
         ./configure --prefix=$(realpath depends/x86_64-w64-mingw32)
         make -j$(nproc)
@@ -122,7 +122,7 @@ jobs:
     - name: Prepare Files for Artifact
       run: |
         mkdir -p $ARTIFACT_DIR
-        mv $SOURCE_ARTIFACT/src/{australiacash-cli.exe,australiacash-tx.exe,australiacashd.exe,qt/australiacash-qt.exe} $ARTIFACT_DIR
+        mv $SOURCE_ARTIFACT/src/{coin-cli.exe,coin-tx.exe,coind.exe,qt/coin-qt.exe} $ARTIFACT_DIR
     - name: Upload Artifact
       uses: actions/upload-artifact@v1
       with:
@@ -142,7 +142,7 @@ jobs:
   #   - name: Extract Archives
   #     run: |
   #       tar -xzf depends.tar.gz
-  #       tar -xzf australiacash-*.tar.gz --strip-components=1
+  #       tar -xzf coin-*.tar.gz --strip-components=1
   #     working-directory: ${{ env.SOURCE_ARTIFACT }}
   #   - name: Use Xcode instead of Command Line Tools
   #     run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
@@ -151,7 +151,7 @@ jobs:
   #   - name: Build Dependencies
   #     run: make -C depends -j$(sysctl -n hw.activecpu)
   #     working-directory: ${{ env.SOURCE_ARTIFACT }}
-  #   - name: Build Australiacash
+  #   - name: Build Coin
   #     run: |
   #       ./configure --disable-jni --prefix=$(grealpath depends/x86_64-apple-darwin*)
   #       make -j$(sysctl -n hw.activecpu)
@@ -159,7 +159,7 @@ jobs:
   #   - name: Prepare Files for Artifact
   #     run: |
   #       mkdir -p $ARTIFACT_DIR
-  #       mv $SOURCE_ARTIFACT/src/{australiacash-cli,australiacash-tx,australiacashd,qt/australiacash-qt} $ARTIFACT_DIR
+  #       mv $SOURCE_ARTIFACT/src/{coin-cli,coin-tx,coind,qt/coin-qt} $ARTIFACT_DIR
   #   - name: Upload Artifact
   #     uses: actions/upload-artifact@v1
   #     with:

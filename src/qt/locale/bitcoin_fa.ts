@@ -62,11 +62,11 @@
         <translation>آدرس‌های دریافتی</translation>
     </message>
     <message>
-        <source>These are your Australiacash addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Coin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>این‌ها آدرس‌های بیتکوین برای پرداخت‌ها هستند. همیشه قبل از فرستادن سکه‌ها مقدار و آدرس دریافت‌کننده را بررسی نمایید.</translation>
     </message>
     <message>
-        <source>These are your Australiacash addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your Coin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>این‌ها آدرس‌های بیتکوین شما برای دریافت مبالغ می‌باشد. توصیه می‌شود برای هر تراکنش از یک آدرس جدید استفاده کنید.</translation>
     </message>
     <message>
@@ -314,8 +314,8 @@
         <translation>بازنشانی بلوک‌ها روی دیسک...</translation>
     </message>
     <message>
-        <source>Send coins to a Australiacash address</source>
-        <translation>ارسال وجه به نشانی Australiacash</translation>
+        <source>Send coins to a Coin address</source>
+        <translation>ارسال وجه به نشانی Coin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -338,8 +338,8 @@
         <translation>با&amp;زبینی پیام...</translation>
     </message>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
+        <source>Coin</source>
+        <translation>Coin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -366,12 +366,12 @@
         <translation>رمزنگاری کلیدهای خصوصی متعلق به کیف پول شما</translation>
     </message>
     <message>
-        <source>Sign messages with your Australiacash addresses to prove you own them</source>
-        <translation>برای اثبات اینکه پیام‌ها به شما تعلق دارند، آن‌ها را با نشانی Australiacash خود امضا کنید</translation>
+        <source>Sign messages with your Coin addresses to prove you own them</source>
+        <translation>برای اثبات اینکه پیام‌ها به شما تعلق دارند، آن‌ها را با نشانی Coin خود امضا کنید</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Australiacash addresses</source>
-        <translation>برای حصول اطمینان از اینکه پیام با نشانی Australiacash مشخص شده امضا است یا خیر، پیام را شناسایی کنید</translation>
+        <source>Verify messages to ensure they were signed with specified Coin addresses</source>
+        <translation>برای حصول اطمینان از اینکه پیام با نشانی Coin مشخص شده امضا است یا خیر، پیام را شناسایی کنید</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -390,8 +390,8 @@
         <translation>نوارابزار برگه‌ها</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and australiacash: URIs)</source>
-        <translation>درخواست پرداخت ( تولید کد کیوار و ادرس australiacash)</translation>
+        <source>Request payments (generates QR codes and coin: URIs)</source>
+        <translation>درخواست پرداخت ( تولید کد کیوار و ادرس coin)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -402,16 +402,16 @@
         <translation>نمایش لیست آدرس های دریافت و لیبل ها</translation>
     </message>
     <message>
-        <source>Open a australiacash: URI or payment request</source>
-        <translation>بازکردن یک australiacash: آدرس یا درخواست پرداخت</translation>
+        <source>Open a coin: URI or payment request</source>
+        <translation>بازکردن یک coin: آدرس یا درخواست پرداخت</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>گزینه‌های خط‌فرمان</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Australiacash network</source>
-        <translation><numerusform>%n ارتباط فعال با شبکهٔ Australiacash</numerusform><numerusform>%n ارتباط فعال با شبکهٔ Australiacash</numerusform></translation>
+        <source>%n active connection(s) to Coin network</source>
+        <translation><numerusform>%n ارتباط فعال با شبکهٔ Coin</numerusform><numerusform>%n ارتباط فعال با شبکهٔ Coin</numerusform></translation>
     </message>
     <message>
         <source>Processing blocks on disk...</source>
@@ -658,8 +658,8 @@
         <translation>ویرایش آدرس قرستنده</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Australiacash address.</source>
-        <translation>نشانی وارد شده "%1" یک نشانی معتبر Australiacash نیست.</translation>
+        <source>The entered address "%1" is not a valid Coin address.</source>
+        <translation>نشانی وارد شده "%1" یک نشانی معتبر Coin نیست.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -759,8 +759,8 @@
         <translation>استفاده از یک مسیر سفارشی:</translation>
     </message>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
+        <source>Coin</source>
+        <translation>Coin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -864,8 +864,8 @@
         <translation>استخراج</translation>
     </message>
     <message>
-        <source>Automatically open the Australiacash client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>باز کردن خودکار درگاه شبکهٔ Australiacash روی روترها. تنها زمانی کار می‌کند که روتر از پروتکل UPnP پشتیبانی کند و این پروتکل فعال باشد.</translation>
+        <source>Automatically open the Coin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>باز کردن خودکار درگاه شبکهٔ Coin روی روترها. تنها زمانی کار می‌کند که روتر از پروتکل UPnP پشتیبانی کند و این پروتکل فعال باشد.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -967,8 +967,8 @@
         <translation>فرم</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Australiacash network after a connection is established, but this process has not completed yet.</source>
-        <translation>اطلاعات نمایش‌داده شده ممکن است قدیمی باشند. بعد از این که یک اتصال با شبکه برقرار شد، کیف پول شما به‌صورت خودکار با شبکهٔ Australiacash همگام‌سازی می‌شود. اما این روند هنوز کامل نشده است.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Coin network after a connection is established, but this process has not completed yet.</source>
+        <translation>اطلاعات نمایش‌داده شده ممکن است قدیمی باشند. بعد از این که یک اتصال با شبکه برقرار شد، کیف پول شما به‌صورت خودکار با شبکهٔ Coin همگام‌سازی می‌شود. اما این روند هنوز کامل نشده است.</translation>
     </message>
     <message>
         <source>Available:</source>
@@ -1040,8 +1040,8 @@
         <translation>مبلغ</translation>
     </message>
     <message>
-        <source>Enter a Australiacash address (e.g. %1)</source>
-        <translation>یک آدرس Australiacash وارد کنید (مثلاً %1)</translation>
+        <source>Enter a Coin address (e.g. %1)</source>
+        <translation>یک آدرس Coin وارد کنید (مثلاً %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1484,8 +1484,8 @@
         <translation>این یک پرداخت عادی است</translation>
     </message>
     <message>
-        <source>The Australiacash address to send the payment to</source>
-        <translation>نشانی Australiacash برای ارسال پرداخت به آن</translation>
+        <source>The Coin address to send the payment to</source>
+        <translation>نشانی Coin برای ارسال پرداخت به آن</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -1537,8 +1537,8 @@
         <translation>ا&amp;مضای پیام</translation>
     </message>
     <message>
-        <source>The Australiacash address to sign the message with</source>
-        <translation>نشانی Australiacash برای امضاء پیغام با آن</translation>
+        <source>The Coin address to sign the message with</source>
+        <translation>نشانی Coin برای امضاء پیغام با آن</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1569,7 +1569,7 @@
         <translation>امضای فعلی را به حافظهٔ سیستم کپی کن</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Australiacash address</source>
+        <source>Sign the message to prove you own this Coin address</source>
         <translation>برای اثبات تعلق این نشانی به شما، پیام را امضا کنید</translation>
     </message>
     <message>
@@ -1589,12 +1589,12 @@
         <translation>&amp;شناسایی پیام</translation>
     </message>
     <message>
-        <source>The Australiacash address the message was signed with</source>
-        <translation>نشانی Australiacash که پیغام با آن امضاء شده</translation>
+        <source>The Coin address the message was signed with</source>
+        <translation>نشانی Coin که پیغام با آن امضاء شده</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Australiacash address</source>
-        <translation>برای حصول اطمینان از اینکه پیام با نشانی Australiacash مشخص شده امضا است یا خیر، پیام را شناسایی کنید</translation>
+        <source>Verify the message to ensure it was signed with the specified Coin address</source>
+        <translation>برای حصول اطمینان از اینکه پیام با نشانی Coin مشخص شده امضا است یا خیر، پیام را شناسایی کنید</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -1718,8 +1718,8 @@
         <translation>اجرا در پشت زمینه به‌صورت یک سرویس و پذیرش دستورات</translation>
     </message>
     <message>
-        <source>Australiacash Core</source>
-        <translation> هسته Australiacash </translation>
+        <source>Coin Core</source>
+        <translation> هسته Coin </translation>
     </message>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>

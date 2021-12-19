@@ -2,5 +2,5 @@
 for i in {1..999}
 do
 	echo " $i "
-	./australiacash-cli generate $i
+	./coin-cli generate $i
 done
