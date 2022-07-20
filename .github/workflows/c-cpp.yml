@@ -124,7 +124,7 @@ jobs:
       run: |
         mkdir -p $ARTIFACT_DIR
         mv $SOURCE_ARTIFACT/src/{australiacash-cli.exe,australiacash-tx.exe,australiacashd.exe,qt/australiacash-qt.exe} $ARTIFACT_DIR
-        mv $SOURCE_ARTIFACT/install/* $ARTIFACT_DIR
+        mv $SOURCE_ARTIFACT/install/ $ARTIFACT_DIR
     - name: Upload Artifact
       uses: actions/upload-artifact@v1
       with:
