@@ -64,7 +64,7 @@
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>AustraliaCashGUI</name>
     <message>
         <source>E&amp;xit</source>
         <translation>Buda</translation>

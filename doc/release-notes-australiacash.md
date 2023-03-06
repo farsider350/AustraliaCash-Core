@@ -51,7 +51,7 @@ Credits
 
 Thanks to everyone who directly contributed to this release:
 
-- [The Bitcoin Core Developers](/doc/release-notes)
+- [The AustraliaCash Core Developers](/doc/release-notes)
 - Adrian Gallagher
 - aunyks
 - coblee

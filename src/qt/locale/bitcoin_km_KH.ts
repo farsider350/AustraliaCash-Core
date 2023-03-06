@@ -88,7 +88,7 @@
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>AustraliaCashGUI</name>
     <message>
         <source>Send coins to a Australiacash address</source>
         <translation>ផ្ញើកាក់ទៅកាន់ អាសយដ្ឋាន Australiacash មួយ</translation>
