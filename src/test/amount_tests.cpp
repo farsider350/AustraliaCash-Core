@@ -99,7 +99,7 @@ BOOST_AUTO_TEST_CASE(BinaryOperatorTest)
     BOOST_CHECK(a <= a);
     BOOST_CHECK(b >= a);
     BOOST_CHECK(b >= b);
-    // a should be 0.00000002 BTC/kvB now
+    // a should be 0.00000002 AUS/kvB now
     a += a;
     BOOST_CHECK(a == b);
 }
@@ -108,9 +108,9 @@ BOOST_AUTO_TEST_CASE(ToStringTest)
 {
     CFeeRate feeRate;
     feeRate = CFeeRate(1);
-    BOOST_CHECK_EQUAL(feeRate.ToString(), "0.00000001 BTC/kvB");
-    BOOST_CHECK_EQUAL(feeRate.ToString(FeeEstimateMode::BTC_KVB), "0.00000001 BTC/kvB");
-    BOOST_CHECK_EQUAL(feeRate.ToString(FeeEstimateMode::SAT_VB), "0.001 sat/vB");
+    BOOST_CHECK_EQUAL(feeRate.ToString(), "0.00000001 AUS/kvB");
+    BOOST_CHECK_EQUAL(feeRate.ToString(FeeEstimateMode::AUS_KVB), "0.00000001 AUS/kvB");
+    BOOST_CHECK_EQUAL(feeRate.ToString(FeeEstimateMode::ACE_VB), "0.001 ace/vB");
 }
 
 BOOST_AUTO_TEST_SUITE_END()
