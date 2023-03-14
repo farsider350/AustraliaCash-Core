@@ -1463,16 +1463,16 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
     int halvings = nHeight / consensusParams.nSubsidyHalvingInterval;
     // Force block reward to zero when right shift is undefined.
     if (halvings >= 64)
-        return 0;
+        return 1;
 
     CAmount nSubsidy;
 
     if (nHeight == 0)
 	nSubsidy = 0 * COIN;
     else if (nHeight == 1)
-	nSubsidy = 100000000 * COIN;
+	nSubsidy = 50 * COIN;
     else
-	nSubsidy = 214 * COIN;
+	nSubsidy = 50 * COIN;
 
     // Subsidy is cut in half eventually.
     nSubsidy >>= halvings;
@@ -1913,7 +1913,7 @@ public:
 
     bool Condition(const CBlockIndex* pindex, const Consensus::Params& params) const override
     {
-        return pindex->nHeight >= params.MinBIP9WarningHeight &&
+        return pindex->nHeight >= params.SegwitHeight &&
                ((pindex->nVersion & VERSIONBITS_TOP_MASK) == VERSIONBITS_TOP_BITS) &&
                ((pindex->nVersion >> m_bit) & 1) != 0 &&
                ((m_chainman.m_versionbitscache.ComputeBlockVersion(pindex->pprev, params) >> m_bit) & 1) == 0;
