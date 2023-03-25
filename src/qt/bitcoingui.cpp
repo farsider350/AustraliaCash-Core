@@ -20,6 +20,7 @@
 #include <qt/utilitydialog.h>
 
 #ifdef ENABLE_WALLET
+#include <pos/manager.h>
 #include <qt/walletcontroller.h>
 #include <qt/walletframe.h>
 #include <qt/walletmodel.h>
@@ -36,6 +37,7 @@
 #include <interfaces/handler.h>
 #include <interfaces/node.h>
 #include <node/interface_ui.h>
+#include <pos/minter.h>
 #include <util/system.h>
 #include <util/translation.h>
 #include <validation.h>
@@ -86,6 +88,7 @@ AustraliaCashGUI::AustraliaCashGUI(interfaces::Node& node, const PlatformStyle *
     platformStyle(_platformStyle),
     m_network_style(networkStyle)
 {
+    m_is_staking = false;
     QSettings settings;
     if (!restoreGeometry(settings.value("MainWindowGeometry").toByteArray())) {
         // Restore failed (perhaps missing setting), center the window
@@ -162,6 +165,7 @@ AustraliaCashGUI::AustraliaCashGUI(interfaces::Node& node, const PlatformStyle *
     frameBlocksLayout->setContentsMargins(3,0,3,0);
     frameBlocksLayout->setSpacing(3);
     unitDisplayControl = new UnitDisplayStatusBarControl(platformStyle);
+    labelStakingIcon = new QLabel();
     labelWalletEncryptionIcon = new GUIUtil::ThemedLabel(platformStyle);
     labelWalletHDStatusIcon = new GUIUtil::ThemedLabel(platformStyle);
     labelProxyIcon = new GUIUtil::ClickableLabel(platformStyle);
@@ -182,6 +186,7 @@ AustraliaCashGUI::AustraliaCashGUI(interfaces::Node& node, const PlatformStyle *
     frameBlocksLayout->addWidget(connectionsControl);
     frameBlocksLayout->addStretch();
     frameBlocksLayout->addWidget(labelBlocksIcon);
+    frameBlocksLayout->addWidget(labelStakingIcon);
     frameBlocksLayout->addStretch();
 
     // Progress bar and label for blocks download
@@ -223,6 +228,11 @@ AustraliaCashGUI::AustraliaCashGUI(interfaces::Node& node, const PlatformStyle *
 #ifdef Q_OS_MACOS
     m_app_nap_inhibitor = new CAppNapInhibitor;
 #endif
+
+    QTimer* timerStakingIcon = new QTimer(labelStakingIcon);
+    connect(timerStakingIcon, SIGNAL(timeout()), this, SLOT(setStakingStatus()));
+    timerStakingIcon->start(1500);
+    setStakingStatus();
 
     GUIUtil::handleCloseWindowShortcut(this);
 }
@@ -307,6 +317,8 @@ void AustraliaCashGUI::createActions()
     optionsAction->setMenuRole(QAction::PreferencesRole);
     optionsAction->setEnabled(false);
 
+    toggleStakingAction = new QAction(tr("Enable staking..."), this);
+    toggleStakingAction->setStatusTip(tr("Enable staking on current wallet"));
     encryptWalletAction = new QAction(tr("&Encrypt Wallet…"), this);
     encryptWalletAction->setStatusTip(tr("Encrypt the private keys that belong to your wallet"));
     encryptWalletAction->setCheckable(true);
@@ -379,6 +391,7 @@ void AustraliaCashGUI::createActions()
 #ifdef ENABLE_WALLET
     if(walletFrame)
     {
+        connect(toggleStakingAction, &QAction::triggered, this, &AustraliaCashGUI::toggleStaking);
         connect(encryptWalletAction, &QAction::triggered, walletFrame, &WalletFrame::encryptWallet);
         connect(backupWalletAction, &QAction::triggered, walletFrame, &WalletFrame::backupWallet);
         connect(changePassphraseAction, &QAction::triggered, walletFrame, &WalletFrame::changePassphrase);
@@ -498,6 +511,7 @@ void AustraliaCashGUI::createMenuBar()
     if(walletFrame)
     {
         settings->addAction(encryptWalletAction);
+        settings->addAction(toggleStakingAction);
         settings->addAction(changePassphraseAction);
         settings->addSeparator();
         settings->addAction(m_mask_values_action);
@@ -770,6 +784,7 @@ void AustraliaCashGUI::removeAllWallets()
 
 void AustraliaCashGUI::setWalletActionsEnabled(bool enabled)
 {
+    toggleStakingAction->setEnabled(enabled);
     overviewAction->setEnabled(enabled);
     sendCoinsAction->setEnabled(enabled);
     receiveCoinsAction->setEnabled(enabled);
@@ -911,6 +926,21 @@ void AustraliaCashGUI::showHelpMessageClicked()
 }
 
 #ifdef ENABLE_WALLET
+void AustraliaCashGUI::toggleStaking()
+{
+    if (!m_is_staking) {
+        m_is_staking = true;
+        stakeman_request_start();
+        toggleStakingAction->setText("Disable staking...");
+        toggleStakingAction->setStatusTip("Disable staking on current wallet");
+    } else {
+        m_is_staking = false;
+        stakeman_request_stop();
+        toggleStakingAction->setText("Enable staking...");
+        toggleStakingAction->setStatusTip("Enable staking on current wallet");
+    }
+}
+
 void AustraliaCashGUI::openClicked()
 {
     OpenURIDialog dlg(platformStyle, this);
@@ -1359,6 +1389,26 @@ void AustraliaCashGUI::setHDStatus(bool privkeyDisabled, int hdEnabled)
     labelWalletHDStatusIcon->setToolTip(privkeyDisabled ? tr("Private key <b>disabled</b>") : hdEnabled ? tr("HD key generation is <b>enabled</b>") : tr("HD key generation is <b>disabled</b>"));
     labelWalletHDStatusIcon->show();
 }
+
+void AustraliaCashGUI::setStakingStatus()
+{
+    if (fStakerRunning) {
+        if (!fTryToSync) {
+           labelStakingIcon->show();
+           labelStakingIcon->setPixmap(QIcon(":/icons/staking_active").pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE));
+           labelStakingIcon->setToolTip(tr("Staking is active"));
+        } else {
+           labelStakingIcon->show();
+           labelStakingIcon->setPixmap(QIcon(":/icons/staking_stalled").pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE));
+           labelStakingIcon->setToolTip(tr("Staking is stalled"));
+        }
+    } else {
+        labelStakingIcon->show();
+        labelStakingIcon->setPixmap(QIcon(":/icons/staking_inactive").pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE));
+        labelStakingIcon->setToolTip(tr("Staking is inactive"));
+    }
+}
+
 
 void AustraliaCashGUI::setEncryptionStatus(int status)
 {
