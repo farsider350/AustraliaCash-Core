@@ -1117,12 +1117,8 @@ static RPCHelpMan setstaking()
 {
     UniValue obj(UniValue::VOBJ);
 
-    void fProofOfStake
-    if (request.params.size() > 0)
-        fProofOfStake = request.params[0].get_bool();
-
     bool action = request.params[0].isNull() ? false : request.params[0].get_bool();
-    if (action == true) {
+    if (action) {
         stakeman_request_start();
     } else {
         stakeman_request_stop();

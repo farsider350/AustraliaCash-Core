@@ -251,8 +251,8 @@ public:
         consensus.nStakeMaxAge = 60 * 60 * 24 * 30;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
-        consensus.nRuleChangeActivationThreshold = 1512; // 75% for testchains
-        consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
+        consensus.nRuleChangeActivationThreshold = 100; // 75% for testchains
+        consensus.nMinerConfirmationWindow = 150; // nPowTargetTimespan / nPowTargetSpacing
 
         // AustraliaCashcoin specific parameters
         consensus.nMultiAlgoStartBlock = 100;
