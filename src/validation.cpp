@@ -1913,7 +1913,7 @@ public:
 
     bool Condition(const CBlockIndex* pindex, const Consensus::Params& params) const override
     {
-        return pindex->nHeight >= params.SegwitHeight &&
+        return pindex->nHeight >= params.PosHeight &&
                ((pindex->nVersion & VERSIONBITS_TOP_MASK) == VERSIONBITS_TOP_BITS) &&
                ((pindex->nVersion >> m_bit) & 1) != 0 &&
                ((m_chainman.m_versionbitscache.ComputeBlockVersion(pindex->pprev, params) >> m_bit) & 1) == 0;
@@ -4251,7 +4251,7 @@ bool Chainstate::NeedsRedownload() const
 {
     AssertLockHeld(cs_main);
 
-    // At and above m_params.SegwitHeight, segwit consensus rules must be validated
+    // At and above m_params.PosHeight, segwit consensus rules must be validated
     CBlockIndex* block{m_chain.Tip()};
 
     while (block != nullptr && DeploymentActiveAt(*block, m_chainman, Consensus::DEPLOYMENT_SEGWIT)) {

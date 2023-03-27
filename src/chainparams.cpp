@@ -74,14 +74,14 @@ public:
         consensus.BIP34Hash = uint256S("4b22bb52e51d5b2f3f7648f61b81b69b3359d8d630d2253b81a92d7948d8676a");
         consensus.BIP65Height = 0;
         consensus.BIP66Height = 0;
-        consensus.SegwitHeight = 750000; // segwit activation height + miner confirmation window
+        consensus.PosHeight = 750000;
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 0.5 * 24 * 60 * 60; // 0.5 days
         consensus.nPowTargetSpacing = 2.5 * 60;
         consensus.posLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPosTargetTimespan = 5 * 60;
-        consensus.nPosTargetSpacing = 1 * 60;
-        consensus.nStakeMinAge = 10 * 60;
+        consensus.nPosTargetSpacing = 2 * 60;
+        consensus.nStakeMinAge = 10 * 60 * 24 * 5;
         consensus.nStakeMaxAge = 60 * 60 * 24 * 30;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
@@ -91,14 +91,14 @@ public:
         // AustraliaCash specific parameters
         consensus.nMultiAlgoStartBlock = 500000;
         consensus.nAveragingInterval = 10;
-        consensus.nMultiAlgoTargetSpacing = 15 * NUM_ALGOS;
+        consensus.nMultiAlgoTargetSpacing = 25 * NUM_ALGOS;
         consensus.nMaxAdjustDown = 16;
         consensus.nMaxAdjustUp = 8;
         consensus.nAveragingTargetTimespan = consensus.nAveragingInterval * consensus.nMultiAlgoTargetSpacing;
         consensus.nMinActualTimespan = consensus.nAveragingTargetTimespan * (100 - consensus.nMaxAdjustUp) / 100;
         consensus.nMaxActualTimespan = consensus.nAveragingTargetTimespan * (100 + consensus.nMaxAdjustDown) / 100;
         consensus.nLocalTargetAdjustment = 4;
-        consensus.nCoinbaseMaturity = 59;
+        consensus.nCoinbaseMaturity = 520;
 
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
@@ -117,9 +117,9 @@ public:
 
         // Deployment of Taproot (BIPs 340-342)
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].bit = 2;
-        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nStartTime = 1619222400; // April 24th, 2021
-        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = 1628640000; // August 11th, 2021
-        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 709632; // Approximately November 12th, 2021
+        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nStartTime = 1703670559; // Dec 2023
+        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = 1735292959; // Dec 2024
+        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 725000;
 
         consensus.nMinimumChainWork = uint256S("000000000000000000000000000000000000000000000000037ca543d83432af");
         consensus.defaultAssumeValid = uint256S("0x1b340cd2dd8990b4e8c1c686038cb4d882cd6a71991bb0a0381027af7851e892");
@@ -232,7 +232,7 @@ public:
         strNetworkID = CBaseChainParams::TESTNET;
         consensus.signet_blocks = false;
         consensus.signet_challenge.clear();
-        consensus.nSubsidyHalvingInterval = 840;
+        consensus.nSubsidyHalvingInterval = 84000;
         // consensus.script_flag_exceptions.emplace( // BIP16 exception
         //     uint256S("0x00000000dd30457c001f4095d208cc1296b0eed002427aa599874af7a432b105"), SCRIPT_VERIFY_NONE);
         // consensus.BIP16Height = 0;
@@ -240,24 +240,24 @@ public:
         consensus.BIP34Hash = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000");
         consensus.BIP65Height = 76;
         consensus.BIP66Height = 76;
-        consensus.SegwitHeight = 200;
+        consensus.PosHeight = 500;
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 0.5 * 24 * 60 * 60; // 0.5 days
         consensus.nPowTargetSpacing = 2.5 * 60;
         consensus.posLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPosTargetTimespan = 5 * 60;
-        consensus.nPosTargetSpacing = 1 * 60;
+        consensus.nPosTargetSpacing = 2 * 60;
         consensus.nStakeMinAge = 10 * 60;
-        consensus.nStakeMaxAge = 60 * 60 * 24 * 30;
+        consensus.nStakeMaxAge = 60 * 60 * 24;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 100; // 75% for testchains
         consensus.nMinerConfirmationWindow = 150; // nPowTargetTimespan / nPowTargetSpacing
 
         // AustraliaCashcoin specific parameters
-        consensus.nMultiAlgoStartBlock = 100;
+        consensus.nMultiAlgoStartBlock = 300;
         consensus.nAveragingInterval = 10;
-        consensus.nMultiAlgoTargetSpacing = 15 * NUM_ALGOS;
+        consensus.nMultiAlgoTargetSpacing = 25 * NUM_ALGOS;
         consensus.nMaxAdjustDown = 16;
         consensus.nMaxAdjustUp = 8;
         consensus.nAveragingTargetTimespan = consensus.nAveragingInterval * consensus.nMultiAlgoTargetSpacing;
@@ -408,7 +408,7 @@ public:
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 1815; // 90% of 2016
         consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
-        consensus.SegwitHeight = 0;
+        consensus.PosHeight = 0;
         consensus.powLimit = uint256S("00000377ae000000000000000000000000000000000000000000000000000000");
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = Consensus::BIP9Deployment::NEVER_ACTIVE;
@@ -467,7 +467,7 @@ public:
         consensus.BIP34Hash = uint256();
         consensus.BIP65Height = 1351; // BIP65 activated on regtest (Used in rpc activation tests)
         consensus.BIP66Height = 1251; // BIP66 activated on regtest (Used in rpc activation tests)
-        consensus.SegwitHeight = 0;
+        consensus.PosHeight = 0;
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60; // two weeks
         consensus.nPowTargetSpacing = 2.5 * 60;
