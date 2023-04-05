@@ -589,7 +589,8 @@ crypto_libaustraliacash_crypto_base_la_SOURCES = \
   crypto/ghostrider/sph/sph_sha2.c \
   crypto/ghostrider/sph/sph_sha512.c \
   crypto/ghostrider/ghostrider.h \
-  crypto/ghostrider/hash_selection.cpp
+  crypto/ghostrider/hash_selection.cpp \
+  crypto/ghostrider/hash_selection.h
 
 if USE_ASM
 crypto_libaustraliacash_crypto_base_la_SOURCES += crypto/sha256_sse4.cpp
