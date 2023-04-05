@@ -520,6 +520,7 @@ crypto_libaustraliacash_crypto_base_la_LDFLAGS = $(AM_LDFLAGS) -static
 crypto_libaustraliacash_crypto_base_la_SOURCES = \
   crypto/aes.cpp \
   crypto/aes.h \
+  crypto/balloon/balloon.h \
   crypto/chacha_poly_aead.h \
   crypto/chacha_poly_aead.cpp \
   crypto/chacha20.h \
