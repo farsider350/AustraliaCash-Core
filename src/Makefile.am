@@ -520,6 +520,7 @@ crypto_libaustraliacash_crypto_base_la_LDFLAGS = $(AM_LDFLAGS) -static
 crypto_libaustraliacash_crypto_base_la_SOURCES = \
   crypto/aes.cpp \
   crypto/aes.h \
+  crypto/balloon/balloon.cpp \
   crypto/balloon/balloon.h \
   crypto/chacha_poly_aead.h \
   crypto/chacha_poly_aead.cpp \
@@ -552,9 +553,12 @@ crypto_libaustraliacash_crypto_base_la_SOURCES = \
   crypto/siphash.h \
   crypto/yescrypt/sha256_Y.c \
   crypto/yescrypt/yescrypt.c \
+  crypto/yescrypt/yescrypt.h \
   crypto/yescrypt/yescrypt-best.c \
   crypto/whirlpool/whirlpool.c \
+  crypto/whirlpool/whirlpool.h \
   crypto/whirlpool/sph_whirlpool.c \
+  crypto/whirlpool/sph_whirlpool.h \
   crypto/ghostrider/cryptonote/int-util.h \
   crypto/ghostrider/cryptonote/aesb.c \
   crypto/ghostrider/cryptonote/c_blake256.c \
@@ -584,8 +588,8 @@ crypto_libaustraliacash_crypto_base_la_SOURCES = \
   crypto/ghostrider/sph/sph_shabal.c \
   crypto/ghostrider/sph/sph_sha2.c \
   crypto/ghostrider/sph/sph_sha512.c \
-  crypto/ghostrider/hash_selection.cpp \
-  crypto/balloon/balloon.cpp
+  crypto/ghostrider/ghostrider.h \
+  crypto/ghostrider/hash_selection.cpp
 
 if USE_ASM
 crypto_libaustraliacash_crypto_base_la_SOURCES += crypto/sha256_sse4.cpp
