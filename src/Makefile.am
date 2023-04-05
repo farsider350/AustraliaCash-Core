@@ -577,6 +577,7 @@ crypto_libaustraliacash_crypto_base_la_SOURCES = \
   crypto/ghostrider/sph/echo.c \
   crypto/ghostrider/sph/groestl.c \
   crypto/ghostrider/sph/jh.c \
+  crypto/ghostrider/sph/md_helper.c \
   crypto/ghostrider/sph/sph_jh.h \
   crypto/ghostrider/sph/keccak.c \
   crypto/ghostrider/sph/luffa.c \
