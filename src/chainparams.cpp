@@ -74,7 +74,7 @@ public:
         consensus.BIP34Hash = uint256S("4b22bb52e51d5b2f3f7648f61b81b69b3359d8d630d2253b81a92d7948d8676a");
         consensus.BIP65Height = 0;
         consensus.BIP66Height = 0;
-        consensus.PosHeight = 750000;
+        consensus.PosHeight = INT_MAX;
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 0.5 * 24 * 60 * 60; // 0.5 days
         consensus.nPowTargetSpacing = 2.5 * 60;
@@ -89,7 +89,7 @@ public:
         consensus.nMinerConfirmationWindow = 8064; // nPowTargetTimespan
 
         // AustraliaCash specific parameters
-        consensus.nMultiAlgoStartBlock = 500000;
+        consensus.nMultiAlgoStartBlock = 666666;
         consensus.nAveragingInterval = 10;
         consensus.nMultiAlgoTargetSpacing = 25 * NUM_ALGOS;
         consensus.nMaxAdjustDown = 16;
@@ -98,7 +98,7 @@ public:
         consensus.nMinActualTimespan = consensus.nAveragingTargetTimespan * (100 - consensus.nMaxAdjustUp) / 100;
         consensus.nMaxActualTimespan = consensus.nAveragingTargetTimespan * (100 + consensus.nMaxAdjustDown) / 100;
         consensus.nLocalTargetAdjustment = 4;
-        consensus.nCoinbaseMaturity = 520;
+        consensus.nCoinbaseMaturity = 59;
 
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
@@ -162,7 +162,7 @@ public:
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,23);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
-        // base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,63);
+        base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,63);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,23);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x07, 0x77, 0xC3, 0x1D};
         base58Prefixes[EXT_SECRET_KEY] = {0x05, 0x66, 0xAA, 0xF2};
@@ -179,7 +179,7 @@ public:
         checkpointData = {
             {
         {  0, uint256S("0x7f90a957c7c307305924641f651423456cab5d456457d82671927361609d9215")},
-		{  2100, uint256S("0x0019f21b64cdae0379225a935dfc0f44030f45411eff5a2910b2f391875d872d")},
+        {  2100, uint256S("0x0019f21b64cdae0379225a935dfc0f44030f45411eff5a2910b2f391875d872d")},
 		{  4957, uint256S("0x7577ff0728fe984476bf2f9fa9261133d78da4f2af6feb036bf7e2a82a2d6055")},
 		{  10212, uint256S("0xe004ad1378f39ca06bf0cff572a1c5f7369bb61add1d039f23c082cae9b3c2ea")},
 		{  15215, uint256S("0x040dbc53aa7aeedef70600430446c7a636a3bf7a143b2644cf745c3bd9269deb")},
@@ -281,18 +281,18 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = Consensus::BIP9Deployment::ALWAYS_ACTIVE;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].min_activation_height = 0; // No activation delay
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].min_activation_height = 500;
 
         // Deployment of Taproot (BIPs 340-342)
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].bit = 2;
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nStartTime = 1619222400; // April 24th, 2021
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = 1628640000; // August 11th, 2021
-        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 0; // No activation delay
+        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 750;
 
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000");
         consensus.defaultAssumeValid = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000");
 
-        pchMessageStart[0] = 0xfd;
+        pchMessageStart[0] = 0xab;
         pchMessageStart[1] = 0xd2;
         pchMessageStart[2] = 0xc8;
         pchMessageStart[3] = 0xf1;
@@ -309,9 +309,9 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,23);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,25); // 'B' prefix
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
-        // base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,63);
+        base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,65); // 'T' prefix
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,23);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x07, 0x77, 0xC3, 0x1D};
         base58Prefixes[EXT_SECRET_KEY] = {0x05, 0x66, 0xAA, 0xF2};
@@ -539,7 +539,7 @@ public:
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,23);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
-        // base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,63);
+        base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,63);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,23);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x07, 0x77, 0xC3, 0x1D};
         base58Prefixes[EXT_SECRET_KEY] = {0x05, 0x66, 0xAA, 0xF2};
