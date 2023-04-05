@@ -577,17 +577,33 @@ crypto_libaustraliacash_crypto_base_la_SOURCES = \
   crypto/ghostrider/sph/echo.c \
   crypto/ghostrider/sph/groestl.c \
   crypto/ghostrider/sph/jh.c \
+  crypto/ghostrider/sph/sph_jh.h \
   crypto/ghostrider/sph/keccak.c \
   crypto/ghostrider/sph/luffa.c \
   crypto/ghostrider/sph/shavite.c \
   crypto/ghostrider/sph/simd.c \
   crypto/ghostrider/sph/skein.c \
+  crypto/ghostrider/sph/sph_blake.h \
+  crypto/ghostrider/sph/sph_bmw.h \
+  crypto/ghostrider/sph/sph_cubehash.h \
+  crypto/ghostrider/sph/sph_echo.h \
+  crypto/ghostrider/sph/sph_fugue.h \
+  crypto/ghostrider/sph/sph_groestl.h \
+  crypto/ghostrider/sph/sph_hamsi.h \
   crypto/ghostrider/sph/sph_hamsi.c \
   crypto/ghostrider/sph/sph_hamsi_helper.c \
   crypto/ghostrider/sph/sph_fugue.c \
+  crypto/ghostrider/sph/sph_keccak.h \
+  crypto/ghostrider/sph/sph_luffa.h \
   crypto/ghostrider/sph/sph_shabal.c \
+  crypto/ghostrider/sph/sph_shabal.h \
+  crypto/ghostrider/sph/sph_shavite.h \
+  crypto/ghostrider/sph/sph_simd.h \
+  crypto/ghostrider/sph/sph_skein.h \
   crypto/ghostrider/sph/sph_sha2.c \
+  crypto/ghostrider/sph/sph_sha2.h \
   crypto/ghostrider/sph/sph_sha512.c \
+  crypto/ghostrider/sph/sph_types.h \
   crypto/ghostrider/ghostrider.h \
   crypto/ghostrider/hash_selection.cpp \
   crypto/ghostrider/hash_selection.h
