@@ -116,6 +116,9 @@ extern uint256 hashAssumeValid;
 /** Minimum work we will assume exists on some valid chain. */
 extern arith_uint256 nMinimumChainWork;
 
+/** The currently-connected chain of blocks (protected by cs_main). */
+extern CChain& chainActive;
+
 /** Documentation for argument 'checklevel'. */
 extern const std::vector<std::string> CHECKLEVEL_DOC;
 

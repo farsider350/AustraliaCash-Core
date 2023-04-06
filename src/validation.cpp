@@ -3721,7 +3721,7 @@ bool ChainstateManager::AcceptBlockHeader(const CBlockHeader& block, BlockValida
             return false;
         }
         if (!CheckMaxReorgLength(chainActive.Tip(), pindexPrev))
-            return state.DoS(100, error("%s: prev chain violates max reorg length", __func__), 0, "bad-prevblk");
+            return state.Invalid(BlockValidationResult::BLOCK_INVALID_PREV, "bad-prevblk");
 
         /* Determine if this block descends from any block which has been found
          * invalid (m_failed_blocks), then mark pindexPrev and any blocks between
