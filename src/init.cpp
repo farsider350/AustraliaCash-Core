@@ -1046,7 +1046,7 @@ bool AppInitParameterInteraction(const ArgsManager& args, bool use_syscall_sandb
     }
 #endif // USE_SYSCALL_SANDBOX
 
-    nMaxReorgLength = gArgs.GetArg("-maxreorglength", DEFAULT_MAX_REORG_LENGTH);
+    nMaxReorgLength = args.GetIntArg("-maxreorglength", DEFAULT_MAX_REORG_LENGTH);
 
     return true;
 }
