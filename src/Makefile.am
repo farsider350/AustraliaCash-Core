@@ -557,6 +557,7 @@ crypto_libaustraliacash_crypto_base_la_SOURCES = \
   crypto/yescrypt/yescrypt.c \
   crypto/yescrypt/yescrypt.h \
   crypto/yescrypt/yescrypt-best.c \
+  crypto/yescrypt/yescrypt-simd.c \
   crypto/whirlpool/whirlpool.c \
   crypto/whirlpool/whirlpool.h \
   crypto/whirlpool/sph_whirlpool.c \
