@@ -553,6 +553,7 @@ crypto_libaustraliacash_crypto_base_la_SOURCES = \
   crypto/siphash.h \
   crypto/yescrypt/sha256_Y.c \
   crypto/yescrypt/sha256_Y.h \
+  crypto/yescrypt/sysendian.h \
   crypto/yescrypt/yescrypt.c \
   crypto/yescrypt/yescrypt.h \
   crypto/yescrypt/yescrypt-best.c \

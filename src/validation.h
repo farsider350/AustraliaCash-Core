@@ -86,7 +86,7 @@ static constexpr int DEFAULT_CHECKLEVEL{3};
 // Setting the target to >= 550 MiB will make it likely we can respect the target.
 static const uint64_t MIN_DISK_SPACE_FOR_BLOCK_FILES = 550 * 1024 * 1024;
 
-extern uint64_t nMaxReorgLength;
+// extern uint64_t nMaxReorgLength;
 
 /** Current sync state passed to tip changed callbacks. */
 enum class SynchronizationState {
@@ -117,7 +117,7 @@ extern uint256 hashAssumeValid;
 extern arith_uint256 nMinimumChainWork;
 
 /** The currently-connected chain of blocks (protected by cs_main). */
-extern CChain& chainActive;
+// extern CChain& chainActive;
 
 /** Documentation for argument 'checklevel'. */
 extern const std::vector<std::string> CHECKLEVEL_DOC;

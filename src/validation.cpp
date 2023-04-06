@@ -2779,11 +2779,11 @@ bool Chainstate::ConnectTip(BlockValidationState& state, CBlockIndex* pindexNew,
     return true;
 }
 
-static bool CheckMaxReorgLength(const CBlockIndex* pindexOldTip, const CBlockIndex* pindexNew) {
-    const CBlockIndex *pindexFork = chainActive.FindFork(pindexNew);
-    auto reorgLength = pindexOldTip ? pindexOldTip->nHeight - (pindexFork ? pindexFork->nHeight : -1) : 0;
-    return reorgLength <= nMaxReorgLength;
-}
+// static bool CheckMaxReorgLength(const CBlockIndex* pindexOldTip, const CBlockIndex* pindexNew) {
+//     const CBlockIndex *pindexFork = chainActive.FindFork(pindexNew);
+//     auto reorgLength = pindexOldTip ? pindexOldTip->nHeight - (pindexFork ? pindexFork->nHeight : -1) : 0;
+//     return reorgLength <= nMaxReorgLength;
+// }
 
 /**
  * Return the tip of the chain with the most work in it, that isn't
@@ -3720,8 +3720,8 @@ bool ChainstateManager::AcceptBlockHeader(const CBlockHeader& block, BlockValida
             LogPrint(BCLog::VALIDATION, "%s: Consensus::ContextualCheckBlockHeader: %s, %s\n", __func__, hash.ToString(), state.ToString());
             return false;
         }
-        if (!CheckMaxReorgLength(chainActive.Tip(), pindexPrev))
-            return state.Invalid(BlockValidationResult::BLOCK_INVALID_PREV, "bad-prevblk");
+        // if (!CheckMaxReorgLength(chainActive.Tip(), pindexPrev))
+        //     return state.Invalid(BlockValidationResult::BLOCK_INVALID_PREV, "bad-prevblk");
 
         /* Determine if this block descends from any block which has been found
          * invalid (m_failed_blocks), then mark pindexPrev and any blocks between
