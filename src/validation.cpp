@@ -132,7 +132,7 @@ bool fCheckBlockIndex = false;
 bool fCheckpointsEnabled = DEFAULT_CHECKPOINTS_ENABLED;
 int64_t nMaxTipAge = DEFAULT_MAX_TIP_AGE;
 
-uint64_t nMaxReorgLength = DEFAULT_MAX_REORG_LENGTH;
+// uint64_t nMaxReorgLength = DEFAULT_MAX_REORG_LENGTH;
 
 int COINBASE_MATURITY;
 uint256 hashAssumeValid;
@@ -2874,7 +2874,7 @@ bool Chainstate::ActivateBestChainStep(BlockValidationState& state, CBlockIndex*
     const CBlockIndex* pindexFork = m_chain.FindFork(pindexMostWork);
 
     // Reject fork if reorg is too long.
-    assert(CheckMaxReorgLength(pindexOldTip, pindexFork));
+    // assert(CheckMaxReorgLength(pindexOldTip, pindexFork));
 
     // Disconnect active blocks which are no longer in the best chain.
     bool fBlocksDisconnected = false;
