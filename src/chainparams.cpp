@@ -74,7 +74,7 @@ public:
         consensus.BIP34Hash = uint256S("4b22bb52e51d5b2f3f7648f61b81b69b3359d8d630d2253b81a92d7948d8676a");
         consensus.BIP65Height = 0;
         consensus.BIP66Height = 0;
-        consensus.PosHeight = INT_MAX;
+        consensus.MinBIP9WarningHeight = INT_MAX;
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 0.5 * 24 * 60 * 60; // 0.5 days
         consensus.nPowTargetSpacing = 2.5 * 60;
@@ -90,6 +90,7 @@ public:
 
         // AustraliaCash specific parameters
         consensus.nMultiAlgoStartBlock = 666666;
+        consensus.nPosStartBlock = 999999;
         consensus.nAveragingInterval = 10;
         consensus.nMultiAlgoTargetSpacing = 25 * NUM_ALGOS;
         consensus.nMaxAdjustDown = 16;
@@ -240,7 +241,7 @@ public:
         consensus.BIP34Hash = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000");
         consensus.BIP65Height = 76;
         consensus.BIP66Height = 76;
-        consensus.PosHeight = 500;
+        consensus.MinBIP9WarningHeight = 500;
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 0.5 * 24 * 60 * 60; // 0.5 days
         consensus.nPowTargetSpacing = 2.5 * 60;
@@ -256,6 +257,7 @@ public:
 
         // AustraliaCashcoin specific parameters
         consensus.nMultiAlgoStartBlock = 300;
+        consensus.nPosStartBlock = 600;
         consensus.nAveragingInterval = 10;
         consensus.nMultiAlgoTargetSpacing = 25 * NUM_ALGOS;
         consensus.nMaxAdjustDown = 16;
@@ -408,7 +410,7 @@ public:
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 1815; // 90% of 2016
         consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
-        consensus.PosHeight = 0;
+        consensus.MinBIP9WarningHeight = 0;
         consensus.powLimit = uint256S("00000377ae000000000000000000000000000000000000000000000000000000");
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = Consensus::BIP9Deployment::NEVER_ACTIVE;
@@ -467,7 +469,7 @@ public:
         consensus.BIP34Hash = uint256();
         consensus.BIP65Height = 1351; // BIP65 activated on regtest (Used in rpc activation tests)
         consensus.BIP66Height = 1251; // BIP66 activated on regtest (Used in rpc activation tests)
-        consensus.PosHeight = 0;
+        consensus.MinBIP9WarningHeight = 0;
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60; // two weeks
         consensus.nPowTargetSpacing = 2.5 * 60;

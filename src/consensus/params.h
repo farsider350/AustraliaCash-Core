@@ -89,7 +89,7 @@ struct Params {
     int BIP66Height;
     /** Don't warn about unknown BIP 9 activations below this height.
      * This prevents us from warning about the CSV and segwit activations. */
-    int PosHeight;
+    int MinBIP9WarningHeight;
     /**
      * Minimum blocks including miner confirmation of the total of 2016 blocks in a retargeting period,
      * (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments.
@@ -114,6 +114,7 @@ struct Params {
 
     /** Multialgo parameters */
     int nMultiAlgoStartBlock;
+    int nPosStartBlock;
     int64_t nMultiAlgoTargetSpacing;
     int64_t nAveragingInterval;
     int64_t nAveragingTargetTimespan;
