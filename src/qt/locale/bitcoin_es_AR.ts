@@ -138,7 +138,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>AustraliaCashGUI</name>
     </context>
 <context>
     <name>CoinControlDialog</name>

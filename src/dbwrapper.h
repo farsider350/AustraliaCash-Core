@@ -1,4 +1,4 @@
-// Copyright (c) 2012-2017 The Bitcoin Core developers
+// Copyright (c) 2012-2021 The AustraliaCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,14 +7,26 @@
 
 #include <clientversion.h>
 #include <fs.h>
+#include <logging.h>
 #include <serialize.h>
+#include <span.h>
 #include <streams.h>
-#include <util.h>
-#include <utilstrencodings.h>
-#include <version.h>
 
+#include <cstddef>
+#include <cstdint>
+#include <exception>
 #include <leveldb/db.h>
+#include <leveldb/iterator.h>
+#include <leveldb/options.h>
+#include <leveldb/slice.h>
+#include <leveldb/status.h>
 #include <leveldb/write_batch.h>
+#include <stdexcept>
+#include <string>
+#include <vector>
+namespace leveldb {
+class Env;
+}
 
 static const size_t DBWRAPPER_PREALLOC_KEY_SIZE = 64;
 static const size_t DBWRAPPER_PREALLOC_VALUE_SIZE = 1024;
@@ -74,12 +86,12 @@ public:
     {
         ssKey.reserve(DBWRAPPER_PREALLOC_KEY_SIZE);
         ssKey << key;
-        leveldb::Slice slKey(ssKey.data(), ssKey.size());
+        leveldb::Slice slKey((const char*)ssKey.data(), ssKey.size());
 
         ssValue.reserve(DBWRAPPER_PREALLOC_VALUE_SIZE);
         ssValue << value;
         ssValue.Xor(dbwrapper_private::GetObfuscateKey(parent));
-        leveldb::Slice slValue(ssValue.data(), ssValue.size());
+        leveldb::Slice slValue((const char*)ssValue.data(), ssValue.size());
 
         batch.Put(slKey, slValue);
         // LevelDB serializes writes as:
@@ -99,7 +111,7 @@ public:
     {
         ssKey.reserve(DBWRAPPER_PREALLOC_KEY_SIZE);
         ssKey << key;
-        leveldb::Slice slKey(ssKey.data(), ssKey.size());
+        leveldb::Slice slKey((const char*)ssKey.data(), ssKey.size());
 
         batch.Delete(slKey);
         // LevelDB serializes erases as:
@@ -138,7 +150,7 @@ public:
         CDataStream ssKey(SER_DISK, CLIENT_VERSION);
         ssKey.reserve(DBWRAPPER_PREALLOC_KEY_SIZE);
         ssKey << key;
-        leveldb::Slice slKey(ssKey.data(), ssKey.size());
+        leveldb::Slice slKey((const char*)ssKey.data(), ssKey.size());
         piter->Seek(slKey);
     }
 
@@ -147,7 +159,7 @@ public:
     template<typename K> bool GetKey(K& key) {
         leveldb::Slice slKey = piter->key();
         try {
-            CDataStream ssKey(slKey.data(), slKey.data() + slKey.size(), SER_DISK, CLIENT_VERSION);
+            CDataStream ssKey{MakeByteSpan(slKey), SER_DISK, CLIENT_VERSION};
             ssKey >> key;
         } catch (const std::exception&) {
             return false;
@@ -158,7 +170,7 @@ public:
     template<typename V> bool GetValue(V& value) {
         leveldb::Slice slValue = piter->value();
         try {
-            CDataStream ssValue(slValue.data(), slValue.data() + slValue.size(), SER_DISK, CLIENT_VERSION);
+            CDataStream ssValue{MakeByteSpan(slValue), SER_DISK, CLIENT_VERSION};
             ssValue.Xor(dbwrapper_private::GetObfuscateKey(parent));
             ssValue >> value;
         } catch (const std::exception&) {
@@ -166,11 +178,6 @@ public:
         }
         return true;
     }
-
-    unsigned int GetValueSize() {
-        return piter->value().size();
-    }
-
 };
 
 class CDBWrapper
@@ -198,6 +205,9 @@ private:
     //! the database itself
     leveldb::DB* pdb;
 
+    //! the name of this database
+    std::string m_name;
+
     //! a key used for optional XOR-obfuscation of the database
     std::vector<unsigned char> obfuscate_key;
 
@@ -221,13 +231,16 @@ public:
     CDBWrapper(const fs::path& path, size_t nCacheSize, bool fMemory = false, bool fWipe = false, bool obfuscate = false);
     ~CDBWrapper();
 
+    CDBWrapper(const CDBWrapper&) = delete;
+    CDBWrapper& operator=(const CDBWrapper&) = delete;
+
     template <typename K, typename V>
     bool Read(const K& key, V& value) const
     {
         CDataStream ssKey(SER_DISK, CLIENT_VERSION);
         ssKey.reserve(DBWRAPPER_PREALLOC_KEY_SIZE);
         ssKey << key;
-        leveldb::Slice slKey(ssKey.data(), ssKey.size());
+        leveldb::Slice slKey((const char*)ssKey.data(), ssKey.size());
 
         std::string strValue;
         leveldb::Status status = pdb->Get(readoptions, slKey, &strValue);
@@ -238,7 +251,7 @@ public:
             dbwrapper_private::HandleError(status);
         }
         try {
-            CDataStream ssValue(strValue.data(), strValue.data() + strValue.size(), SER_DISK, CLIENT_VERSION);
+            CDataStream ssValue{MakeByteSpan(strValue), SER_DISK, CLIENT_VERSION};
             ssValue.Xor(obfuscate_key);
             ssValue >> value;
         } catch (const std::exception&) {
@@ -261,7 +274,7 @@ public:
         CDataStream ssKey(SER_DISK, CLIENT_VERSION);
         ssKey.reserve(DBWRAPPER_PREALLOC_KEY_SIZE);
         ssKey << key;
-        leveldb::Slice slKey(ssKey.data(), ssKey.size());
+        leveldb::Slice slKey((const char*)ssKey.data(), ssKey.size());
 
         std::string strValue;
         leveldb::Status status = pdb->Get(readoptions, slKey, &strValue);
@@ -284,17 +297,8 @@ public:
 
     bool WriteBatch(CDBBatch& batch, bool fSync = false);
 
-    // not available for LevelDB; provide for compatibility with BDB
-    bool Flush()
-    {
-        return true;
-    }
-
-    bool Sync()
-    {
-        CDBBatch batch(*this);
-        return WriteBatch(batch, true);
-    }
+    // Get an estimate of LevelDB memory usage (in bytes).
+    size_t DynamicMemoryUsage() const;
 
     CDBIterator *NewIterator()
     {
@@ -314,30 +318,13 @@ public:
         ssKey2.reserve(DBWRAPPER_PREALLOC_KEY_SIZE);
         ssKey1 << key_begin;
         ssKey2 << key_end;
-        leveldb::Slice slKey1(ssKey1.data(), ssKey1.size());
-        leveldb::Slice slKey2(ssKey2.data(), ssKey2.size());
+        leveldb::Slice slKey1((const char*)ssKey1.data(), ssKey1.size());
+        leveldb::Slice slKey2((const char*)ssKey2.data(), ssKey2.size());
         uint64_t size = 0;
         leveldb::Range range(slKey1, slKey2);
         pdb->GetApproximateSizes(&range, 1, &size);
         return size;
     }
-
-    /**
-     * Compact a certain range of keys in the database.
-     */
-    template<typename K>
-    void CompactRange(const K& key_begin, const K& key_end) const
-    {
-        CDataStream ssKey1(SER_DISK, CLIENT_VERSION), ssKey2(SER_DISK, CLIENT_VERSION);
-        ssKey1.reserve(DBWRAPPER_PREALLOC_KEY_SIZE);
-        ssKey2.reserve(DBWRAPPER_PREALLOC_KEY_SIZE);
-        ssKey1 << key_begin;
-        ssKey2 << key_end;
-        leveldb::Slice slKey1(ssKey1.data(), ssKey1.size());
-        leveldb::Slice slKey2(ssKey2.data(), ssKey2.size());
-        pdb->CompactRange(&slKey1, &slKey2);
-    }
-
 };
 
 #endif // BITCOIN_DBWRAPPER_H

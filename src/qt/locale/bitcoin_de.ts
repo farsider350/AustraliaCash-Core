@@ -236,7 +236,7 @@
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>AustraliaCashGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Nachricht s&amp;ignieren...</translation>
@@ -3166,8 +3166,8 @@
         <translation>Kann HTTP Server nicht starten. Siehe debug log für Details.</translation>
     </message>
     <message>
-        <source>Bitcoin Core</source>
-        <translation>Bitcoin Core</translation>
+        <source>AustraliaCash Core</source>
+        <translation>AustraliaCash Core</translation>
     </message>
     <message>
         <source>The %s developers</source>

@@ -132,7 +132,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>AustraliaCashGUI</name>
     <message>
         <source>Synchronizing with network...</source>
         <translation>Synchronizuji se sítí...</translation>

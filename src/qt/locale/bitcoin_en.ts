@@ -302,7 +302,7 @@
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>AustraliaCashGUI</name>
     <message>
         <location filename="../bitcoingui.cpp" line="+358"/>
         <source>Sign &amp;message...</source>

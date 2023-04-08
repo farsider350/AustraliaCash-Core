@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2009-2017 The AustraliaCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -577,9 +577,9 @@ void PrintExceptionContinue(const std::exception* pex, const char* pszThread)
 
 fs::path GetDefaultDataDir()
 {
-    // Windows < Vista: C:\Documents and Settings\Username\Application Data\Bitcoin
-    // Windows >= Vista: C:\Users\Username\AppData\Roaming\Bitcoin
-    // Mac: ~/Library/Application Support/Bitcoin
+    // Windows < Vista: C:\Documents and Settings\Username\Application Data\AustraliaCash
+    // Windows >= Vista: C:\Users\Username\AppData\Roaming\AustraliaCash
+    // Mac: ~/Library/Application Support/AustraliaCash
     // Unix: ~/.bitcoin
 #ifdef WIN32
     // Windows
@@ -947,11 +947,11 @@ std::string CopyrightHolders(const std::string& strPrefix)
 {
     std::string strCopyrightHolders = strPrefix + strprintf(_(COPYRIGHT_HOLDERS), _(COPYRIGHT_HOLDERS_SUBSTITUTION));
 
-    // Check for untranslated substitution to make sure Bitcoin Core copyright is not removed by accident
-    if (strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("Bitcoin Core") == std::string::npos) {
+    // Check for untranslated substitution to make sure AustraliaCash Core copyright is not removed by accident
+    if (strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("AustraliaCash Core") == std::string::npos) {
         std::string strYear = strPrefix;
         strYear.replace(strYear.find("2011"), sizeof("2011")-1, "2009");
-        strCopyrightHolders += "\n" + strYear + "The Bitcoin Core developers";
+        strCopyrightHolders += "\n" + strYear + "The AustraliaCash Core developers";
     }
     return strCopyrightHolders;
 }

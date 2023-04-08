@@ -118,13 +118,11 @@ jobs:
       run: |
         ./configure --prefix=$(realpath depends/x86_64-w64-mingw32)
         make -j$(nproc)
-        make install DESTDIR=$SOURCE_ARTIFACT/install
       working-directory: ${{ env.SOURCE_ARTIFACT }}
     - name: Prepare Files for Artifact
       run: |
         mkdir -p $ARTIFACT_DIR
         mv $SOURCE_ARTIFACT/src/{australiacash-cli.exe,australiacash-tx.exe,australiacashd.exe,qt/australiacash-qt.exe} $ARTIFACT_DIR
-        mv $SOURCE_ARTIFACT/install/ $ARTIFACT_DIR
     - name: Upload Artifact
       uses: actions/upload-artifact@v1
       with:

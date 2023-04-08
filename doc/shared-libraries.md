@@ -3,15 +3,15 @@ Shared Libraries
 
 ## bitcoinconsensus
 
-The purpose of this library is to make the verification functionality that is critical to Bitcoin's consensus available to other applications, e.g. to language bindings.
+The purpose of this library is to make the verification functionality that is critical to AustraliaCash's consensus available to other applications, e.g. to language bindings.
 
 ### API
 
-The interface is defined in the C header `bitcoinconsensus.h` located in  `src/script/bitcoinconsensus.h`.
+The interface is defined in the C header `bitcoinconsensus.h` located in `src/script/bitcoinconsensus.h`.
 
 #### Version
 
-`bitcoinconsensus_version` returns an `unsigned int` with the API version *(currently at an experimental `0`)*.
+`bitcoinconsensus_version` returns an `unsigned int` with the API version *(currently `1`)*.
 
 #### Script Validation
 
@@ -41,9 +41,10 @@ The interface is defined in the C header `bitcoinconsensus.h` located in  `src/s
 - `bitcoinconsensus_ERR_TX_SIZE_MISMATCH` - `txToLen` did not match with the size of `txTo`
 - `bitcoinconsensus_ERR_DESERIALIZE` - An error deserializing `txTo`
 - `bitcoinconsensus_ERR_AMOUNT_REQUIRED` - Input amount is required if WITNESS is used
+- `bitcoinconsensus_ERR_INVALID_FLAGS` - Script verification `flags` are invalid (i.e. not part of the libconsensus interface)
 
 ### Example Implementations
-- [NBitcoin](https://github.com/NicolasDorier/NBitcoin/blob/master/NBitcoin/Script.cs#L814) (.NET Bindings)
+- [NAustraliaCash](https://github.com/MetacoSA/NAustraliaCash/blob/5e1055cd7c4186dee4227c344af8892aea54faec/NAustraliaCash/Script.cs#L979-#L1031) (.NET Bindings)
 - [node-libbitcoinconsensus](https://github.com/bitpay/node-libbitcoinconsensus) (Node.js Bindings)
 - [java-libbitcoinconsensus](https://github.com/dexX7/java-libbitcoinconsensus) (Java Bindings)
 - [bitcoinconsensus-php](https://github.com/Bit-Wasp/bitcoinconsensus-php) (PHP Bindings)

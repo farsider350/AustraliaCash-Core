@@ -192,7 +192,7 @@
     </message>
     </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>AustraliaCashGUI</name>
     <message>
         <source>Synchronizing with network...</source>
         <translation>네트워크와 동기화중...</translation>
