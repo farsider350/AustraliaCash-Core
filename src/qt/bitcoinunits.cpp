@@ -1,114 +1,107 @@
-// Copyright (c) 2011-2017 The Bitcoin Core developers
+// Copyright (c) 2011-2021 The AustraliaCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <qt/bitcoinunits.h>
 
-#include <primitives/transaction.h>
+#include <consensus/amount.h>
 
 #include <QStringList>
 
-BitcoinUnits::BitcoinUnits(QObject *parent):
+#include <cassert>
+
+static constexpr auto MAX_DIGITS_BTC = 16;
+
+AustraliaCashUnits::AustraliaCashUnits(QObject *parent):
         QAbstractListModel(parent),
         unitlist(availableUnits())
 {
 }
 
-QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
+QList<AustraliaCashUnit> AustraliaCashUnits::availableUnits()
 {
-    QList<BitcoinUnits::Unit> unitlist;
-    unitlist.append(BTC);
-    unitlist.append(mBTC);
-    unitlist.append(uBTC);
+    QList<AustraliaCashUnit> unitlist;
+    unitlist.append(Unit::BTC);
+    unitlist.append(Unit::mBTC);
+    unitlist.append(Unit::uBTC);
+    unitlist.append(Unit::SAT);
     return unitlist;
 }
 
-bool BitcoinUnits::valid(int unit)
+QString AustraliaCashUnits::longName(Unit unit)
 {
-    switch(unit)
-    {
-    case BTC:
-    case mBTC:
-    case uBTC:
-        return true;
-    default:
-        return false;
-    }
+    switch (unit) {
+    case Unit::BTC: return QString("AUS");
+    case Unit::mBTC: return QString("mAUS");
+    case Unit::uBTC: return QString::fromUtf8("µAUS (mbits)");
+    case Unit::SAT: return QString("Mateoshi (msat)");
+    } // no default case, so the compiler can warn about missing cases
+    assert(false);
 }
 
-QString BitcoinUnits::longName(int unit)
+QString AustraliaCashUnits::shortName(Unit unit)
 {
-    switch(unit)
-    {
-    case BTC: return QString("AUS");
-    case mBTC: return QString("auses");
-    case uBTC: return QString("aces");
-    default: return QString("???");
-    }
+    switch (unit) {
+    case Unit::BTC: return longName(unit);
+    case Unit::mBTC: return longName(unit);
+    case Unit::uBTC: return QString("mbits");
+    case Unit::SAT: return QString("msat");
+    } // no default case, so the compiler can warn about missing cases
+    assert(false);
 }
 
-QString BitcoinUnits::shortName(int unit)
+QString AustraliaCashUnits::description(Unit unit)
 {
-    switch(unit)
-    {
-    case uBTC: return QString::fromUtf8("bits");
-    default:   return longName(unit);
-    }
+    switch (unit) {
+    case Unit::BTC: return QString("AustraliaCashcoins");
+    case Unit::mBTC: return QString("Milli-AustraliaCashcoins (1 / 1" THIN_SP_UTF8 "000)");
+    case Unit::uBTC: return QString("Micro-AustraliaCashcoins (mbits) (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case Unit::SAT: return QString("Mateoshi (msat) (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    } // no default case, so the compiler can warn about missing cases
+    assert(false);
 }
 
-QString BitcoinUnits::description(int unit)
+qint64 AustraliaCashUnits::factor(Unit unit)
 {
-    switch(unit)
-    {
-    case BTC: return QString("Australiacashs");
-    case mBTC: return QString("Lites (1 / 1" THIN_SP_UTF8 "000)");
-    case uBTC: return QString("Photons (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
-    default: return QString("???");
-    }
+    switch (unit) {
+    case Unit::BTC: return 100'000'000;
+    case Unit::mBTC: return 100'000;
+    case Unit::uBTC: return 100;
+    case Unit::SAT: return 1;
+    } // no default case, so the compiler can warn about missing cases
+    assert(false);
 }
 
-qint64 BitcoinUnits::factor(int unit)
+int AustraliaCashUnits::decimals(Unit unit)
 {
-    switch(unit)
-    {
-    case BTC:  return 100000000;
-    case mBTC: return 100000;
-    case uBTC: return 100;
-    default:   return 100000000;
-    }
+    switch (unit) {
+    case Unit::BTC: return 8;
+    case Unit::mBTC: return 5;
+    case Unit::uBTC: return 2;
+    case Unit::SAT: return 0;
+    } // no default case, so the compiler can warn about missing cases
+    assert(false);
 }
 
-int BitcoinUnits::decimals(int unit)
-{
-    switch(unit)
-    {
-    case BTC: return 8;
-    case mBTC: return 5;
-    case uBTC: return 2;
-    default: return 0;
-    }
-}
-
-QString BitcoinUnits::format(int unit, const CAmount& nIn, bool fPlus, SeparatorStyle separators)
+QString AustraliaCashUnits::format(Unit unit, const CAmount& nIn, bool fPlus, SeparatorStyle separators, bool justify)
 {
     // Note: not using straight sprintf here because we do NOT want
     // localized number formatting.
-    if(!valid(unit))
-        return QString(); // Refuse to format invalid unit
     qint64 n = (qint64)nIn;
     qint64 coin = factor(unit);
     int num_decimals = decimals(unit);
     qint64 n_abs = (n > 0 ? n : -n);
     qint64 quotient = n_abs / coin;
-    qint64 remainder = n_abs % coin;
     QString quotient_str = QString::number(quotient);
-    QString remainder_str = QString::number(remainder).rightJustified(num_decimals, '0');
+    if (justify) {
+        quotient_str = quotient_str.rightJustified(MAX_DIGITS_BTC - num_decimals, ' ');
+    }
 
     // Use SI-style thin space separators as these are locale independent and can't be
     // confused with the decimal marker.
     QChar thin_sp(THIN_SP_CP);
     int q_size = quotient_str.size();
-    if (separators == separatorAlways || (separators == separatorStandard && q_size > 4))
+    if (separators == SeparatorStyle::ALWAYS || (separators == SeparatorStyle::STANDARD && q_size > 4))
         for (int i = 3; i < q_size; i += 3)
             quotient_str.insert(q_size - i, thin_sp);
 
@@ -116,7 +109,14 @@ QString BitcoinUnits::format(int unit, const CAmount& nIn, bool fPlus, Separator
         quotient_str.insert(0, '-');
     else if (fPlus && n > 0)
         quotient_str.insert(0, '+');
-    return quotient_str + QString(".") + remainder_str;
+
+    if (num_decimals > 0) {
+        qint64 remainder = n_abs % coin;
+        QString remainder_str = QString::number(remainder).rightJustified(num_decimals, '0');
+        return quotient_str + QString(".") + remainder_str;
+    } else {
+        return quotient_str;
+    }
 }
 
 
@@ -128,23 +128,35 @@ QString BitcoinUnits::format(int unit, const CAmount& nIn, bool fPlus, Separator
 // Please take care to use formatHtmlWithUnit instead, when
 // appropriate.
 
-QString BitcoinUnits::formatWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
+QString AustraliaCashUnits::formatWithUnit(Unit unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
 {
     return format(unit, amount, plussign, separators) + QString(" ") + shortName(unit);
 }
 
-QString BitcoinUnits::formatHtmlWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
+QString AustraliaCashUnits::formatHtmlWithUnit(Unit unit, const CAmount& amount, bool plussign, SeparatorStyle separators)
 {
     QString str(formatWithUnit(unit, amount, plussign, separators));
     str.replace(QChar(THIN_SP_CP), QString(THIN_SP_HTML));
     return QString("<span style='white-space: nowrap;'>%1</span>").arg(str);
 }
 
-
-bool BitcoinUnits::parse(int unit, const QString &value, CAmount *val_out)
+QString AustraliaCashUnits::formatWithPrivacy(Unit unit, const CAmount& amount, SeparatorStyle separators, bool privacy)
 {
-    if(!valid(unit) || value.isEmpty())
+    assert(amount >= 0);
+    QString value;
+    if (privacy) {
+        value = format(unit, 0, false, separators, true).replace('0', '#');
+    } else {
+        value = format(unit, amount, false, separators, true);
+    }
+    return value + QString(" ") + shortName(unit);
+}
+
+bool AustraliaCashUnits::parse(Unit unit, const QString& value, CAmount* val_out)
+{
+    if (value.isEmpty()) {
         return false; // Refuse to parse invalid unit or empty string
+    }
     int num_decimals = decimals(unit);
 
     // Ignore spaces and thin spaces when parsing
@@ -180,23 +192,18 @@ bool BitcoinUnits::parse(int unit, const QString &value, CAmount *val_out)
     return ok;
 }
 
-QString BitcoinUnits::getAmountColumnTitle(int unit)
+QString AustraliaCashUnits::getAmountColumnTitle(Unit unit)
 {
-    QString amountTitle = QObject::tr("Amount");
-    if (BitcoinUnits::valid(unit))
-    {
-        amountTitle += " ("+BitcoinUnits::shortName(unit) + ")";
-    }
-    return amountTitle;
+    return QObject::tr("Amount") + " (" + shortName(unit) + ")";
 }
 
-int BitcoinUnits::rowCount(const QModelIndex &parent) const
+int AustraliaCashUnits::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
     return unitlist.size();
 }
 
-QVariant BitcoinUnits::data(const QModelIndex &index, int role) const
+QVariant AustraliaCashUnits::data(const QModelIndex &index, int role) const
 {
     int row = index.row();
     if(row >= 0 && row < unitlist.size())
@@ -210,13 +217,50 @@ QVariant BitcoinUnits::data(const QModelIndex &index, int role) const
         case Qt::ToolTipRole:
             return QVariant(description(unit));
         case UnitRole:
-            return QVariant(static_cast<int>(unit));
+            return QVariant::fromValue(unit);
         }
     }
     return QVariant();
 }
 
-CAmount BitcoinUnits::maxMoney()
+CAmount AustraliaCashUnits::maxMoney()
 {
     return MAX_MONEY;
+}
+
+namespace {
+qint8 ToQint8(AustraliaCashUnit unit)
+{
+    switch (unit) {
+    case AustraliaCashUnit::BTC: return 0;
+    case AustraliaCashUnit::mBTC: return 1;
+    case AustraliaCashUnit::uBTC: return 2;
+    case AustraliaCashUnit::SAT: return 3;
+    } // no default case, so the compiler can warn about missing cases
+    assert(false);
+}
+
+AustraliaCashUnit FromQint8(qint8 num)
+{
+    switch (num) {
+    case 0: return AustraliaCashUnit::BTC;
+    case 1: return AustraliaCashUnit::mBTC;
+    case 2: return AustraliaCashUnit::uBTC;
+    case 3: return AustraliaCashUnit::SAT;
+    }
+    assert(false);
+}
+} // namespace
+
+QDataStream& operator<<(QDataStream& out, const AustraliaCashUnit& unit)
+{
+    return out << ToQint8(unit);
+}
+
+QDataStream& operator>>(QDataStream& in, AustraliaCashUnit& unit)
+{
+    qint8 input;
+    in >> input;
+    unit = FromQint8(input);
+    return in;
 }
