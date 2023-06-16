@@ -74,7 +74,7 @@ public:
         consensus.BIP34Hash = uint256S("4b22bb52e51d5b2f3f7648f61b81b69b3359d8d630d2253b81a92d7948d8676a");
         consensus.BIP65Height = 0;
         consensus.BIP66Height = 0;
-        consensus.MinBIP9WarningHeight = 777777;
+        consensus.MinBIP9WarningHeight = 1777777;
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 0.5 * 24 * 60 * 60; // 0.5 days
         consensus.nPowTargetSpacing = 2.5 * 60;
@@ -89,8 +89,8 @@ public:
         consensus.nMinerConfirmationWindow = 8064; // nPowTargetTimespan
 
         // AustraliaCash specific parameters
-        consensus.nMultiAlgoStartBlock = 777777;
-        consensus.nPosStartBlock = 777777;
+        consensus.nMultiAlgoStartBlock = INT_MAX;
+        consensus.nPosStartBlock = INT_MAX;
         consensus.nAveragingInterval = 10;
         consensus.nMultiAlgoTargetSpacing = 25 * NUM_ALGOS;
         consensus.nMaxAdjustDown = 16;
@@ -156,10 +156,10 @@ public:
         vSeeds.emplace_back("104.156.233.160");
         vSeeds.emplace_back("104.156.239.75");
         vSeeds.emplace_back("45.32.244.142");
-	vSeeds.emplace_back("207.148.85.226");
-	vSeeds.emplace_back("104.27.141.137");
-	vSeeds.emplace_back("104.20.149.177");
-	vSeeds.emplace_back("104.24.6.35");
+        vSeeds.emplace_back("207.148.85.226");
+        vSeeds.emplace_back("104.27.141.137");
+        vSeeds.emplace_back("104.20.149.177");
+        vSeeds.emplace_back("104.24.6.35");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,23);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
