@@ -1,6 +1,6 @@
 # AustraliaCash-Core
 AUS-Cash Core Wallet
-
+v1.17.01.00
 ####	About
 
 >		Australiacash is a free open source peer-to-peer electronic system that is
