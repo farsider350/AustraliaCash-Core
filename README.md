@@ -1,30 +1,75 @@
-# AustraliaCash-Core
-AUS-Cash Core Wallet
-v1.17.01.00
-####	About
+AustraliaCash Core integration/staging tree
+=====================================
 
->		Australiacash is a free open source peer-to-peer electronic system that is
->		completely decentralized, without the need for a central server or trusted
->		parties.  Users hold the crypto keys to their own Australia Cash and transact directly
->		with each other, with the help of a peer-to-peer network to check for double-spending.
->
->		Australia Cash is a peer-to-peer cryptocurrency and open-source software project released 
->		under the MIT/X11 license. Creation and transfer of coins is based on an open source 
->		cryptographic protocol and is not managed by any central authority.
+What is AustraliaCash?
+----------------
 
+AustraliaCash is an experimental digital currency that enables instant payments to
+anyone, anywhere in the world. AustraliaCash uses peer-to-peer technology to operate
+with no central authority: managing transactions and issuing money are carried
+out collectively by the network. AustraliaCash Core is the name of open source
+software which enables the use of this currency.
 
->		Australiacash Core is the original Australiacash client and it builds the backbone of the network.
->		However, it downloads and stores the entire history of Australiacash transactions
->		depending on the speed of your computer and network connection, the synchronization
->		process can take anywhere from a few hours to a day or more.		
+For more information, as well as an immediately useable, binary version of
+the AustraliaCash Core software, see [http://australiacash.global](http://australiacash.global).
 
+License
+-------
 
-####    Install Instructions
+AustraliaCash Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
+information or see https://opensource.org/licenses/MIT.
 
->       Proceed to the releases section of this GitHub
->       Find the latest release at top of page (Latest 0.17.4.2)
->       Download the compressed file for your operating system
->       Unzip and double click the AustraliaCash-qt file
->       
->       Open ports 1986-1987 via the routers port forwarding or virtual server option for better peers connectivity.
->       Start the wallet with australiacash-qt
+Development Process
+-------------------
+
+The `master` branch is regularly built and tested, but is not guaranteed to be
+completely stable. [Tags](https://github.com/AustraliaCash-Network/AustraliaCash2019/tags) are created
+regularly to indicate new official, stable release versions of AustraliaCash Core.
+
+The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+The developer [mailing list](https://bitcointalk.org/index.php?topic=2161853)
+should be used to discuss complicated or controversial changes before working
+on a patch set.
+
+Developer IRC can be found on Freenode at #australiacash-dev.
+
+Testing
+-------
+
+Testing and code review is the bottleneck for development; we get more pull
+requests than we can review and test on short notice. Please be patient and help out by testing
+other people's pull requests, and remember this is a security-critical project where any mistake might cost people
+lots of money.
+
+### Automated Testing
+
+Developers are strongly encouraged to write [unit tests](src/test/README.md) for new code, and to
+submit new unit tests for old code. Unit tests can be compiled and run
+(assuming they weren't disabled in configure) with: `make check`. Further details on running
+and extending unit tests can be found in [/src/test/README.md](/src/test/README.md).
+
+There are also [regression and integration tests](/test), written
+in Python, that are run automatically on the build server.
+These tests can be run (if the [test dependencies](/test) are installed) with: `test/functional/test_runner.py`
+
+The Travis CI system makes sure that every pull request is built for Windows, Linux, and macOS, and that unit/sanity tests are run automatically.
+
+### Manual Quality Assurance (QA) Testing
+
+Changes should be tested by somebody other than the developer who wrote the
+code. This is especially important for large or high-risk changes. It is useful
+to add a test plan to the pull request description if testing the changes is
+not straightforward.
+
+Translations
+------------
+
+We only accept translation fixes that are submitted through [Bitcoin Core's Transifex page](https://www.transifex.com/projects/p/bitcoin/).
+Translations are converted to AustraliaCash periodically.
+
+Translations are periodically pulled from Transifex and merged into the git repository. See the
+[translation process](doc/translation_process.md) for details on how this works.
+
+**Important**: We do not accept translation changes as GitHub pull requests because the next
+pull from Transifex would automatically overwrite them again.

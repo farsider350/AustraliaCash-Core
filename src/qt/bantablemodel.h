@@ -1,9 +1,9 @@
-// Copyright (c) 2011-2017 The Bitcoin Core developers
+// Copyright (c) 2011-2018 The AustraliaCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_BANTABLEMODEL_H
-#define BITCOIN_QT_BANTABLEMODEL_H
+#ifndef AUSTRALIACASH_QT_BANTABLEMODEL_H
+#define AUSTRALIACASH_QT_BANTABLEMODEL_H
 
 #include <net.h>
 
@@ -14,6 +14,10 @@
 
 class ClientModel;
 class BanTablePriv;
+
+namespace interfaces {
+    class Node;
+}
 
 struct CCombinedBan {
     CSubNet subnet;
@@ -41,7 +45,7 @@ class BanTableModel : public QAbstractTableModel
     Q_OBJECT
 
 public:
-    explicit BanTableModel(ClientModel *parent = 0);
+    explicit BanTableModel(interfaces::Node& node, ClientModel *parent = 0);
     ~BanTableModel();
     void startAutoRefresh();
     void stopAutoRefresh();
@@ -67,9 +71,10 @@ public Q_SLOTS:
     void refresh();
 
 private:
+    interfaces::Node& m_node;
     ClientModel *clientModel;
     QStringList columns;
     std::unique_ptr<BanTablePriv> priv;
 };
 
-#endif // BITCOIN_QT_BANTABLEMODEL_H
+#endif // AUSTRALIACASH_QT_BANTABLEMODEL_H

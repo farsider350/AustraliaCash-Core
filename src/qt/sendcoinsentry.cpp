@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2017 The Bitcoin Core developers
+// Copyright (c) 2011-2018 The AustraliaCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -32,13 +32,11 @@ SendCoinsEntry::SendCoinsEntry(const PlatformStyle *_platformStyle, QWidget *par
 
     if (platformStyle->getUseExtraSpacing())
         ui->payToLayout->setSpacing(4);
-#if QT_VERSION >= 0x040700
     ui->addAsLabel->setPlaceholderText(tr("Enter a label for this address to add it to your address book"));
-#endif
 
-    // normal bitcoin address field
+    // normal australiacash address field
     GUIUtil::setupAddressWidget(ui->payTo, this);
-    // just a label for displaying bitcoin address(es)
+    // just a label for displaying australiacash address(es)
     ui->payTo_is->setFont(GUIUtil::fixedPitchFont());
 
     // Connect signals
@@ -48,6 +46,7 @@ SendCoinsEntry::SendCoinsEntry(const PlatformStyle *_platformStyle, QWidget *par
     connect(ui->deleteButton_is, SIGNAL(clicked()), this, SLOT(deleteClicked()));
     connect(ui->deleteButton_s, SIGNAL(clicked()), this, SLOT(deleteClicked()));
     connect(ui->useAvailableBalanceButton, SIGNAL(clicked()), this, SLOT(useAvailableBalanceClicked()));
+    connect(ui->checkBoxCID, SIGNAL(stateChanged(int)), this, SLOT(useCID(int)));
 }
 
 SendCoinsEntry::~SendCoinsEntry()
@@ -89,16 +88,33 @@ void SendCoinsEntry::setModel(WalletModel *_model)
     clear();
 }
 
-void SendCoinsEntry::clear()
+void SendCoinsEntry::showMessageEdit() 
+{
+    ui->messageTextLabel->show();
+    ui->messageLabel->show();
+    ui->cidLabel->show();
+    ui->cidTextLabel->show();
+    ui->checkBoxCID->show();
+    useCID(false);
+}
+
+void SendCoinsEntry::clear(bool showMessage)
 {
     // clear UI elements for normal payment
     ui->payTo->clear();
     ui->addAsLabel->clear();
     ui->payAmount->clear();
     ui->checkboxSubtractFeeFromAmount->setCheckState(Qt::Unchecked);
+    ui->checkBoxCID->setCheckState(Qt::Unchecked);
+    ui->cidTextLabel->setEnabled(false);
     ui->messageTextLabel->clear();
-    ui->messageTextLabel->hide();
-    ui->messageLabel->hide();
+    if (!showMessage) {
+        ui->messageTextLabel->hide();
+        ui->messageLabel->hide();
+        ui->cidLabel->hide();
+        ui->cidTextLabel->hide();
+        ui->checkBoxCID->hide();
+    }
     // clear UI elements for unauthenticated payment request
     ui->payTo_is->clear();
     ui->memoTextLabel_is->clear();
@@ -108,13 +124,18 @@ void SendCoinsEntry::clear()
     ui->memoTextLabel_s->clear();
     ui->payAmount_s->clear();
 
-    // update the display unit, to not use the default ("BTC")
+    // update the display unit, to not use the default ("AUS")
     updateDisplayUnit();
 }
 
 void SendCoinsEntry::checkSubtractFeeFromAmount()
 {
     ui->checkboxSubtractFeeFromAmount->setChecked(true);
+}
+
+void SendCoinsEntry::useCID(int a)
+{
+    ui->cidTextLabel->setEnabled(ui->checkBoxCID->isChecked());
 }
 
 void SendCoinsEntry::deleteClicked()
@@ -127,7 +148,7 @@ void SendCoinsEntry::useAvailableBalanceClicked()
     Q_EMIT useAvailableBalance(this);
 }
 
-bool SendCoinsEntry::validate()
+bool SendCoinsEntry::validate(interfaces::Node& node)
 {
     if (!model)
         return false;
@@ -158,7 +179,7 @@ bool SendCoinsEntry::validate()
     }
 
     // Reject dust outputs:
-    if (retval && GUIUtil::isDust(ui->payTo->text(), ui->payAmount->value())) {
+    if (retval && GUIUtil::isDust(node, ui->payTo->text(), ui->payAmount->value())) {
         ui->payAmount->setValid(false);
         retval = false;
     }
@@ -176,7 +197,12 @@ SendCoinsRecipient SendCoinsEntry::getValue()
     recipient.address = ui->payTo->text();
     recipient.label = ui->addAsLabel->text();
     recipient.amount = ui->payAmount->value();
-    recipient.message = ui->messageTextLabel->text();
+    // SANDO - composed txComment set
+    QString cid = ui->cidTextLabel->text();
+    QString spr("\n");
+    QString msg = ui->messageTextLabel->text();
+    bool cmp = ui->checkBoxCID->isChecked();
+    recipient.message = cmp ? (cid + spr + msg) : msg;
     recipient.fSubtractFeeFromAmount = (ui->checkboxSubtractFeeFromAmount->checkState() == Qt::Checked);
 
     return recipient;
@@ -221,8 +247,8 @@ void SendCoinsEntry::setValue(const SendCoinsRecipient &value)
     {
         // message
         ui->messageTextLabel->setText(recipient.message);
-        ui->messageTextLabel->setVisible(!recipient.message.isEmpty());
-        ui->messageLabel->setVisible(!recipient.message.isEmpty());
+        ui->messageTextLabel->setVisible(true);
+        ui->messageLabel->setVisible(true);
 
         ui->addAsLabel->clear();
         ui->payTo->setText(recipient.address); // this may set a label from addressbook

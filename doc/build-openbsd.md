@@ -1,6 +1,6 @@
 OpenBSD build guide
 ======================
-(updated for OpenBSD 6.2)
+(updated for OpenBSD 6.3)
 
 This guide describes how to build australiacashd and command-line utilities on OpenBSD.
 
@@ -12,13 +12,12 @@ Preparation
 Run the following as root to install the base dependencies for building:
 
 ```bash
-pkg_add git gmake libevent libtool
+pkg_add git gmake libevent libtool boost
 pkg_add autoconf # (select highest version, e.g. 2.69)
 pkg_add automake # (select highest version, e.g. 1.15)
 pkg_add python # (select highest version, e.g. 3.6)
-pkg_add boost
 
-git clone https://github.com/australiacash/australiacash-core.git
+git clone https://github.com/AustraliaCash-Network/AustraliaCash.git
 ```
 
 See [dependencies.md](dependencies.md) for a complete overview.
@@ -49,14 +48,21 @@ from the root of the repository. Then set `BDB_PREFIX` for the next section:
 export BDB_PREFIX="$PWD/db4"
 ```
 
-### Building Australiacash Core
+### Building AustraliaCash Core
 
 **Important**: use `gmake`, not `make`. The non-GNU `make` will exit with a horrible error.
 
 Preparation:
 ```bash
-export AUTOCONF_VERSION=2.69 # replace this with the autoconf version that you installed
-export AUTOMAKE_VERSION=1.15 # replace this with the automake version that you installed
+
+# Replace this with the autoconf version that you installed. Include only
+# the major and minor parts of the version: use "2.69" for "autoconf-2.69p2".
+export AUTOCONF_VERSION=2.69
+
+# Replace this with the automake version that you installed. Include only
+# the major and minor parts of the version: use "1.15" for "automake-1.15.1".
+export AUTOMAKE_VERSION=1.15
+
 ./autogen.sh
 ```
 Make sure `BDB_PREFIX` is set to the appropriate path from the above steps.
@@ -88,8 +94,7 @@ The standard ulimit restrictions in OpenBSD are very strict:
 
     data(kbytes)         1572864
 
-This, unfortunately, in some cases not enough to compile some `.cpp` files in the project,
-(see issue [#6658](https://github.com/bitcoin/bitcoin/issues/6658)).
+This, unfortunately, in some cases not enough to compile some `.cpp` files in the project.
 If your user is in the `staff` group the limit can be raised with:
 
     ulimit -d 3000000

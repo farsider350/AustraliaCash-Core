@@ -1,13 +1,13 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2009-2018 The AustraliaCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 /**
  * Utilities for converting data from/to strings.
  */
-#ifndef BITCOIN_UTILSTRENCODINGS_H
-#define BITCOIN_UTILSTRENCODINGS_H
+#ifndef AUSTRALIACASH_UTILSTRENCODINGS_H
+#define AUSTRALIACASH_UTILSTRENCODINGS_H
 
 #include <stdint.h>
 #include <string>
@@ -19,12 +19,22 @@
 #define UEND(a)             ((unsigned char*)&((&(a))[1]))
 #define ARRAYLEN(array)     (sizeof(array)/sizeof((array)[0]))
 
+// The maximal length of txComment
+const int TX_COMMENT_LIMIT = 252;
+const int TX_COMPOSED_COMMENT_LIMIT = 400;
+// Check txComment in UTF-8 and limit it to 252 bytes
+std::string ValidateUnicodeString(const std::string& input);
+// Check, if txComment contain a valid base58-encoded string
+// Return pos of the separator or 0
+size_t FindIpfsIdseparator(const std::string& s);
+
 /** Used by SanitizeString() */
 enum SafeChars
 {
     SAFE_CHARS_DEFAULT, //!< The full set of allowed chars
     SAFE_CHARS_UA_COMMENT, //!< BIP-0014 subset
     SAFE_CHARS_FILENAME, //!< Chars allowed in filenames
+    SAFE_CHARS_URI, //!< Chars allowed in URIs (RFC 3986)
 };
 
 /**
@@ -60,6 +70,16 @@ std::string itostr(int n);
 int64_t atoi64(const char* psz);
 int64_t atoi64(const std::string& str);
 int atoi(const std::string& str);
+
+/**
+ * Tests if the given character is a decimal digit.
+ * @param[in] c     character to test
+ * @return          true if the argument is a decimal digit; otherwise false.
+ */
+constexpr bool IsDigit(char c)
+{
+    return c >= '0' && c <= '9';
+}
 
 /**
  * Convert string to signed 32-bit integer with strict parse error feedback.
@@ -151,7 +171,7 @@ bool ParseFixedPoint(const std::string &val, int decimals, int64_t *amount_out);
 
 /** Convert from one power-of-2 number base to another. */
 template<int frombits, int tobits, bool pad, typename O, typename I>
-bool ConvertBits(O& out, I it, I end) {
+bool ConvertBits(const O& outfn, I it, I end) {
     size_t acc = 0;
     size_t bits = 0;
     constexpr size_t maxv = (1 << tobits) - 1;
@@ -161,16 +181,16 @@ bool ConvertBits(O& out, I it, I end) {
         bits += frombits;
         while (bits >= tobits) {
             bits -= tobits;
-            out.push_back((acc >> bits) & maxv);
+            outfn((acc >> bits) & maxv);
         }
         ++it;
     }
     if (pad) {
-        if (bits) out.push_back((acc << (tobits - bits)) & maxv);
+        if (bits) outfn((acc << (tobits - bits)) & maxv);
     } else if (bits >= frombits || ((acc << (tobits - bits)) & maxv)) {
         return false;
     }
     return true;
 }
 
-#endif // BITCOIN_UTILSTRENCODINGS_H
+#endif // AUSTRALIACASH_UTILSTRENCODINGS_H

@@ -86,24 +86,12 @@
         <translation>Taridza ruzivo rwe Qt</translation>
     </message>
     <message>
-        <source>&amp;Sending addresses...</source>
-        <translation>&amp;Makero ekutumira nawo</translation>
-    </message>
-    <message>
-        <source>&amp;Receiving addresses...</source>
-        <translation>&amp;Makero ekutambira nawo</translation>
-    </message>
-    <message>
         <source>Open &amp;URI...</source>
         <translation>Vhura &amp;URI</translation>
     </message>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
-    </message>
-    <message>
-        <source>Wallet</source>
-        <translation>Chikwama</translation>
+        <source>litecoin</source>
+        <translation>litecoin</translation>
     </message>
     <message>
         <source>&amp;Send</source>
@@ -165,8 +153,8 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
+        <source>litecoin</source>
+        <translation>litecoin</translation>
     </message>
     </context>
 <context>
@@ -194,8 +182,8 @@
         <translation>Marii </translation>
     </message>
     <message>
-        <source>Enter a Australiacash address (e.g. %1)</source>
-        <translation>Nyora kero ye Australiacash (sekuti %1)</translation>
+        <source>Enter a litecoin address (e.g. %1)</source>
+        <translation>Nyora kero ye litecoin (sekuti %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -251,6 +239,10 @@
     <message>
         <source>Label</source>
         <translation>Zita</translation>
+    </message>
+    <message>
+        <source>Wallet</source>
+        <translation>Chikwama</translation>
     </message>
     </context>
 <context>
@@ -339,6 +331,9 @@
     </context>
 <context>
     <name>UnitDisplayStatusBarControl</name>
+    </context>
+<context>
+    <name>WalletController</name>
     </context>
 <context>
     <name>WalletFrame</name>

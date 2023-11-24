@@ -5,7 +5,7 @@ connections, inter-process communication, and shared-memory,
 providing various message-oriented semantics such as publish/subscribe,
 request/reply, and push/pull.
 
-The Australiacash Core daemon can be configured to act as a trusted "border
+The AustraliaCash Core daemon can be configured to act as a trusted "border
 router", implementing the australiacash wire protocol and relay, making
 consensus decisions, maintaining the local blockchain database,
 broadcasting locally generated transactions into the network, and
@@ -33,7 +33,7 @@ buffering or reassembly.
 
 ## Prerequisites
 
-The ZeroMQ feature in Australiacash Core requires ZeroMQ API version 4.x or
+The ZeroMQ feature in AustraliaCash Core requires ZeroMQ API version 4.x or
 newer. Typically, it is packaged by distributions as something like
 *libzmq3-dev*. The C++ wrapper for ZeroMQ is *not* needed.
 
@@ -66,7 +66,7 @@ address. The same address can be used in more than one notification.
 
 For instance:
 
-    $ australiacashd -zmqpubhashtx=tcp://127.0.0.1:28332 \
+    $ australiacashd -zmqpubhashtx=tcp://127.0.0.1:211081 \
                -zmqpubrawtx=ipc:///tmp/australiacashd.tx.raw
 
 Each PUB notification has a topic and body, where the header
@@ -101,6 +101,6 @@ and just the tip will be notified. It is up to the subscriber to
 retrieve the chain from the last known block to the new tip.
 
 There are several possibilities that ZMQ notification can get lost
-during transmission depending on the communication type your are
-using. Australiacashd appends an up-counting sequence number to each
+during transmission depending on the communication type you are
+using. AustraliaCashd appends an up-counting sequence number to each
 notification which allows listeners to detect lost notifications.

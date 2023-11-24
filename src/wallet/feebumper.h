@@ -1,9 +1,9 @@
-// Copyright (c) 2017 The Bitcoin Core developers
+// Copyright (c) 2017-2018 The AustraliaCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_WALLET_FEEBUMPER_H
-#define BITCOIN_WALLET_FEEBUMPER_H
+#ifndef AUSTRALIACASH_WALLET_FEEBUMPER_H
+#define AUSTRALIACASH_WALLET_FEEBUMPER_H
 
 #include <primitives/transaction.h>
 
@@ -26,7 +26,7 @@ enum class Result
 };
 
 //! Return whether transaction can be bumped.
-bool TransactionCanBeBumped(CWallet* wallet, const uint256& txid);
+bool TransactionCanBeBumped(const CWallet* wallet, const uint256& txid);
 
 //! Create bumpfee transaction.
 Result CreateTransaction(const CWallet* wallet,
@@ -55,4 +55,4 @@ Result CommitTransaction(CWallet* wallet,
 
 } // namespace feebumper
 
-#endif // BITCOIN_WALLET_FEEBUMPER_H
+#endif // AUSTRALIACASH_WALLET_FEEBUMPER_H

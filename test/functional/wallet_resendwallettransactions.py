@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
-# Copyright (c) 2017 The Bitcoin Core developers
+# Copyright (c) 2017-2018 The AustraliaCash Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test resendwallettransactions RPC."""
 
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import AustraliaCashTestFramework
 from test_framework.util import assert_equal, assert_raises_rpc_error
 
-class ResendWalletTransactionsTest(BitcoinTestFramework):
+class ResendWalletTransactionsTest(AustraliaCashTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.extra_args = [['--walletbroadcast=false']]
+
+    def skip_test_if_missing_module(self):
+        self.skip_if_no_wallet()
 
     def run_test(self):
         # Should raise RPC_WALLET_ERROR (-4) if walletbroadcast is disabled.

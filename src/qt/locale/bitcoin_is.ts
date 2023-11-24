@@ -62,12 +62,12 @@
         <translation>Færslugildi sem þiggja til sín</translation>
     </message>
     <message>
-        <source>These are your Australiacash addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Þetta eru Australiacash færslugildin sem senda greiðslur. Skoðið ævinlega vel upphæðina og færslugildin sem þiggja greiðslur áður en mynt er send.</translation>
+        <source>These are your litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Þetta eru litecoin færslugildin sem senda greiðslur. Skoðið ævinlega vel upphæðina og færslugildin sem þiggja greiðslur áður en mynt er send.</translation>
     </message>
     <message>
-        <source>These are your Australiacash addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Þetta eru Australiacash færslugildin sem þiggja greiðslur. Mælt er með að nota aldrei sama færslugildið til að þiggja fleiri en eina greiðslu.</translation>
+        <source>These are your litecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Þetta eru litecoin færslugildin sem þiggja greiðslur. Mælt er með að nota aldrei sama færslugildið til að þiggja fleiri en eina greiðslu.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -180,10 +180,6 @@
         <translation>Veski dulkóðað</translation>
     </message>
     <message>
-        <source>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your australiacashs from being stolen by malware infecting your computer.</source>
-        <translation>%1 lokast núna til að dulkóðun klárist. Mundu að dulkóðun veskis kemur ekki að fullu í veg fyrir að mynt verði stolið úr tölvunni þinni með aðstoð smitforrita. </translation>
-    </message>
-    <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
         <translation>MIKILVÆGT: Nýja dulkóðaða veskisskráin þarf að koma í staðinn fyrir öll fyrri afrit sem þú hefur gert af upprunalegu veskisskránni. Af öryggisástæðum munu öll fyrri afrit af ódulkóðaða veskinu verða óvirk um leið og þú byrjar að nota nýja, dulkóðaða veskið.</translation>
     </message>
@@ -246,10 +242,6 @@
         <translation>&amp;Yfirlit</translation>
     </message>
     <message>
-        <source>Node</source>
-        <translation>Hnútur</translation>
-    </message>
-    <message>
         <source>Show general overview of wallet</source>
         <translation>Sýna almennt yfirlit af veski</translation>
     </message>
@@ -306,14 +298,6 @@
         <translation>&amp;Breyta lykilsetningu</translation>
     </message>
     <message>
-        <source>&amp;Sending addresses...</source>
-        <translation>&amp;Sendi færslugildi...</translation>
-    </message>
-    <message>
-        <source>&amp;Receiving addresses...</source>
-        <translation>&amp;Tek við færslugildum...</translation>
-    </message>
-    <message>
         <source>Open &amp;URI...</source>
         <translation>Opna &amp;URL...</translation>
     </message>
@@ -338,8 +322,8 @@
         <translation>Endurraða blokkum á drifi...</translation>
     </message>
     <message>
-        <source>Send coins to a Australiacash address</source>
-        <translation>Senda mynt í Australiacash færslugildi</translation>
+        <source>Send coins to a litecoin address</source>
+        <translation>Senda mynt í litecoin færslugildi</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -362,12 +346,8 @@
         <translation>&amp;Yfirfara skilaboð...</translation>
     </message>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
-    </message>
-    <message>
-        <source>Wallet</source>
-        <translation>Veski</translation>
+        <source>litecoin</source>
+        <translation>litecoin</translation>
     </message>
     <message>
         <source>&amp;Send</source>
@@ -390,12 +370,12 @@
         <translation>Dulkóða einkalyklana sem tilheyra veskinu þínu</translation>
     </message>
     <message>
-        <source>Sign messages with your Australiacash addresses to prove you own them</source>
-        <translation>Kvitta undir skilaboð með Australiacash færslugildunum þínum til að sanna að þú eigir þau</translation>
+        <source>Sign messages with your litecoin addresses to prove you own them</source>
+        <translation>Kvitta undir skilaboð með litecoin færslugildunum þínum til að sanna að þú eigir þau</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Australiacash addresses</source>
-        <translation>Yfirfara skilaboð til að tryggja að kvittað hafi verið fyrir þau með tilteknum Australiacash færslugildum</translation>
+        <source>Verify messages to ensure they were signed with specified litecoin addresses</source>
+        <translation>Yfirfara skilaboð til að tryggja að kvittað hafi verið fyrir þau með tilteknum litecoin færslugildum</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -414,8 +394,8 @@
         <translation>Tólaborð flipa</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and australiacash: URIs)</source>
-        <translation>Óska eftir greiðslum (býr til QR kóða og australiacash: URI)</translation>
+        <source>Request payments (generates QR codes and litecoin: URIs)</source>
+        <translation>Óska eftir greiðslum (býr til QR kóða og litecoin: URI)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -426,8 +406,8 @@
         <translation>Sýna færslugildi sem notuð hafa verið til að taka við mynt og merkingar þeirra</translation>
     </message>
     <message>
-        <source>Open a australiacash: URI or payment request</source>
-        <translation>Opna australiacash: URI eða greiðslubeiðni</translation>
+        <source>Open a litecoin: URI or payment request</source>
+        <translation>Opna litecoin: URI eða greiðslubeiðni</translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -466,8 +446,8 @@
         <translation>Uppfært</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Australiacash command-line options</source>
-        <translation>Sýna %1 hjálparskilaboðin til að fá lista yfir valkosti Australiacash aðgerðir í skipanalínu</translation>
+        <source>Show the %1 help message to get a list with possible litecoin command-line options</source>
+        <translation>Sýna %1 hjálparskilaboðin til að fá lista yfir valkosti litecoin aðgerðir í skipanalínu</translation>
     </message>
     <message>
         <source>%1 client</source>
@@ -536,8 +516,8 @@
         <translation>Veskið er &lt;b&gt;dulkóðað&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Australiacash can no longer continue safely and will quit.</source>
-        <translation>Alvarleg villa átti sér stað. Australiacash getur ekki haldið áfram með öruggum hætti og stoppar hér.</translation>
+        <source>A fatal error occurred. litecoin can no longer continue safely and will quit.</source>
+        <translation>Alvarleg villa átti sér stað. litecoin getur ekki haldið áfram með öruggum hætti og stoppar hér.</translation>
     </message>
 </context>
 <context>
@@ -638,10 +618,6 @@
         <translation>Nýtt móttökufærslugildi</translation>
     </message>
     <message>
-        <source>New receiving address</source>
-        <translation>Nýtt móttökufærslugildi</translation>
-    </message>
-    <message>
         <source>New sending address</source>
         <translation>Nýtt sendingarfærslugildi</translation>
     </message>
@@ -654,8 +630,8 @@
         <translation>Breyta sendingarfærslugildi</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Australiacash address.</source>
-        <translation>Færslugildið sem slegið var inn "%1" er ekki leyfilegt Australiacash færslugildi.</translation>
+        <source>The entered address "%1" is not a valid litecoin address.</source>
+        <translation>Færslugildið sem slegið var inn "%1" er ekki leyfilegt litecoin færslugildi.</translation>
     </message>
     </context>
 <context>
@@ -667,8 +643,8 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
+        <source>litecoin</source>
+        <translation>litecoin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -807,6 +783,10 @@
         <translation>Merki</translation>
     </message>
     <message>
+        <source>Wallet</source>
+        <translation>Veski</translation>
+    </message>
+    <message>
         <source>Resulting URI too long, try to reduce the text for label / message.</source>
         <translation>URI varð of langt, reyndu að minnka texta í merki / skilaboðum.</translation>
     </message>
@@ -847,10 +827,6 @@
     <message>
         <source>Change:</source>
         <translation>Skiptimynt:</translation>
-    </message>
-    <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for australiacash transactions than the network can process.</source>
-        <translation>Það er í lagi að greiða einungis lágmarksupphæðina svo framarlega sem færslurúmtakið er minna en plássið í blokkunum. En gætið þess að þegar það er meiri eftirspurn eftir australiacash færslum en netið getur unnið úr þá gæti svo farið að færslurnar verða aldrei samþykktar.</translation>
     </message>
     <message>
         <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
@@ -908,10 +884,6 @@
         <translation>Merki</translation>
     </message>
     <message>
-        <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Þessi blokk barst ekki í neinn annan hnútpunkt og verður sennilega ekki samþykkt!</translation>
-    </message>
-    <message>
         <source>Mined</source>
         <translation>Námuunnið</translation>
     </message>
@@ -955,6 +927,9 @@
     <name>UnitDisplayStatusBarControl</name>
     </context>
 <context>
+    <name>WalletController</name>
+    </context>
+<context>
     <name>WalletFrame</name>
     </context>
 <context>
@@ -982,24 +957,12 @@
         <translation>Viðvörun: Netið er ekki í fullu samræmi! Einhver námuvinnsla virðist í ólagi.</translation>
     </message>
     <message>
-        <source>Maximum size of data in data carrier transactions we relay and mine (default: %u)</source>
-        <translation>Hámarks gagnastærð í burðarfærslum sem við tökum við til námavinnslu (sjálfgefið: %u)</translation>
-    </message>
-    <message>
         <source>Information</source>
         <translation>Upplýsingar</translation>
     </message>
     <message>
         <source>Warning</source>
         <translation>Viðvörun</translation>
-    </message>
-    <message>
-        <source>Warning: Unknown block versions being mined! It's possible unknown rules are in effect</source>
-        <translation>Viðvörun: Óþekkt blokkarútgáfa í námavinnslu! Það er mögulegt að óþekktum reglum sé fylgt</translation>
-    </message>
-    <message>
-        <source>Relay and mine data carrier transactions (default: %u)</source>
-        <translation>Hleypa í gegn og námuvinna gagnaburðarfærslur (sjálfgefið: %u)</translation>
     </message>
     <message>
         <source>Error</source>

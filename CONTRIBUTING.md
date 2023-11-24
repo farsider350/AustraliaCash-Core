@@ -1,7 +1,7 @@
-Contributing to Australiacash Core
+Contributing to AustraliaCash Core
 ============================
 
-The Australiacash Core project operates an open contributor model where anyone is
+The AustraliaCash Core project operates an open contributor model where anyone is
 welcome to contribute towards development in the form of peer review, testing
 and patches. This document explains the practical process and guidelines for
 contributing.
@@ -13,6 +13,27 @@ the developer community. However, some hierarchy is necessary for practical
 purposes. As such there are repository "maintainers" who are responsible for
 merging pull requests as well as a "lead maintainer" who is responsible for the
 release cycle, overall merging, moderation and appointment of maintainers.
+
+If you're looking for somewhere to start contributing, check out the
+[good first issue](https://github.com/australiacash/australiacash/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
+list.
+
+Communication Channels
+----------------------
+
+Most communication about AustraliaCash Core development happens on IRC, in the
+#australiacash-core-dev channel on Freenode. The easiest way to participate on IRC is
+with the web client, [webchat.freenode.net](https://webchat.freenode.net/). Chat
+history logs can be found
+on [botbot.me](https://botbot.me/freenode/australiacash-core-dev/).
+
+Discussion about code base improvements happens in GitHub issues and on pull
+requests.
+
+The developer
+[mailing list](https://lists.linuxfoundation.org/mailman/listinfo/australiacash-dev)
+should be used to discuss complicated or controversial changes before working on
+a patch set.
 
 
 Contributor Workflow
@@ -82,7 +103,7 @@ Examples:
     Trivial: Fix typo in init.cpp
 
 Note that translations should not be submitted as pull requests, please see
-[Translation Process](https://github.com/bitcoin/bitcoin/blob/master/doc/translation_process.md) 
+[Translation Process](https://github.com/australiacash/australiacash/blob/master/doc/translation_process.md) 
 for more information on helping with translations.
 
 If a pull request is not to be considered for merging (yet), please
@@ -98,6 +119,8 @@ At this stage one should expect comments and review from other contributors. You
 can add more commits to your pull request by committing them locally and pushing
 to your fork until you have satisfied all feedback.
 
+Note: Code review is a burdensome but important part of the development process, and as such, certain types of pull requests are rejected. In general, if the **improvements** do not warrant the **review effort** required, the PR has a high chance of being rejected. It is up to the PR author to convince the reviewers that the changes warrant the review effort, and if reviewers are "Concept NAK'ing" the PR, the author may need to present arguments and/or do research backing their suggested changes.
+
 Squashing Commits
 ---------------------------
 If your pull request is accepted for merging, you may be asked by a maintainer
@@ -106,10 +129,10 @@ before it will be merged. The basic squashing workflow is shown below.
 
     git checkout your_branch_name
     git rebase -i HEAD~n
-    # n is normally the number of commits in the pull
-    # set commits from 'pick' to 'squash', save and quit
-    # on the next screen, edit/refine commit messages
-    # save and quit
+    # n is normally the number of commits in the pull request.
+    # Set commits (except the one in the first line) from 'pick' to 'squash', save and quit.
+    # On the next screen, edit/refine commit messages.
+    # Save and quit.
     git push -f # (force push to GitHub)
 
 If you have problems with squashing (or other workflows with `git`), you can
@@ -169,11 +192,11 @@ workload on reviewing.
 "Decision Making" Process
 -------------------------
 
-The following applies to code changes to the Australiacash Core project (and related
-projects such as libsecp256k1), and is not to be confused with overall Australiacash
+The following applies to code changes to the AustraliaCash Core project (and related
+projects such as libsecp256k1), and is not to be confused with overall AustraliaCash
 Network Protocol consensus changes.
 
-Whether a pull request is merged into Australiacash Core rests with the project merge
+Whether a pull request is merged into AustraliaCash Core rests with the project merge
 maintainers and ultimately the project lead.
 
 Maintainers will take into consideration if a patch is in line with the general
@@ -191,7 +214,7 @@ In general, all pull requests must:
   - Where bugs are fixed, where possible, there should be unit tests
     demonstrating the bug and also proving the fix. This helps prevent regression.
 
-Patches that change Australiacash consensus rules are considerably more involved than
+Patches that change AustraliaCash consensus rules are considerably more involved than
 normal because they affect the entire ecosystem and so must be preceded by
 extensive mailing list discussions and have a numbered BIP. While each case will
 be different, one should be prepared to expend more time and effort than for
@@ -232,7 +255,7 @@ higher in terms of discussion and peer review requirements, keeping in mind that
 mistakes could be very costly to the wider community. This includes refactoring
 of consensus critical code.
 
-Where a patch set proposes to change the Australiacash consensus, it must have been
+Where a patch set proposes to change the AustraliaCash consensus, it must have been
 discussed extensively on the mailing list and IRC, be accompanied by a widely
 discussed BIP and have a generally widely perceived technical consensus of being
 a worthwhile change based on the judgement of the maintainers.
@@ -272,7 +295,7 @@ about:
 Release Policy
 --------------
 
-The project leader is the release manager for each Australiacash Core release.
+The project leader is the release manager for each AustraliaCash Core release.
 
 Copyright
 ---------

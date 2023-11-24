@@ -1,39 +1,45 @@
-# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Copyright (c) 2013-2016 The AustraliaCash Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-TESTS += test/test_australiacash
 bin_PROGRAMS += test/test_australiacash
 noinst_PROGRAMS += test/test_australiacash_fuzzy
 TEST_SRCDIR = test
 TEST_BINARY=test/test_australiacash$(EXEEXT)
 
 JSON_TEST_FILES = \
-  test/data/script_tests.json \
-  test/data/base58_keys_valid.json \
   test/data/base58_encode_decode.json \
-  test/data/base58_keys_invalid.json \
+  test/data/key_io_valid.json \
+  test/data/key_io_invalid.json \
+  test/data/script_tests.json \
+  test/data/sighash.json \
   test/data/tx_invalid.json \
-  test/data/tx_valid.json \
-  test/data/sighash.json
+  test/data/tx_valid.json
 
 RAW_TEST_FILES =
 
 GENERATED_TEST_FILES = $(JSON_TEST_FILES:.json=.json.h) $(RAW_TEST_FILES:.raw=.raw.h)
 
-# test_bitcoin binary #
-BITCOIN_TESTS =\
+AUSTRALIACASH_TEST_SUITE = \
+  test/test_australiacash_main.cpp \
+  test/test_australiacash.h \
+  test/test_australiacash.cpp
+
+# test_australiacash binary #
+AUSTRALIACASH_TESTS =\
   test/arith_uint256_tests.cpp \
   test/scriptnum10.h \
   test/addrman_tests.cpp \
   test/amount_tests.cpp \
   test/allocator_tests.cpp \
+  test/auxpow_tests.cpp \
   test/base32_tests.cpp \
   test/base58_tests.cpp \
   test/base64_tests.cpp \
   test/bech32_tests.cpp \
   test/bip32_tests.cpp \
   test/blockchain_tests.cpp \
+  test/blockencodings_tests.cpp \
   test/bloom_tests.cpp \
   test/bswap_tests.cpp \
   test/checkqueue_tests.cpp \
@@ -41,9 +47,12 @@ BITCOIN_TESTS =\
   test/compress_tests.cpp \
   test/crypto_tests.cpp \
   test/cuckoocache_tests.cpp \
-  test/DoS_tests.cpp \
+  test/denialofservice_tests.cpp \
+  test/descriptor_tests.cpp \
+  test/australiacash_tests.cpp \
   test/getarg_tests.cpp \
   test/hash_tests.cpp \
+  test/key_io_tests.cpp \
   test/key_tests.cpp \
   test/limitedmap_tests.cpp \
   test/dbwrapper_tests.cpp \
@@ -65,7 +74,7 @@ BITCOIN_TESTS =\
   test/rpc_tests.cpp \
   test/sanity_tests.cpp \
   test/scheduler_tests.cpp \
-  test/script_P2SH_tests.cpp \
+  test/script_p2sh_tests.cpp \
   test/script_tests.cpp \
   test/script_standard_tests.cpp \
   test/scriptnum_tests.cpp \
@@ -75,12 +84,10 @@ BITCOIN_TESTS =\
   test/sigopcount_tests.cpp \
   test/skiplist_tests.cpp \
   test/streams_tests.cpp \
-  test/test_bitcoin.cpp \
-  test/test_bitcoin.h \
-  test/test_bitcoin_main.cpp \
   test/timedata_tests.cpp \
   test/torcontrol_tests.cpp \
   test/transaction_tests.cpp \
+  test/txindex_tests.cpp \
   test/txvalidation_tests.cpp \
   test/txvalidationcache_tests.cpp \
   test/uint256_tests.cpp \
@@ -89,25 +96,30 @@ BITCOIN_TESTS =\
   test/versionbits_tests.cpp
 
 if ENABLE_WALLET
-BITCOIN_TESTS += \
-  wallet/test/wallet_test_fixture.cpp \
-  wallet/test/wallet_test_fixture.h \
+AUSTRALIACASH_TESTS += \
   wallet/test/accounting_tests.cpp \
+  wallet/test/psbt_wallet_tests.cpp \
   wallet/test/wallet_tests.cpp \
-  wallet/test/crypto_tests.cpp
+  wallet/test/wallet_crypto_tests.cpp \
+  wallet/test/coinselector_tests.cpp
+
+AUSTRALIACASH_TEST_SUITE += \
+  wallet/test/wallet_test_fixture.cpp \
+  wallet/test/wallet_test_fixture.h
 endif
 
-test_test_australiacash_SOURCES = $(BITCOIN_TESTS) $(JSON_TEST_FILES) $(RAW_TEST_FILES)
-test_test_australiacash_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(TESTDEFS) $(EVENT_CFLAGS)
+test_test_australiacash_SOURCES = $(AUSTRALIACASH_TEST_SUITE) $(AUSTRALIACASH_TESTS) $(JSON_TEST_FILES) $(RAW_TEST_FILES)
+test_test_australiacash_CPPFLAGS = $(AM_CPPFLAGS) $(AUSTRALIACASH_INCLUDES) $(TESTDEFS) $(EVENT_CFLAGS)
 test_test_australiacash_LDADD =
 if ENABLE_WALLET
-test_test_australiacash_LDADD += $(LIBBITCOIN_WALLET)
+test_test_australiacash_LDADD += $(LIBAUSTRALIACASH_WALLET)
 endif
-test_test_australiacash_LDADD += $(LIBBITCOIN_SERVER) $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CONSENSUS) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) \
+
+test_test_australiacash_LDADD += $(LIBAUSTRALIACASH_SERVER) $(LIBAUSTRALIACASH_CLI) $(LIBAUSTRALIACASH_COMMON) $(LIBAUSTRALIACASH_UTIL) $(LIBAUSTRALIACASH_CONSENSUS) $(LIBAUSTRALIACASH_CRYPTO) $(LIBUNIVALUE) \
   $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) $(BOOST_LIBS) $(BOOST_UNIT_TEST_FRAMEWORK_LIB) $(LIBSECP256K1) $(EVENT_LIBS) $(EVENT_PTHREADS_LIBS)
 test_test_australiacash_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
-test_test_australiacash_LDADD += $(LIBBITCOIN_CONSENSUS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS)
+test_test_australiacash_LDADD += $(LIBAUSTRALIACASH_CONSENSUS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS)
 test_test_australiacash_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) -static
 
 if ENABLE_ZMQ
@@ -115,19 +127,22 @@ test_test_australiacash_LDADD += $(ZMQ_LIBS)
 endif
 #
 
-# test_bitcoin_fuzzy binary #
-test_test_australiacash_fuzzy_SOURCES = test/test_bitcoin_fuzzy.cpp
-test_test_australiacash_fuzzy_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+# test_australiacash_fuzzy binary #
+test_test_australiacash_fuzzy_SOURCES = test/test_australiacash_fuzzy.cpp
+test_test_australiacash_fuzzy_CPPFLAGS = $(AM_CPPFLAGS) $(AUSTRALIACASH_INCLUDES)
 test_test_australiacash_fuzzy_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 test_test_australiacash_fuzzy_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 test_test_australiacash_fuzzy_LDADD = \
   $(LIBUNIVALUE) \
-  $(LIBBITCOIN_SERVER) \
-  $(LIBBITCOIN_COMMON) \
-  $(LIBBITCOIN_UTIL) \
-  $(LIBBITCOIN_CONSENSUS) \
-  $(LIBBITCOIN_CRYPTO) \
+  $(LIBAUSTRALIACASH_SERVER) \
+  $(LIBAUSTRALIACASH_COMMON) \
+  $(LIBAUSTRALIACASH_UTIL) \
+  $(LIBAUSTRALIACASH_CONSENSUS) \
+  $(LIBAUSTRALIACASH_CRYPTO) \
+  $(LIBAUSTRALIACASH_CRYPTO_SSE41) \
+  $(LIBAUSTRALIACASH_CRYPTO_AVX2) \
+  $(LIBAUSTRALIACASH_CRYPTO_SHANI) \
   $(LIBSECP256K1)
 
 test_test_australiacash_fuzzy_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
@@ -135,27 +150,33 @@ test_test_australiacash_fuzzy_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 
 nodist_test_test_australiacash_SOURCES = $(GENERATED_TEST_FILES)
 
-$(BITCOIN_TESTS): $(GENERATED_TEST_FILES)
+$(AUSTRALIACASH_TESTS): $(GENERATED_TEST_FILES)
 
-CLEAN_BITCOIN_TEST = test/*.gcda test/*.gcno $(GENERATED_TEST_FILES)
+CLEAN_AUSTRALIACASH_TEST = test/*.gcda test/*.gcno $(GENERATED_TEST_FILES)
 
-CLEANFILES += $(CLEAN_BITCOIN_TEST)
+CLEANFILES += $(CLEAN_AUSTRALIACASH_TEST)
 
-bitcoin_test: $(TEST_BINARY)
+australiacash_test: $(TEST_BINARY)
 
-bitcoin_test_check: $(TEST_BINARY) FORCE
+australiacash_test_check: $(TEST_BINARY) FORCE
 	$(MAKE) check-TESTS TESTS=$^
 
-bitcoin_test_clean : FORCE
-	rm -f $(CLEAN_BITCOIN_TEST) $(test_test_bitcoin_OBJECTS) $(TEST_BINARY)
+australiacash_test_clean : FORCE
+	rm -f $(CLEAN_AUSTRALIACASH_TEST) $(test_test_australiacash_OBJECTS) $(TEST_BINARY)
 
-check-local:
-	@echo "Running test/util/bitcoin-util-test.py..."
-	$(PYTHON) $(top_builddir)/test/util/bitcoin-util-test.py
+check-local: $(AUSTRALIACASH_TESTS:.cpp=.cpp.test)
+	@echo "Running test/util/australiacash-util-test.py..."
+	$(PYTHON) $(top_builddir)/test/util/australiacash-util-test.py
+	@echo "Running test/util/rpcauth-test.py..."
+	$(PYTHON) $(top_builddir)/test/util/rpcauth-test.py
 	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C secp256k1 check
 if EMBEDDED_UNIVALUE
 	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C univalue check
 endif
+
+%.cpp.test: %.cpp
+	@echo Running tests: `cat $< | grep -E "(BOOST_FIXTURE_TEST_SUITE\\(|BOOST_AUTO_TEST_SUITE\\()" | cut -d '(' -f 2 | cut -d ',' -f 1 | cut -d ')' -f 1` from $<
+	$(AM_V_at)$(TEST_BINARY) -l test_suite -t "`cat $< | grep -E "(BOOST_FIXTURE_TEST_SUITE\\(|BOOST_AUTO_TEST_SUITE\\()" | cut -d '(' -f 2 | cut -d ',' -f 1 | cut -d ')' -f 1`" > $<.log 2>&1 || (cat $<.log && false)
 
 %.json.h: %.json
 	@$(MKDIR_P) $(@D)

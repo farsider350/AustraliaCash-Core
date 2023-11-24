@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2014-2017 The Bitcoin Core developers
+# Copyright (c) 2014-2018 The AustraliaCash Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test wallet import RPCs.
@@ -8,18 +8,18 @@ Test rescan behavior of importaddress, importpubkey, importprivkey, and
 importmulti RPCs with different types of keys and rescan options.
 
 In the first part of the test, node 0 creates an address for each type of
-import RPC call and sends BTC to it. Then other nodes import the addresses,
+import RPC call and sends AUS to it. Then other nodes import the addresses,
 and the test makes listtransactions and getbalance calls to confirm that the
 importing node either did or did not execute rescans picking up the send
 transactions.
 
-In the second part of the test, node 0 sends more BTC to each address, and the
+In the second part of the test, node 0 sends more AUS to each address, and the
 test makes more listtransactions and getbalance calls to confirm that the
 importing nodes pick up the new transactions regardless of whether rescans
 happened previously.
 """
 
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import AustraliaCashTestFramework
 from test_framework.util import (assert_raises_rpc_error, connect_nodes, sync_blocks, assert_equal, set_node_times)
 
 import collections
@@ -42,16 +42,15 @@ class Variant(collections.namedtuple("Variant", "call data rescan prune")):
 
     def do_import(self, timestamp):
         """Call one key import RPC."""
+        rescan = self.rescan == Rescan.yes
 
         if self.call == Call.single:
             if self.data == Data.address:
-                response = self.try_rpc(self.node.importaddress, self.address["address"], self.label,
-                                               self.rescan == Rescan.yes)
+                response = self.try_rpc(self.node.importaddress, address=self.address["address"], label=self.label, rescan=rescan)
             elif self.data == Data.pub:
-                response = self.try_rpc(self.node.importpubkey, self.address["pubkey"], self.label,
-                                               self.rescan == Rescan.yes)
+                response = self.try_rpc(self.node.importpubkey, pubkey=self.address["pubkey"], label=self.label, rescan=rescan)
             elif self.data == Data.priv:
-                response = self.try_rpc(self.node.importprivkey, self.key, self.label, self.rescan == Rescan.yes)
+                response = self.try_rpc(self.node.importprivkey, privkey=self.key, label=self.label, rescan=rescan)
             assert_equal(response, None)
 
         elif self.call == Call.multi:
@@ -68,17 +67,18 @@ class Variant(collections.namedtuple("Variant", "call data rescan prune")):
             assert_equal(response, [{"success": True}])
 
     def check(self, txid=None, amount=None, confirmations=None):
-        """Verify that getbalance/listtransactions return expected values."""
+        """Verify that listtransactions/listreceivedbyaddress return expected values."""
 
-        balance = self.node.getbalance(self.label, 0, True)
-        assert_equal(balance, self.expected_balance)
-
-        txs = self.node.listtransactions(self.label, 10000, 0, True)
+        txs = self.node.listtransactions(label=self.label, count=10000, skip=0, include_watchonly=True)
         assert_equal(len(txs), self.expected_txs)
+
+        addresses = self.node.listreceivedbyaddress(minconf=0, include_watchonly=True, address_filter=self.address['address'])
+        if self.expected_txs:
+            assert_equal(len(addresses[0]["txids"]), self.expected_txs)
 
         if txid is not None:
             tx, = [tx for tx in txs if tx["txid"] == txid]
-            assert_equal(tx["account"], self.label)
+            assert_equal(tx["label"], self.label)
             assert_equal(tx["address"], self.address["address"])
             assert_equal(tx["amount"], amount)
             assert_equal(tx["category"], "receive")
@@ -86,6 +86,11 @@ class Variant(collections.namedtuple("Variant", "call data rescan prune")):
             assert_equal(tx["txid"], txid)
             assert_equal(tx["confirmations"], confirmations)
             assert_equal("trusted" not in tx, True)
+
+            address, = [ad for ad in addresses if txid in ad["txids"]]
+            assert_equal(address["address"], self.address["address"])
+            assert_equal(address["amount"], self.expected_balance)
+            assert_equal(address["confirmations"], confirmations)
             # Verify the transaction is correctly marked watchonly depending on
             # whether the transaction pays to an imported public key or
             # imported private key. The test setup ensures that transaction
@@ -93,9 +98,9 @@ class Variant(collections.namedtuple("Variant", "call data rescan prune")):
             # involvesWatchonly will be true if either the transaction output
             # or inputs are watchonly).
             if self.data != Data.priv:
-                assert_equal(tx["involvesWatchonly"], True)
+                assert_equal(address["involvesWatchonly"], True)
             else:
-                assert_equal("involvesWatchonly" not in tx, True)
+                assert_equal("involvesWatchonly" not in address, True)
 
 
 # List of Variants for each way a key or address could be imported.
@@ -114,9 +119,12 @@ IMPORT_NODES = [ImportNode(*fields) for fields in itertools.product((False, True
 TIMESTAMP_WINDOW = 2 * 60 * 60
 
 
-class ImportRescanTest(BitcoinTestFramework):
+class ImportRescanTest(AustraliaCashTestFramework):
     def set_test_params(self):
         self.num_nodes = 2 + len(IMPORT_NODES)
+
+    def skip_test_if_missing_module(self):
+        self.skip_if_no_wallet()
 
     def setup_network(self):
         extra_args = [["-addresstype=legacy"] for _ in range(self.num_nodes)]
@@ -124,17 +132,26 @@ class ImportRescanTest(BitcoinTestFramework):
             if import_node.prune:
                 extra_args[i] += ["-prune=1"]
 
-        self.add_nodes(self.num_nodes, extra_args)
+        self.add_nodes(self.num_nodes, extra_args=extra_args)
+
+        # Import keys
+        self.start_nodes(extra_args=[[]] * self.num_nodes)
+        super().import_deterministic_coinbase_privkeys()
+        self.stop_nodes()
+
         self.start_nodes()
         for i in range(1, self.num_nodes):
             connect_nodes(self.nodes[i], 0)
 
+    def import_deterministic_coinbase_privkeys(self):
+        pass
+
     def run_test(self):
-        # Create one transaction on node 0 with a unique amount and label for
+        # Create one transaction on node 0 with a unique amount for
         # each possible type of wallet import RPC.
         for i, variant in enumerate(IMPORT_VARIANTS):
             variant.label = "label {} {}".format(i, variant)
-            variant.address = self.nodes[1].validateaddress(self.nodes[1].getnewaddress(variant.label))
+            variant.address = self.nodes[1].getaddressinfo(self.nodes[1].getnewaddress(variant.label))
             variant.key = self.nodes[1].dumpprivkey(variant.address["address"])
             variant.initial_amount = 10 - (i + 1) / 4.0
             variant.initial_txid = self.nodes[0].sendtoaddress(variant.address["address"], variant.initial_amount)

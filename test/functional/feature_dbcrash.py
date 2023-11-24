@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2017 The Bitcoin Core developers
+# Copyright (c) 2017-2018 The AustraliaCash Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test recovery from a crash during chainstate writing.
@@ -31,10 +31,9 @@ import random
 import sys
 import time
 
-from test_framework.mininode import *
-from test_framework.script import *
-from test_framework.test_framework import BitcoinTestFramework
-from test_framework.util import *
+from test_framework.messages import COIN, COutPoint, CTransaction, CTxIn, CTxOut, ToHex
+from test_framework.test_framework import AustraliaCashTestFramework
+from test_framework.util import assert_equal, create_confirmed_utxos, hex_str_to_bytes
 
 HTTP_DISCONNECT_ERRORS = [http.client.CannotSendRequest]
 try:
@@ -42,10 +41,12 @@ try:
 except AttributeError:
     pass
 
-class ChainstateWriteCrashTest(BitcoinTestFramework):
+class ChainstateWriteCrashTest(AustraliaCashTestFramework):
     def set_test_params(self):
         self.num_nodes = 4
         self.setup_clean_chain = False
+        # Need a bit of extra time for the nodes to start up for this test
+        self.rpc_timewait = 90
 
         # Set -maxmempool=0 to turn off mempool memory sharing with dbcache
         # Set -rpcservertimeout=900 to reduce socket disconnects in this
@@ -62,9 +63,11 @@ class ChainstateWriteCrashTest(BitcoinTestFramework):
         self.node3_args = ["-blockmaxweight=4000000"]
         self.extra_args = [self.node0_args, self.node1_args, self.node2_args, self.node3_args]
 
+    def skip_test_if_missing_module(self):
+        self.skip_if_no_wallet()
+
     def setup_network(self):
-        # Need a bit of extra time for the nodes to start up for this test
-        self.add_nodes(self.num_nodes, extra_args=self.extra_args, timewait=90)
+        self.add_nodes(self.num_nodes, extra_args=self.extra_args)
         self.start_nodes()
         # Leave them unconnected, we'll use submitblock directly in this test
 
@@ -84,14 +87,14 @@ class ChainstateWriteCrashTest(BitcoinTestFramework):
                 return utxo_hash
             except:
                 # An exception here should mean the node is about to crash.
-                # If bitcoind exits, then try again.  wait_for_node_exit()
-                # should raise an exception if bitcoind doesn't exit.
+                # If australiacashd exits, then try again.  wait_for_node_exit()
+                # should raise an exception if australiacashd doesn't exit.
                 self.wait_for_node_exit(node_index, timeout=10)
             self.crashed_on_restart += 1
             time.sleep(1)
 
-        # If we got here, bitcoind isn't coming back up on restart.  Could be a
-        # bug in bitcoind, or we've gotten unlucky with our dbcrash ratio --
+        # If we got here, australiacashd isn't coming back up on restart.  Could be a
+        # bug in australiacashd, or we've gotten unlucky with our dbcrash ratio --
         # perhaps we generated a test case that blew up our cache?
         # TODO: If this happens a lot, we should try to restart without -dbcrashratio
         # and make sure that recovery happens.
@@ -206,7 +209,7 @@ class ChainstateWriteCrashTest(BitcoinTestFramework):
                 tx.vout.append(CTxOut(output_amount, hex_str_to_bytes(utxo['scriptPubKey'])))
 
             # Sign and send the transaction to get into the mempool
-            tx_signed_hex = node.signrawtransaction(ToHex(tx))['hex']
+            tx_signed_hex = node.signrawtransactionwithwallet(ToHex(tx))['hex']
             node.sendrawtransaction(tx_signed_hex)
             num_transactions += 1
 

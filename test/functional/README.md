@@ -20,12 +20,15 @@ don't have test cases for.
 - Where possible, try to adhere to [PEP-8 guidelines](https://www.python.org/dev/peps/pep-0008/)
 - Use a python linter like flake8 before submitting PRs to catch common style
   nits (eg trailing whitespace, unused imports, etc)
+- See [the python lint script](/test/lint/lint-python.sh) that checks for violations that
+  could lead to bugs and issues in the test code.
 - Avoid wildcard imports where possible
 - Use a module-level docstring to describe what the test is testing, and how it
   is testing it.
-- When subclassing the BitcoinTestFramwork, place overrides for the
+- When subclassing the AustraliaCashTestFramwork, place overrides for the
   `set_test_params()`, `add_options()` and `setup_xxxx()` methods at the top of
   the subclass, then locally-defined helper methods, then the `run_test()` method.
+- Use `'{}'.format(x)` for string formatting, not `'%s' % x`.
 
 #### Naming guidelines
 
@@ -53,7 +56,7 @@ don't have test cases for.
 - Set the `self.setup_clean_chain` variable in `set_test_params()` to control whether
   or not to use the cached data directories. The cached data directories
   contain a 200-block pre-mined blockchain and wallets for four nodes. Each node
-  has 25 mature blocks (25x50=1250 BTC) in its wallet.
+  has 25 mature blocks (25x50=1250 AUS) in its wallet.
 - When calling RPCs with lots of arguments, consider using named keyword
   arguments instead of positional arguments to make the intent of the call
   clear to readers.
@@ -74,71 +77,21 @@ over the network (`CBlock`, `CTransaction`, etc, along with the network-level
 wrappers for them, `msg_block`, `msg_tx`, etc).
 
 - P2P tests have two threads. One thread handles all network communication
-with the australiacashd(s) being tested (using python's asyncore package); the other
+with the australiacashd(s) being tested in a callback-based event loop; the other
 implements the test logic.
 
 - `P2PConnection` is the class used to connect to a australiacashd.  `P2PInterface`
 contains the higher level logic for processing P2P payloads and connecting to
-the Australiacash Core node application logic. For custom behaviour, subclass the
+the AustraliaCash Core node application logic. For custom behaviour, subclass the
 P2PInterface object and override the callback methods.
-
-- Call `network_thread_start()` after all `P2PInterface` objects are created to
-start the networking thread.  (Continue with the test logic in your existing
-thread.)
 
 - Can be used to write tests where specific P2P protocol behavior is tested.
 Examples tests are `p2p_unrequested_blocks.py`, `p2p_compactblocks.py`.
 
-#### Comptool
-
-- Comptool is a Testing framework for writing tests that compare the block/tx acceptance
-behavior of a australiacashd against 1 or more other australiacashd instances. It should not be used
-to write static tests with known outcomes, since that type of test is easier to write and
-maintain using the standard BitcoinTestFramework.
-
-- Set the `num_nodes` variable (defined in `ComparisonTestFramework`) to start up
-1 or more nodes.  If using 1 node, then `--testbinary` can be used as a command line
-option to change the australiacashd binary used by the test.  If using 2 or more nodes,
-then `--refbinary` can be optionally used to change the australiacashd that will be used
-on nodes 2 and up.
-
-- Implement a (generator) function called `get_tests()` which yields `TestInstance`s.
-Each `TestInstance` consists of:
-  - A list of `[object, outcome, hash]` entries
-    * `object` is a `CBlock`, `CTransaction`, or
-    `CBlockHeader`.  `CBlock`'s and `CTransaction`'s are tested for
-    acceptance.  `CBlockHeader`s can be used so that the test runner can deliver
-    complete headers-chains when requested from the australiacashd, to allow writing
-    tests where blocks can be delivered out of order but still processed by
-    headers-first australiacashd's.
-    * `outcome` is `True`, `False`, or `None`.  If `True`
-    or `False`, the tip is compared with the expected tip -- either the
-    block passed in, or the hash specified as the optional 3rd entry.  If
-    `None` is specified, then the test will compare all the australiacashd's
-    being tested to see if they all agree on what the best tip is.
-    * `hash` is the block hash of the tip to compare against. Optional to
-    specify; if left out then the hash of the block passed in will be used as
-    the expected tip.  This allows for specifying an expected tip while testing
-    the handling of either invalid blocks or blocks delivered out of order,
-    which complete a longer chain.
-  - `sync_every_block`: `True/False`.  If `False`, then all blocks
-    are inv'ed together, and the test runner waits until the node receives the
-    last one, and tests only the last block for tip acceptance using the
-    outcome and specified tip.  If `True`, then each block is tested in
-    sequence and synced (this is slower when processing many blocks).
-  - `sync_every_transaction`: `True/False`.  Analogous to
-    `sync_every_block`, except if the outcome on the last tx is "None",
-    then the contents of the entire mempool are compared across all australiacashd
-    connections.  If `True` or `False`, then only the last tx's
-    acceptance is tested against the given outcome.
-
-- For examples of tests written in this framework, see
-  `p2p_invalid_block.py` and `feature_block.py`.
-
 ### test-framework modules
 
 #### [test_framework/authproxy.py](test_framework/authproxy.py)
-Taken from the [python-bitcoinrpc repository](https://github.com/jgarzik/python-bitcoinrpc).
+Taken from the [python-australiacashrpc repository](https://github.com/jgarzik/python-australiacashrpc).
 
 #### [test_framework/test_framework.py](test_framework/test_framework.py)
 Base class for functional tests.
@@ -149,17 +102,11 @@ Generally useful functions.
 #### [test_framework/mininode.py](test_framework/mininode.py)
 Basic code to support P2P connectivity to a australiacashd.
 
-#### [test_framework/comptool.py](test_framework/comptool.py)
-Framework for comparison-tool style, P2P tests.
-
 #### [test_framework/script.py](test_framework/script.py)
-Utilities for manipulating transaction scripts (originally from python-bitcoinlib)
-
-#### [test_framework/blockstore.py](test_framework/blockstore.py)
-Implements disk-backed block and tx storage.
+Utilities for manipulating transaction scripts (originally from python-australiacashlib)
 
 #### [test_framework/key.py](test_framework/key.py)
-Wrapper around OpenSSL EC_Key (originally from python-bitcoinlib)
+Wrapper around OpenSSL EC_Key (originally from python-australiacashlib)
 
 #### [test_framework/bignum.py](test_framework/bignum.py)
 Helpers for script.py

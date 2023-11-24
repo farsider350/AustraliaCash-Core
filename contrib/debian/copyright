@@ -1,13 +1,13 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: Bitcoin
+Upstream-Name: AustraliaCash
 Upstream-Contact: Satoshi Nakamoto <satoshin@gmx.com>
- irc://#bitcoin@freenode.net
-Source: https://github.com/bitcoin/bitcoin
+ irc://#australiacash@freenode.net
+Source: https://github.com/australiacash/australiacash
 
 Files: *
-Copyright: 2009-2018, Bitcoin Core Developers
+Copyright: 2009-2018, AustraliaCash Core Developers
 License: Expat
-Comment: The Bitcoin Core Developers encompasses the current developers listed on bitcoin.org,
+Comment: The AustraliaCash Core Developers encompasses the current developers listed on australiacash.org,
          as well as the numerous contributors to the project.
 
 Files: debian/*
@@ -76,8 +76,8 @@ Comment:
 
 Files: src/qt/res/icons/clock*.png
        src/qt/res/icons/eye_*.png
-       src/qt/res/icons/verify.png
        src/qt/res/icons/tx_in*.png
+       src/qt/res/icons/verify.png
        src/qt/res/src/clock_*.svg
        src/qt/res/src/tx_*.svg
        src/qt/res/src/verify.svg
@@ -86,12 +86,17 @@ License: Expat
 Comment: Modifications of Stephan Hutchings Typicons
 
 Files: src/qt/res/icons/about.png
-       src/qt/res/icons/bitcoin.*
-       share/pixmaps/bitcoin*
-       src/qt/res/src/bitcoin.svg
+       src/qt/res/icons/australiacash.*
+       share/pixmaps/australiacash*
+       src/qt/res/src/australiacash.svg
 Copyright: Bitboy, Jonas Schnelli
 License: public-domain
-Comment: Site: https://bitcointalk.org/?topic=1756.0
+Comment: Site: https://australiacashtalk.org/?topic=1756.0
+
+Files: src/qt/res/icons/proxy.png
+       src/qt/res/src/proxy.svg
+Copyright: Cristian Mircea Messel
+Licese: public-domain
 
 
 License: Expat

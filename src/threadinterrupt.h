@@ -1,9 +1,9 @@
-// Copyright (c) 2016 The Bitcoin Core developers
+// Copyright (c) 2016-2017 The AustraliaCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_THREADINTERRUPT_H
-#define BITCOIN_THREADINTERRUPT_H
+#ifndef AUSTRALIACASH_THREADINTERRUPT_H
+#define AUSTRALIACASH_THREADINTERRUPT_H
 
 #include <atomic>
 #include <chrono>
@@ -18,6 +18,7 @@
 class CThreadInterrupt
 {
 public:
+    CThreadInterrupt();
     explicit operator bool() const;
     void operator()();
     void reset();
@@ -31,4 +32,4 @@ private:
     std::atomic<bool> flag;
 };
 
-#endif //BITCOIN_THREADINTERRUPT_H
+#endif //AUSTRALIACASH_THREADINTERRUPT_H

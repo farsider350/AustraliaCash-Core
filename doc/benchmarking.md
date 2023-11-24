@@ -1,14 +1,14 @@
 Benchmarking
 ============
 
-Australiacash Core has an internal benchmarking framework, with benchmarks
-for cryptographic algorithms such as SHA1, SHA256, SHA512 and RIPEMD160. As well as the rolling bloom filter.
+AustraliaCash Core has an internal benchmarking framework, with benchmarks
+for cryptographic algorithms (e.g. SHA1, SHA256, SHA512, RIPEMD160), as well as the rolling bloom filter.
 
 Running
 ---------------------
-After compiling Australiacash-core, the benchmarks can be run with:
+After compiling australiacash-core, the benchmarks can be run with:
 
-    src/bench/bench_Australiacash
+    src/bench/bench_australiacash
 
 The output will look similar to:
 ```
@@ -43,7 +43,7 @@ Help
 ---------------------
 `-?` will print a list of options and exit:
 
-    src/bench/bench_Australiacash -?
+    src/bench/bench_australiacash -?
 
 Notes
 ---------------------

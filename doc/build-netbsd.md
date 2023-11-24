@@ -25,12 +25,12 @@ python27
 
 Download the source code:
 ```
-git clone https://github.com/australiacash/australiacash-core
+git clone https://github.com/AustraliaCash-Network/AustraliaCash
 ```
 
 See [dependencies.md](dependencies.md) for a complete overview.
 
-### Building Australiacash Core
+### Building AustraliaCash Core
 
 **Important**: Use `gmake` (the non-GNU `make` will exit with an error).
 

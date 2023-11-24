@@ -1,4 +1,4 @@
-Fuzz-testing Australiacash Core
+Fuzz-testing AustraliaCash Core
 ==========================
 
 A special test harness `test_australiacash_fuzzy` is provided to provide an easy
@@ -20,7 +20,7 @@ export AFLPATH=$PWD
 Instrumentation
 ----------------
 
-To build Australiacash Core using AFL instrumentation (this assumes that the
+To build AustraliaCash Core using AFL instrumentation (this assumes that the
 `AFLPATH` was set as above):
 ```
 ./configure --disable-ccache --disable-shared --enable-tests CC=${AFLPATH}/afl-gcc CXX=${AFLPATH}/afl-g++
@@ -55,7 +55,7 @@ AFLOUT=$PWD/outputs
 
 Example inputs are available from:
 
-- https://download.visucore.com/bitcoin/bitcoin_fuzzy_in.tar.xz
+- https://download.visucore.com/australiacash/australiacash_fuzzy_in.tar.xz
 - http://strateman.ninja/fuzzing.tar.xz
 
 Extract these (or other starting inputs) into the `inputs` directory before starting fuzzing.

@@ -1,9 +1,9 @@
-// Copyright (c) 2011-2017 The Bitcoin Core developers
+// Copyright (c) 2011-2018 The AustraliaCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_SENDCOINSENTRY_H
-#define BITCOIN_QT_SENDCOINSENTRY_H
+#ifndef AUSTRALIACASH_QT_SENDCOINSENTRY_H
+#define AUSTRALIACASH_QT_SENDCOINSENTRY_H
 
 #include <qt/walletmodel.h>
 
@@ -17,7 +17,7 @@ namespace Ui {
 }
 
 /**
- * A single entry in the dialog for sending bitcoins.
+ * A single entry in the dialog for sending australiacashs.
  * Stacked widget, with different UIs for payment requests
  * with a strong payee identity.
  */
@@ -30,7 +30,7 @@ public:
     ~SendCoinsEntry();
 
     void setModel(WalletModel *model);
-    bool validate();
+    bool validate(interfaces::Node& node);
     SendCoinsRecipient getValue();
 
     /** Return whether the entry is still empty and unedited */
@@ -46,10 +46,12 @@ public:
     QWidget *setupTabChain(QWidget *prev);
 
     void setFocus();
+    void showMessageEdit();
 
 public Q_SLOTS:
-    void clear();
+    void clear(bool showMessage = false);
     void checkSubtractFeeFromAmount();
+    void useCID(int);
 
 Q_SIGNALS:
     void removeEntry(SendCoinsEntry *entry);
@@ -74,4 +76,4 @@ private:
     bool updateLabel(const QString &address);
 };
 
-#endif // BITCOIN_QT_SENDCOINSENTRY_H
+#endif // AUSTRALIACASH_QT_SENDCOINSENTRY_H

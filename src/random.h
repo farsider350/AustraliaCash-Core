@@ -1,16 +1,17 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2009-2018 The AustraliaCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_RANDOM_H
-#define BITCOIN_RANDOM_H
+#ifndef AUSTRALIACASH_RANDOM_H
+#define AUSTRALIACASH_RANDOM_H
 
 #include <crypto/chacha20.h>
 #include <crypto/common.h>
 #include <uint256.h>
 
 #include <stdint.h>
+#include <limits>
 
 /* Seed OpenSSL PRNG with additional entropy data */
 void RandAddSeed();
@@ -32,7 +33,7 @@ void RandAddSeedSleep();
 
 /**
  * Function to gather random data from multiple sources, failing whenever any
- * of those source fail to provide a result.
+ * of those sources fail to provide a result.
  */
 void GetStrongRandBytes(unsigned char* buf, int num);
 
@@ -121,6 +122,12 @@ public:
 
     /** Generate a random boolean. */
     bool randbool() { return randbits(1); }
+
+    // Compatibility with the C++11 UniformRandomBitGenerator concept
+    typedef uint64_t result_type;
+    static constexpr uint64_t min() { return 0; }
+    static constexpr uint64_t max() { return std::numeric_limits<uint64_t>::max(); }
+    inline uint64_t operator()() { return rand64(); }
 };
 
 /* Number of random bytes returned by GetOSRand.
@@ -143,4 +150,4 @@ bool Random_SanityCheck();
 /** Initialize the RNG. */
 void RandomInit();
 
-#endif // BITCOIN_RANDOM_H
+#endif // AUSTRALIACASH_RANDOM_H

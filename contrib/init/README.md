@@ -1,11 +1,11 @@
 Sample configuration files for:
 ```
-SystemD: bitcoind.service
-Upstart: bitcoind.conf
-OpenRC:  bitcoind.openrc
-         bitcoind.openrcconf
-CentOS:  bitcoind.init
-OS X:    org.bitcoin.bitcoind.plist
+SystemD: australiacashd.service
+Upstart: australiacashd.conf
+OpenRC:  australiacashd.openrc
+         australiacashd.openrcconf
+CentOS:  australiacashd.init
+macOS:    org.australiacash.australiacashd.plist
 ```
 have been made available to assist packagers in creating node packages here.
 

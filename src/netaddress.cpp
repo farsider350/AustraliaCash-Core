@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2009-2018 The AustraliaCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,12 +12,11 @@ static const unsigned char pchIPv4[12] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xff, 0
 static const unsigned char pchOnionCat[] = {0xFD,0x87,0xD8,0x7E,0xEB,0x43};
 
 // 0xFD + sha256("australiacash")[0:5]
-static const unsigned char g_internal_prefix[] = { 0xFD, 0x6C, 0xE9, 0xFE, 0x45, 0x49 };
+static const unsigned char g_internal_prefix[] = { 0xFD, 0x6B, 0x88, 0xC0, 0x87, 0x24 };
 
-void CNetAddr::Init()
+CNetAddr::CNetAddr()
 {
     memset(ip, 0, sizeof(ip));
-    scopeId = 0;
 }
 
 void CNetAddr::SetIP(const CNetAddr& ipIn)
@@ -65,11 +64,6 @@ bool CNetAddr::SetSpecial(const std::string &strName)
         return true;
     }
     return false;
-}
-
-CNetAddr::CNetAddr()
-{
-    Init();
 }
 
 CNetAddr::CNetAddr(const struct in_addr& ipv4Addr)
@@ -251,7 +245,7 @@ enum Network CNetAddr::GetNetwork() const
         return NET_IPV4;
 
     if (IsTor())
-        return NET_TOR;
+        return NET_ONION;
 
     return NET_IPV6;
 }
@@ -290,11 +284,6 @@ bool operator==(const CNetAddr& a, const CNetAddr& b)
     return (memcmp(a.ip, b.ip, 16) == 0);
 }
 
-bool operator!=(const CNetAddr& a, const CNetAddr& b)
-{
-    return (memcmp(a.ip, b.ip, 16) != 0);
-}
-
 bool operator<(const CNetAddr& a, const CNetAddr& b)
 {
     return (memcmp(a.ip, b.ip, 16) < 0);
@@ -310,6 +299,9 @@ bool CNetAddr::GetInAddr(struct in_addr* pipv4Addr) const
 
 bool CNetAddr::GetIn6Addr(struct in6_addr* pipv6Addr) const
 {
+    if (!IsIPv6()) {
+        return false;
+    }
     memcpy(pipv6Addr, ip, 16);
     return true;
 }
@@ -365,7 +357,7 @@ std::vector<unsigned char> CNetAddr::GetGroup() const
     }
     else if (IsTor())
     {
-        nClass = NET_TOR;
+        nClass = NET_ONION;
         nStartByte = 6;
         nBits = 4;
     }
@@ -414,17 +406,17 @@ int static GetExtNetwork(const CNetAddr *addr)
 int CNetAddr::GetReachabilityFrom(const CNetAddr *paddrPartner) const
 {
     enum Reachability {
-        REACH_UNREACHABLE,
-        REACH_DEFAULT,
-        REACH_TEREDO,
-        REACH_IPV6_WEAK,
-        REACH_IPV4,
-        REACH_IPV6_STRONG,
-        REACH_PRIVATE
+        RAUSH_UNRAUSHABLE,
+        RAUSH_DEFAULT,
+        RAUSH_TEREDO,
+        RAUSH_IPV6_WEAK,
+        RAUSH_IPV4,
+        RAUSH_IPV6_STRONG,
+        RAUSH_PRIVATE
     };
 
     if (!IsRoutable() || IsInternal())
-        return REACH_UNREACHABLE;
+        return RAUSH_UNRAUSHABLE;
 
     int ourNet = GetExtNetwork(this);
     int theirNet = GetExtNetwork(paddrPartner);
@@ -433,50 +425,44 @@ int CNetAddr::GetReachabilityFrom(const CNetAddr *paddrPartner) const
     switch(theirNet) {
     case NET_IPV4:
         switch(ourNet) {
-        default:       return REACH_DEFAULT;
-        case NET_IPV4: return REACH_IPV4;
+        default:       return RAUSH_DEFAULT;
+        case NET_IPV4: return RAUSH_IPV4;
         }
     case NET_IPV6:
         switch(ourNet) {
-        default:         return REACH_DEFAULT;
-        case NET_TEREDO: return REACH_TEREDO;
-        case NET_IPV4:   return REACH_IPV4;
-        case NET_IPV6:   return fTunnel ? REACH_IPV6_WEAK : REACH_IPV6_STRONG; // only prefer giving our IPv6 address if it's not tunnelled
+        default:         return RAUSH_DEFAULT;
+        case NET_TEREDO: return RAUSH_TEREDO;
+        case NET_IPV4:   return RAUSH_IPV4;
+        case NET_IPV6:   return fTunnel ? RAUSH_IPV6_WEAK : RAUSH_IPV6_STRONG; // only prefer giving our IPv6 address if it's not tunnelled
         }
-    case NET_TOR:
+    case NET_ONION:
         switch(ourNet) {
-        default:         return REACH_DEFAULT;
-        case NET_IPV4:   return REACH_IPV4; // Tor users can connect to IPv4 as well
-        case NET_TOR:    return REACH_PRIVATE;
+        default:         return RAUSH_DEFAULT;
+        case NET_IPV4:   return RAUSH_IPV4; // Tor users can connect to IPv4 as well
+        case NET_ONION:    return RAUSH_PRIVATE;
         }
     case NET_TEREDO:
         switch(ourNet) {
-        default:          return REACH_DEFAULT;
-        case NET_TEREDO:  return REACH_TEREDO;
-        case NET_IPV6:    return REACH_IPV6_WEAK;
-        case NET_IPV4:    return REACH_IPV4;
+        default:          return RAUSH_DEFAULT;
+        case NET_TEREDO:  return RAUSH_TEREDO;
+        case NET_IPV6:    return RAUSH_IPV6_WEAK;
+        case NET_IPV4:    return RAUSH_IPV4;
         }
     case NET_UNKNOWN:
     case NET_UNROUTABLE:
     default:
         switch(ourNet) {
-        default:          return REACH_DEFAULT;
-        case NET_TEREDO:  return REACH_TEREDO;
-        case NET_IPV6:    return REACH_IPV6_WEAK;
-        case NET_IPV4:    return REACH_IPV4;
-        case NET_TOR:     return REACH_PRIVATE; // either from Tor, or don't care about our address
+        default:          return RAUSH_DEFAULT;
+        case NET_TEREDO:  return RAUSH_TEREDO;
+        case NET_IPV6:    return RAUSH_IPV6_WEAK;
+        case NET_IPV4:    return RAUSH_IPV4;
+        case NET_ONION:     return RAUSH_PRIVATE; // either from Tor, or don't care about our address
         }
     }
 }
 
-void CService::Init()
+CService::CService() : port(0)
 {
-    port = 0;
-}
-
-CService::CService()
-{
-    Init();
 }
 
 CService::CService(const CNetAddr& cip, unsigned short portIn) : CNetAddr(cip), port(portIn)
@@ -522,17 +508,12 @@ unsigned short CService::GetPort() const
 
 bool operator==(const CService& a, const CService& b)
 {
-    return (CNetAddr)a == (CNetAddr)b && a.port == b.port;
-}
-
-bool operator!=(const CService& a, const CService& b)
-{
-    return (CNetAddr)a != (CNetAddr)b || a.port != b.port;
+    return static_cast<CNetAddr>(a) == static_cast<CNetAddr>(b) && a.port == b.port;
 }
 
 bool operator<(const CService& a, const CService& b)
 {
-    return (CNetAddr)a < (CNetAddr)b || ((CNetAddr)a == (CNetAddr)b && a.port < b.port);
+    return static_cast<CNetAddr>(a) < static_cast<CNetAddr>(b) || (static_cast<CNetAddr>(a) == static_cast<CNetAddr>(b) && a.port < b.port);
 }
 
 bool CService::GetSockAddr(struct sockaddr* paddr, socklen_t *addrlen) const
@@ -663,16 +644,16 @@ bool CSubNet::Match(const CNetAddr &addr) const
 static inline int NetmaskBits(uint8_t x)
 {
     switch(x) {
-    case 0x00: return 0; break;
-    case 0x80: return 1; break;
-    case 0xc0: return 2; break;
-    case 0xe0: return 3; break;
-    case 0xf0: return 4; break;
-    case 0xf8: return 5; break;
-    case 0xfc: return 6; break;
-    case 0xfe: return 7; break;
-    case 0xff: return 8; break;
-    default: return -1; break;
+    case 0x00: return 0;
+    case 0x80: return 1;
+    case 0xc0: return 2;
+    case 0xe0: return 3;
+    case 0xf0: return 4;
+    case 0xf8: return 5;
+    case 0xfc: return 6;
+    case 0xfe: return 7;
+    case 0xff: return 8;
+    default: return -1;
     }
 }
 
@@ -722,11 +703,6 @@ bool CSubNet::IsValid() const
 bool operator==(const CSubNet& a, const CSubNet& b)
 {
     return a.valid == b.valid && a.network == b.network && !memcmp(a.netmask, b.netmask, 16);
-}
-
-bool operator!=(const CSubNet& a, const CSubNet& b)
-{
-    return !(a==b);
 }
 
 bool operator<(const CSubNet& a, const CSubNet& b)

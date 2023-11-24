@@ -3,7 +3,7 @@
 <plist version="0.9">
 <dict>
   <key>LSMinimumSystemVersion</key>
-  <string>10.8.0</string>
+  <string>10.10.0</string>
 
   <key>LSArchitecturePriority</key>
   <array>
@@ -11,7 +11,7 @@
   </array>
 
   <key>CFBundleIconFile</key>
-  <string>bitcoin.icns</string>
+  <string>australiacash.icns</string>
 
   <key>CFBundlePackageType</key>
   <string>APPL</string>
@@ -29,16 +29,16 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
-  <string>Australiacash-Qt</string>
+  <string>AustraliaCash-Qt</string>
   
   <key>CFBundleName</key>
-  <string>Australiacash-Qt</string>
+  <string>AustraliaCash-Qt</string>
 
   <key>LSHasLocalizedDisplayName</key>
   <true/>
 
   <key>CFBundleIdentifier</key>
-  <string>org.australiacash.Australiacash-Qt</string>
+  <string>org.australiacashfoundation.AustraliaCash-Qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>
@@ -46,7 +46,7 @@
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLName</key>
-      <string>org.australiacash.AustraliacashPayment</string>
+      <string>org.australiacash.AustraliaCashPayment</string>
       <key>CFBundleURLSchemes</key>
       <array>
         <string>australiacash</string>
@@ -60,7 +60,7 @@
       <key>UTTypeIdentifier</key>
       <string>org.australiacash.paymentrequest</string>
       <key>UTTypeDescription</key>
-      <string>Australiacash payment request</string>
+      <string>AustraliaCash payment request</string>
       <key>UTTypeConformsTo</key>
       <array>
         <string>public.data</string>
@@ -98,6 +98,9 @@
     <string>True</string>
 
   <key>LSAppNapIsDisabled</key>
+    <string>True</string>
+
+  <key>NSRequiresAquaSystemAppearance</key>
     <string>True</string>
   
   <key>LSApplicationCategoryType</key>

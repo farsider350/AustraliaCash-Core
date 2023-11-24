@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2016-2017 The Bitcoin Core developers
+# Copyright (c) 2016-2018 The AustraliaCash Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Encode and decode BASE58, P2PKH and P2SH addresses."""
@@ -35,7 +35,7 @@ def keyhash_to_p2pkh(hash, main = False):
 
 def scripthash_to_p2sh(hash, main = False):
     assert (len(hash) == 20)
-    version = 5 if main else 58
+    version = 5 if main else 196
     return byte_to_base58(hash, version)
 
 def key_to_p2pkh(key, main = False):
@@ -57,7 +57,7 @@ def program_to_witness(version, program, main = False):
     assert 0 <= version <= 16
     assert 2 <= len(program) <= 40
     assert version > 0 or len(program) in [20, 32]
-    return segwit_addr.encode("ltc" if main else "rltc", version, program)
+    return segwit_addr.encode("bc" if main else "bcrt", version, program)
 
 def script_to_p2wsh(script, main = False):
     script = check_script(script)

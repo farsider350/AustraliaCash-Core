@@ -1,9 +1,9 @@
-// Copyright (c) 2011-2017 The Bitcoin Core developers
+// Copyright (c) 2011-2018 The AustraliaCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_RECEIVEREQUESTDIALOG_H
-#define BITCOIN_QT_RECEIVEREQUESTDIALOG_H
+#ifndef AUSTRALIACASH_QT_RECEIVEREQUESTDIALOG_H
+#define AUSTRALIACASH_QT_RECEIVEREQUESTDIALOG_H
 
 #include <qt/walletmodel.h>
 
@@ -11,8 +11,6 @@
 #include <QImage>
 #include <QLabel>
 #include <QPainter>
-
-class OptionsModel;
 
 namespace Ui {
     class ReceiveRequestDialog;
@@ -53,7 +51,7 @@ public:
     explicit ReceiveRequestDialog(QWidget *parent = 0);
     ~ReceiveRequestDialog();
 
-    void setModel(OptionsModel *model);
+    void setModel(WalletModel *model);
     void setInfo(const SendCoinsRecipient &info);
 
 private Q_SLOTS:
@@ -64,8 +62,8 @@ private Q_SLOTS:
 
 private:
     Ui::ReceiveRequestDialog *ui;
-    OptionsModel *model;
+    WalletModel *model;
     SendCoinsRecipient info;
 };
 
-#endif // BITCOIN_QT_RECEIVEREQUESTDIALOG_H
+#endif // AUSTRALIACASH_QT_RECEIVEREQUESTDIALOG_H
