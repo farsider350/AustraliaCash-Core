@@ -1,4 +1,4 @@
-name: Continuous Integration on Develop
+name: Continuous Integration on AUX_PUP
 on:
   push:
     branches:
