@@ -3,6 +3,7 @@ on:
   push:
     branches:
     - dev
+    - DOGE2
   pull_request:
     branches:
     - dev
