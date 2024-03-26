@@ -140,10 +140,10 @@ CAmount GetAustraliaCashBlockSubsidy(int nHeight, const Consensus::Params& conse
         return (1 + rand) * COIN;
     } else if (nHeight < (6 * consensusParams.nSubsidyHalvingInterval)) {
         // New-style constant rewards for each halving interval
-        return (500000 * COIN) >> halvings;
+        return (50 * COIN) >> halvings;
     } else {
         // Constant inflation
-        return 10000 * COIN;
+        return 1 * COIN;
     }
 }
 

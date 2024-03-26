@@ -93,6 +93,7 @@ public:
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowAllowDigishieldMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
+        consensus.fSimplifiedRewards = true;
         consensus.nRuleChangeActivationThreshold = 6048; // 75% of 8064
         consensus.nMinerConfirmationWindow = 8064; // nPowTargetTimespan
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
@@ -116,7 +117,7 @@ public:
         consensus.defaultAssumeValid = uint256S("0x1b340cd2dd8990b4e8c1c686038cb4d882cd6a71991bb0a0381027af7851e892");
 
         // AuxPoW parameters
-        consensus.nAuxpowChainId = 0x; // Jack ToDo
+        consensus.nAuxpowChainId = 0x410f; // Jack Test
         consensus.fStrictChainId = true;
         consensus.fAllowLegacyBlocks = true;
         consensus.nHeightEffective = 800000;
@@ -126,7 +127,8 @@ public:
         digishieldConsensus.nHeightEffective = 900000;
         digishieldConsensus.fSimplifiedRewards = true;
         digishieldConsensus.fDigishieldDifficultyCalculation = true;
-        digishieldConsensus.nPowTargetTimespan = 60; // post-digishield: 1 minute
+        digishieldConsensus.nPowTargetTimespan = 2 * 60; // post-digishield: 2 min
+        digishieldConsensus.nPowTargetSpacing = 30;
         digishieldConsensus.nCoinbaseMaturity = 240;
 
         // Blocks 371337+ are AuxPoW
