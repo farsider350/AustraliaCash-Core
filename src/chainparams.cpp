@@ -80,7 +80,7 @@ public:
         consensus.nMajorityEnforceBlockUpgrade = 1500;
         consensus.nMajorityRejectBlockOutdated = 1900;
         consensus.nMajorityWindow = 2000;
-        // BIP34 is never enforced in AustraliaCash v2 blocks, so we enforce from v3
+//        consensus.BIP16Height = 0;
         consensus.BIP34Height = 1;
         consensus.BIP34Hash = uint256S("0x4b22bb52e51d5b2f3f7648f61b81b69b3359d8d630d2253b81a92d7948d8676a");
         consensus.BIP65Height = 0;
@@ -93,7 +93,7 @@ public:
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowAllowDigishieldMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
-        consensus.fSimplifiedRewards = true;
+        consensus.fSimplifiedRewards = false;
         consensus.nRuleChangeActivationThreshold = 6048; // 75% of 8064
         consensus.nMinerConfirmationWindow = 8064; // nPowTargetTimespan
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
@@ -104,6 +104,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1547078400; // January 10, 2019
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1576195200; // December 13, 2019
+        //consensus.vDeployments[Consensus::DEPLOYMENT_CSV].min_activation_height = 48385;
 
         // Deployment of SegWit (BIP141, BIP143, and BIP147)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
@@ -117,24 +118,25 @@ public:
         consensus.defaultAssumeValid = uint256S("0x1b340cd2dd8990b4e8c1c686038cb4d882cd6a71991bb0a0381027af7851e892");
 
         // AuxPoW parameters
-        consensus.nAuxpowChainId = 0x410f; // Jack Test
+        consensus.nAuxpowChainId = 0x2000; // Jack Test
         consensus.fStrictChainId = true;
         consensus.fAllowLegacyBlocks = true;
-        consensus.nHeightEffective = 800000;
+        consensus.nHeightEffective = 618245;
 
-        // Blocks 145000 - 371336 are Digishield without AuxPoW
+        // Blocks 900000 - 920000 are Digishield without AuxPoW
         digishieldConsensus = consensus;
-        digishieldConsensus.nHeightEffective = 900000;
+        digishieldConsensus.nHeightEffective = 618245;
         digishieldConsensus.fSimplifiedRewards = true;
         digishieldConsensus.fDigishieldDifficultyCalculation = true;
         digishieldConsensus.nPowTargetTimespan = 2 * 60; // post-digishield: 2 min
         digishieldConsensus.nPowTargetSpacing = 30;
         digishieldConsensus.nCoinbaseMaturity = 240;
 
-        // Blocks 371337+ are AuxPoW
+        // Blocks 920000+ are AuxPoW
         auxpowConsensus = digishieldConsensus;
-        auxpowConsensus.nHeightEffective = 920000;
-        auxpowConsensus.fAllowLegacyBlocks = false;
+        auxpowConsensus.nHeightEffective = 618244;
+        auxpowConsensus.fStrictChainId = true;
+        auxpowConsensus.fAllowLegacyBlocks = true;
 
         // Assemble the binary search tree of consensus parameters
         pConsensusRoot = &digishieldConsensus;
