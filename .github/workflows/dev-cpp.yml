@@ -3,10 +3,7 @@ on:
   push:
     branches:
     - dev
-<<<<<<< HEAD
-=======
-    - DOGE2
->>>>>>> origin/DOGE2
+    - aux-dev
   pull_request:
     branches:
     - dev
@@ -15,11 +12,7 @@ env:
 jobs:
   create-source-distribution:
     name: Create Source Distribution
-<<<<<<< HEAD
-    runs-on: ubuntu-20.04
-=======
     runs-on: ubuntu-22.04
->>>>>>> origin/DOGE2
     env:
       ARTIFACT_DIR: source
     steps:
@@ -27,11 +20,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Install Required Packages
       run: |
-<<<<<<< HEAD
-        sudo apt-get install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils python3
-=======
         sudo apt-get install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils python3 autoconf-archive
->>>>>>> origin/DOGE2
         sudo apt-get install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
         sudo apt-get install libboost-all-dev
         sudo apt-get install software-properties-common
@@ -62,11 +51,7 @@ jobs:
   build-linux:
     name: Build for Linux
     needs: create-source-distribution
-<<<<<<< HEAD
-    runs-on: ubuntu-20.04
-=======
     runs-on: ubuntu-22.04
->>>>>>> origin/DOGE2
     env:
       ARTIFACT_DIR: linux-binaries
       TEST_LOG_ARTIFACT_DIR: test-logs
@@ -104,11 +89,7 @@ jobs:
   build-windows:
     name: Build for Windows
     needs: create-source-distribution
-<<<<<<< HEAD
-    runs-on: ubuntu-18.04
-=======
     runs-on: ubuntu-22.04
->>>>>>> origin/DOGE2
     env:
       ARTIFACT_DIR: windows-binaries
     steps:
