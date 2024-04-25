@@ -126,19 +126,17 @@ bool CheckAuxPowProofOfWork(const CBlockHeader& block, const Consensus::Params& 
 CAmount GetAustraliaCashBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 {
     int halvings = nHeight / consensusParams.nSubsidyHalvingInterval;
-    int halvings5 = nHeight / (consensusParams.nSubsidyHalvingInterval * 5);
+    int halvings5 = (nHeight - 1480000) / (consensusParams.nSubsidyHalvingInterval * 5);
 
     if (!consensusParams.fSimplifiedRewards)
     {
-        // Old-style rewards derived from the previous block hash
+        // Old-style rewards - 50 per block
         return (50 * COIN) >> halvings;
-    } else if (nHeight < (6 * consensusParams.nSubsidyHalvingInterval)) {
-        // New-style constant rewards for each halving interval
-        return (10 * COIN) >> halvings5;
+    } else if (nHeight < 1480000) {
+        // New-style 10 per block to finish 4 year emission schedule
+        return 10 * COIN;
     } else {
         // Constant inflation
-        return 1 * COIN;
+        return (5 * COIN) >> halvings5;
     }
 }
-
-
