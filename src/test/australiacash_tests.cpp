@@ -66,9 +66,9 @@ BOOST_AUTO_TEST_CASE(subsidy_first_100k_test)
 
     for (int nHeight = 0; nHeight <= 100000; nHeight++) {
         const Consensus::Params& params = mainParams.GetConsensus(nHeight);
-        CAmount nSubsidy = GetAustraliaCashBlockSubsidy(nHeight, params, ArithToUint256(prevHash));
+        CAmount nSubsidy = GetAustraliaCashBlockSubsidy(nHeight, params);
         BOOST_CHECK(MoneyRange(nSubsidy));
-        BOOST_CHECK(nSubsidy <= 1000000 * COIN);
+        BOOST_CHECK(nSubsidy <= 50 * COIN);
         nSum += nSubsidy;
         // Use nSubsidy to give us some variation in previous block hash, without requiring full block templates
         prevHash += nSubsidy;
@@ -86,7 +86,7 @@ BOOST_AUTO_TEST_CASE(subsidy_100k_145k_test)
 
     for (int nHeight = 100000; nHeight <= 145000; nHeight++) {
         const Consensus::Params& params = mainParams.GetConsensus(nHeight);
-        CAmount nSubsidy = GetAustraliaCashBlockSubsidy(nHeight, params, ArithToUint256(prevHash));
+        CAmount nSubsidy = GetAustraliaCashBlockSubsidy(nHeight, params);
         BOOST_CHECK(MoneyRange(nSubsidy));
         BOOST_CHECK(nSubsidy <= 500000 * COIN);
         nSum += nSubsidy;
@@ -106,17 +106,17 @@ BOOST_AUTO_TEST_CASE(subsidy_post_145k_test)
 
     for (int nHeight = 145000; nHeight < 600000; nHeight++) {
         const Consensus::Params& params = mainParams.GetConsensus(nHeight);
-        CAmount nSubsidy = GetAustraliaCashBlockSubsidy(nHeight, params, prevHash);
+        CAmount nSubsidy = GetAustraliaCashBlockSubsidy(nHeight, params);
         CAmount nExpectedSubsidy = (500000 >> (nHeight / 100000)) * COIN;
         BOOST_CHECK(MoneyRange(nSubsidy));
         BOOST_CHECK_EQUAL(nSubsidy, nExpectedSubsidy);
     }
 
     // Test reward at 600k+ is constant
-    CAmount nConstantSubsidy = GetAustraliaCashBlockSubsidy(600000, mainParams.GetConsensus(600000), prevHash);
+    CAmount nConstantSubsidy = GetAustraliaCashBlockSubsidy(600000, mainParams.GetConsensus(600000));
     BOOST_CHECK_EQUAL(nConstantSubsidy, 10000 * COIN);
 
-    nConstantSubsidy = GetAustraliaCashBlockSubsidy(700000, mainParams.GetConsensus(700000), prevHash);
+    nConstantSubsidy = GetAustraliaCashBlockSubsidy(700000, mainParams.GetConsensus(700000));
     BOOST_CHECK_EQUAL(nConstantSubsidy, 10000 * COIN);
 }
 
