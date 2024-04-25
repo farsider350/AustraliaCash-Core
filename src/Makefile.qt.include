@@ -250,7 +250,7 @@ RES_ICONS = \
   qt/res/icons/about.png \
   qt/res/icons/about_qt.png \
   qt/res/icons/australiacash.ico \
-  qt/res/icons/bitcoin_testnet.ico \
+  qt/res/icons/australiacash_testnet.ico \
   qt/res/icons/australiacash.png \
   qt/res/icons/chevron.png \
   qt/res/icons/clock1.png \
