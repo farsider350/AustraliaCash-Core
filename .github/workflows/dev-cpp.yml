@@ -1,14 +1,17 @@
-name: Continuous Integration on Develop
+name: Continuous Integration For AustraliaCash
 on:
   push:
     branches:
     - dev
     - aux-dev
     - master
+    - aux-master
   pull_request:
     branches:
     - dev
+    - aux-dev
     - master
+    - aux-master
 env:
   SOURCE_ARTIFACT: source
 jobs:
