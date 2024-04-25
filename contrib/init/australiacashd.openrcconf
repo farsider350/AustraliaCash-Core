@@ -1,0 +1,33 @@
+# /etc/conf.d/australiacashd: config file for /etc/init.d/australiacashd
+
+# Config file location
+#AUSCOIND_CONFIGFILE="/etc/australiacash/australiacash.conf"
+
+# What directory to write pidfile to?  (created and owned by $AUSCOIND_USER)
+#AUSCOIND_PIDDIR="/var/run/australiacashd"
+
+# What filename to give the pidfile
+#AUSCOIND_PIDFILE="${AUSCOIND_PIDDIR}/australiacashd.pid"
+
+# Where to write australiacashd data (be mindful that the blockchain is large)
+#AUSCOIND_DATADIR="/var/lib/australiacashd"
+
+# User and group to own australiacashd process
+#AUSCOIND_USER="australiacash"
+#AUSCOIND_GROUP="australiacash"
+
+# Path to australiacashd executable
+#AUSCOIND_BIN="/usr/bin/australiacashd"
+
+# Nice value to run australiacashd under
+#AUSCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+AUSCOIND_OPTS="-disablewallet"
+
+# The timeout in seconds OpenRC will wait for australiacashd to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+AUSCOIND_SIGTERM_TIMEOUT=60
