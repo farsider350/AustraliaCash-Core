@@ -126,7 +126,7 @@ bool CheckAuxPowProofOfWork(const CBlockHeader& block, const Consensus::Params& 
 CAmount GetAustraliaCashBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 {
     int halvings = nHeight / consensusParams.nSubsidyHalvingInterval;
-    int halvings5 = nHeight / consensusParams.nSubsidyHalvingInterval * 5;
+    int halvings5 = nHeight / (consensusParams.nSubsidyHalvingInterval * 5);
 
     if (!consensusParams.fSimplifiedRewards)
     {

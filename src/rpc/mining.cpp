@@ -354,7 +354,7 @@ std::string gbt_vb_name(const Consensus::DeploymentPos pos) {
 UniValue getblocktemplate(const JSONRPCRequest& request)
 {
     // AustraliaCash: Never mine witness tx
-    // const bool fMineWitnessTx = false;
+    const bool fMineWitnessTx = false;
     if (request.fHelp || request.params.size() > 1)
         throw runtime_error(
             "getblocktemplate ( TemplateRequest )\n"
