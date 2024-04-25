@@ -119,7 +119,7 @@ public:
 
         // AuxPoW parameters
         consensus.nAuxpowChainId = 0x2000; // Jack Test
-        consensus.fStrictChainId = true;
+        consensus.fStrictChainId = false;
         consensus.fAllowLegacyBlocks = true;
         consensus.nHeightEffective = 680000;
 
@@ -136,7 +136,7 @@ public:
         // Blocks 920000+ are AuxPoW
         auxpowConsensus = digishieldConsensus;
         auxpowConsensus.nHeightEffective = 680000;
-        auxpowConsensus.fStrictChainId = true;
+        auxpowConsensus.fStrictChainId = false;
         auxpowConsensus.fAllowLegacyBlocks = true;
 
         // Assemble the binary search tree of consensus parameters
