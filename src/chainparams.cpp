@@ -112,10 +112,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1576195200; // December 13, 2019
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000000037ca543d83432af");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000001335614ebeee1212");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x1b340cd2dd8990b4e8c1c686038cb4d882cd6a71991bb0a0381027af7851e892");
+        consensus.defaultAssumeValid = uint256S("0x3762e27c84ef721dda2f6cf1b5fc1c2b5bbbf5a38037674e3af87bfd15eb3b7f");
 
         // AuxPoW parameters
         consensus.nAuxpowChainId = 0x2000;
@@ -131,13 +131,13 @@ public:
         digishieldConsensus.fPowAllowDigishieldMinDifficultyBlocks = true;
         digishieldConsensus.nPowTargetTimespan = 2 * 60; // post-digishield: 2 min
         digishieldConsensus.nPowTargetSpacing = 30;
-        digishieldConsensus.nCoinbaseMaturity = 40;
+        digishieldConsensus.nCoinbaseMaturity = 80;
 
         // Blocks 690000+ are AuxPoW
         auxpowConsensus = digishieldConsensus;
         auxpowConsensus.nHeightEffective = 690000;
         auxpowConsensus.fStrictChainId = false;
-        auxpowConsensus.fAllowLegacyBlocks = true;
+        auxpowConsensus.fAllowLegacyBlocks = false;
 
         // Assemble the binary search tree of consensus parameters
         pConsensusRoot = &digishieldConsensus;
@@ -217,15 +217,19 @@ public:
             (  95000, uint256S("0x16ae3b52e588a4750d1670127a66b428b64396709824e6b08d8050369b932c54"))
             ( 130000, uint256S("0x233f0791e8beab0ea34af5aa4db4f9e9e78b4e6f570e7af3a26a94432019d697"))
             ( 232059, uint256S("0x1b340cd2dd8990b4e8c1c686038cb4d882cd6a71991bb0a0381027af7851e892"))
+            ( 333333, uint256S("0x5dc49c1298629a9b2e5915791b45aaca420bf52115fa0e6d66555c93fb3f1d4d"))
+            ( 444444, uint256S("0xb4b7cabc8d571489148dbb4ec3c330688aa76c5cfd0d893c9f0da5c645bf3861"))
+            ( 555555, uint256S("0xdb53c32f3c6068f48a239ab4e55c4c3923cf716450e14a4f25b0cf108cad7972"))
+            ( 633333, uint256S("0x3762e27c84ef721dda2f6cf1b5fc1c2b5bbbf5a38037674e3af87bfd15eb3b7f"))
         };
 
         chainTxData = ChainTxData{
             // Data as of block  (height ).
             // Tx estimate based on average between 2021-07-01 (3793538) and 2022-07-01 (4288126)
-            1615034275, // * UNIX timestamp of last checkpoint block
-            266819,   // * total number of transactions between genesis and last checkpoint
+            1715123921, // * UNIX timestamp of last checkpoint block
+            963324,   // * total number of transactions between genesis and last checkpoint
                         //   (the tx=... number in the SetBestChain debug.log lines)
-            0.0040207        // * estimated number of transactions per second after checkpoint
+            0.040207        // * estimated number of transactions per second after checkpoint
         };
     }
 };
@@ -330,6 +334,8 @@ public:
 
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
+        vSeeds.push_back(CDNSSeedData("australiacash.org", "seed.australiacash.org", true));
+        vSeeds.push_back(CDNSSeedData("australiacash.org", "testseed.australiacash.org", true));
         vSeeds.push_back(CDNSSeedData("triplezen.org", "testseed.triplezen.org"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,113); // 0x71
