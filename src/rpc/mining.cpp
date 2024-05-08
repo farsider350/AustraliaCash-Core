@@ -1000,7 +1000,7 @@ void AuxMiningCheck()
                            "AustraliaCash is downloading blocks...");
 
     /* This should never fail, since the chain is already
-       past the point of merge-mining start.  Check nevertheless.  */
+       past the point of merge-mining start.  Check nevertheless. This  */
     {
         LOCK(cs_main);
         if (Params().GetConsensus(chainActive.Height() + 1).fAllowLegacyBlocks)

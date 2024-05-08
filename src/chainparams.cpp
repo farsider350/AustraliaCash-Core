@@ -75,7 +75,7 @@ public:
     CMainParams() {
         strNetworkID = "main";
 
-        // Blocks 0 - ? are conventional difficulty calculation
+        // Blocks 0 - 685,000 are conventional difficulty calculation, block reward and block times.
         consensus.nSubsidyHalvingInterval = 840000;
         consensus.nMajorityEnforceBlockUpgrade = 1500;
         consensus.nMajorityRejectBlockOutdated = 1900;
@@ -118,24 +118,24 @@ public:
         consensus.defaultAssumeValid = uint256S("0x1b340cd2dd8990b4e8c1c686038cb4d882cd6a71991bb0a0381027af7851e892");
 
         // AuxPoW parameters
-        consensus.nAuxpowChainId = 0x2000; // Jack Test
+        consensus.nAuxpowChainId = 0x2000;
         consensus.fStrictChainId = false;
         consensus.fAllowLegacyBlocks = true;
         consensus.nHeightEffective = 680000;
 
-        // Blocks 900000 - 920000 are Digishield without AuxPoW
+        // Blocks 680000 - 685000 are Digishield without AuxPoW
         digishieldConsensus = consensus;
-        digishieldConsensus.nHeightEffective = 680000;
+        digishieldConsensus.nHeightEffective = 685000;
         digishieldConsensus.fSimplifiedRewards = true;
         digishieldConsensus.fDigishieldDifficultyCalculation = true;
         digishieldConsensus.fPowAllowDigishieldMinDifficultyBlocks = true;
         digishieldConsensus.nPowTargetTimespan = 2 * 60; // post-digishield: 2 min
         digishieldConsensus.nPowTargetSpacing = 30;
-        digishieldConsensus.nCoinbaseMaturity = 240;
+        digishieldConsensus.nCoinbaseMaturity = 40;
 
-        // Blocks 920000+ are AuxPoW
+        // Blocks 690000+ are AuxPoW
         auxpowConsensus = digishieldConsensus;
-        auxpowConsensus.nHeightEffective = 680000;
+        auxpowConsensus.nHeightEffective = 690000;
         auxpowConsensus.fStrictChainId = false;
         auxpowConsensus.fAllowLegacyBlocks = true;
 
@@ -243,7 +243,6 @@ public:
     CTestNetParams() {
         strNetworkID = "test";
 
-        // Blocks 0 - 144999 are pre-Digishield
         consensus.nHeightEffective = 0;
         consensus.nPowTargetTimespan = 4 * 60 * 60; // pre-digishield: 4 hours
         consensus.fDigishieldDifficultyCalculation = false;
@@ -251,14 +250,13 @@ public:
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowAllowDigishieldMinDifficultyBlocks = false;
         consensus.nSubsidyHalvingInterval = 10000;
-        consensus.nMajorityEnforceBlockUpgrade = 501;
-        consensus.nMajorityRejectBlockOutdated = 750;
+        consensus.nMajorityEnforceBlockUpgrade = 5;
+        consensus.nMajorityRejectBlockOutdated = 7;
         consensus.nMajorityWindow = 1000;
-        // BIP34 is never enforced in AustraliaCash v2 blocks, so we enforce from v3
         consensus.BIP34Height = 1;
         consensus.BIP34Hash = uint256S("0x00");
-        consensus.BIP65Height = 0; // 955bd496d23790aba1ecfacb722b089a6ae7ddabaedf7d8fb0878f48308a71f9
-        consensus.BIP66Height = 0; // 21b8b97dcdb94caa67c7f8f6dbf22e61e0cfe0e46e1fff3528b22864659e9b38 - this is the last block that could be v2, 1900 blocks past the last v2 block
+        consensus.BIP65Height = 0;
+        consensus.BIP66Height = 0;
         consensus.powLimit = uint256S("0x00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~uint256(0) >> 20;
         consensus.nPowTargetTimespan = 4 * 60 * 60; // pre-digishield: 4 hours
         consensus.nPowTargetSpacing = 60; // 1 minute
@@ -270,7 +268,6 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 0; // Not active
 
         // Deployment of BIP68, BIP112, and BIP113.
-        // XXX: BIP heights and hashes all need to be updated to AustraliaCash values
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 0;
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 999999999999ULL; // Always active
@@ -287,31 +284,28 @@ public:
         consensus.defaultAssumeValid = uint256S("0x00");
 
         // AuxPoW parameters
-        consensus.nAuxpowChainId = 0x0062; // 98 - Josh Wise!
+        consensus.nAuxpowChainId = 0x2000;
         consensus.fStrictChainId = false;
         consensus.nHeightEffective = 0;
         consensus.fAllowLegacyBlocks = true;
 
-        // Blocks 145000 - 157499 are Digishield without minimum difficulty on all blocks
         digishieldConsensus = consensus;
-        digishieldConsensus.nHeightEffective = 68000;
+        digishieldConsensus.nHeightEffective = 140;
         digishieldConsensus.nPowTargetTimespan = 30; // post-digishield: 30 sec
         digishieldConsensus.fDigishieldDifficultyCalculation = true;
         digishieldConsensus.fSimplifiedRewards = true;
         digishieldConsensus.fPowAllowMinDifficultyBlocks = false;
         digishieldConsensus.nCoinbaseMaturity = 240;
 
-        // Blocks 157500 - 158099 are Digishield with minimum difficulty on all blocks
         minDifficultyConsensus = digishieldConsensus;
-        minDifficultyConsensus.nHeightEffective = 68000;
+        minDifficultyConsensus.nHeightEffective = 160;
         minDifficultyConsensus.fPowAllowDigishieldMinDifficultyBlocks = true;
-        minDifficultyConsensus.fPowAllowMinDifficultyBlocks = true;
 
-        // Enable AuxPoW at 158100
+        // Enable AuxPoW
         auxpowConsensus = minDifficultyConsensus;
-        auxpowConsensus.nHeightEffective = 68000;
+        auxpowConsensus.nHeightEffective = 180;
         auxpowConsensus.fPowAllowDigishieldMinDifficultyBlocks = true;
-        auxpowConsensus.fAllowLegacyBlocks = true;
+        auxpowConsensus.fAllowLegacyBlocks = false;
 
         // Assemble the binary search tree of parameters
         pConsensusRoot = &digishieldConsensus;
@@ -323,7 +317,7 @@ public:
         pchMessageStart[1] = 0xc1;
         pchMessageStart[2] = 0xb7;
         pchMessageStart[3] = 0xdc;
-        nDefaultPort = 44556;
+        nDefaultPort = 2018;
         nPruneAfterHeight = 1000;
 
         genesis = CreateGenesisBlock(1541015250, 319977, 0x1e0ffff0, 1, 50 * COIN);
