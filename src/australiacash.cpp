@@ -30,8 +30,7 @@ bool AllowDigishieldMinDifficultyForBlock(const CBlockIndex* pindexLast, const C
         return false;
 
     // check if the chain allows minimum difficulty blocks on recalc blocks
-    if (pindexLast->nHeight < 157500)
-    // if (!params.fPowAllowDigishieldMinDifficultyBlocks)
+    if (!params.fPowAllowDigishieldMinDifficultyBlocks)
         return false;
 
     // Allow for a minimum block time if the elapsed time > 2*nTargetSpacing
