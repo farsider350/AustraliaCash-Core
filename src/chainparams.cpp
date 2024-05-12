@@ -129,6 +129,7 @@ public:
         digishieldConsensus.fSimplifiedRewards = true;
         digishieldConsensus.fDigishieldDifficultyCalculation = true;
         digishieldConsensus.fPowAllowDigishieldMinDifficultyBlocks = true;
+        digishieldConsensus.fPowAllowMinDifficultyBlocks = true;
         digishieldConsensus.nPowTargetTimespan = 2 * 60; // post-digishield: 2 min
         digishieldConsensus.nPowTargetSpacing = 30;
         digishieldConsensus.nCoinbaseMaturity = 80;

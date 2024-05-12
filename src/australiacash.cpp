@@ -33,8 +33,8 @@ bool AllowDigishieldMinDifficultyForBlock(const CBlockIndex* pindexLast, const C
     if (!params.fPowAllowDigishieldMinDifficultyBlocks)
         return false;
 
-    // Allow for a minimum block time if the elapsed time > 2*nTargetSpacing
-    return (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*2);
+    // Allow for a minimum block time if the elapsed time > 8*nTargetSpacing = 4mins at 30 sec block times
+    return (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*8);
 }
 
 unsigned int CalculateAustraliaCashNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)

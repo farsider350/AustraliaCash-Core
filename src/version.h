@@ -1,4 +1,4 @@
-// Copyright (c) 2012-2016 The Bitcoin Core developers
+// Copyright (c) 2012-2024 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,9 +9,8 @@
  * network protocol versioning
  */
 
-// XXX: Decide if this is appropriate - if we reintroduce alerts we may need
-//      to  reduce to 70012
-static const int PROTOCOL_VERSION = 70033;
+//      FS350 - AUXPOW Version
+static const int PROTOCOL_VERSION = 70350;
 
 //! initial proto version, to be increased after version/verack negotiation
 static const int INIT_PROTO_VERSION = 209;
@@ -19,7 +18,7 @@ static const int INIT_PROTO_VERSION = 209;
 //! In this version, 'getheaders' was introduced.
 static const int GETHEADERS_VERSION = 31800;
 
-//! disconnect from peers older than this proto version
+//! Can be raised once auxpow is enabled - low version needed for p2pool compatibility
 static const int MIN_PEER_PROTO_VERSION = 31800;
 
 //! nTime field added to CAddress, starting with this version;
