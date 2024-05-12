@@ -1,6 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2022 The AustraliaCash Core developers
+// Copyright (c) 2018-2024 The AustraliaCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -121,11 +121,11 @@ public:
         consensus.nAuxpowChainId = 0x2000;
         consensus.fStrictChainId = false;
         consensus.fAllowLegacyBlocks = true;
-        consensus.nHeightEffective = 680000;
+        consensus.nHeightEffective = 675000;
 
-        // Blocks 680000 - 685000 are Digishield without AuxPoW
+        // Blocks 680000 - 690000 are Digishield without AuxPoW
         digishieldConsensus = consensus;
-        digishieldConsensus.nHeightEffective = 685000;
+        digishieldConsensus.nHeightEffective = 680000;
         digishieldConsensus.fSimplifiedRewards = true;
         digishieldConsensus.fDigishieldDifficultyCalculation = true;
         digishieldConsensus.fPowAllowDigishieldMinDifficultyBlocks = true;
