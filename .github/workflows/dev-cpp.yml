@@ -129,6 +129,82 @@ jobs:
       with:
         name: linux-ubu20-binaries
         path: ${{ env.ARTIFACT_DIR }}
+  build-linux-18:
+    name: Build for Linux 18
+    needs: create-source-distribution
+    runs-on: ubuntu-18.04
+    env:
+      ARTIFACT_DIR: linux-ubu18-binaries
+      TEST_LOG_ARTIFACT_DIR: test-logs
+    steps:
+    - name: Getting Source
+      uses: actions/download-artifact@v1
+      with:
+        name: ${{ env.SOURCE_ARTIFACT }}
+    - name: Extract Archives
+      run: |
+        tar -xzf depends.tar.gz
+        tar -xzf australiacash-*.tar.gz --strip-components=1
+      working-directory: ${{ env.SOURCE_ARTIFACT }}
+    - name: Install Required Packages
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3-zmq
+    - name: Build Dependencies
+      run: make -C depends -j$(nproc)
+      working-directory: ${{ env.SOURCE_ARTIFACT }}
+    - name: Build Australiacash
+      run: |
+        ./configure --prefix=$(realpath depends/x86_64-pc-linux-gnu)
+        make -j$(nproc)
+      working-directory: ${{ env.SOURCE_ARTIFACT }}
+    - name: Prepare Files for Artifact
+      run: |
+        mkdir -p $ARTIFACT_DIR
+        mv $SOURCE_ARTIFACT/src/{australiacash-cli,australiacash-tx,australiacashd,qt/australiacash-qt} $ARTIFACT_DIR
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: linux-ubu18-binaries
+        path: ${{ env.ARTIFACT_DIR }}
+  build-linux-24:
+    name: Build for Linux 24
+    needs: create-source-distribution
+    runs-on: ubuntu-24.04
+    env:
+      ARTIFACT_DIR: linux-ubu24-binaries
+      TEST_LOG_ARTIFACT_DIR: test-logs
+    steps:
+    - name: Getting Source
+      uses: actions/download-artifact@v1
+      with:
+        name: ${{ env.SOURCE_ARTIFACT }}
+    - name: Extract Archives
+      run: |
+        tar -xzf depends.tar.gz
+        tar -xzf australiacash-*.tar.gz --strip-components=1
+      working-directory: ${{ env.SOURCE_ARTIFACT }}
+    - name: Install Required Packages
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3-zmq
+    - name: Build Dependencies
+      run: make -C depends -j$(nproc)
+      working-directory: ${{ env.SOURCE_ARTIFACT }}
+    - name: Build Australiacash
+      run: |
+        ./configure --prefix=$(realpath depends/x86_64-pc-linux-gnu)
+        make -j$(nproc)
+      working-directory: ${{ env.SOURCE_ARTIFACT }}
+    - name: Prepare Files for Artifact
+      run: |
+        mkdir -p $ARTIFACT_DIR
+        mv $SOURCE_ARTIFACT/src/{australiacash-cli,australiacash-tx,australiacashd,qt/australiacash-qt} $ARTIFACT_DIR
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: linux-ubu24-binaries
+        path: ${{ env.ARTIFACT_DIR }}
   build-windows:
     name: Build for Windows
     needs: create-source-distribution
