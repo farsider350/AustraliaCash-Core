@@ -58,7 +58,7 @@ jobs:
     needs: create-source-distribution
     runs-on: ubuntu-22.04
     env:
-      ARTIFACT_DIR: linux-binaries
+      ARTIFACT_DIR: linux-ubu22-binaries
       TEST_LOG_ARTIFACT_DIR: test-logs
     steps:
     - name: Getting Source
@@ -89,14 +89,14 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v1
       with:
-        name: linux-binaries
+        name: linux-ubu22-binaries
         path: ${{ env.ARTIFACT_DIR }}
   build-linux-20:
     name: Build for Linux 20
     needs: create-source-distribution
     runs-on: ubuntu-20.04
     env:
-      ARTIFACT_DIR: linux-binaries
+      ARTIFACT_DIR: linux-ubu20-binaries
       TEST_LOG_ARTIFACT_DIR: test-logs
     steps:
     - name: Getting Source
@@ -127,7 +127,7 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v1
       with:
-        name: linux-binaries
+        name: linux-ubu20-binaries
         path: ${{ env.ARTIFACT_DIR }}
   build-windows:
     name: Build for Windows
