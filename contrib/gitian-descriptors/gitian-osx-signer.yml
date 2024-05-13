@@ -1,13 +1,13 @@
 ---
 name: "australiacash-dmg-signer"
 suites:
-- "trusty"
+- "bionic"
 architectures:
 - "amd64"
 packages:
 - "faketime"
 remotes:
-- "url": "https://github.com/australiacash-project/australiacash-detached-sigs.git"
+- "url": "https://github.com/australiacash/australiacash-detached-sigs.git"
   "dir": "signature"
 files:
 - "australiacash-osx-unsigned.tar.gz"

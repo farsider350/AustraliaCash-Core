@@ -12,17 +12,8 @@ dnl warranty.
 m4_define([_CHECK_ATOMIC_testbody], [[
   #include <atomic>
   #include <cstdint>
-  #include <chrono>
-
-  using namespace std::chrono_literals;
 
   int main() {
-    std::atomic<bool> lock{true};
-    lock.exchange(false);
-
-    std::atomic<std::chrono::seconds> t{0s};
-    t.store(2s);
-
     std::atomic<int64_t> a{};
 
     int64_t v = 5;
@@ -34,8 +25,6 @@ m4_define([_CHECK_ATOMIC_testbody], [[
 AC_DEFUN([CHECK_ATOMIC], [
 
   AC_LANG_PUSH(C++)
-  TEMP_CXXFLAGS="$CXXFLAGS"
-  CXXFLAGS="$CXXFLAGS $PTHREAD_CFLAGS"
 
   AC_MSG_CHECKING([whether std::atomic can be used without link library])
 
@@ -53,6 +42,5 @@ AC_DEFUN([CHECK_ATOMIC], [
         ])
     ])
 
-  CXXFLAGS="$TEMP_CXXFLAGS"
   AC_LANG_POP
 ])

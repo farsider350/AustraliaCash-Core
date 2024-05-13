@@ -1,4 +1,5 @@
-// Copyright (c) 2011-2021 The AustraliaCash Core developers
+// Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2022 The AustraliaCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,7 +9,6 @@
 #include <QDialog>
 #include <QValidator>
 
-class ClientModel;
 class OptionsModel;
 class QValidatedLineEdit;
 
@@ -29,7 +29,7 @@ class ProxyAddressValidator : public QValidator
 public:
     explicit ProxyAddressValidator(QObject *parent);
 
-    State validate(QString &input, int &pos) const override;
+    State validate(QString &input, int &pos) const;
 };
 
 /** Preferences dialog. */
@@ -41,25 +41,17 @@ public:
     explicit OptionsDialog(QWidget *parent, bool enableWallet);
     ~OptionsDialog();
 
-    enum Tab {
-        TAB_MAIN,
-        TAB_NETWORK,
-    };
-
-    void setClientModel(ClientModel* client_model);
     void setModel(OptionsModel *model);
     void setMapper();
-    void setCurrentTab(OptionsDialog::Tab tab);
 
 private Q_SLOTS:
     /* set OK button state (enabled / disabled) */
     void setOkButtonState(bool fState);
     void on_resetButton_clicked();
-    void on_openAustraliaCashConfButton_clicked();
     void on_okButton_clicked();
     void on_cancelButton_clicked();
-
-    void on_showTrayIcon_stateChanged(int state);
+    
+    void on_hideTrayIcon_stateChanged(int fState);
 
     void togglePruneWarning(bool enabled);
     void showRestartWarning(bool fPersistent = false);
@@ -69,12 +61,10 @@ private Q_SLOTS:
     void updateDefaultProxyNets();
 
 Q_SIGNALS:
-    void proxyIpChecks(QValidatedLineEdit *pUiProxyIp, uint16_t nProxyPort);
-    void quitOnReset();
+    void proxyIpChecks(QValidatedLineEdit *pUiProxyIp, int nProxyPort);
 
 private:
     Ui::OptionsDialog *ui;
-    ClientModel* m_client_model{nullptr};
     OptionsModel *model;
     QDataWidgetMapper *mapper;
 };

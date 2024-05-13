@@ -1,24 +1,23 @@
-// Copyright (c) 2011-2021 The AustraliaCash Core developers
+// Copyright (c) 2011-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <arith_uint256.h>
-#include <uint256.h>
-
 #include <boost/test/unit_test.hpp>
-
-#include <cmath>
-#include <cstdint>
+#include <stdint.h>
+#include <sstream>
 #include <iomanip>
 #include <limits>
-#include <sstream>
+#include <cmath>
+#include "uint256.h"
+#include "arith_uint256.h"
 #include <string>
-#include <vector>
+#include "version.h"
+#include "test/test_bitcoin.h"
 
-BOOST_AUTO_TEST_SUITE(arith_uint256_tests)
+BOOST_FIXTURE_TEST_SUITE(arith_uint256_tests, BasicTestingSetup)
 
 /// Convert vector to arith_uint256, via uint256 blob
-static inline arith_uint256 arith_uint256V(const std::vector<unsigned char>& vch)
+inline arith_uint256 arith_uint256V(const std::vector<unsigned char>& vch)
 {
     return UintToArith256(uint256(vch));
 }
@@ -54,7 +53,7 @@ const unsigned char MaxArray[] =
 const arith_uint256 MaxL = arith_uint256V(std::vector<unsigned char>(MaxArray,MaxArray+32));
 
 const arith_uint256 HalfL = (OneL << 255);
-static std::string ArrayToString(const unsigned char A[], unsigned int width)
+std::string ArrayToString(const unsigned char A[], unsigned int width)
 {
     std::stringstream Stream;
     Stream << std::hex;
@@ -123,30 +122,30 @@ BOOST_AUTO_TEST_CASE( basics ) // constructors, equality, inequality
     tmpL = ~MaxL; BOOST_CHECK(tmpL == ~MaxL);
 }
 
-static void shiftArrayRight(unsigned char* to, const unsigned char* from, unsigned int arrayLength, unsigned int bitsToShift)
+void shiftArrayRight(unsigned char* to, const unsigned char* from, unsigned int arrayLength, unsigned int bitsToShift)
 {
     for (unsigned int T=0; T < arrayLength; ++T)
     {
         unsigned int F = (T+bitsToShift/8);
         if (F < arrayLength)
-            to[T] = uint8_t(from[F] >> (bitsToShift % 8));
+            to[T]  = from[F] >> (bitsToShift%8);
         else
             to[T] = 0;
         if (F + 1 < arrayLength)
-            to[T] |= uint8_t(from[(F + 1)] << (8 - bitsToShift % 8));
+            to[T] |= from[(F+1)] << (8-bitsToShift%8);
     }
 }
 
-static void shiftArrayLeft(unsigned char* to, const unsigned char* from, unsigned int arrayLength, unsigned int bitsToShift)
+void shiftArrayLeft(unsigned char* to, const unsigned char* from, unsigned int arrayLength, unsigned int bitsToShift)
 {
     for (unsigned int T=0; T < arrayLength; ++T)
     {
         if (T >= bitsToShift/8)
         {
             unsigned int F = T-bitsToShift/8;
-            to[T] = uint8_t(from[F] << (bitsToShift % 8));
+            to[T]  = from[F] << (bitsToShift%8);
             if (T >= bitsToShift/8+1)
-                to[T] |= uint8_t(from[F - 1] >> (8 - bitsToShift % 8));
+                to[T] |= from[F-1] >> (8-bitsToShift%8);
         }
         else {
             to[T] = 0;
@@ -199,10 +198,17 @@ BOOST_AUTO_TEST_CASE( shifts ) { // "<<"  ">>"  "<<="  ">>="
 
 BOOST_AUTO_TEST_CASE( unaryOperators ) // !    ~    -
 {
+    BOOST_CHECK(!ZeroL);
+    BOOST_CHECK(!(!OneL));
+    for (unsigned int i = 0; i < 256; ++i)
+        BOOST_CHECK(!(!(OneL<<i)));
+    BOOST_CHECK(!(!R1L));
+    BOOST_CHECK(!(!MaxL));
+
     BOOST_CHECK(~ZeroL == MaxL);
 
     unsigned char TmpArray[32];
-    for (unsigned int i = 0; i < 32; ++i) { TmpArray[i] = uint8_t(~R1Array[i]); }
+    for (unsigned int i = 0; i < 32; ++i) { TmpArray[i] = ~R1Array[i]; }
     BOOST_CHECK(arith_uint256V(std::vector<unsigned char>(TmpArray,TmpArray+32)) == (~R1L));
 
     BOOST_CHECK(-ZeroL == ZeroL);
@@ -213,9 +219,9 @@ BOOST_AUTO_TEST_CASE( unaryOperators ) // !    ~    -
 
 
 // Check if doing _A_ _OP_ _B_ results in the same as applying _OP_ onto each
-// element of Aarray and Barray, and then converting the result into an arith_uint256.
+// element of Aarray and Barray, and then converting the result into a arith_uint256.
 #define CHECKBITWISEOPERATOR(_A_,_B_,_OP_)                              \
-    for (unsigned int i = 0; i < 32; ++i) { TmpArray[i] = uint8_t(_A_##Array[i] _OP_ _B_##Array[i]); } \
+    for (unsigned int i = 0; i < 32; ++i) { TmpArray[i] = _A_##Array[i] _OP_ _B_##Array[i]; } \
     BOOST_CHECK(arith_uint256V(std::vector<unsigned char>(TmpArray,TmpArray+32)) == (_A_##L _OP_ _B_##L));
 
 #define CHECKASSIGNMENTOPERATOR(_A_,_B_,_OP_)                           \
@@ -363,7 +369,7 @@ BOOST_AUTO_TEST_CASE( divide )
 }
 
 
-static bool almostEqual(double d1, double d2)
+bool almostEqual(double d1, double d2)
 {
     return fabs(d1-d2) <= 4*fabs(d1)*std::numeric_limits<double>::epsilon();
 }

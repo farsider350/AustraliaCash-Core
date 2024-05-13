@@ -1,115 +1,37 @@
-# FreeBSD Build Guide
+Building on FreeBSD
+--------------------
 
-**Updated for FreeBSD [12.3](https://www.freebsd.org/releases/12.3R/announce/)**
+**Last tested with:** 1.14.5-dev (as of 18dbe32)
+**Tested on:** FreeBSD 11.4
 
-This guide describes how to build bitcoind, command-line utilities, and GUI on FreeBSD.
+Clang is installed by default as `cc` compiler, this makes it easier to get
+started than on other distros. Installing dependencies:
 
-## Preparation
+    pkg install autoconf automake libtool pkgconf
+    pkg install boost-libs openssl libevent
+    pkg install gmake
 
-### 1. Install Required Dependencies
-Run the following as root to install the base dependencies for building.
+You need to use GNU make (`gmake`) instead of `make`.
+(`libressl` instead of `openssl` will also work)
 
-```bash
-pkg install autoconf automake boost-libs git gmake libevent libtool pkgconf
+For the wallet (optional):
 
-```
+    pkg install db5
 
-See [dependencies.md](dependencies.md) for a complete overview.
+As of writing, the default hardening routines will fail on the scrypt code, so
+currently, no hardened executables can be built, and the `--disable-hardening`
+flag is needed for successful compilation.
 
-### 2. Clone AustraliaCash Repo
-Now that `git` and all the required dependencies are installed, let's clone the AustraliaCash Core repository to a directory. All build scripts and commands will run from this directory.
-``` bash
-git clone https://github.com/bitcoin/bitcoin.git
-```
-
-### 3. Install Optional Dependencies
-
-#### Wallet Dependencies
-It is not necessary to build wallet functionality to run either `bitcoind` or `bitcoin-qt`.
-
-###### Descriptor Wallet Support
-
-`sqlite3` is required to support [descriptor wallets](descriptors.md).
-Skip if you don't intend to use descriptor wallets.
-``` bash
-pkg install sqlite3
-```
-
-###### Legacy Wallet Support
-`db5` is only required to support legacy wallets.
-Skip if you don't intend to use legacy wallets.
+Then build using:
 
 ```bash
-pkg install db5
-```
----
-
-#### GUI Dependencies
-###### Qt5
-
-AustraliaCash Core includes a GUI built with the cross-platform Qt Framework. To compile the GUI, we need to install `qt5`. Skip if you don't intend to use the GUI.
-```bash
-pkg install qt5
-```
-###### libqrencode
-
-The GUI can encode addresses in a QR Code. To build in QR support for the GUI, install `libqrencode`. Skip if not using the GUI or don't want QR code functionality.
-```bash
-pkg install libqrencode
-```
----
-
-#### Notifications
-###### ZeroMQ
-
-AustraliaCash Core can provide notifications via ZeroMQ. If the package is installed, support will be compiled in.
-```bash
-pkg install libzmq4
+  ./autogen.sh
+  ./configure --disable-hardening MAKE="gmake" \
+      CFLAGS="-I/usr/local/include" CXXFLAGS="-I/usr/local/include -I/usr/local/include/db5" \
+      LDFLAGS="-L/usr/local/lib -L/usr/local/lib/db5"
+  gmake
 ```
 
-#### Test Suite Dependencies
-There is an included test suite that is useful for testing code changes when developing.
-To run the test suite (recommended), you will need to have Python 3 installed:
-
-```bash
-pkg install python3
-```
----
-
-## Building AustraliaCash Core
-
-### 1. Configuration
-
-There are many ways to configure AustraliaCash Core, here are a few common examples:
-
-##### Descriptor Wallet and GUI:
-This explicitly enables the GUI and disables legacy wallet support, assuming `sqlite` and `qt` are installed.
-```bash
-./autogen.sh
-./configure --without-bdb --with-gui=yes MAKE=gmake
-```
-
-##### Descriptor & Legacy Wallet. No GUI:
-This enables support for both wallet types and disables the GUI, assuming
-`sqlite3` and `db5` are both installed.
-```bash
-./autogen.sh
-./configure --with-gui=no --with-incompatible-bdb \
-    BDB_LIBS="-ldb_cxx-5" \
-    BDB_CFLAGS="-I/usr/local/include/db5" \
-    MAKE=gmake
-```
-
-##### No Wallet or GUI
-``` bash
-./autogen.sh
-./configure --without-wallet --with-gui=no MAKE=gmake
-```
-
-### 2. Compile
-**Important**: Use `gmake` (the non-GNU `make` will exit with an error).
-
-```bash
-gmake # use "-j N" for N parallel jobs
-gmake check # Run tests if Python 3 is available
-```
+*Note on debugging*: The version of `gdb` installed by default is [ancient and considered harmful](https://wiki.freebsd.org/GdbRetirement).
+It is not suitable for debugging a multi-threaded C++ program, not even for getting backtraces. Please install the package `gdb` and
+use the versioned gdb command e.g. `gdb7111`.

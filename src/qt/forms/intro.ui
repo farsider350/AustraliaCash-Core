@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>674</width>
-    <height>447</height>
+    <height>363</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -55,6 +55,9 @@
    </item>
    <item>
     <widget class="QLabel" name="sizeWarningLabel">
+     <property name="text">
+      <string>%1 will download and store a copy of the AustraliaCash block chain. At least %2GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</string>
+     </property>
      <property name="wordWrap">
       <bool>true</bool>
      </property>
@@ -199,36 +202,6 @@
       </layout>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QLabel" name="lblExplanation1">
-     <property name="text">
-      <string>When you click OK, %1 will begin to download and process the full block chain.</string>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="lblExplanation2">
-     <property name="text">
-      <string>This initial synchronisation is very demanding, and may expose hardware problems with your computer that had previously gone unnoticed. Each time you run %1, it will continue downloading where it left off.</string>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="lblExplanation3">
-     <property name="text">
-      <string>Please understand that deleting directory will delete your private keys as well which effectively destroys your coins. Make sure to have the backup. All the keys are stored in the wallet.dat file.</string>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
    </item>
    <item>
     <spacer name="verticalSpacer">

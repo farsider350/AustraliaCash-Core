@@ -1,19 +1,35 @@
-// Copyright (c) 2011-2021 The AustraliaCash Core developers
+// Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2018 The AustraliaCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_QT_BITCOINUNITS_H
 #define BITCOIN_QT_BITCOINUNITS_H
 
-#include <consensus/amount.h>
+#include "amount.h"
 
 #include <QAbstractListModel>
-#include <QDataStream>
 #include <QString>
 
 // U+2009 THIN SPACE = UTF-8 E2 80 89
 #define REAL_THIN_SP_CP 0x2009
 #define REAL_THIN_SP_UTF8 "\xE2\x80\x89"
+#define REAL_THIN_SP_HTML "&thinsp;"
+
+// U+200A HAIR SPACE = UTF-8 E2 80 8A
+#define HAIR_SP_CP 0x200A
+#define HAIR_SP_UTF8 "\xE2\x80\x8A"
+#define HAIR_SP_HTML "&#8202;"
+
+// U+2006 SIX-PER-EM SPACE = UTF-8 E2 80 86
+#define SIXPEREM_SP_CP 0x2006
+#define SIXPEREM_SP_UTF8 "\xE2\x80\x86"
+#define SIXPEREM_SP_HTML "&#8198;"
+
+// U+2007 FIGURE SPACE = UTF-8 E2 80 87
+#define FIGURE_SP_CP 0x2007
+#define FIGURE_SP_UTF8 "\xE2\x80\x87"
+#define FIGURE_SP_HTML "&#8199;"
 
 // QMessageBox seems to have a bug whereby it doesn't display thin/hair spaces
 // correctly.  Workaround is to display a space in a small font.  If you
@@ -26,32 +42,33 @@
 #define THIN_SP_UTF8 REAL_THIN_SP_UTF8
 #define THIN_SP_HTML HTML_HACK_SP
 
-/** AustraliaCash unit definitions. Encapsulates parsing and formatting
+/** Bitcoin unit definitions. Encapsulates parsing and formatting
    and serves as list model for drop-down selection boxes.
 */
-class AustraliaCashUnits: public QAbstractListModel
+class BitcoinUnits: public QAbstractListModel
 {
     Q_OBJECT
 
 public:
-    explicit AustraliaCashUnits(QObject *parent);
+    explicit BitcoinUnits(QObject *parent);
 
-    /** AustraliaCash units.
+    /** Bitcoin units.
       @note Source: https://en.bitcoin.it/wiki/Units . Please add only sensible ones
      */
-    enum class Unit {
+    enum Unit
+    {
+        MBTC,
+        kBTC,
         BTC,
         mBTC,
-        uBTC,
-        SAT
+        uBTC
     };
-    Q_ENUM(Unit)
 
-    enum class SeparatorStyle
+    enum SeparatorStyle
     {
-        NEVER,
-        STANDARD,
-        ALWAYS
+        separatorNever,
+        separatorStandard,
+        separatorAlways
     };
 
     //! @name Static API
@@ -60,28 +77,26 @@ public:
 
     //! Get list of units, for drop-down box
     static QList<Unit> availableUnits();
-    //! Long name
-    static QString longName(Unit unit);
+    //! Is unit ID valid?
+    static bool valid(int unit);
     //! Short name
-    static QString shortName(Unit unit);
+    static QString name(int unit);
     //! Longer description
-    static QString description(Unit unit);
+    static QString description(int unit);
     //! Number of Satoshis (1e-8) per unit
-    static qint64 factor(Unit unit);
+    static qint64 factor(int unit);
     //! Number of decimals left
-    static int decimals(Unit unit);
+    static int decimals(int unit);
     //! Format as string
-    static QString format(Unit unit, const CAmount& amount, bool plussign = false, SeparatorStyle separators = SeparatorStyle::STANDARD, bool justify = false);
+    static QString format(int unit, const CAmount& amount, bool plussign=false, SeparatorStyle separators=separatorStandard);
     //! Format as string (with unit)
-    static QString formatWithUnit(Unit unit, const CAmount& amount, bool plussign = false, SeparatorStyle separators = SeparatorStyle::STANDARD);
+    static QString formatWithUnit(int unit, const CAmount& amount, bool plussign=false, SeparatorStyle separators=separatorStandard);
     //! Format as HTML string (with unit)
-    static QString formatHtmlWithUnit(Unit unit, const CAmount& amount, bool plussign = false, SeparatorStyle separators = SeparatorStyle::STANDARD);
-    //! Format as string (with unit) of fixed length to preserve privacy, if it is set.
-    static QString formatWithPrivacy(Unit unit, const CAmount& amount, SeparatorStyle separators, bool privacy);
+    static QString formatHtmlWithUnit(int unit, const CAmount& amount, bool plussign=false, SeparatorStyle separators=separatorStandard);
     //! Parse string to coin amount
-    static bool parse(Unit unit, const QString& value, CAmount* val_out);
+    static bool parse(int unit, const QString &value, CAmount *val_out);
     //! Gets title for amount column including current display unit if optionsModel reference available */
-    static QString getAmountColumnTitle(Unit unit);
+    static QString getAmountColumnTitle(int unit);
     ///@}
 
     //! @name AbstractListModel implementation
@@ -91,14 +106,17 @@ public:
         /** Unit identifier */
         UnitRole = Qt::UserRole
     };
-    int rowCount(const QModelIndex &parent) const override;
-    QVariant data(const QModelIndex &index, int role) const override;
+    int rowCount(const QModelIndex &parent) const;
+    QVariant data(const QModelIndex &index, int role) const;
     ///@}
 
     static QString removeSpaces(QString text)
     {
         text.remove(' ');
         text.remove(QChar(THIN_SP_CP));
+#if (THIN_SP_CP != REAL_THIN_SP_CP)
+        text.remove(QChar(REAL_THIN_SP_CP));
+#endif
         return text;
     }
 
@@ -106,11 +124,8 @@ public:
     static CAmount maxMoney();
 
 private:
-    QList<Unit> unitlist;
+    QList<BitcoinUnits::Unit> unitlist;
 };
-typedef AustraliaCashUnits::Unit AustraliaCashUnit;
-
-QDataStream& operator<<(QDataStream& out, const AustraliaCashUnit& unit);
-QDataStream& operator>>(QDataStream& in, AustraliaCashUnit& unit);
+typedef BitcoinUnits::Unit BitcoinUnit;
 
 #endif // BITCOIN_QT_BITCOINUNITS_H

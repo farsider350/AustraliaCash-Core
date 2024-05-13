@@ -37,7 +37,7 @@ Source30:	https://raw.githubusercontent.com/bitcoin/bitcoin/v%{version}/contrib/
 Source31:	https://raw.githubusercontent.com/bitcoin/bitcoin/v%{version}/contrib/rpm/bitcoin.fc
 Source32:	https://raw.githubusercontent.com/bitcoin/bitcoin/v%{version}/contrib/rpm/bitcoin.if
 
-Source100:	https://upload.wikimedia.org/wikipedia/commons/4/46/AustraliaCash.svg
+Source100:	https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg
 
 %if 0%{?_use_libressl:1}
 BuildRequires:	libressl-devel
@@ -54,7 +54,7 @@ Patch0:		bitcoin-0.12.0-libressl.patch
 
 
 %description
-AustraliaCash is a digital cryptographic currency that uses peer-to-peer technology to
+Bitcoin is a digital cryptographic currency that uses peer-to-peer technology to
 operate with no central authority or banks; managing transactions and the
 issuing of bitcoins is carried out collectively by the network.
 
@@ -79,17 +79,17 @@ BuildRequires:	%{_bindir}/inkscape
 BuildRequires:	%{_bindir}/convert
 
 %description core
-AustraliaCash is a digital cryptographic currency that uses peer-to-peer technology to
+Bitcoin is a digital cryptographic currency that uses peer-to-peer technology to
 operate with no central authority or banks; managing transactions and the
 issuing of bitcoins is carried out collectively by the network.
 
 This package contains the Qt based graphical client and node. If you are looking
-to run a AustraliaCash wallet, this is probably the package you want.
+to run a Bitcoin wallet, this is probably the package you want.
 %endif
 
 
 %package libs
-Summary:	AustraliaCash shared libraries
+Summary:	Bitcoin shared libraries
 Group:		System Environment/Libraries
 
 %description libs
@@ -134,7 +134,7 @@ If you use the graphical bitcoin-core client then you almost certainly do not
 need this package.
 
 %package utils
-Summary:	AustraliaCash utilities
+Summary:	Bitcoin utilities
 Group:		Applications/System
 
 %description utils
@@ -209,7 +209,7 @@ touch -a -m -t 201504280000 %{buildroot}%{_sysconfdir}/sysconfig/bitcoin
 mkdir -p %{buildroot}%{_unitdir}
 cat <<EOF > %{buildroot}%{_unitdir}/bitcoin.service
 [Unit]
-Description=AustraliaCash daemon
+Description=Bitcoin daemon
 After=syslog.target network.target
 
 [Service]
@@ -243,20 +243,20 @@ done
 
 %if %{_buildqt}
 # qt icons
-install -D -p share/pixmaps/bitcoin.ico %{buildroot}%{_datadir}/pixmaps/bitcoin.ico
+install -D -p share/pixmaps/australiacash.ico %{buildroot}%{_datadir}/pixmaps/australiacash.ico
 install -p share/pixmaps/nsis-header.bmp %{buildroot}%{_datadir}/pixmaps/
 install -p share/pixmaps/nsis-wizard.bmp %{buildroot}%{_datadir}/pixmaps/
 install -p %{SOURCE100} %{buildroot}%{_datadir}/pixmaps/bitcoin.svg
-%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/bitcoin16.png -w16 -h16
-%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/bitcoin32.png -w32 -h32
-%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/bitcoin64.png -w64 -h64
-%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/bitcoin128.png -w128 -h128
-%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/bitcoin256.png -w256 -h256
-%{_bindir}/convert -resize 16x16 %{buildroot}%{_datadir}/pixmaps/bitcoin256.png %{buildroot}%{_datadir}/pixmaps/bitcoin16.xpm
-%{_bindir}/convert -resize 32x32 %{buildroot}%{_datadir}/pixmaps/bitcoin256.png %{buildroot}%{_datadir}/pixmaps/bitcoin32.xpm
-%{_bindir}/convert -resize 64x64 %{buildroot}%{_datadir}/pixmaps/bitcoin256.png %{buildroot}%{_datadir}/pixmaps/bitcoin64.xpm
-%{_bindir}/convert -resize 128x128 %{buildroot}%{_datadir}/pixmaps/bitcoin256.png %{buildroot}%{_datadir}/pixmaps/bitcoin128.xpm
-%{_bindir}/convert %{buildroot}%{_datadir}/pixmaps/bitcoin256.png %{buildroot}%{_datadir}/pixmaps/bitcoin256.xpm
+%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/australiacash16.png -w16 -h16
+%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/australiacash32.png -w32 -h32
+%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/australiacash64.png -w64 -h64
+%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/australiacash128.png -w128 -h128
+%{_bindir}/inkscape %{SOURCE100} --export-png=%{buildroot}%{_datadir}/pixmaps/australiacash256.png -w256 -h256
+%{_bindir}/convert -resize 16x16 %{buildroot}%{_datadir}/pixmaps/australiacash256.png %{buildroot}%{_datadir}/pixmaps/australiacash16.xpm
+%{_bindir}/convert -resize 32x32 %{buildroot}%{_datadir}/pixmaps/australiacash256.png %{buildroot}%{_datadir}/pixmaps/australiacash32.xpm
+%{_bindir}/convert -resize 64x64 %{buildroot}%{_datadir}/pixmaps/australiacash256.png %{buildroot}%{_datadir}/pixmaps/australiacash64.xpm
+%{_bindir}/convert -resize 128x128 %{buildroot}%{_datadir}/pixmaps/australiacash256.png %{buildroot}%{_datadir}/pixmaps/australiacash128.xpm
+%{_bindir}/convert %{buildroot}%{_datadir}/pixmaps/australiacash256.png %{buildroot}%{_datadir}/pixmaps/australiacash256.xpm
 touch %{buildroot}%{_datadir}/pixmaps/*.png -r %{SOURCE100}
 touch %{buildroot}%{_datadir}/pixmaps/*.xpm -r %{SOURCE100}
 
@@ -265,10 +265,10 @@ mkdir -p %{buildroot}%{_datadir}/applications
 cat <<EOF > %{buildroot}%{_datadir}/applications/bitcoin-core.desktop
 [Desktop Entry]
 Encoding=UTF-8
-Name=AustraliaCash
-Comment=AustraliaCash P2P Cryptocurrency
-Comment[fr]=AustraliaCash, monnaie virtuelle cryptographique pair à pair
-Comment[tr]=AustraliaCash, eşten eşe kriptografik sanal para birimi
+Name=Bitcoin
+Comment=Bitcoin P2P Cryptocurrency
+Comment[fr]=Bitcoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Bitcoin, eşten eşe kriptografik sanal para birimi
 Exec=bitcoin-qt %u
 Terminal=false
 Type=Application
@@ -311,8 +311,10 @@ rm -f %{buildroot}%{_bindir}/test_*
 
 %check
 make check
-srcdir=src test/bitcoin-util-test.py
-test/functional/test_runner.py --extended
+pushd src
+srcdir=. test/bitcoin-util-test.py
+popd
+qa/pull-tester/rpc-tests.py -extended
 
 %post libs -p /sbin/ldconfig
 
@@ -322,7 +324,7 @@ test/functional/test_runner.py --extended
 getent group bitcoin >/dev/null || groupadd -r bitcoin
 getent passwd bitcoin >/dev/null ||
 	useradd -r -g bitcoin -d /var/lib/bitcoin -s /sbin/nologin \
-	-c "AustraliaCash wallet server" bitcoin
+	-c "Bitcoin wallet server" bitcoin
 exit 0
 
 %post server
@@ -332,12 +334,10 @@ if [ `%{_sbindir}/sestatus |grep -c "disabled"` -eq 0 ]; then
 for selinuxvariant in %{selinux_variants}; do
 	%{_sbindir}/semodule -s ${selinuxvariant} -i %{_datadir}/selinux/${selinuxvariant}/bitcoin.pp &> /dev/null || :
 done
-%{_sbindir}/semanage port -a -t bitcoin_port_t -p tcp 1987
-%{_sbindir}/semanage port -a -t bitcoin_port_t -p tcp 1986
-%{_sbindir}/semanage port -a -t bitcoin_port_t -p tcp 11987
-%{_sbindir}/semanage port -a -t bitcoin_port_t -p tcp 19335
-%{_sbindir}/semanage port -a -t bitcoin_port_t -p tcp 19443
-%{_sbindir}/semanage port -a -t bitcoin_port_t -p tcp 19444
+%{_sbindir}/semanage port -a -t bitcoin_port_t -p tcp 8332
+%{_sbindir}/semanage port -a -t bitcoin_port_t -p tcp 8333
+%{_sbindir}/semanage port -a -t bitcoin_port_t -p tcp 18332
+%{_sbindir}/semanage port -a -t bitcoin_port_t -p tcp 18333
 %{_sbindir}/fixfiles -R bitcoin-server restore &> /dev/null || :
 %{_sbindir}/restorecon -R %{_localstatedir}/lib/bitcoin || :
 fi
@@ -353,12 +353,10 @@ fi
 # SELinux
 if [ $1 -eq 0 ]; then
 	if [ `%{_sbindir}/sestatus |grep -c "disabled"` -eq 0 ]; then
-	%{_sbindir}/semanage port -d -p tcp 1987
-	%{_sbindir}/semanage port -d -p tcp 1986
-	%{_sbindir}/semanage port -d -p tcp 11987
-	%{_sbindir}/semanage port -d -p tcp 19335
-	%{_sbindir}/semanage port -d -p tcp 19443
-	%{_sbindir}/semanage port -d -p tcp 19444
+	%{_sbindir}/semanage port -d -p tcp 8332
+	%{_sbindir}/semanage port -d -p tcp 8333
+	%{_sbindir}/semanage port -d -p tcp 18332
+	%{_sbindir}/semanage port -d -p tcp 18333
 	for selinuxvariant in %{selinux_variants}; do
 		%{_sbindir}/semodule -s ${selinuxvariant} -r bitcoin &> /dev/null || :
 	done

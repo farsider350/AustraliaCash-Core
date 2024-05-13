@@ -1,4 +1,41 @@
-<TS language="da" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="da">
+<context>
+    <name>AddPeerDialog</name>
+    <message>
+        <source>Add Peer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the peer details below.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Be careful! Do not blindly trust anyone that tells you to add their node.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the peer&apos;s address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the peer&apos;s port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter an address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a valid peer address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 <context>
     <name>AddressBookPage</name>
     <message>
@@ -54,20 +91,20 @@
         <translation>&amp;Vælg</translation>
     </message>
     <message>
-        <source>Sending addresses</source>
+        <source>Such sending addresses</source>
         <translation>Afsendelsesadresser</translation>
     </message>
     <message>
-        <source>Receiving addresses</source>
+        <source>Much receiving addresses</source>
         <translation>Modtagelsesadresser</translation>
     </message>
     <message>
-        <source>These are your Australiacash addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Disse er dine Australiacash-adresser til afsendelse af betalinger. Tjek altid beløb og modtagelsesadresse, inden du sender australiacashs.</translation>
+        <source>These are your AustraliaCash addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Disse er dine AustraliaCash-adresser til afsendelse af betalinger. Tjek altid beløb og modtagelsesadresse, inden du sender australiacashs.</translation>
     </message>
     <message>
-        <source>These are your Australiacash addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Dette er dine Australiacash-adresser til modtagelse af betalinger. Det anbefales at bruge en ny modtagelsesadresse for hver transaktion.</translation>
+        <source>These are your AustraliaCash addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Dette er dine AustraliaCash-adresser til modtagelse af betalinger. Det anbefales at bruge en ny modtagelsesadresse for hver transaktion.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -132,10 +169,6 @@
         <translation>Gentag ny adgangskode</translation>
     </message>
     <message>
-        <source>Show password</source>
-        <translation>Vis adgangskode</translation>
-    </message>
-    <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
         <translation>Indtast det nye kodeord til tegnebogen.&lt;br/&gt;Brug venligst et kodeord på &lt;b&gt;ti eller flere tilfældige tegn&lt;/b&gt; eller &lt;b&gt;otte eller flere ord&lt;/b&gt;.</translation>
     </message>
@@ -172,8 +205,8 @@
         <translation>Bekræft tegnebogskryptering</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR LITECOINS&lt;/b&gt;!</source>
-        <translation>Advarsel: Hvis du krypterer din tegnebog og mister din adgangskode, vil du &lt;b&gt;MISTE ALLE DINE LITECOINS&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR AUSCOINS&lt;/b&gt;!</source>
+        <translation>Advarsel: Hvis du krypterer din tegnebog og mister din adgangskode, vil du &lt;b&gt;MISTE ALLE DINE AUSCOINS&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -236,7 +269,7 @@
     </message>
 </context>
 <context>
-    <name>AustraliaCashGUI</name>
+    <name>BitcoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Signér &amp;besked…</translation>
@@ -246,7 +279,7 @@
         <translation>Synkroniserer med netværk…</translation>
     </message>
     <message>
-        <source>&amp;Overview</source>
+        <source>&amp;Wow</source>
         <translation>&amp;Oversigt</translation>
     </message>
     <message>
@@ -310,11 +343,11 @@
         <translation>&amp;Skift adgangskode…</translation>
     </message>
     <message>
-        <source>&amp;Sending addresses...</source>
+        <source>&amp;Such sending addresses...</source>
         <translation>&amp;Afsendelsesadresser…</translation>
     </message>
     <message>
-        <source>&amp;Receiving addresses...</source>
+        <source>&amp;Much receiving addresses...</source>
         <translation>&amp;Modtagelsesadresser…</translation>
     </message>
     <message>
@@ -342,8 +375,8 @@
         <translation>Genindekserer blokke på disken…</translation>
     </message>
     <message>
-        <source>Send coins to a Australiacash address</source>
-        <translation>Send australiacashs til en Australiacash-adresse</translation>
+        <source>Send coins to a AustraliaCash address</source>
+        <translation>Send australiacashs til en AustraliaCash-adresse</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -366,19 +399,19 @@
         <translation>&amp;Verificér besked…</translation>
     </message>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
+        <source>AustraliaCash</source>
+        <translation>AustraliaCash</translation>
     </message>
     <message>
         <source>Wallet</source>
         <translation>Tegnebog</translation>
     </message>
     <message>
-        <source>&amp;Send</source>
-        <translation>&amp;Send</translation>
+        <source>&amp;Such Send</source>
+        <translation>&amp;Such Send</translation>
     </message>
     <message>
-        <source>&amp;Receive</source>
+        <source>&amp;Much Receive</source>
         <translation>&amp;Modtag</translation>
     </message>
     <message>
@@ -394,12 +427,12 @@
         <translation>Kryptér de private nøgler, der hører til din tegnebog</translation>
     </message>
     <message>
-        <source>Sign messages with your Australiacash addresses to prove you own them</source>
-        <translation>Signér beskeder med dine Australiacash-adresser for at bevise, at de tilhører dig</translation>
+        <source>Sign messages with your AustraliaCash addresses to prove you own them</source>
+        <translation>Signér beskeder med dine AustraliaCash-adresser for at bevise, at de tilhører dig</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Australiacash addresses</source>
-        <translation>Verificér beskeder for at sikre, at de er signeret med de angivne Australiacash-adresser</translation>
+        <source>Verify messages to ensure they were signed with specified AustraliaCash addresses</source>
+        <translation>Verificér beskeder for at sikre, at de er signeret med de angivne AustraliaCash-adresser</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -419,7 +452,7 @@
     </message>
     <message>
         <source>Request payments (generates QR codes and australiacash: URIs)</source>
-        <translation>Anmod om betalinger (genererer QR-koder og “australiacash:”-URI'er)</translation>
+        <translation>Anmod om betalinger (genererer QR-koder og “australiacash:”-URI&apos;er)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -438,8 +471,11 @@
         <translation>Tilvalg for &amp;kommandolinje</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Australiacash network</source>
-        <translation><numerusform>%n aktiv forbindelse til Australiacash-netværket</numerusform><numerusform>%n aktive forbindelser til Australiacash-netværket</numerusform></translation>
+        <source>%n active connection(s) to AustraliaCash network</source>
+        <translation>
+            <numerusform>%n aktiv forbindelse til AustraliaCash-netværket</numerusform>
+            <numerusform>%n aktive forbindelser til AustraliaCash-netværket</numerusform>
+        </translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -451,7 +487,10 @@
     </message>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Bearbejdede %n blok med transaktionshistorik.</numerusform><numerusform>Bearbejdede %n blokke med transaktionshistorik.</numerusform></translation>
+        <translation>
+            <numerusform>Bearbejdede %n blok med transaktionshistorik.</numerusform>
+            <numerusform>Bearbejdede %n blokke med transaktionshistorik.</numerusform>
+        </translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -482,8 +521,8 @@
         <translation>Opdateret</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Australiacash command-line options</source>
-        <translation>Vis %1 hjælpebesked for at få en liste over mulige tilvalg for Australiacash kommandolinje</translation>
+        <source>Show the %1 help message to get a list with possible AustraliaCash command-line options</source>
+        <translation>Vis %1 hjælpebesked for at få en liste over mulige tilvalg for AustraliaCash kommandolinje</translation>
     </message>
     <message>
         <source>%1 client</source>
@@ -552,8 +591,28 @@
         <translation>Tegnebog er &lt;b&gt;krypteret&lt;/b&gt; og i øjeblikket &lt;b&gt;låst&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Australiacash can no longer continue safely and will quit.</source>
-        <translation>Der opstod en fatal fejl. Australiacash kan ikke længere fortsætte sikkert og vil afslutte.</translation>
+        <source>A fatal error occurred. AustraliaCash can no longer continue safely and will quit.</source>
+        <translation>Der opstod en fatal fejl. AustraliaCash kan ikke længere fortsætte sikkert og vil afslutte.</translation>
+    </message>
+    <message>
+        <source>&amp;Print paper wallets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print paper wallets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Import Private Key...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import a AustraliaCash private key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Runaway exception</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -691,8 +750,8 @@
         <translation>Denne mærkat bliver rød, hvis en eller flere modtagere modtager et beløb, der er mindre end den aktuelle støvgrænse.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation>Kan variere med ±%1 satoshi per input.</translation>
+        <source>Can vary +/- %1 koinu(s) per input.</source>
+        <translation type="vanished">Kan variere med ±%1 koinu per input.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -705,6 +764,10 @@
     <message>
         <source>(change)</source>
         <translation>(byttepange)</translation>
+    </message>
+    <message>
+        <source>Can vary +/- %1 koinu per input.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -746,11 +809,11 @@
         <translation>Redigér afsendelsesadresse</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Australiacash address.</source>
-        <translation>Den indtastede adresse “%1” er ikke en gyldig Australiacash-adresse.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid AustraliaCash address.</source>
+        <translation>Den indtastede adresse “%1” er ikke en gyldig AustraliaCash-adresse.</translation>
     </message>
     <message>
-        <source>The entered address "%1" is already in the address book.</source>
+        <source>The entered address &quot;%1&quot; is already in the address book.</source>
         <translation>Den indtastede adresse “%1” er allerede i adressebogen.</translation>
     </message>
     <message>
@@ -820,7 +883,7 @@
         <translation>Vælg datamappe under opstart (standard: %u)</translation>
     </message>
     <message>
-        <source>Set language, for example "de_DE" (default: system locale)</source>
+        <source>Set language, for example &quot;de_DE&quot; (default: system locale)</source>
         <translation>Vælg sprog; fx “da_DK” (standard: systemsprog)</translation>
     </message>
     <message>
@@ -841,6 +904,69 @@
     </message>
 </context>
 <context>
+    <name>ImportKeysDialog</name>
+    <message>
+        <source>Import Private Key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Import Private Key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Private Key:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Private key to import into your wallet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label for this private key in your wallet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label (optional):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rescan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset this form.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished">&amp;Annullér</translation>
+    </message>
+    <message>
+        <source>Invalid private key; please check and try again!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid address generated from private key; please check and try again!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to add private key.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rescanning...</source>
+        <translation type="unfinished">Genindlæser…</translation>
+    </message>
+</context>
+<context>
     <name>Intro</name>
     <message>
         <source>Welcome</source>
@@ -855,16 +981,8 @@
         <translation>Siden dette er første gang, programmet startes, kan du vælge, hvor %1 skal gemme sin data.</translation>
     </message>
     <message>
-        <source>When you click OK, %1 will begin to download and process the full %4 block chain (%2GB) starting with the earliest transactions in %3 when %4 initially launched.</source>
-        <translation>Når du klikker OK, vil %1 begynde at downloade og bearbejde den fulde %4-blokkæde (%2 GB), startende med de tidligste transaktioner i %3, da %4 først startede.</translation>
-    </message>
-    <message>
-        <source>This initial synchronisation is very demanding, and may expose hardware problems with your computer that had previously gone unnoticed. Each time you run %1, it will continue downloading where it left off.</source>
-        <translation>Denne indledningsvise synkronisering er meget krævende, og den kan potentielt afsløre hardwareproblemer med din computer, som du ellers ikke har lagt mærke til. Hver gang, du kører %1, vil den fortsætte med at downloade, hvor den sidst slap.</translation>
-    </message>
-    <message>
-        <source>If you have chosen to limit block chain storage (pruning), the historical data must still be downloaded and processed, but will be deleted afterward to keep your disk usage low.</source>
-        <translation>Hvis du har valgt at begrænse opbevaringen af blokkæden (beskæring/pruning), vil al historisk data stadig skulle downloades og bearbejdes men vil blive slettet efterfølgende for at holde dit diskforbrug lavt.</translation>
+        <source>%1 will download and store a copy of the AustraliaCash block chain. At least %2GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>%1 vil downloade og gemme et kopi af AustraliaCash-blokkæden. Mindst %2 GB data vil blive gemt i denne mappe, og den vil vokse over tid. Tegnebogen vil også blive gemt i denne mappe.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -875,27 +993,7 @@
         <translation>Brug tilpasset mappe for data:</translation>
     </message>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
-    </message>
-    <message>
-        <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
-        <translation>Mindst %1 GB data vil blive gemt i denne mappe, og det vil vokse over tid.</translation>
-    </message>
-    <message>
-        <source>Approximately %1 GB of data will be stored in this directory.</source>
-        <translation>Omtrent %1 GB data vil blive gemt i denne mappe.</translation>
-    </message>
-    <message>
-        <source>%1 will download and store a copy of the Australiacash block chain.</source>
-        <translation>%1 vil downloade og gemme en kopi af Australiacash-blokkæden.</translation>
-    </message>
-    <message>
-        <source>The wallet will also be stored in this directory.</source>
-        <translation>Tegnebogen vil også blive gemt i denne mappe.</translation>
-    </message>
-    <message>
-        <source>Error: Specified data directory "%1" cannot be created.</source>
+        <source>Error: Specified data directory &quot;%1&quot; cannot be created.</source>
         <translation>Fejl: Angivet datamappe “%1” kan ikke oprettes.</translation>
     </message>
     <message>
@@ -904,11 +1002,21 @@
     </message>
     <message numerus="yes">
         <source>%n GB of free space available</source>
-        <translation><numerusform>%n GB fri plads tilgængelig</numerusform><numerusform>%n GB fri plads tilgængelig</numerusform></translation>
+        <translation>
+            <numerusform>%n GB fri plads tilgængelig</numerusform>
+            <numerusform>%n GB fri plads tilgængelig</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>(of %n GB needed)</source>
-        <translation><numerusform>(ud af %n GB nødvendig)</numerusform><numerusform>(ud af %n GB nødvendig)</numerusform></translation>
+        <translation>
+            <numerusform>(ud af %n GB nødvendig)</numerusform>
+            <numerusform>(ud af %n GB nødvendig)</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Choose data directory</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -918,7 +1026,7 @@
         <translation>Formular</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the australiacash network, as detailed below.</source>
+        <source>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the australiacash network, as detailed below.</source>
         <translation>Nylige transaktioner er måske ikke synlige endnu, og derfor kan din tegnebogs saldo være ukorrekt. Denne information vil være korrekt, når din tegnebog er færdig med at synkronisere med australiacash-netværket, som detaljerne herunder viser.</translation>
     </message>
     <message>
@@ -1016,24 +1124,16 @@
         <translation>Antallet af script&amp;verificeringstråde</translation>
     </message>
     <message>
+        <source>Accept connections from outside</source>
+        <translation>Acceptér forbindelser udefra</translation>
+    </message>
+    <message>
+        <source>Allow incoming connections</source>
+        <translation>Tillad indkommende forbindelser</translation>
+    </message>
+    <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
         <translation>IP-adresse for proxyen (fx IPv4: 127.0.0.1 / IPv6: ::1)</translation>
-    </message>
-    <message>
-        <source>Shows if the supplied default SOCKS5 proxy is used to reach peers via this network type.</source>
-        <translation>Viser om den angivne standard-SOCKS5-proxy bruges til at nå knuder via denne netværkstype.</translation>
-    </message>
-    <message>
-        <source>Use separate SOCKS&amp;5 proxy to reach peers via Tor hidden services:</source>
-        <translation>Brug separat SOCKS&amp;5-proxy for at nå knuder via Tors skjulte tjenester:</translation>
-    </message>
-    <message>
-        <source>Hide the icon from the system tray.</source>
-        <translation>Skjul ikonet fra statusfeltet.</translation>
-    </message>
-    <message>
-        <source>&amp;Hide tray icon</source>
-        <translation>&amp;Skjul statusikon</translation>
     </message>
     <message>
         <source>Minimize instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Exit in the menu.</source>
@@ -1041,19 +1141,15 @@
     </message>
     <message>
         <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>Tredjeparts-URL'er (fx et blokhåndteringsværktøj), der vises i transaktionsfanen som genvejsmenupunkter. %s i URL'en erstattes med transaktionens hash. Flere URL'er separeres med en lodret streg |.</translation>
+        <translation>Tredjeparts-URL&apos;er (fx et blokhåndteringsværktøj), der vises i transaktionsfanen som genvejsmenupunkter. %s i URL&apos;en erstattes med transaktionens hash. Flere URL&apos;er separeres med en lodret streg |.</translation>
+    </message>
+    <message>
+        <source>Third party transaction URLs</source>
+        <translation>Tredjeparts-transaktions-URL&apos;er</translation>
     </message>
     <message>
         <source>Active command-line options that override above options:</source>
         <translation>Aktuelle tilvalg for kommandolinjen, der tilsidesætter ovenstående tilvalg:</translation>
-    </message>
-    <message>
-        <source>Open the %1 configuration file from the working directory.</source>
-        <translation>Åbn konfigurationsfilen for %1 fra arbejdsmappen.</translation>
-    </message>
-    <message>
-        <source>Open Configuration File</source>
-        <translation>Åbn konfigurationsfil</translation>
     </message>
     <message>
         <source>Reset all client options to default.</source>
@@ -1092,24 +1188,16 @@
         <translation>&amp;Brug ubekræftede byttepenge</translation>
     </message>
     <message>
-        <source>Automatically open the Australiacash client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Åbn automatisk Australiacash-klientens port på routeren. Dette virker kun, når din router understøtter UPnP, og UPnP er aktiveret.</translation>
+        <source>Automatically open the AustraliaCash client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Åbn automatisk AustraliaCash-klientens port på routeren. Dette virker kun, når din router understøtter UPnP, og UPnP er aktiveret.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
         <translation>Konfigurér port vha. &amp;UPnP</translation>
     </message>
     <message>
-        <source>Accept connections from outside.</source>
-        <translation>Acceptér forbindelser udefra.</translation>
-    </message>
-    <message>
-        <source>Allow incomin&amp;g connections</source>
-        <translation>Tillad &amp;indkommende forbindelser</translation>
-    </message>
-    <message>
-        <source>Connect to the Australiacash network through a SOCKS5 proxy.</source>
-        <translation>Forbind til Australiacash-netværket gennem en SOCKS5-proxy.</translation>
+        <source>Connect to the AustraliaCash network through a SOCKS5 proxy.</source>
+        <translation>Forbind til AustraliaCash-netværket gennem en SOCKS5-proxy.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1132,6 +1220,10 @@
         <translation>Bruges til at nå knuder via:</translation>
     </message>
     <message>
+        <source>Shows, if the supplied default SOCKS5 proxy is used to reach peers via this network type.</source>
+        <translation>Viser om den angivne standard-SOCKS5-proxy bruges til at nå knuder via denne netværkstype.</translation>
+    </message>
+    <message>
         <source>IPv4</source>
         <translation>IPv4</translation>
     </message>
@@ -1144,12 +1236,24 @@
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Australiacash network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Forbind til Australiacash-netværket gennem en separat SOCKS5-proxy for Tors skjulte tjenester.</translation>
+        <source>Connect to the AustraliaCash network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>Forbind til AustraliaCash-netværket gennem en separat SOCKS5-proxy for skjulte Tor-tjenester.</translation>
+    </message>
+    <message>
+        <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services:</source>
+        <translation>Brug separat SOCKS5-proxy for at nå knuder via skjulte Tor-tjenester.</translation>
     </message>
     <message>
         <source>&amp;Window</source>
         <translation>&amp;Vindue</translation>
+    </message>
+    <message>
+        <source>&amp;Hide the icon from the system tray.</source>
+        <translation>&amp;Skjul ikonet fra statusbaren.</translation>
+    </message>
+    <message>
+        <source>Hide tray icon</source>
+        <translation>Skjul statusikon</translation>
     </message>
     <message>
         <source>Show only a tray icon after minimizing the window.</source>
@@ -1188,10 +1292,6 @@
         <translation>Hvorvidt egenskaber for coin-styring skal vises eller ej.</translation>
     </message>
     <message>
-        <source>&amp;Third party transaction URLs</source>
-        <translation>&amp;Tredjeparts-transaktions-URL'er</translation>
-    </message>
-    <message>
         <source>&amp;OK</source>
         <translation>&amp;Ok</translation>
     </message>
@@ -1220,28 +1320,28 @@
         <translation>Klienten vil lukke ned. Vil du fortsætte?</translation>
     </message>
     <message>
-        <source>Configuration options</source>
-        <translation>Konfigurationsindstillinger</translation>
-    </message>
-    <message>
-        <source>The configuration file is used to specify advanced user options which override GUI settings. Additionally, any command-line options will override this configuration file.</source>
-        <translation>Konfigurationsfilen bruges til at opsætte avancerede brugerindstillinger, som tilsidesætter indstillingerne i den grafiske brugerflade. Derudover vil eventuelle kommandolinjetilvalg tilsidesætte denne konfigurationsfil.</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Fejl</translation>
-    </message>
-    <message>
-        <source>The configuration file could not be opened.</source>
-        <translation>Konfigurationsfilen kunne ikke åbnes.</translation>
-    </message>
-    <message>
         <source>This change would require a client restart.</source>
         <translation>Denne ændring vil kræve en genstart af klienten.</translation>
     </message>
     <message>
         <source>The supplied proxy address is invalid.</source>
         <translation>Den angivne proxy-adresse er ugyldig.</translation>
+    </message>
+    <message>
+        <source>Disables some advanced features but all blocks will still be fully validated. Reverting this setting requires re-downloading the entire blockchain. Actual disk usage may be somewhat higher.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prune &amp;block storage to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverting this setting requires re-downloading the entire blockchain.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1251,8 +1351,8 @@
         <translation>Formular</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Australiacash network after a connection is established, but this process has not completed yet.</source>
-        <translation>Den viste information kan være forældet. Din tegnebog synkroniserer automatisk med Australiacash-netværket, når en forbindelse etableres, men denne proces er ikke gennemført endnu.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the AustraliaCash network after a connection is established, but this process has not completed yet.</source>
+        <translation>Den viste information kan være forældet. Din tegnebog synkroniserer automatisk med AustraliaCash-netværket, når en forbindelse etableres, men denne proces er ikke gennemført endnu.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1318,6 +1418,229 @@
         <source>Current total balance in watch-only addresses</source>
         <translation>Nuværende totalsaldo på kigge-adresser</translation>
     </message>
+    <message>
+        <source>Helpful tip of the day:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Never share your wallet.dat file with anyone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For advanced operations, use the console in &apos;Help&apos; -&gt; &apos;Debug Window&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encrypt your wallet with a strong passphrase for maximum security</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make sure to keep your wallet software updated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Backup your private key to recover your coins, using &apos;File&apos; &gt; &apos;Backup Wallet&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always do your own research before using an external cryptocurrency service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Never share your private key with anyone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Who owns the private keys, owns the coins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To see ongoing development and contribute, check out the AustraliaCash Core repository on GitHub</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Services that claim to double your australiacashs are always ponzi schemes</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaperWalletDialog</name>
+    <message>
+        <source>Print Your Paper Wallets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Very New Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>So Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Many Wallets?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>10</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>12</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Public Key:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning: Network Activity Detected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>It is recommended to disconnect from the internet before printing paper wallets. Even though paper wallets are generated on your local computer, it is still possible to unknowingly have malware that transmits your screen to a remote location. It is also recommended to print to a local printer vs a network printer since that network traffic can be monitored. Some advanced printers also store copies of each printed document. Proceed with caution relative to the amount of value you plan to store on each address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error encoding Address into QR Code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error encoding private key into QR Code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Printing Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>failed to open file, is it writable?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load Paper Wallets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The paper wallet printing process has begun.&lt;br/&gt;Please wait for the wallets to print completely and verify that everything printed correctly.&lt;br/&gt;Check for misalignments, ink bleeding, smears, or anything else that could make the private keys unreadable.&lt;br/&gt;Now, enter the number of AUS you wish to send to each wallet:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paper wallet %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;%1&lt;/b&gt; to Paper Wallet &lt;span style=&apos;font-family: monospace;&apos;&gt;%2&lt;/span&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send Coins</source>
+        <translation type="unfinished">Send australiacashs</translation>
+    </message>
+    <message>
+        <source>The recipient address is not valid, please recheck.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The amount to pay must be larger than 0</source>
+        <translation type="unfinished">Beløbet til betaling skal være større end 0. {0?}</translation>
+    </message>
+    <message>
+        <source>The amount exceeds your balance.</source>
+        <translation type="unfinished">Beløbet overstiger din saldo.</translation>
+    </message>
+    <message>
+        <source>The total exceeds your balance when the transaction fee is included</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate address found, can only send to each address once per send operation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transaction creation failed!</source>
+        <translation type="unfinished">Oprettelse af transaktion mislykkedes!</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to send?</source>
+        <translation type="unfinished">Er du sikker på, at du vil sende?</translation>
+    </message>
+    <message>
+        <source>added as transaction fee</source>
+        <translation type="unfinished">tilføjet som transaktionsgebyr</translation>
+    </message>
+    <message>
+        <source>Total Amount %1 (= %2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>or</source>
+        <translation type="unfinished">eller</translation>
+    </message>
+    <message>
+        <source>Confirm send coins</source>
+        <translation type="unfinished">Bekræft afsendelse af australiacashs</translation>
+    </message>
+    <message>
+        <source>The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PaymentServer</name>
@@ -1342,8 +1665,8 @@
         <translation>Ugyldig betalingsadresse %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Australiacash address or malformed URI parameters.</source>
-        <translation>URI kan ikke tolkes! Dette kan skyldes en ugyldig Australiacash-adresse eller forkert udformede URL-parametre.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid AustraliaCash address or malformed URI parameters.</source>
+        <translation>URI kan ikke tolkes! Dette kan skyldes en ugyldig AustraliaCash-adresse eller forkert udformede URL-parametre.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -1358,7 +1681,7 @@
         <translation>Betalingsanmodning afvist</translation>
     </message>
     <message>
-        <source>Payment request network doesn't match client network.</source>
+        <source>Payment request network doesn&apos;t match client network.</source>
         <translation>Netværk for betalingsanmodning stemmer ikke overens med klientens netværk.</translation>
     </message>
     <message>
@@ -1379,7 +1702,7 @@
     </message>
     <message>
         <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>Anmodet betalingsbeløb på %1 er for lille (regnes som støv).</translation>
+        <translation type="vanished">Anmodet betalingsbeløb på %1 er for lille (regnes som støv).</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -1409,6 +1732,10 @@
         <source>Payment acknowledged</source>
         <translation>Betaling anerkendt</translation>
     </message>
+    <message>
+        <source>Requested payment amount of %1 is too small (below discard threshold).</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PeerTableModel</name>
@@ -1429,12 +1756,43 @@
         <translation>Ping</translation>
     </message>
     <message>
-        <source>Sent</source>
-        <translation>Sendt</translation>
+        <source>Bytes Sent</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Received</source>
-        <translation>Modtaget</translation>
+        <source>Bytes Received</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PeerTools</name>
+    <message>
+        <source>Error: Node address is invalid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: Peer-to-peer functionality missing or disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attempted to one try node.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: Unable to add node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Node not found in connected nodes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disconnected the node: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Returned OK.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1444,8 +1802,8 @@
         <translation>Beløb</translation>
     </message>
     <message>
-        <source>Enter a Australiacash address (e.g. %1)</source>
-        <translation>Indtast en Australiacash-adresse (fx %1)</translation>
+        <source>Enter a AustraliaCash address (e.g. %1)</source>
+        <translation>Indtast en AustraliaCash-adresse (fx %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1477,23 +1835,38 @@
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
-        <translation><numerusform>%n sekund</numerusform><numerusform>%n sekunder</numerusform></translation>
+        <translation>
+            <numerusform>%n sekund</numerusform>
+            <numerusform>%n sekunder</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>%n minute(s)</source>
-        <translation><numerusform>%n minut</numerusform><numerusform>%n minutter</numerusform></translation>
+        <translation>
+            <numerusform>%n minut</numerusform>
+            <numerusform>%n minutter</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
-        <translation><numerusform>%n time</numerusform><numerusform>%n timer</numerusform></translation>
+        <translation>
+            <numerusform>%n time</numerusform>
+            <numerusform>%n timer</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>%n day(s)</source>
-        <translation><numerusform>%n dag</numerusform><numerusform>%n dage</numerusform></translation>
+        <translation>
+            <numerusform>%n dag</numerusform>
+            <numerusform>%n dage</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <source>%n week(s)</source>
-        <translation><numerusform>%n uge</numerusform><numerusform>%n uger</numerusform></translation>
+        <translation>
+            <numerusform>%n uge</numerusform>
+            <numerusform>%n uger</numerusform>
+        </translation>
     </message>
     <message>
         <source>%1 and %2</source>
@@ -1501,37 +1874,32 @@
     </message>
     <message numerus="yes">
         <source>%n year(s)</source>
-        <translation><numerusform>%n år</numerusform><numerusform>%n år</numerusform></translation>
+        <translation>
+            <numerusform>%n år</numerusform>
+            <numerusform>%n år</numerusform>
+        </translation>
     </message>
     <message>
-        <source>%1 B</source>
-        <translation>%1 B</translation>
-    </message>
-    <message>
-        <source>%1 KB</source>
-        <translation>%1 KB</translation>
-    </message>
-    <message>
-        <source>%1 MB</source>
-        <translation>%1 MB</translation>
-    </message>
-    <message>
-        <source>%1 GB</source>
-        <translation>%1 GB</translation>
-    </message>
-    <message>
-        <source>%1 didn't yet exit safely...</source>
+        <source>%1 didn&apos;t yet exit safely...</source>
         <translation>%1 har endnu ikke afsluttet på sikker vis…</translation>
     </message>
     <message>
-        <source>unknown</source>
-        <translation>ukendt</translation>
+        <source>%1 B</source>
+        <translation type="unfinished">%1 B</translation>
+    </message>
+    <message>
+        <source>%1 kB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 MB</source>
+        <translation type="unfinished">%1 MB</translation>
     </message>
 </context>
 <context>
     <name>QObject::QObject</name>
     <message>
-        <source>Error: Specified data directory "%1" does not exist.</source>
+        <source>Error: Specified data directory &quot;%1&quot; does not exist.</source>
         <translation>Fejl: Angivet datamappe “%1” eksisterer ikke.</translation>
     </message>
     <message>
@@ -1627,10 +1995,6 @@
     <message>
         <source>Memory usage</source>
         <translation>Hukommelsesforbrug</translation>
-    </message>
-    <message>
-        <source>&amp;Reset</source>
-        <translation>&amp;Nulstil</translation>
     </message>
     <message>
         <source>Received</source>
@@ -1749,6 +2113,10 @@
         <translation>&amp;Netværkstrafik</translation>
     </message>
     <message>
+        <source>&amp;Clear</source>
+        <translation>&amp;Ryd</translation>
+    </message>
+    <message>
         <source>Totals</source>
         <translation>Totaler</translation>
     </message>
@@ -1801,24 +2169,36 @@
         <translation>Velkommen til %1s RPC-konsol.</translation>
     </message>
     <message>
-        <source>Use up and down arrows to navigate history, and %1 to clear screen.</source>
-        <translation>Brug op- og nedpilene til at navigere i historikken og %1 til at rydde skærmen.</translation>
+        <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>
+        <translation>Brug op- og ned-piletasterne til at navigere i historikken og &lt;b&gt;Ctrl-L&lt;/b&gt; til at rydde skærmen.</translation>
     </message>
     <message>
-        <source>Type %1 for an overview of available commands.</source>
-        <translation>Tast %1 for en oversigt over de tilgængelige kommandoer.</translation>
+        <source>Type &lt;b&gt;help&lt;/b&gt; for an overview of available commands.</source>
+        <translation>Tast &lt;b&gt;help&lt;/b&gt; for en oversigt over de tilgængelige kommandoer.</translation>
     </message>
     <message>
-        <source>For more information on using this console type %1.</source>
-        <translation>For mere information om at bruge denne konsol, tast %1.</translation>
-    </message>
-    <message>
-        <source>WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramifications of a command.</source>
-        <translation>ADVARSEL: Svindlere har tidligere aktivt bedt brugere om at indtaste kommandoer her for at stjæle indholdet af deres tegnebøger. Brug ikke denne konsol uden fuldt ud at forstå følgerne af en kommando.</translation>
+        <source>WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramification of a command.</source>
+        <translation>ADVARSEL: Svindlere har tidligere forsøgt at få folk til at indtaste kommandoer her og derved stjæle indholdet af deres tegnebog. Brug ikke denne konsol uden fuldt ud at forstå følgerne for en kommando.</translation>
     </message>
     <message>
         <source>Network activity disabled</source>
         <translation>Netværksaktivitet deaktiveret</translation>
+    </message>
+    <message>
+        <source>%1 B</source>
+        <translation>%1 B</translation>
+    </message>
+    <message>
+        <source>%1 KB</source>
+        <translation>%1 KB</translation>
+    </message>
+    <message>
+        <source>%1 MB</source>
+        <translation>%1 MB</translation>
+    </message>
+    <message>
+        <source>%1 GB</source>
+        <translation>%1 GB</translation>
     </message>
     <message>
         <source>(node id: %1)</source>
@@ -1852,6 +2232,38 @@
         <source>Unknown</source>
         <translation>Ukendt</translation>
     </message>
+    <message>
+        <source>Connected peers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add new peer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove peer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One try peer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fejl</translation>
+    </message>
+    <message>
+        <source>Remove Peer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Are you sure you want to remove the peer: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No peer was selected.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ReceiveCoinsDialog</name>
@@ -1868,8 +2280,16 @@
         <translation>&amp;Besked:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Australiacash network.</source>
-        <translation>En valgfri besked, der føjes til betalingsanmodningen, og som vil vises, når anmodningen åbnes. Bemærk: Beskeden vil ikke sendes sammen med betalingen over Australiacash-netværket.</translation>
+        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
+        <translation>Genbrug en af de tidligere brugte modtagelsesadresser. Genbrug af adresser har indflydelse på sikkerhed og privatliv. Brug ikke dette med mindre du genskaber en betalingsanmodning fra tidligere.</translation>
+    </message>
+    <message>
+        <source>R&amp;euse an existing receiving address (not recommended)</source>
+        <translation>&amp;Genbrug en eksisterende modtagelsesadresse (anbefales ikke)</translation>
+    </message>
+    <message>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the AustraliaCash network.</source>
+        <translation>En valgfri besked, der føjes til betalingsanmodningen, og som vil vises, når anmodningen åbnes. Bemærk: Beskeden vil ikke sendes sammen med betalingen over AustraliaCash-netværket.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -1890,14 +2310,6 @@
     <message>
         <source>Clear</source>
         <translation>Ryd</translation>
-    </message>
-    <message>
-        <source>Native segwit addresses (aka Bech32 or BIP-173) reduce your transaction fees later on and offer better protection against typos, but old wallets don't support them. When unchecked, an address compatible with older wallets will be created instead.</source>
-        <translation>Rene segwit-adresser (kendt som Bech32 eller BIP-173) reducerer dine transaktionsgebyrer i det lange løb og giver bedre beskyttelse imod tastefejl, men gamle tegnebøger understøtter dem ikke. Hvis dette ikke vælges, vil i stedet en adresse, der fungerer med ældre tegnebøger, oprettes.</translation>
-    </message>
-    <message>
-        <source>Generate native segwit (Bech32) address</source>
-        <translation>Generér rene segwit-adresser (Bech32)</translation>
     </message>
     <message>
         <source>Requested payments history</source>
@@ -2089,14 +2501,6 @@
         <translation>Vælg…</translation>
     </message>
     <message>
-        <source>Using the fallbackfee can result in sending a transaction that will take several hours or days (or never) to confirm. Consider choosing your fee manually or wait until you have validated the complete chain.</source>
-        <translation>Brug af tilbagefaldsgebyret kan resultere i en transaktion, der tager adskillige timer eller dage (eller aldrig) at bekræfte. Overvej at vælge dit gebyr manuelt eller at vente indtil du har valideret hele kæden.</translation>
-    </message>
-    <message>
-        <source>Warning: Fee estimation is currently not possible.</source>
-        <translation>Advarsel: Gebyrestimering er ikke muligt i øjeblikket.</translation>
-    </message>
-    <message>
         <source>collapse fee-settings</source>
         <translation>sammenfold gebyropsætning</translation>
     </message>
@@ -2105,12 +2509,16 @@
         <translation>pr. kilobyte</translation>
     </message>
     <message>
-        <source>If the custom fee is set to 1000 satoshis and the transaction is only 250 bytes, then "per kilobyte" only pays 250 satoshis in fee, while "total at least" pays 1000 satoshis. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Hvis det brugertilpassede gebyr er sat til 1000 satoshis, og transaktionen kun fylder 250 byte, betaler “pr. kilobyte” kun 250 satoshis i gebyr, mens “total mindst” betaler 1000 satoshis. For transaktioner større end en kilobyte betaler begge pr. kilobyte.</translation>
+        <source>If the custom fee is set to 1000 koinu and the transaction is only 250 bytes, then &quot;per kilobyte&quot; only pays 250 koinu in fee, while &quot;total at least&quot; pays 1000 koinu. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <translation type="vanished">Hvis det brugertilpassede gebyr er sat til 1000 koinu, og transaktionen kun fylder 250 byte, betaler “pr. kilobyte” kun 250 koinu i gebyr, mens “total mindst” betaler 1000 koinu. For transaktioner større end en kilobyte betaler begge pr. kilobyte.</translation>
     </message>
     <message>
         <source>Hide</source>
         <translation>Skjul</translation>
+    </message>
+    <message>
+        <source>total at least</source>
+        <translation>total mindst</translation>
     </message>
     <message>
         <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for australiacash transactions than the network can process.</source>
@@ -2130,7 +2538,15 @@
     </message>
     <message>
         <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
-        <translation>(Smart-gebyr er ikke initialiseret endnu. Dette tager typisk nogle få blokke…)</translation>
+        <translation type="vanished">(Smart-gebyr er ikke initialiseret endnu. Dette tager typisk nogle få blokke…)</translation>
+    </message>
+    <message>
+        <source>normal</source>
+        <translation type="vanished">normal</translation>
+    </message>
+    <message>
+        <source>fast</source>
+        <translation type="vanished">hurtig</translation>
     </message>
     <message>
         <source>Send to multiple recipients at once</source>
@@ -2150,15 +2566,7 @@
     </message>
     <message>
         <source>Confirmation time target:</source>
-        <translation>Mål for bekræftelsestid:</translation>
-    </message>
-    <message>
-        <source>Enable Replace-By-Fee</source>
-        <translation>Aktivér erstat-med-gebyr (RBF)</translation>
-    </message>
-    <message>
-        <source>With Replace-By-Fee (BIP-125) you can increase a transaction's fee after it is sent. Without this, a higher fee may be recommended to compensate for increased transaction delay risk.</source>
-        <translation>Med erstat-med-gebyr (Replace-By-Fee, BIP-125) kan du øge en transaktions gebyr, efter den er sendt. Uden dette kan et højere gebyr anbefales for at kompensere for øget risiko for at transaktionen bliver forsinket.</translation>
+        <translation type="vanished">Mål for bekræftelsestid:</translation>
     </message>
     <message>
         <source>Clear &amp;All</source>
@@ -2205,10 +2613,6 @@
         <translation>Kopiér byttepenge</translation>
     </message>
     <message>
-        <source>%1 (%2 blocks)</source>
-        <translation>%1 (%2 blokke)</translation>
-    </message>
-    <message>
         <source>%1 to %2</source>
         <translation>%1 til %2</translation>
     </message>
@@ -2227,14 +2631,6 @@
     <message>
         <source>or</source>
         <translation>eller</translation>
-    </message>
-    <message>
-        <source>You can increase the fee later (signals Replace-By-Fee, BIP-125).</source>
-        <translation>Du kan øge gebyret senere (signalerer erstat-med-gebyr, BIP-125).</translation>
-    </message>
-    <message>
-        <source>Not signalling Replace-By-Fee, BIP-125.</source>
-        <translation>Signalerer ikke erstat-med-gebyr, BIP-125.</translation>
     </message>
     <message>
         <source>Confirm send coins</source>
@@ -2276,17 +2672,27 @@
         <source>Payment request expired.</source>
         <translation>Betalingsanmodning er udløbet.</translation>
     </message>
+    <message numerus="yes">
+        <source>%n block(s)</source>
+        <translation type="vanished">
+            <numerusform>%n blok</numerusform>
+            <numerusform>%n blokke</numerusform>
+        </translation>
+    </message>
     <message>
         <source>Pay only the required fee of %1</source>
         <translation>Betal kun det påkrævede gebyr på %1</translation>
     </message>
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>
-        <translation><numerusform>Bekræftelse estimeret til at begynde om %n blok.</numerusform><numerusform>Bekræftelse estimeret til at begynde om %n blokke.</numerusform></translation>
+        <translation type="vanished">
+            <numerusform>Bekræftelse estimeret til at begynde om %n blok.</numerusform>
+            <numerusform>Bekræftelse estimeret til at begynde om %n blokke.</numerusform>
+        </translation>
     </message>
     <message>
-        <source>Warning: Invalid Australiacash address</source>
-        <translation>Advarsel: Ugyldig Australiacash-adresse</translation>
+        <source>Warning: Invalid AustraliaCash address</source>
+        <translation>Advarsel: Ugyldig AustraliaCash-adresse</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -2303,6 +2709,30 @@
     <message>
         <source>(no label)</source>
         <translation>(ingen mærkat)</translation>
+    </message>
+    <message>
+        <source>Using the fallbackfee can result in sending a transaction that will take several hours or days (or never) to confirm. Consider choosing your fee manually or wait until you have validated the complete chain.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning: Fee estimation is currently not possible.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If the custom fee is set to 1000 satoshis and the transaction is only 250 bytes, then &quot;per kilobyte&quot; only pays 250 satoshis in fee, while &quot;total at least&quot; pays 1000 satoshis. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Priority:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>high</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2328,8 +2758,8 @@
         <translation>Dette er en normal betaling.</translation>
     </message>
     <message>
-        <source>The Australiacash address to send the payment to</source>
-        <translation>Australiacash-adresse, som betalingen skal sendes til</translation>
+        <source>The AustraliaCash address to send the payment to</source>
+        <translation>AustraliaCash-adresse, som betalingen skal sendes til</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -2356,10 +2786,6 @@
         <translation>&amp;Træk gebyr fra beløb</translation>
     </message>
     <message>
-        <source>Use available balance</source>
-        <translation>Brug tilgængelig saldo</translation>
-    </message>
-    <message>
         <source>Message:</source>
         <translation>Besked:</translation>
     </message>
@@ -2376,8 +2802,8 @@
         <translation>Indtast et mærkat for denne adresse for at føje den til listen over brugte adresser</translation>
     </message>
     <message>
-        <source>A message that was attached to the australiacash: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Australiacash network.</source>
-        <translation>En besked, som blev føjet til “bitcon:”-URI'en, som vil gemmes med transaktionen til din reference. Bemærk: Denne besked vil ikke blive sendt over Australiacash-netværket.</translation>
+        <source>A message that was attached to the australiacash: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the AustraliaCash network.</source>
+        <translation>En besked, som blev føjet til “bitcon:”-URI&apos;en, som vil gemmes med transaktionen til din reference. Bemærk: Denne besked vil ikke blive sendt over AustraliaCash-netværket.</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2425,8 +2851,8 @@
         <translation>Du kan signere beskeder/aftaler med dine adresser for at bevise, at du kan modtage australiacash, der bliver sendt til adresserne. Vær forsigtig med ikke at signere noget vagt eller tilfældigt, da eventuelle phishing-angreb kan snyde dig til at overlade din identitet til dem. Signér kun fuldt ud detaljerede udsagn, som du er enig i.</translation>
     </message>
     <message>
-        <source>The Australiacash address to sign the message with</source>
-        <translation>Australiacash-adresse, som beskeden skal signeres med</translation>
+        <source>The AustraliaCash address to sign the message with</source>
+        <translation>AustraliaCash-adresse, som beskeden skal signeres med</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2457,8 +2883,8 @@
         <translation>Kopiér den nuværende signatur til systemets udklipsholder</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Australiacash address</source>
-        <translation>Signér denne besked for at bevise, at Australiacash-adressen tilhører dig</translation>
+        <source>Sign the message to prove you own this AustraliaCash address</source>
+        <translation>Signér denne besked for at bevise, at AustraliaCash-adressen tilhører dig</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -2477,16 +2903,16 @@
         <translation>&amp;Verificér besked</translation>
     </message>
     <message>
-        <source>Enter the receiver's address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack. Note that this only proves the signing party receives with the address, it cannot prove sendership of any transaction!</source>
+        <source>Enter the receiver&apos;s address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack. Note that this only proves the signing party receives with the address, it cannot prove sendership of any transaction!</source>
         <translation>Indtast modtagerens adresse, besked (vær sikker på at kopiere linjeskift, mellemrum, tabuleringer, etc. præcist) og signatur herunder for at verificere beskeden. Vær forsigtig med ikke at læse noget ud fra signaturen, som ikke står i selve beskeden, for at undgå at blive snydt af et eventuelt man-in-the-middle-angreb. Bemærk, at dette kun beviser, at den signerende person kan modtage med adressen; det kan ikke bevise hvem der har sendt en given transaktion!</translation>
     </message>
     <message>
-        <source>The Australiacash address the message was signed with</source>
-        <translation>Australiacash-adressen, som beskeden blev signeret med</translation>
+        <source>The AustraliaCash address the message was signed with</source>
+        <translation>AustraliaCash-adressen, som beskeden blev signeret med</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Australiacash address</source>
-        <translation>Verificér beskeden for at sikre, at den er signeret med den angivne Australiacash-adresse</translation>
+        <source>Verify the message to ensure it was signed with the specified AustraliaCash address</source>
+        <translation>Verificér beskeden for at sikre, at den er signeret med den angivne AustraliaCash-adresse</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2497,7 +2923,7 @@
         <translation>Nulstil alle “verificér besked”-felter</translation>
     </message>
     <message>
-        <source>Click "Sign Message" to generate signature</source>
+        <source>Click &quot;Sign Message&quot; to generate signature</source>
         <translation>Klik “Signér besked” for at generere underskriften</translation>
     </message>
     <message>
@@ -2557,6 +2983,45 @@
     </message>
 </context>
 <context>
+    <name>TestPeerDialog</name>
+    <message>
+        <source>Test Peer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the peer details below.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Be careful! Do not blindly trust anyone that tells you to add their node.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the peer&apos;s address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the peer&apos;s port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter an address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter a valid peer address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Try Peer</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TrafficGraphWidget</name>
     <message>
         <source>KB/s</source>
@@ -2567,7 +3032,10 @@
     <name>TransactionDesc</name>
     <message numerus="yes">
         <source>Open for %n more block(s)</source>
-        <translation><numerusform>Åben i %n yderligere blok</numerusform><numerusform>Åben i %n yderligere blokke</numerusform></translation>
+        <translation>
+            <numerusform>Åben i %n yderligere blok</numerusform>
+            <numerusform>Åben i %n yderligere blokke</numerusform>
+        </translation>
     </message>
     <message>
         <source>Open until %1</source>
@@ -2579,7 +3047,7 @@
     </message>
     <message>
         <source>%1/offline</source>
-        <translation>%1/offline</translation>
+        <translation type="vanished">%1/offline</translation>
     </message>
     <message>
         <source>0/unconfirmed, %1</source>
@@ -2611,11 +3079,14 @@
     </message>
     <message>
         <source>, has not been successfully broadcast yet</source>
-        <translation>, er ikke blevet transmitteret endnu</translation>
+        <translation type="vanished">, er ikke blevet transmitteret endnu</translation>
     </message>
     <message numerus="yes">
         <source>, broadcast through %n node(s)</source>
-        <translation><numerusform>, transmitteret igennem %n knude</numerusform><numerusform>, transmitteret igennem %n knuder</numerusform></translation>
+        <translation type="vanished">
+            <numerusform>, transmitteret igennem %n knude</numerusform>
+            <numerusform>, transmitteret igennem %n knuder</numerusform>
+        </translation>
     </message>
     <message>
         <source>Date</source>
@@ -2659,7 +3130,10 @@
     </message>
     <message numerus="yes">
         <source>matures in %n more block(s)</source>
-        <translation><numerusform>modner om %n blok</numerusform><numerusform>modner om %n blokke</numerusform></translation>
+        <translation>
+            <numerusform>modner om %n blok</numerusform>
+            <numerusform>modner om %n blokke</numerusform>
+        </translation>
     </message>
     <message>
         <source>not accepted</source>
@@ -2710,7 +3184,7 @@
         <translation>Forretningsdrivende</translation>
     </message>
     <message>
-        <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
+        <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
         <translation>Minede australiacashs skal modne %1 blokke, før de kan bruges. Da du genererede denne blok, blev den transmitteret til netværket for at blive føjet til blokkæden. Hvis det ikke lykkes at få den i kæden, vil dens tilstand ændres til “ikke accepteret”, og den vil ikke kunne bruges. Dette kan ske nu og da, hvis en anden knude udvinder en blok inden for nogle få sekunder fra din.</translation>
     </message>
     <message>
@@ -2765,7 +3239,10 @@
     </message>
     <message numerus="yes">
         <source>Open for %n more block(s)</source>
-        <translation><numerusform>Åben i %n yderligere blok</numerusform><numerusform>Åben i %n yderligere blokke</numerusform></translation>
+        <translation>
+            <numerusform>Åben i %n yderligere blok</numerusform>
+            <numerusform>Åben i %n yderligere blokke</numerusform>
+        </translation>
     </message>
     <message>
         <source>Open until %1</source>
@@ -2773,7 +3250,7 @@
     </message>
     <message>
         <source>Offline</source>
-        <translation>Offline</translation>
+        <translation type="vanished">Offline</translation>
     </message>
     <message>
         <source>Unconfirmed</source>
@@ -2801,7 +3278,7 @@
     </message>
     <message>
         <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>Denne blok blev ikke modtaget af nogen andre knuder og vil formentlig ikke blive accepteret!</translation>
+        <translation type="vanished">Denne blok blev ikke modtaget af nogen andre knuder og vil formentlig ikke blive accepteret!</translation>
     </message>
     <message>
         <source>Generated but not accepted</source>
@@ -2915,8 +3392,8 @@
         <translation>Andet</translation>
     </message>
     <message>
-        <source>Enter address, transaction id, or label to search</source>
-        <translation>Indtast adresse, transaktions-ID eller mærkat for at søge</translation>
+        <source>Enter address or label to search</source>
+        <translation>Indtast adresse eller mærkat for at søge</translation>
     </message>
     <message>
         <source>Min amount</source>
@@ -2925,10 +3402,6 @@
     <message>
         <source>Abandon transaction</source>
         <translation>Opgiv transaktion</translation>
-    </message>
-    <message>
-        <source>Increase transaction fee</source>
-        <translation>Forøg transaktionsgebyr</translation>
     </message>
     <message>
         <source>Copy address</source>
@@ -3043,42 +3516,6 @@
         <source>Send Coins</source>
         <translation>Send australiacashs</translation>
     </message>
-    <message>
-        <source>Fee bump error</source>
-        <translation>Fejl ved gebyrforøgelse</translation>
-    </message>
-    <message>
-        <source>Increasing transaction fee failed</source>
-        <translation>Forøgelse af transaktionsgebyr mislykkedes</translation>
-    </message>
-    <message>
-        <source>Do you want to increase the fee?</source>
-        <translation>Vil du forøge gebyret?</translation>
-    </message>
-    <message>
-        <source>Current fee:</source>
-        <translation>Aktuelt gebyr:</translation>
-    </message>
-    <message>
-        <source>Increase:</source>
-        <translation>Forøgelse:</translation>
-    </message>
-    <message>
-        <source>New fee:</source>
-        <translation>Nyt gebyr:</translation>
-    </message>
-    <message>
-        <source>Confirm fee bump</source>
-        <translation>Bekræft gebyrforøgelse</translation>
-    </message>
-    <message>
-        <source>Can't sign transaction.</source>
-        <translation>Kan ikke signere transaktionen.</translation>
-    </message>
-    <message>
-        <source>Could not commit transaction</source>
-        <translation>Kunne ikke gennemføre transaktionen</translation>
-    </message>
 </context>
 <context>
     <name>WalletView</name>
@@ -3138,6 +3575,14 @@
         <translation>Acceptér kommandolinje- og JSON-RPC-kommandoer</translation>
     </message>
     <message>
+        <source>Accept connections from outside (default: 1 if no -proxy or -connect/-noconnect)</source>
+        <translation>Acceptér forbindelser udefra (standard: 1 hvis ingen -proxy eller -connect/-noconnect)</translation>
+    </message>
+    <message>
+        <source>Connect only to the specified node(s); -noconnect or -connect=0 alone to disable automatic connections</source>
+        <translation>Forbind kun til de specificerede knuder; -noconnect eller -connect=0 alene for at deaktivere automatiske forbindelser</translation>
+    </message>
+    <message>
         <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation>Distribueret under MIT-softwarelicensen; se den vedlagte fil %s eller %s</translation>
     </message>
@@ -3178,8 +3623,8 @@
         <translation>Kunne ikke starte HTTP-server. Se fejlretningslog for detaljer.</translation>
     </message>
     <message>
-        <source>Australiacash Core</source>
-        <translation>Australiacash Core</translation>
+        <source>AustraliaCash Core</source>
+        <translation>AustraliaCash Core</translation>
     </message>
     <message>
         <source>The %s developers</source>
@@ -3194,10 +3639,6 @@
         <translation>Acceptér videresendte transaktioner, der modtages fra hvidlistede knuder, selv når transaktioner ikke videresendes (standard: %d)</translation>
     </message>
     <message>
-        <source>Add a node to connect to and attempt to keep the connection open (see the `addnode` RPC command help for more info)</source>
-        <translation>Tilføj en knude at forbinde til og forsøg at holde forbindelsen åben (se hjælp for RPC-kommandoen “addnode” for mere info)</translation>
-    </message>
-    <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>
         <translation>Tildel til den givne adresse og lyt altid på den. Brug [vært]:port-notation for IPv6</translation>
     </message>
@@ -3206,24 +3647,16 @@
         <translation>Kan ikke opnå en lås på datamappe %s. %s kører sansynligvis allerede.</translation>
     </message>
     <message>
-        <source>Cannot provide specific connections and have addrman find outgoing connections at the same.</source>
-        <translation>Kan ikke give specifikke forbindelser og få addrman til at finde udgående forbindelser på samme tid.</translation>
-    </message>
-    <message>
-        <source>Connect only to the specified node(s); -connect=0 disables automatic connections (the rules for this peer are the same as for -addnode)</source>
-        <translation>Forbind kun til de specificerede knuder; -connect=0 deaktiverer automatiske forbindelser (reglerne for denne knude er de samme som for -addnode)</translation>
-    </message>
-    <message>
         <source>Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup</source>
         <translation>Slet alle transaktioner i tegnebogen og genskab kun disse dele af blokkæden gennem -rescan under opstart</translation>
     </message>
     <message>
-        <source>Error reading %s! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
-        <translation>Fejl under læsning af %s! Alle nøgler blev læst korrekt, men transaktionsdata eller indgange i adressebogen kan mangle eller være ukorrekte.</translation>
+        <source>Error loading %s: You can&apos;t enable HD on a already existing non-HD wallet</source>
+        <translation>Fejl under indlæsning af %s: Du kan ikke aktivere HD på en allerede eksisterende ikke-HD-tegnebog</translation>
     </message>
     <message>
-        <source>Exclude debugging information for a category. Can be used in conjunction with -debug=1 to output debug logs for all categories except one or more specified categories.</source>
-        <translation>Ekskludér fejlsøgningsinformation for en kategori. Kan bruges sammen med -debug=1 for at udskrive fejlsøgningslogs for alle kategorier undtaget én eller flere specificerede kategorier.</translation>
+        <source>Error reading %s! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
+        <translation>Fejl under læsning af %s! Alle nøgler blev læst korrekt, men transaktionsdata eller indgange i adressebogen kan mangle eller være ukorrekte.</translation>
     </message>
     <message>
         <source>Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)</source>
@@ -3246,7 +3679,7 @@
         <translation>Maksimalt totalgebyr (i %s) der må bruges i en enkelt tegnebogstransaktion eller rå transaktion; en for lav en værdi kan afbryde store transaktioner (standard: %s)</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
+        <source>Please check that your computer&apos;s date and time are correct! If your clock is wrong, %s will not work properly.</source>
         <translation>Undersøg venligst at din computers dato og klokkeslet er korrekt indstillet! Hvis der er fejl i disse, vil %s ikke fungere korrekt.</translation>
     </message>
     <message>
@@ -3254,36 +3687,24 @@
         <translation>Overvej venligst at bidrage til udviklingen, hvis du finder %s brugbar. Besøg %s for yderligere information om softwaren.</translation>
     </message>
     <message>
-        <source>Query for peer addresses via DNS lookup, if low on addresses (default: 1 unless -connect used)</source>
-        <translation>Hvis beholdning af adresser er lav, forespørg da adresser på andre knuder via DNS-opslag (standard: 1 med mindre -connect bruges)</translation>
-    </message>
-    <message>
         <source>Reduce storage requirements by enabling pruning (deleting) of old blocks. This allows the pruneblockchain RPC to be called to delete specific blocks, and enables automatic pruning of old blocks if a target size in MiB is provided. This mode is incompatible with -txindex and -rescan. Warning: Reverting this setting requires re-downloading the entire blockchain. (default: 0 = disable pruning blocks, 1 = allow manual pruning via RPC, &gt;%u = automatically prune block files to stay under the specified target size in MiB)</source>
-        <translation>Reducér pladskravene ved at beskære (slette, “prune”) gamle blokke. Dette tillader pruneblockchain-RPC'en at blive kaldt for at slette specifikke blokke, og det aktiverer automatisk beskæring af gamle blokke, hvis en målstørrelse i MiB er angivet. Denne tilstand er ikke kompatibel med -txindex og -rescan. Advarsel: Fortrydelse af denne indstilling kræver download af hele blokkæden igen. (standard: 0 = slå beskæring af blokke fra, 1 = tillad manuel beskæring via RPC, &gt;%u = beskær automatisk blokfiler for at bliver under den angivne målstørrelse i MiB)</translation>
+        <translation>Reducér pladskravene ved at beskære (slette, “prune”) gamle blokke. Dette tillader pruneblockchain-RPC&apos;en at blive kaldt for at slette specifikke blokke, og det aktiverer automatisk beskæring af gamle blokke, hvis en målstørrelse i MiB er angivet. Denne tilstand er ikke kompatibel med -txindex og -rescan. Advarsel: Fortrydelse af denne indstilling kræver download af hele blokkæden igen. (standard: 0 = slå beskæring af blokke fra, 1 = tillad manuel beskæring via RPC, &gt;%u = beskær automatisk blokfiler for at bliver under den angivne målstørrelse i MiB)</translation>
     </message>
     <message>
         <source>Set lowest fee rate (in %s/kB) for transactions to be included in block creation. (default: %s)</source>
-        <translation>Sæt den laveste gebyrsats (i %s/kB) for transaktioner, der skal inkluderes i blokoprettelse. (standard: %s)</translation>
+        <translation>Sæt den laveste gebyrrate (i %s/kB) for transaktioner, der skal inkluderes i blokoprettelse. (standard: %s)</translation>
     </message>
     <message>
         <source>Set the number of script verification threads (%u to %d, 0 = auto, &lt;0 = leave that many cores free, default: %d)</source>
         <translation>Sæt antallet af scriptverificeringstråde (%u til %d, 0 = auto, &lt;0 = efterlad det antal kernet fri, standard: %d)</translation>
     </message>
     <message>
-        <source>The block database contains a block which appears to be from the future. This may be due to your computer's date and time being set incorrectly. Only rebuild the block database if you are sure that your computer's date and time are correct</source>
+        <source>The block database contains a block which appears to be from the future. This may be due to your computer&apos;s date and time being set incorrectly. Only rebuild the block database if you are sure that your computer&apos;s date and time are correct</source>
         <translation>Blokdatabasen indeholder en blok, som ser ud til at være fra fremtiden. Dette kan skyldes, at din computers dato og tid ikke er sat korrekt. Genopbyg kun blokdatabasen, hvis du er sikker på, at din computers dato og tid er korrekt</translation>
     </message>
     <message>
         <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
         <translation>Dette er en foreløbig testudgivelse – brug på eget ansvar – brug ikke til mining eller handelsprogrammer</translation>
-    </message>
-    <message>
-        <source>This is the transaction fee you may discard if change is smaller than dust at this level</source>
-        <translation>Dette er det transaktionsgebyr, du kan kassere, hvis byttepengene er mindre end støv på dette niveau</translation>
-    </message>
-    <message>
-        <source>Unable to replay blocks. You will need to rebuild the database using -reindex-chainstate.</source>
-        <translation>Kan ikke genafspille blokke. Du er nødt til at genopbytte databasen ved hjælp af -reindex-chainstate.</translation>
     </message>
     <message>
         <source>Unable to rewind the database to a pre-fork state. You will need to redownload the blockchain</source>
@@ -3310,12 +3731,8 @@
         <translation>Advarsel: Vi ser ikke ud til at være fuldt ud enige med andre knuder! Du kan være nødt til at opgradere, eller andre knuder kan være nødt til at opgradere.</translation>
     </message>
     <message>
-        <source>Whether to save the mempool on shutdown and load on restart (default: %u)</source>
-        <translation>Hvorvidt hukommelsespuljen skal gemmes under nedlukning og indlæses under genstart (standard: %u)</translation>
-    </message>
-    <message>
-        <source>%d of last 100 blocks have unexpected version</source>
-        <translation>%d af de seneste 100 blokke har en uventet version</translation>
+        <source>You need to rebuild the database using -reindex-chainstate to change -txindex</source>
+        <translation>Du er nødt til at genopbygge databasen ved hjælp af -reindex-chainstate for at ændre -txindex</translation>
     </message>
     <message>
         <source>%s corrupt, salvage failed</source>
@@ -3330,10 +3747,6 @@
         <translation>&lt;kategori&gt; kan være:</translation>
     </message>
     <message>
-        <source>Accept connections from outside (default: 1 if no -proxy or -connect)</source>
-        <translation>Acceptér forbindelser udefra (standard: 1 hvis hverken -proxy eller -connect)</translation>
-    </message>
-    <message>
         <source>Append comment to the user agent string</source>
         <translation>Føj kommentar til brugeragentstrengen</translation>
     </message>
@@ -3346,7 +3759,7 @@
         <translation>Blokoprettelsestilvalg:</translation>
     </message>
     <message>
-        <source>Cannot resolve -%s address: '%s'</source>
+        <source>Cannot resolve -%s address: &apos;%s&apos;</source>
         <translation>Kan ikke finde -%s-adressen: “%s”</translation>
     </message>
     <message>
@@ -3402,10 +3815,6 @@
         <translation>Aktivér transaktionserstatning i hukommelsespuljen (standard: %u)</translation>
     </message>
     <message>
-        <source>Error creating %s: You can't create non-HD wallets with this version.</source>
-        <translation>Fejl under oprettelse af %s: Du kan ikke oprette ikke-HD-tegnebøger med denne version.</translation>
-    </message>
-    <message>
         <source>Error initializing block database</source>
         <translation>Klargøring af blokdatabase mislykkedes</translation>
     </message>
@@ -3426,6 +3835,10 @@
         <translation>Fejl under indlæsning af %s: Tegnebog kræver nyere version af %s</translation>
     </message>
     <message>
+        <source>Error loading %s: You can&apos;t disable HD on a already existing HD wallet</source>
+        <translation>Fejl under indlæsning af %s: Du kan ikke deaktivere HD på en allerede eksisterende HD-tegnebog</translation>
+    </message>
+    <message>
         <source>Error loading block database</source>
         <translation>Indlæsning af blokdatabase mislykkedes</translation>
     </message>
@@ -3442,10 +3855,6 @@
         <translation>Lytning på enhver port mislykkedes. Brug -listen=0, hvis du ønsker dette.</translation>
     </message>
     <message>
-        <source>Failed to rescan the wallet during initialization</source>
-        <translation>Genindlæsning af tegnebogen under initialisering mislykkedes</translation>
-    </message>
-    <message>
         <source>Importing...</source>
         <translation>Importerer…</translation>
     </message>
@@ -3455,27 +3864,23 @@
     </message>
     <message>
         <source>Initialization sanity check failed. %s is shutting down.</source>
-        <translation>Sundhedstjek under initialisering mislykkedes. %s lukker ned.</translation>
+        <translation>Klargøring af sundhedstjek mislykkedes. %s lukker ned.</translation>
     </message>
     <message>
-        <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
+        <source>Invalid -onion address: &apos;%s&apos;</source>
+        <translation>Ugyldig -onion adresse: “%s”</translation>
+    </message>
+    <message>
+        <source>Invalid amount for -%s=&lt;amount&gt;: &apos;%s&apos;</source>
         <translation>Ugyldigt beløb for -%s=&lt;beløb&gt;: “%s”</translation>
     </message>
     <message>
-        <source>Invalid amount for -discardfee=&lt;amount&gt;: '%s'</source>
-        <translation>Ugyldigt beløb for -discardfee=&lt;amount&gt;: “%s”</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
+        <source>Invalid amount for -fallbackfee=&lt;amount&gt;: &apos;%s&apos;</source>
         <translation>Ugyldigt beløb for -fallbackfee=&lt;beløb&gt;: “%s”</translation>
     </message>
     <message>
         <source>Keep the transaction memory pool below &lt;n&gt; megabytes (default: %u)</source>
         <translation>Hold hukommelsespuljen med transaktioner under &lt;n&gt; megabyte (standard: %u)</translation>
-    </message>
-    <message>
-        <source>Loading P2P addresses...</source>
-        <translation>Indlæser P2P-adresser…</translation>
     </message>
     <message>
         <source>Loading banlist...</source>
@@ -3518,20 +3923,16 @@
         <translation>Genopbyg kædetilstand ud fra de aktuelt indekserede blokke</translation>
     </message>
     <message>
-        <source>Replaying blocks...</source>
-        <translation>Genafspiller blokke…</translation>
-    </message>
-    <message>
         <source>Rewinding blocks...</source>
         <translation>Spoler blokke tilbage…</translation>
     </message>
     <message>
-        <source>Send transactions with full-RBF opt-in enabled (RPC only, default: %u)</source>
-        <translation>Send transaktioner med fuld-RBF opt-in aktiveret (kun RPC, standard: %u)</translation>
-    </message>
-    <message>
         <source>Set database cache size in megabytes (%d to %d, default: %d)</source>
         <translation>Sæt cache-størrelse for database i megabytes (%d til %d; standard: %d)</translation>
+    </message>
+    <message>
+        <source>Set maximum block size in bytes (default: %d)</source>
+        <translation>Sæt maksimum blokstørrelse i byte (standard: %d)</translation>
     </message>
     <message>
         <source>Specify wallet file (within data directory)</source>
@@ -3540,10 +3941,6 @@
     <message>
         <source>The source code is available from %s.</source>
         <translation>Kildekoden er tilgængelig fra %s.</translation>
-    </message>
-    <message>
-        <source>Transaction fee and change calculation failed</source>
-        <translation>Beregning af transaktionsgebyr og byttepenge mislykkedes</translation>
     </message>
     <message>
         <source>Unable to bind to %s on this computer. %s is probably already running.</source>
@@ -3562,14 +3959,6 @@
         <translation>Argument -tor understøttes ikke; brug -onion.</translation>
     </message>
     <message>
-        <source>Unsupported logging category %s=%s.</source>
-        <translation>Ikke understøttet logningskategori %s=%s.</translation>
-    </message>
-    <message>
-        <source>Upgrading UTXO database</source>
-        <translation>Opgraderer UTXO-database</translation>
-    </message>
-    <message>
         <source>Use UPnP to map the listening port (default: %u)</source>
         <translation>Brug UPnP til at konfigurere den lyttende port (standard: %u)</translation>
     </message>
@@ -3584,6 +3973,14 @@
     <message>
         <source>Verifying blocks...</source>
         <translation>Verificerer blokke…</translation>
+    </message>
+    <message>
+        <source>Verifying wallet...</source>
+        <translation>Verificerer tegnebog…</translation>
+    </message>
+    <message>
+        <source>Wallet %s resides outside data directory %s</source>
+        <translation>Tegnebog %s findes uden for datamappe %s</translation>
     </message>
     <message>
         <source>Wallet debugging/testing options:</source>
@@ -3606,6 +4003,10 @@
         <translation>Tildel given adresse og sæt andre knuder, der forbinder til den, på hvidliste. Brug [vært]:port notation for IPv6</translation>
     </message>
     <message>
+        <source>Bind to given address to listen for JSON-RPC connections. Use [host]:port notation for IPv6. This option can be specified multiple times (default: bind to all interfaces)</source>
+        <translation>Tildel til den givne adresse for at lytte efter JSON-RPC-forbindelser. Brug [vært]:port-notation for IPv6. Denne valgmulighed kan angives flere gange (standard: tildel til alle grænseflader)</translation>
+    </message>
+    <message>
         <source>Create new files with system default permissions, instead of umask 077 (only effective with disabled wallet functionality)</source>
         <translation>Opret nye filer med systemstandard for rettigheder i stedet for umask 077 (kun virksomt med tegnebogsfunktionalitet deaktiveret)</translation>
     </message>
@@ -3619,7 +4020,7 @@
     </message>
     <message>
         <source>Execute command when a relevant alert is received or we see a really long fork (%s in cmd is replaced by message)</source>
-        <translation>Udfør kommando, når en relevant alarm modtages eller vi ser en virkelig lang udsplitning (%s i cmd erstattes af besked)</translation>
+        <translation type="vanished">Udfør kommando, når en relevant alarm modtages eller vi ser en virkelig lang udsplitning (%s i cmd erstattes af besked)</translation>
     </message>
     <message>
         <source>Fees (in %s/kB) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)</source>
@@ -3630,7 +4031,7 @@
         <translation>Hvis paytxfee ikke er sat, inkluderes nok gebyr til at transaktioner begynder at blive bekræftet ingen for gennemsnitligt n blokke (standard: %u)</translation>
     </message>
     <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
+        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: &apos;%s&apos; (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
         <translation>Ugyldigt beløb for -maxtxfee=&lt;beløb&gt;: “%s” (skal være på mindst minrelay-gebyret på %s for at undgå hængende transaktioner)</translation>
     </message>
     <message>
@@ -3642,8 +4043,16 @@
         <translation>Brug tilfældige akkreditiver for hver proxy-forbindelse. Dette aktiverer strømisolation med Tor (standard: %u)</translation>
     </message>
     <message>
+        <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
+        <translation>Sæt maksimumstørrelse for højprioritet/lavgebyr-transaktioner i byte (standard: %d)</translation>
+    </message>
+    <message>
         <source>The transaction amount is too small to send after the fee has been deducted</source>
         <translation>Transaktionsbeløbet er for lille til at sende, når gebyret er trukket fra</translation>
+    </message>
+    <message>
+        <source>Use hierarchical deterministic key generation (HD) after BIP32. Only has effect during wallet creation/first start</source>
+        <translation>Brug hierarkisk deterministisk nøglegenerering (HD) efter BIP32. Har kun effekt ved generering af ny tegnebog og under første opstart</translation>
     </message>
     <message>
         <source>Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool, useful e.g. for a gateway</source>
@@ -3670,16 +4079,8 @@
         <translation>Forbind gennem SOCKS5-proxy</translation>
     </message>
     <message>
-        <source>Error loading %s: You can't disable HD on an already existing HD wallet</source>
-        <translation>Fejl under indlæsning af %s: Du kan ikke slå HD fra på en allerede eksisterende HD-tegnebog</translation>
-    </message>
-    <message>
         <source>Error reading from database, shutting down.</source>
         <translation>Fejl under læsning fra database; lukker ned.</translation>
-    </message>
-    <message>
-        <source>Error upgrading chainstate database</source>
-        <translation>Fejl under opgradering af kædetilstandsdatabase</translation>
     </message>
     <message>
         <source>Imports blocks from external blk000??.dat file on startup</source>
@@ -3690,19 +4091,11 @@
         <translation>Information</translation>
     </message>
     <message>
-        <source>Invalid -onion address or hostname: '%s'</source>
-        <translation>Ugyldig -onion-adresse eller værtsnavn: “%s”</translation>
-    </message>
-    <message>
-        <source>Invalid -proxy address or hostname: '%s'</source>
-        <translation>Ugyldig -proxy-adresse eller værtsnavn: “%s”</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
+        <source>Invalid amount for -paytxfee=&lt;amount&gt;: &apos;%s&apos; (must be at least %s)</source>
         <translation>Ugyldigt beløb for -paytxfee=&lt;beløb&gt;: “%s” (skal være mindst %s)</translation>
     </message>
     <message>
-        <source>Invalid netmask specified in -whitelist: '%s'</source>
+        <source>Invalid netmask specified in -whitelist: &apos;%s&apos;</source>
         <translation>Ugyldig netmaske angivet i -whitelist: “%s”</translation>
     </message>
     <message>
@@ -3710,7 +4103,7 @@
         <translation>Behold højest &lt;n&gt; uforbindelige transaktioner i hukommelsen (standard: %u)</translation>
     </message>
     <message>
-        <source>Need to specify a port with -whitebind: '%s'</source>
+        <source>Need to specify a port with -whitebind: &apos;%s&apos;</source>
         <translation>Nødt til at angive en port med -whitebinde: “%s”</translation>
     </message>
     <message>
@@ -3732,6 +4125,10 @@
     <message>
         <source>Send trace/debug info to console instead of debug.log file</source>
         <translation>Send sporings-/fejlsøgningsinformation til konsollen i stedet for debug.log filen</translation>
+    </message>
+    <message>
+        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
+        <translation>Send transaktioner som nul-gebyr-transaktioner hvis muligt (standard: %u)</translation>
     </message>
     <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
@@ -3778,24 +4175,12 @@
         <translation>Ikke i stand til at tildele til %s på denne computer (bind returnerede fejl %s)</translation>
     </message>
     <message>
-        <source>Unable to generate initial keys</source>
-        <translation>Kan ikke generere indledningsvise nøgler</translation>
-    </message>
-    <message>
         <source>Upgrade wallet to latest format on startup</source>
         <translation>Opgradér tegnebog til seneste format under opstart</translation>
     </message>
     <message>
         <source>Username for JSON-RPC connections</source>
         <translation>Brugernavn til JSON-RPC-forbindelser</translation>
-    </message>
-    <message>
-        <source>Verifying wallet(s)...</source>
-        <translation>Verificerer tegnebøger…</translation>
-    </message>
-    <message>
-        <source>Wallet %s resides outside wallet directory %s</source>
-        <translation>Tegnebog %s findes uden for tegnebogsmappen %s</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -3808,10 +4193,6 @@
     <message>
         <source>Whether to operate in a blocks only mode (default: %u)</source>
         <translation>Hvorvidt der skal arbejdes i kun-blokke-tilstand (standard: %u)</translation>
-    </message>
-    <message>
-        <source>You need to rebuild the database using -reindex to change -txindex</source>
-        <translation>Du er nødt til at genopbygge databasen ved hjælp af -reindex for at ændre -txindex</translation>
     </message>
     <message>
         <source>Zapping all transactions from wallet...</source>
@@ -3827,11 +4208,15 @@
     </message>
     <message>
         <source>Execute command when the best block changes (%s in cmd is replaced by block hash)</source>
-        <translation>Udfør kommando, når den bedste blok ændres (%s i kommandoen erstattes med blokhash)</translation>
+        <translation type="vanished">Udfør kommando, når den bedste blok ændres (%s i kommandoen erstattes med blokhash)</translation>
     </message>
     <message>
         <source>Allow DNS lookups for -addnode, -seednode and -connect</source>
         <translation>Tillad DNS-opslag for -addnode, -seednode og -connect</translation>
+    </message>
+    <message>
+        <source>Loading addresses...</source>
+        <translation>Indlæser adresser…</translation>
     </message>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
@@ -3842,24 +4227,12 @@
         <translation>-maxtxfee er sat meget højt! Gebyrer så store risikeres betalt på en enkelt transaktion.</translation>
     </message>
     <message>
-        <source>Bind to given address to listen for JSON-RPC connections. This option is ignored unless -rpcallowip is also passed. Port is optional and overrides -rpcport. Use [host]:port notation for IPv6. This option can be specified multiple times (default: 127.0.0.1 and ::1 i.e., localhost, or if -rpcallowip has been specified, 0.0.0.0 and :: i.e., all addresses)</source>
-        <translation>Tildel til den givne adresse for at lytte efter JSON-RPC-forbindelser. Dette tilvalg ignoreres med mindre -rpcwallet også bruges. Port er valgfri og tilsidesætter -rpcport. Brug [vært]:port-notation for IPv6. Denne valgmulighed kan angives flere gange (standard: 127.0.0.1 og ::1, dvs. localhost, eller hvis -rpcallowip is angivet: 0.0.0.0 og ::, dvs. alle adresser)</translation>
-    </message>
-    <message>
         <source>Do not keep transactions in the mempool longer than &lt;n&gt; hours (default: %u)</source>
         <translation>Behold ikke transaktioner i hukommelsespuljen i mere end &lt;n&gt; timer (default: %u)</translation>
     </message>
     <message>
         <source>Equivalent bytes per sigop in transactions for relay and mining (default: %u)</source>
         <translation>Tilsvarende bytes pr. sigop i transaktioner, som videresendes og mines (standard: %u)</translation>
-    </message>
-    <message>
-        <source>Error loading %s: You can't enable HD on an already existing non-HD wallet</source>
-        <translation>Fejl under indlæsning af %s: Du kan ikke aktivere HD på en allerede eksisterende ikke-HD-tegnebog</translation>
-    </message>
-    <message>
-        <source>Error loading wallet %s. -wallet parameter must only specify a filename (not a path).</source>
-        <translation>Fejl under indlæsning af tegnebog %s. “-wallet”-parameteren kan kun angive et filnavn (ikke en sti).</translation>
     </message>
     <message>
         <source>Fees (in %s/kB) smaller than this are considered zero fee for transaction creation (default: %s)</source>
@@ -3886,24 +4259,16 @@
         <translation>Udskriv fejlsøgningsinformation (standard: %u, angivelse af &lt;kategori&gt; er valgfri)</translation>
     </message>
     <message>
+        <source>Query for peer addresses via DNS lookup, if low on addresses (default: 1 unless -connect/-noconnect)</source>
+        <translation>Forespørg knudeadresser via DNS-opslag hvis antallet af adresser er lavt (standard: 1 med mindre -connect/-noconnect)</translation>
+    </message>
+    <message>
         <source>Sets the serialization of raw transaction or block hex returned in non-verbose mode, non-segwit(0) or segwit(1) (default: %d)</source>
         <translation>Indstiller serialiseringen af rå transaktioner eller blok-hex returneret i ikke-verbose tilstand, non-segwit(0) eller sigwit(1) (standard: %d)</translation>
     </message>
     <message>
-        <source>Specify directory to hold wallets (default: &lt;datadir&gt;/wallets if it exists, otherwise &lt;datadir&gt;)</source>
-        <translation>Angiv mappe, der skal indeholde tegnebøger (standard: &lt;datadir&gt;/wallets hvis den eksisterer, ellers &lt;datadir&gt;)</translation>
-    </message>
-    <message>
-        <source>Specify location of debug log file: this can be an absolute path or a path relative to the data directory (default: %s)</source>
-        <translation>Angiv placering af logfil til fejlretning: Dette kan være en absolut sti eller en sti relativ til datamappen (standard: %s)</translation>
-    </message>
-    <message>
         <source>Support filtering of blocks and transaction with bloom filters (default: %u)</source>
         <translation>Understøt filtrering af blokke og transaktioner med Bloom-filtre (standard: %u)</translation>
-    </message>
-    <message>
-        <source>The fee rate (in %s/kB) that indicates your tolerance for discarding change by adding it to the fee (default: %s). Note: An output is discarded if it is dust at this rate, but we will always discard up to the dust relay fee and a discard fee above that is limited by the fee estimate for the longest target</source>
-        <translation>Den gebyrsats (i %s/kB), som indikerer din tolerance for at kassere byttepenge ved at føje dem til gebyret (standard: %s). Bemærk: Et output kasseres, hvis det anses som støv ved denne rate, men der vil altid kasseres op til støvvideresendelsesgebyret, og et kasseringsgebyr derover er begrænset af gebyrestimatet for det længste mål</translation>
     </message>
     <message>
         <source>This is the transaction fee you may pay when fee estimates are not available.</source>
@@ -3911,7 +4276,7 @@
     </message>
     <message>
         <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</source>
-        <translation>Dette produkt indeholder software, der er udviklet af OpenSSL-projektet for brug i OpenSSL-værktøjskassen %s, samt kryptografisk software, der er skrevet af Eric Young, samt UPnP-software, der er skrevet af Thomas Bernard.</translation>
+        <translation type="vanished">Dette produkt indeholder software, der er udviklet af OpenSSL-projektet for brug i OpenSSL-værktøjskassen %s, samt kryptografisk software, der er skrevet af Eric Young, samt UPnP-software, der er skrevet af Thomas Bernard.</translation>
     </message>
     <message>
         <source>Total length of network version string (%i) exceeds maximum length (%i). Reduce the number or size of uacomments.</source>
@@ -3922,7 +4287,7 @@
         <translation>Prøver at holde udadgående traffik under det givne mål (i MiB pr. 24 timer), 0 = ingen grænse (standard: %d)</translation>
     </message>
     <message>
-        <source>Unsupported argument -socks found. Setting SOCKS version isn't possible anymore, only SOCKS5 proxies are supported.</source>
+        <source>Unsupported argument -socks found. Setting SOCKS version isn&apos;t possible anymore, only SOCKS5 proxies are supported.</source>
         <translation>Argument -socks understøttes ikke. Det er ikke længere muligt at sætte SOCKS-version; kun SOCKS5-proxier understøttes.</translation>
     </message>
     <message>
@@ -3931,10 +4296,10 @@
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>
-        <translation>Brug separat SOCS5-proxy for at nå knuder via Tors skjulte tjenester (standard: %s)</translation>
+        <translation>Brug separat SOCS5-proxy for at nå knuder via skjulte Tor-tjenester (standard: %s)</translation>
     </message>
     <message>
-        <source>Warning: Unknown block versions being mined! It's possible unknown rules are in effect</source>
+        <source>Warning: Unknown block versions being mined! It&apos;s possible unknown rules are in effect</source>
         <translation>Advarsel: Ukendte blokversioner bliver minet! Det er muligt, at ukendte regler er i brug</translation>
     </message>
     <message>
@@ -3958,24 +4323,16 @@
         <translation>Forespørg altid adresser på andre knuder via DNS-opslag (default: %u)</translation>
     </message>
     <message>
-        <source>Error loading wallet %s. -wallet filename must be a regular file.</source>
-        <translation>Fejl under indlæsning af tegnebog %s. -wallet filnavn skal være en almindelig fil.</translation>
-    </message>
-    <message>
-        <source>Error loading wallet %s. Duplicate -wallet filename specified.</source>
-        <translation>Fejl under indlæsning af tegnebog %s. -wallet filnavn angivet mere end én gang.</translation>
-    </message>
-    <message>
-        <source>Error loading wallet %s. Invalid characters in -wallet filename.</source>
-        <translation>Fejl under indlæsning af tegnebog %s. Ugyldige tegn i -wallet filnavn.</translation>
-    </message>
-    <message>
         <source>How many blocks to check at startup (default: %u, 0 = all)</source>
         <translation>Antal blokke som tjekkes ved opstart (standard: %u, 0 = alle)</translation>
     </message>
     <message>
         <source>Include IP addresses in debug output (default: %u)</source>
         <translation>Inkludér IP-adresser i fejlretningsoutput (standard: %u)</translation>
+    </message>
+    <message>
+        <source>Invalid -proxy address: &apos;%s&apos;</source>
+        <translation>Ugyldig -proxy adresse: “%s”</translation>
     </message>
     <message>
         <source>Keypool ran out, please call keypoolrefill first</source>
@@ -4016,6 +4373,10 @@
     <message>
         <source>Relay non-P2SH multisig (default: %u)</source>
         <translation>Videresend ikke-P2SH multisig (standard: %u)</translation>
+    </message>
+    <message>
+        <source>Send transactions with full-RBF opt-in enabled (default: %u)</source>
+        <translation>Send transaktioner med fuld-RBF opt-in aktiveret (standard: %u)</translation>
     </message>
     <message>
         <source>Set key pool size to &lt;n&gt; (default: %u)</source>
@@ -4079,7 +4440,7 @@
         <translation>Transaktionen skal have mindst én modtager</translation>
     </message>
     <message>
-        <source>Unknown network specified in -onlynet: '%s'</source>
+        <source>Unknown network specified in -onlynet: &apos;%s&apos;</source>
         <translation>Ukendt netværk anført i -onlynet: “%s”</translation>
     </message>
     <message>
@@ -4091,12 +4452,20 @@
         <translation>Indlæser blokindeks…</translation>
     </message>
     <message>
+        <source>Add a node to connect to and attempt to keep the connection open</source>
+        <translation>Tilføj en knude til at forbinde til og forsøg at holde forbindelsen åben</translation>
+    </message>
+    <message>
         <source>Loading wallet...</source>
         <translation>Indlæser tegnebog…</translation>
     </message>
     <message>
         <source>Cannot downgrade wallet</source>
         <translation>Kan ikke nedgradere tegnebog</translation>
+    </message>
+    <message>
+        <source>Cannot write default address</source>
+        <translation>Kan ikke skrive standardadresse</translation>
     </message>
     <message>
         <source>Rescanning...</source>
@@ -4109,6 +4478,78 @@
     <message>
         <source>Error</source>
         <translation>Fejl</translation>
+    </message>
+    <message>
+        <source>Bitcoin Core and AustraliaCash Core</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>-discardthreshold is set very high! This is the output amount that the wallet will discard (to fee) if it is smaller than this setting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amount under which a transaction output is considered dust, in %s (default: %s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amount under which a transaction output is considered non-standard and will not be accepted or relayed, in %s (default: %s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Execute command when the best block changes (%s in cmd is replaced by block hash, %i is replaced by block number)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Execute command when we see a really long fork (%s in cmd is replaced by message)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid amount for -discardthreshold=&lt;amount&gt;: &apos;%s&apos; (must be at least the dust limit of %s to prevent stuck transactions)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specify directory where to write backups and data dumps (default datadir/backups)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The minimum transaction output size (in %s) used to validate wallet transactions and discard change (to fee) (default: %s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard. Paper wallet art provided by Anacoluthia.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amaze</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Many generous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>More</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Such expensive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Namecoin-compatible AuxPow API structure, (default: %u)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wow</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

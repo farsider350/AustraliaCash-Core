@@ -1,17 +1,23 @@
-name: Continuous Integration on Develop
+name: Continuous Integration For AustraliaCash
 on:
   push:
     branches:
     - dev
+    - aux-dev
+    - master
+    - aux-master
   pull_request:
     branches:
     - dev
+    - aux-dev
+    - master
+    - aux-master
 env:
   SOURCE_ARTIFACT: source
 jobs:
   create-source-distribution:
     name: Create Source Distribution
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     env:
       ARTIFACT_DIR: source
     steps:
@@ -19,7 +25,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Install Required Packages
       run: |
-        sudo apt-get install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils python3
+        sudo apt-get install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils python3 autoconf-archive
         sudo apt-get install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
         sudo apt-get install libboost-all-dev
         sudo apt-get install software-properties-common
@@ -50,7 +56,7 @@ jobs:
   build-linux:
     name: Build for Linux
     needs: create-source-distribution
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     env:
       ARTIFACT_DIR: linux-binaries
       TEST_LOG_ARTIFACT_DIR: test-logs
@@ -88,7 +94,7 @@ jobs:
   build-windows:
     name: Build for Windows
     needs: create-source-distribution
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     env:
       ARTIFACT_DIR: windows-binaries
     steps:

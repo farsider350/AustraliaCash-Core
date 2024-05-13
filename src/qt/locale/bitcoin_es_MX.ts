@@ -41,50 +41,6 @@
         <source>&amp;Delete</source>
         <translation>&amp;Borrar</translation>
     </message>
-    <message>
-        <source>Choose the address to send coins to</source>
-        <translation>Elija la direccion a donde se enviaran las monedas</translation>
-    </message>
-    <message>
-        <source>Choose the address to receive coins with</source>
-        <translation>Elija la dirección para recibir monedas.</translation>
-    </message>
-    <message>
-        <source>C&amp;hoose</source>
-        <translation>Elija</translation>
-    </message>
-    <message>
-        <source>Sending addresses</source>
-        <translation>Direcciones de Envio</translation>
-    </message>
-    <message>
-        <source>Receiving addresses</source>
-        <translation>Direcciones de recibo</translation>
-    </message>
-    <message>
-        <source>These are your Australiacash addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Estas son tus direcciones de Australiacash para enviar pagos. Siempre revisa el monto y la dirección de envío antes de enviar monedas.</translation>
-    </message>
-    <message>
-        <source>These are your Australiacash addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Estas son sus direcciones de Australiacash para recibir pagos. Se recomienda utilizar una nueva dirección de recepción para cada transacción.</translation>
-    </message>
-    <message>
-        <source>&amp;Copy Address</source>
-        <translation>&amp;Copiar dirección</translation>
-    </message>
-    <message>
-        <source>Copy &amp;Label</source>
-        <translation>copiar y etiquetar</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation>Editar</translation>
-    </message>
-    <message>
-        <source>Export Address List</source>
-        <translation>Exportar lista de direcciones </translation>
-    </message>
     </context>
 <context>
     <name>AddressTableModel</name>
@@ -116,7 +72,7 @@
     </message>
     </context>
 <context>
-    <name>AustraliaCashGUI</name>
+    <name>BitcoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Firmar &amp;mensaje</translation>
@@ -126,7 +82,7 @@
         <translation>Sincronizando con la red...</translation>
     </message>
     <message>
-        <source>&amp;Overview</source>
+        <source>&amp;Wow</source>
         <translation>&amp;Vista previa</translation>
     </message>
     <message>
@@ -178,11 +134,11 @@
         <translation>&amp;Cambiar contraseña...</translation>
     </message>
     <message>
-        <source>&amp;Sending addresses...</source>
+        <source>&amp;Such sending addresses...</source>
         <translation>Direcciones de &amp;envío...</translation>
     </message>
     <message>
-        <source>&amp;Receiving addresses...</source>
+        <source>&amp;Much receiving addresses...</source>
         <translation>Direcciones de &amp;recepción...</translation>
     </message>
     <message>
@@ -194,8 +150,8 @@
         <translation>Reindexando bloques en el disco...</translation>
     </message>
     <message>
-        <source>Send coins to a Australiacash address</source>
-        <translation>Enviar monedas a una dirección Australiacash</translation>
+        <source>Send coins to a AustraliaCash address</source>
+        <translation>Enviar monedas a una dirección AustraliaCash</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -218,19 +174,19 @@
         <translation>&amp;Verificar mensaje...</translation>
     </message>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
+        <source>AustraliaCash</source>
+        <translation>AustraliaCash</translation>
     </message>
     <message>
         <source>Wallet</source>
         <translation>Cartera</translation>
     </message>
     <message>
-        <source>&amp;Send</source>
+        <source>&amp;Such Send</source>
         <translation>&amp;Enviar</translation>
     </message>
     <message>
-        <source>&amp;Receive</source>
+        <source>&amp;Much Receive</source>
         <translation>&amp;Recibir</translation>
     </message>
     <message>
@@ -381,10 +337,6 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Error</translation>
     </message>
@@ -417,10 +369,6 @@
         <source>none</source>
         <translation>Ninguno </translation>
     </message>
-    <message>
-        <source>Error</source>
-        <translation>Error</translation>
-    </message>
     </context>
 <context>
     <name>OverviewPage</name>
@@ -441,11 +389,7 @@
         <source>Amount</source>
         <translation>Monto</translation>
     </message>
-    <message>
-        <source>unknown</source>
-        <translation>desconocido</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>QObject::QObject</name>
     </context>
@@ -474,8 +418,8 @@
         <translation>Mensaje:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Australiacash network.</source>
-        <translation>Mensaje opcional para agregar a la solicitud de pago, el cual será mostrado cuando la solicitud este abierta. Nota: El mensaje no se manda con el pago a travéz de la red de Australiacash.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the AustraliaCash network.</source>
+        <translation>Mensaje opcional para agregar a la solicitud de pago, el cual será mostrado cuando la solicitud este abierta. Nota: El mensaje no se manda con el pago a travéz de la red de AustraliaCash.</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
@@ -525,6 +469,10 @@
     <message>
         <source>Change:</source>
         <translation>Cambio</translation>
+    </message>
+    <message>
+        <source>fast</source>
+        <translation>rápido</translation>
     </message>
     <message>
         <source>Send to multiple recipients at once</source>
@@ -645,13 +593,9 @@
         <source>Send Coins</source>
         <translation>Enviar monedas</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletView</name>
-    <message>
-        <source>Export the data in the current tab to a file</source>
-        <translation>Exportar la información en la pestaña actual a un archivo</translation>
-    </message>
     </context>
 <context>
     <name>bitcoin-core</name>
@@ -660,8 +604,8 @@
         <translation>Opciones:</translation>
     </message>
     <message>
-        <source>Australiacash Core</source>
-        <translation>nucleo Australiacash</translation>
+        <source>AustraliaCash Core</source>
+        <translation>nucleo AustraliaCash</translation>
     </message>
     <message>
         <source>&lt;category&gt; can be:</source>
@@ -670,6 +614,10 @@
     <message>
         <source>Verifying blocks...</source>
         <translation>Verificando bloques...</translation>
+    </message>
+    <message>
+        <source>Verifying wallet...</source>
+        <translation>Verificando cartera...</translation>
     </message>
     <message>
         <source>Wallet options:</source>
@@ -682,6 +630,10 @@
     <message>
         <source>Warning</source>
         <translation>Aviso</translation>
+    </message>
+    <message>
+        <source>Loading addresses...</source>
+        <translation>Cargando direcciones...</translation>
     </message>
     <message>
         <source>Loading block index...</source>

@@ -54,20 +54,20 @@
         <translation>T&amp;ria</translation>
     </message>
     <message>
-        <source>Sending addresses</source>
+        <source>Such sending addresses</source>
         <translation>S'estan enviant les adreces</translation>
     </message>
     <message>
-        <source>Receiving addresses</source>
+        <source>Much receiving addresses</source>
         <translation>S'estan rebent les adreces</translation>
     </message>
     <message>
-        <source>These are your Australiacash addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Estes són les vostres adreces de Australiacash per enviar els pagaments. Sempre reviseu l'import i l'adreça del destinatari abans de transferir monedes.</translation>
+        <source>These are your AustraliaCash addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Estes són les vostres adreces de AustraliaCash per enviar els pagaments. Sempre reviseu l'import i l'adreça del destinatari abans de transferir monedes.</translation>
     </message>
     <message>
-        <source>These are your Australiacash addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Estes són les vostres adreces Australiacash per rebre pagaments. Es recomana utilitzar una adreça nova de recepció per a cada transacció.</translation>
+        <source>These are your AustraliaCash addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Estes són les vostres adreces AustraliaCash per rebre pagaments. Es recomana utilitzar una adreça nova de recepció per a cada transacció.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -168,8 +168,8 @@
         <translation>Confirma l'encriptació del moneder</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR LITECOINS&lt;/b&gt;!</source>
-        <translation>Avís: si encripteu el vostre moneder i perdeu la contrasenya, &lt;b&gt;PERDREU TOTS ELS VOSTRES LITECOINS&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR AUSCOINS&lt;/b&gt;!</source>
+        <translation>Avís: si encripteu el vostre moneder i perdeu la contrasenya, &lt;b&gt;PERDREU TOTS ELS VOSTRES AUSCOINS&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -220,7 +220,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>AustraliaCashGUI</name>
+    <name>BitcoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Signa el &amp;missatge...</translation>
@@ -230,7 +230,7 @@
         <translation>S'està sincronitzant amb la xarxa ...</translation>
     </message>
     <message>
-        <source>&amp;Overview</source>
+        <source>&amp;Wow</source>
         <translation>&amp;Panorama general</translation>
     </message>
     <message>
@@ -282,11 +282,11 @@
         <translation>&amp;Canvia la contrasenya...</translation>
     </message>
     <message>
-        <source>&amp;Sending addresses...</source>
+        <source>Such &amp;sending addresses...</source>
         <translation>Adreces d'e&amp;nviament...</translation>
     </message>
     <message>
-        <source>&amp;Receiving addresses...</source>
+        <source>Much &amp;receiving addresses...</source>
         <translation>Adreces de &amp;recepció</translation>
     </message>
     <message>
@@ -298,8 +298,8 @@
         <translation>S'estan reindexant els blocs al disc...</translation>
     </message>
     <message>
-        <source>Send coins to a Australiacash address</source>
-        <translation>Envia monedes a una adreça Australiacash</translation>
+        <source>Send coins to a AustraliaCash address</source>
+        <translation>Envia monedes a una adreça AustraliaCash</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -322,19 +322,19 @@
         <translation>&amp;Verifica el missatge...</translation>
     </message>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
+        <source>AustraliaCash</source>
+        <translation>AustraliaCash</translation>
     </message>
     <message>
         <source>Wallet</source>
         <translation>Moneder</translation>
     </message>
     <message>
-        <source>&amp;Send</source>
+        <source>&amp;Such Send</source>
         <translation>&amp;Envia</translation>
     </message>
     <message>
-        <source>&amp;Receive</source>
+        <source>&amp;Much Receive</source>
         <translation>&amp;Rep</translation>
     </message>
     <message>
@@ -350,12 +350,12 @@
         <translation>Encripta les claus privades pertanyents al moneder</translation>
     </message>
     <message>
-        <source>Sign messages with your Australiacash addresses to prove you own them</source>
-        <translation>Signa el missatges amb la seua adreça de Australiacash per provar que les poseeixes</translation>
+        <source>Sign messages with your AustraliaCash addresses to prove you own them</source>
+        <translation>Signa el missatges amb la seua adreça de AustraliaCash per provar que les poseeixes</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Australiacash addresses</source>
-        <translation>Verifiqueu els missatges per assegurar-vos que han estat signats amb una adreça Australiacash específica.</translation>
+        <source>Verify messages to ensure they were signed with specified AustraliaCash addresses</source>
+        <translation>Verifiqueu els missatges per assegurar-vos que han estat signats amb una adreça AustraliaCash específica.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -471,11 +471,7 @@
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</source>
         <translation>El moneder està &lt;b&gt;encriptat&lt;/b&gt; i actualment &lt;b&gt;bloquejat&lt;/b&gt;</translation>
     </message>
-    <message>
-        <source>A fatal error occurred. Australiacash can no longer continue safely and will quit.</source>
-        <translation>Ha tingut lloc un error fatal. Australiacash no pot continuar executant-se de manera segura i es tancará.</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>CoinControlDialog</name>
     <message>
@@ -607,8 +603,8 @@
         <translation>no</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation>Pot variar +/- %1 satoshi(s) per entrada.</translation>
+        <source>Can vary +/- %1 koinu(s) per input.</source>
+        <translation>Pot variar +/- %1 koinu(s) per entrada.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -662,8 +658,8 @@
         <translation>Edita les adreces d'enviament</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Australiacash address.</source>
-        <translation>L'adreça introduïda «%1» no és una adreça de Australiacash vàlida.</translation>
+        <source>The entered address "%1" is not a valid AustraliaCash address.</source>
+        <translation>L'adreça introduïda «%1» no és una adreça de AustraliaCash vàlida.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -755,10 +751,6 @@
         <translation>Utilitza un directori de dades personalitzat:</translation>
     </message>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
-    </message>
-    <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
         <translation>Error: el directori de dades «%1» especificat no pot ser creat.</translation>
     </message>
@@ -828,6 +820,14 @@
         <translation>Nombre de fils de &amp;verificació d'scripts</translation>
     </message>
     <message>
+        <source>Accept connections from outside</source>
+        <translation>Accepta connexions de fora</translation>
+    </message>
+    <message>
+        <source>Allow incoming connections</source>
+        <translation>Permet connexions entrants</translation>
+    </message>
+    <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
         <translation>Adreça IP del proxy (p. ex. IPv4: 127.0.0.1 / IPv6: ::1)</translation>
     </message>
@@ -838,6 +838,10 @@
     <message>
         <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
         <translation>URL de terceres parts (p. ex. explorador de blocs) que apareix en la pestanya de transaccions com elements del menú contextual. %s en l'URL es reemplaçat pel resum de la transacció. Diferents URL estan separades per una barra vertical |.</translation>
+    </message>
+    <message>
+        <source>Third party transaction URLs</source>
+        <translation>URL de transaccions de terceres parts</translation>
     </message>
     <message>
         <source>Active command-line options that override above options:</source>
@@ -880,16 +884,16 @@
         <translation>&amp;Gasta el canvi sense confirmar</translation>
     </message>
     <message>
-        <source>Automatically open the Australiacash client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Obri el port del client de Australiacash al router de forma automàtica. Això només funciona quan el router implementa UPnP i l'opció està activada.</translation>
+        <source>Automatically open the AustraliaCash client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Obri el port del client de AustraliaCash al router de forma automàtica. Això només funciona quan el router implementa UPnP i l'opció està activada.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
         <translation>Port obert amb &amp;UPnP</translation>
     </message>
     <message>
-        <source>Connect to the Australiacash network through a SOCKS5 proxy.</source>
-        <translation>Connecta a la xarxa Australiacash a través d'un proxy SOCKS5.</translation>
+        <source>Connect to the AustraliaCash network through a SOCKS5 proxy.</source>
+        <translation>Connecta a la xarxa AustraliaCash a través d'un proxy SOCKS5.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -906,6 +910,10 @@
     <message>
         <source>Port of the proxy (e.g. 9050)</source>
         <translation>Port del proxy (per exemple 9050)</translation>
+    </message>
+    <message>
+        <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services:</source>
+        <translation>Utilitza un proxy SOCKS4 apart per a arribar als iguals a través de serveis ocults de Tor:</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -972,10 +980,6 @@
         <translation>Es pararà el client. Voleu procedir?</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation>Error</translation>
-    </message>
-    <message>
         <source>This change would require a client restart.</source>
         <translation>Amb este canvi cal un reinici del client.</translation>
     </message>
@@ -991,8 +995,8 @@
         <translation>Formulari</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Australiacash network after a connection is established, but this process has not completed yet.</source>
-        <translation>La informació mostrada pot no estar al día. El teu moneder es sincronitza automàticament amb la xarxa Australiacash un cop s'ha establit connexió, però este proces no s'ha completat encara.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the AustraliaCash network after a connection is established, but this process has not completed yet.</source>
+        <translation>La informació mostrada pot no estar al día. El teu moneder es sincronitza automàticament amb la xarxa AustraliaCash un cop s'ha establit connexió, però este proces no s'ha completat encara.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1082,8 +1086,8 @@
         <translation>Adreça de pagament no vàlida %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Australiacash address or malformed URI parameters.</source>
-        <translation>L'URI no pot ser analitzat! Això pot ser a causa d'una adreça de Australiacash no vàlida o per paràmetres URI amb mal format.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid AustraliaCash address or malformed URI parameters.</source>
+        <translation>L'URI no pot ser analitzat! Això pot ser a causa d'una adreça de AustraliaCash no vàlida o per paràmetres URI amb mal format.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -1160,15 +1164,7 @@
         <source>Node/Service</source>
         <translation>Node/Servei</translation>
     </message>
-    <message>
-        <source>Sent</source>
-        <translation>Enviat</translation>
-    </message>
-    <message>
-        <source>Received</source>
-        <translation>Rebut</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>QObject</name>
     <message>
@@ -1176,8 +1172,8 @@
         <translation>Import</translation>
     </message>
     <message>
-        <source>Enter a Australiacash address (e.g. %1)</source>
-        <translation>Introduïu una adreça de Australiacash (p. ex. %1)</translation>
+        <source>Enter a AustraliaCash address (e.g. %1)</source>
+        <translation>Introduïu una adreça de AustraliaCash (p. ex. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1211,37 +1207,9 @@
         <source>%1 and %2</source>
         <translation>%1 i %2</translation>
     </message>
-    <message>
-        <source>%1 B</source>
-        <translation>%1 B</translation>
-    </message>
-    <message>
-        <source>%1 KB</source>
-        <translation>%1 KB</translation>
-    </message>
-    <message>
-        <source>%1 MB</source>
-        <translation>%1 MB</translation>
-    </message>
-    <message>
-        <source>%1 GB</source>
-        <translation>%1 GB</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>desconegut</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>QObject::QObject</name>
-    <message>
-        <source>Error: Specified data directory "%1" does not exist.</source>
-        <translation>Error: El directori de dades especificat «%1» no existeix.</translation>
-    </message>
-    <message>
-        <source>Error: Cannot parse configuration file: %1. Only use key=value syntax.</source>
-        <translation>Error: no es pot analitzar el fitxer de configuració: %1. Feu servir només la sintaxi clau=valor.</translation>
-    </message>
     </context>
 <context>
     <name>QRImageWidget</name>
@@ -1385,6 +1353,10 @@
         <translation>Trà&amp;nsit de la xarxa</translation>
     </message>
     <message>
+        <source>&amp;Clear</source>
+        <translation>Nete&amp;ja</translation>
+    </message>
+    <message>
         <source>Totals</source>
         <translation>Totals</translation>
     </message>
@@ -1403,6 +1375,30 @@
     <message>
         <source>Clear console</source>
         <translation>Neteja la consola</translation>
+    </message>
+    <message>
+        <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>
+        <translation>Utilitza les fletxes d'amunt i avall per navegar per l'historial, i &lt;b&gt;Ctrl-L&lt;\b&gt; per netejar la pantalla.</translation>
+    </message>
+    <message>
+        <source>Type &lt;b&gt;help&lt;/b&gt; for an overview of available commands.</source>
+        <translation>Escriviu &lt;b&gt;help&lt;\b&gt; per a obtindre un llistat de les ordes disponibles.</translation>
+    </message>
+    <message>
+        <source>%1 B</source>
+        <translation>%1 B</translation>
+    </message>
+    <message>
+        <source>%1 KB</source>
+        <translation>%1 KB</translation>
+    </message>
+    <message>
+        <source>%1 MB</source>
+        <translation>%1 MB</translation>
+    </message>
+    <message>
+        <source>%1 GB</source>
+        <translation>%1 GB</translation>
     </message>
     <message>
         <source>via %1</source>
@@ -1448,8 +1444,16 @@
         <translation>&amp;Missatge:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Australiacash network.</source>
-        <translation>Un missatge opcional que s'adjuntarà a la sol·licitud de pagament, que es mostrarà quan s'òbriga la sol·licitud. Nota: El missatge no s'enviarà amb el pagament per la xarxa Australiacash.</translation>
+        <source>Reuse one of the previously used receiving addresses. Reusing addresses has security and privacy issues. Do not use this unless re-generating a payment request made before.</source>
+        <translation>Reutilitza una de les adreces de recepció utilitzades anteriorment. La reutilització d'adreces pot comportar problemes de seguretat i privadesa. No ho utilitzeu llevat que torneu a generar una sol·licitud de pagament feta abans.</translation>
+    </message>
+    <message>
+        <source>R&amp;euse an existing receiving address (not recommended)</source>
+        <translation>R&amp;eutilitza una adreça de recepció anterior (no recomanat)</translation>
+    </message>
+    <message>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the AustraliaCash network.</source>
+        <translation>Un missatge opcional que s'adjuntarà a la sol·licitud de pagament, que es mostrarà quan s'òbriga la sol·licitud. Nota: El missatge no s'enviarà amb el pagament per la xarxa AustraliaCash.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -1657,12 +1661,16 @@
         <translation>per kilobyte</translation>
     </message>
     <message>
-        <source>If the custom fee is set to 1000 satoshis and the transaction is only 250 bytes, then "per kilobyte" only pays 250 satoshis in fee, while "total at least" pays 1000 satoshis. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Si la comissió personalitzada es defineix a 1000 satoshis i la transacció és de només 250 bytes, llavors «per kilobyte» només es paguen 250 satoshis en una comissió, mentre que amb la de «total com a mínim» es pagarien 1000 satoshis. Per a transaccions superiors al kilobyte, en tots dos casos es paga per kilobyte.</translation>
+        <source>If the custom fee is set to 1000 koinu and the transaction is only 250 bytes, then "per kilobyte" only pays 250 koinu in fee, while "total at least" pays 1000 koinu. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <translation>Si la comissió personalitzada es defineix a 1000 koinu i la transacció és de només 250 bytes, llavors «per kilobyte» només es paguen 250 koinu en una comissió, mentre que amb la de «total com a mínim» es pagarien 1000 koinu. Per a transaccions superiors al kilobyte, en tots dos casos es paga per kilobyte.</translation>
     </message>
     <message>
         <source>Hide</source>
         <translation>Amaga</translation>
+    </message>
+    <message>
+        <source>total at least</source>
+        <translation>total com a mínim</translation>
     </message>
     <message>
         <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for australiacash transactions than the network can process.</source>
@@ -1683,6 +1691,14 @@
     <message>
         <source>(Smart fee not initialized yet. This usually takes a few blocks...)</source>
         <translation>(No s'ha inicialitzat encara la comissió intel·ligent. Normalment pren uns pocs blocs...)</translation>
+    </message>
+    <message>
+        <source>normal</source>
+        <translation>normal</translation>
+    </message>
+    <message>
+        <source>fast</source>
+        <translation>ràpid</translation>
     </message>
     <message>
         <source>Send to multiple recipients at once</source>
@@ -1797,8 +1813,8 @@
         <translation>La sol·licitud de pagament ha vençut.</translation>
     </message>
     <message>
-        <source>Warning: Invalid Australiacash address</source>
-        <translation>Avís: adreça Australiacash no vàlida</translation>
+        <source>Warning: Invalid AustraliaCash address</source>
+        <translation>Avís: adreça AustraliaCash no vàlida</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -1832,8 +1848,8 @@
         <translation>Això és un pagament normal.</translation>
     </message>
     <message>
-        <source>The Australiacash address to send the payment to</source>
-        <translation>L'adreça Australiacash on enviar el pagament</translation>
+        <source>The AustraliaCash address to send the payment to</source>
+        <translation>L'adreça AustraliaCash on enviar el pagament</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -1876,8 +1892,8 @@
         <translation>Introduïu una etiqueta per a esta adreça per afegir-la a la llista d'adreces utilitzades</translation>
     </message>
     <message>
-        <source>A message that was attached to the australiacash: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Australiacash network.</source>
-        <translation>Un missatge que s'ha adjuntat al australiacash: URI que s'emmagatzemarà amb la transacció per a la vostra referència. Nota: el missatge no s'enviarà a través de la xarxa Australiacash.</translation>
+        <source>A message that was attached to the australiacash: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the AustraliaCash network.</source>
+        <translation>Un missatge que s'ha adjuntat al australiacash: URI que s'emmagatzemarà amb la transacció per a la vostra referència. Nota: el missatge no s'enviarà a través de la xarxa AustraliaCash.</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -1921,8 +1937,8 @@
         <translation>Podeu signar missatges/acords amb les vostres adreces per provar que rebeu les australiacashs que s'hi envien. Aneu amb compte no signar res que siga vague o aleatori, perquè en alguns atacs de suplantació es pot provar que hi signeu la vostra identitat. Només signeu aquelles declaracions completament detallades en què hi esteu d'acord. </translation>
     </message>
     <message>
-        <source>The Australiacash address to sign the message with</source>
-        <translation>L'adreça Australiacash amb què signar el missatge</translation>
+        <source>The AustraliaCash address to sign the message with</source>
+        <translation>L'adreça AustraliaCash amb què signar el missatge</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -1953,8 +1969,8 @@
         <translation>Copia la signatura actual al porta-retalls del sistema</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Australiacash address</source>
-        <translation>Signa el missatge per provar que ets propietari d'esta adreça Australiacash</translation>
+        <source>Sign the message to prove you own this AustraliaCash address</source>
+        <translation>Signa el missatge per provar que ets propietari d'esta adreça AustraliaCash</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -1977,12 +1993,12 @@
         <translation>Introduïu l'adreça del receptor, el missatge (assegureu-vos de copiar els salts de línia, espais, tabuladors, etc. exactament) i signatura de sota per verificar el missatge. Tingueu cura de no llegir més en la signatura del que està al missatge signat, per evitar ser enganyat per un atac d'home-en-el-mig. Tingueu en compte que això només demostra que la part que signa rep amb l'adreça, i no es pot provar l'enviament de qualsevol transacció!</translation>
     </message>
     <message>
-        <source>The Australiacash address the message was signed with</source>
-        <translation>L'adreça Australiacash amb què va ser signat el missatge</translation>
+        <source>The AustraliaCash address the message was signed with</source>
+        <translation>L'adreça AustraliaCash amb què va ser signat el missatge</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Australiacash address</source>
-        <translation>Verificar el missatge per assegurar-se que ha estat signat amb una adreça Australiacash específica</translation>
+        <source>Verify the message to ensure it was signed with the specified AustraliaCash address</source>
+        <translation>Verificar el missatge per assegurar-se que ha estat signat amb una adreça AustraliaCash específica</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2359,6 +2375,10 @@
         <translation>Altres</translation>
     </message>
     <message>
+        <source>Enter address or label to search</source>
+        <translation>Introduïu una adreça o una etiqueta per cercar</translation>
+    </message>
+    <message>
         <source>Min amount</source>
         <translation>Import mínim</translation>
     </message>
@@ -2467,7 +2487,7 @@
         <source>Send Coins</source>
         <translation>Envia monedes</translation>
     </message>
-    </context>
+</context>
 <context>
     <name>WalletView</name>
     <message>
@@ -2538,8 +2558,8 @@
         <translation>Executa en segon pla com a programa dimoni i accepta ordes</translation>
     </message>
     <message>
-        <source>Australiacash Core</source>
-        <translation>Australiacash Core</translation>
+        <source>AustraliaCash Core</source>
+        <translation>AustraliaCash Core</translation>
     </message>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>
@@ -2558,24 +2578,8 @@
         <translation>Defineix el nombre de fils de verificació d'scripts (%u a %d, 0 = auto, &lt;0 = deixa tants nuclis lliures, per defecte: %d)</translation>
     </message>
     <message>
-        <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
-        <translation>Esta és una versió de pre-llançament - utilitza-la sota la teva responsabilitat - No usar per a minería o aplicacions de compra-venda</translation>
-    </message>
-    <message>
-        <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
-        <translation>Avís: la xarxa no pareix que hi estiga plenament d'acord. Alguns miners pareix que estan experimentant problemes.</translation>
-    </message>
-    <message>
-        <source>Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.</source>
-        <translation>Avís: pareix que no estem plenament d'acord amb els nostres iguals! Podria caldre que actualitzar l'aplicació, o potser que ho facen altres nodes.</translation>
-    </message>
-    <message>
         <source>&lt;category&gt; can be:</source>
         <translation>&lt;category&gt; pot ser:</translation>
-    </message>
-    <message>
-        <source>Accept connections from outside (default: 1 if no -proxy or -connect)</source>
-        <translation>Accepta connexions de fora (per defecte: 1 si no -proxy o -connect)</translation>
     </message>
     <message>
         <source>Block creation options:</source>
@@ -2634,6 +2638,10 @@
         <translation>No s'ha trobat el bloc de gènesi o és incorrecte. El directori de dades de la xarxa és incorrecte?</translation>
     </message>
     <message>
+        <source>Invalid -onion address: '%s'</source>
+        <translation>Adreça -onion no vàlida: '%s'</translation>
+    </message>
+    <message>
         <source>Not enough file descriptors available.</source>
         <translation>No hi ha suficient descriptors de fitxers disponibles.</translation>
     </message>
@@ -2654,6 +2662,10 @@
         <translation>Defineix la mida de la memòria cau de la base de dades en megabytes (%d a %d, per defecte: %d)</translation>
     </message>
     <message>
+        <source>Set maximum block size in bytes (default: %d)</source>
+        <translation>Defineix la mida màxim del bloc en bytes (per defecte: %d)</translation>
+    </message>
+    <message>
         <source>Specify wallet file (within data directory)</source>
         <translation>Especifica un fitxer de moneder (dins del directori de dades)</translation>
     </message>
@@ -2666,6 +2678,14 @@
         <translation>S'estan verificant els blocs...</translation>
     </message>
     <message>
+        <source>Verifying wallet...</source>
+        <translation>S'està verificant el moneder...</translation>
+    </message>
+    <message>
+        <source>Wallet %s resides outside data directory %s</source>
+        <translation>El moneder %s resideix fora del directori de dades %s</translation>
+    </message>
+    <message>
         <source>Wallet options:</source>
         <translation>Opcions de moneder:</translation>
     </message>
@@ -2676,6 +2696,10 @@
     <message>
         <source>Bind to given address and whitelist peers connecting to it. Use [host]:port notation for IPv6</source>
         <translation>Vincula l'adreça donada i posa a la llista blanca els iguals que s'hi connecten. Feu servir la notació [host]:port per a IPv6</translation>
+    </message>
+    <message>
+        <source>Bind to given address to listen for JSON-RPC connections. Use [host]:port notation for IPv6. This option can be specified multiple times (default: bind to all interfaces)</source>
+        <translation>Vincula a l'adreça donada per a escoltar les connexions JSON-RPC. Feu servir la notació [host]:port per a IPv6. Esta opció pot ser especificada moltes vegades (per defecte: vincula a totes les interfícies)</translation>
     </message>
     <message>
         <source>Create new files with system default permissions, instead of umask 077 (only effective with disabled wallet functionality)</source>
@@ -2708,6 +2732,10 @@
     <message>
         <source>Randomize credentials for every proxy connection. This enables Tor stream isolation (default: %u)</source>
         <translation>Genera a l'atzar credencials per a cada connexió proxy. Això habilita l'aïllament del flux de Tor (per defecte: %u)</translation>
+    </message>
+    <message>
+        <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
+        <translation>Defineix la mida màxima de transaccions d'alta prioritat / baixa comissió en bytes (per defecte: %d)</translation>
     </message>
     <message>
         <source>The transaction amount is too small to send after the fee has been deducted</source>
@@ -2770,6 +2798,10 @@
         <translation>Envia informació de traça/depuració a la consola en comptes del fitxer debug.log</translation>
     </message>
     <message>
+        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
+        <translation>Envia les transaccions com a transaccions de comissió zero sempre que siga possible (per defecte: %u) </translation>
+    </message>
+    <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>Mostra totes les opcions de depuració (ús: --help  --help-debug)</translation>
     </message>
@@ -2814,10 +2846,6 @@
         <translation>Avís</translation>
     </message>
     <message>
-        <source>You need to rebuild the database using -reindex to change -txindex</source>
-        <translation>Cal que reconstruïu la base de dades fent servir -reindex per canviar -txindex</translation>
-    </message>
-    <message>
         <source>Zapping all transactions from wallet...</source>
         <translation>Se suprimeixen totes les transaccions del moneder...</translation>
     </message>
@@ -2832,6 +2860,10 @@
     <message>
         <source>Allow DNS lookups for -addnode, -seednode and -connect</source>
         <translation>Permet consultes DNS per a -addnode, -seednode i -connect</translation>
+    </message>
+    <message>
+        <source>Loading addresses...</source>
+        <translation>S'estan carregant les adreces...</translation>
     </message>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
@@ -2872,6 +2904,10 @@
     <message>
         <source>Include IP addresses in debug output (default: %u)</source>
         <translation>Inclou l'adreça IP a l'eixida de depuració (per defecte: %u)</translation>
+    </message>
+    <message>
+        <source>Invalid -proxy address: '%s'</source>
+        <translation>Adreça -proxy invalida: '%s'</translation>
     </message>
     <message>
         <source>Listen for JSON-RPC connections on &lt;port&gt; (default: %u or testnet: %u)</source>
@@ -2950,12 +2986,20 @@
         <translation>S'està carregant l'índex de blocs...</translation>
     </message>
     <message>
+        <source>Add a node to connect to and attempt to keep the connection open</source>
+        <translation>Afig un node per a connectar-s'hi i intenta mantindre-hi la connexió oberta</translation>
+    </message>
+    <message>
         <source>Loading wallet...</source>
         <translation>S'està carregant el moneder...</translation>
     </message>
     <message>
         <source>Cannot downgrade wallet</source>
         <translation>No es pot reduir la versió del moneder</translation>
+    </message>
+    <message>
+        <source>Cannot write default address</source>
+        <translation>No es pot escriure l'adreça per defecte</translation>
     </message>
     <message>
         <source>Rescanning...</source>

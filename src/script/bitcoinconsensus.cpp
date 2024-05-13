@@ -1,14 +1,14 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2021 The AustraliaCash Core developers
+// Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <script/bitcoinconsensus.h>
+#include "bitcoinconsensus.h"
 
-#include <primitives/transaction.h>
-#include <pubkey.h>
-#include <script/interpreter.h>
-#include <version.h>
+#include "primitives/transaction.h"
+#include "pubkey.h"
+#include "script/interpreter.h"
+#include "version.h"
 
 namespace {
 
@@ -16,40 +16,40 @@ namespace {
 class TxInputStream
 {
 public:
-    TxInputStream(int nVersionIn, const unsigned char *txTo, size_t txToLen) :
+    TxInputStream(int nTypeIn, int nVersionIn, const unsigned char *txTo, size_t txToLen) :
+    m_type(nTypeIn),
     m_version(nVersionIn),
     m_data(txTo),
     m_remaining(txToLen)
     {}
 
-    void read(Span<std::byte> dst)
+    void read(char* pch, size_t nSize)
     {
-        if (dst.size() > m_remaining) {
+        if (nSize > m_remaining)
             throw std::ios_base::failure(std::string(__func__) + ": end of data");
-        }
 
-        if (dst.data() == nullptr) {
+        if (pch == NULL)
             throw std::ios_base::failure(std::string(__func__) + ": bad destination buffer");
-        }
 
-        if (m_data == nullptr) {
+        if (m_data == NULL)
             throw std::ios_base::failure(std::string(__func__) + ": bad source buffer");
-        }
 
-        memcpy(dst.data(), m_data, dst.size());
-        m_remaining -= dst.size();
-        m_data += dst.size();
+        memcpy(pch, m_data, nSize);
+        m_remaining -= nSize;
+        m_data += nSize;
     }
 
     template<typename T>
-    TxInputStream& operator>>(T&& obj)
+    TxInputStream& operator>>(T& obj)
     {
         ::Unserialize(*this, obj);
         return *this;
     }
 
     int GetVersion() const { return m_version; }
+    int GetType() const { return m_type; }
 private:
+    const int m_type;
     const int m_version;
     const unsigned char* m_data;
     size_t m_remaining;
@@ -68,7 +68,7 @@ struct ECCryptoClosure
 };
 
 ECCryptoClosure instance_of_eccryptoclosure;
-} // namespace
+}
 
 /** Check that all specified flags are part of the libconsensus interface. */
 static bool verify_flags(unsigned int flags)
@@ -81,21 +81,21 @@ static int verify_script(const unsigned char *scriptPubKey, unsigned int scriptP
                                     unsigned int nIn, unsigned int flags, bitcoinconsensus_error* err)
 {
     if (!verify_flags(flags)) {
-        return set_error(err, bitcoinconsensus_ERR_INVALID_FLAGS);
+        return bitcoinconsensus_ERR_INVALID_FLAGS;
     }
     try {
-        TxInputStream stream(PROTOCOL_VERSION, txTo, txToLen);
+        TxInputStream stream(SER_NETWORK, PROTOCOL_VERSION, txTo, txToLen);
         CTransaction tx(deserialize, stream);
         if (nIn >= tx.vin.size())
             return set_error(err, bitcoinconsensus_ERR_TX_INDEX);
-        if (GetSerializeSize(tx, PROTOCOL_VERSION) != txToLen)
+        if (GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION) != txToLen)
             return set_error(err, bitcoinconsensus_ERR_TX_SIZE_MISMATCH);
 
         // Regardless of the verification result, the tx did not error.
         set_error(err, bitcoinconsensus_ERR_OK);
 
         PrecomputedTransactionData txdata(tx);
-        return VerifyScript(tx.vin[nIn].scriptSig, CScript(scriptPubKey, scriptPubKey + scriptPubKeyLen), &tx.vin[nIn].scriptWitness, flags, TransactionSignatureChecker(&tx, nIn, amount, txdata, MissingDataBehavior::FAIL), nullptr);
+        return VerifyScript(tx.vin[nIn].scriptSig, CScript(scriptPubKey, scriptPubKey + scriptPubKeyLen), &tx.vin[nIn].scriptWitness, flags, TransactionSignatureChecker(&tx, nIn, amount, txdata), NULL);
     } catch (const std::exception&) {
         return set_error(err, bitcoinconsensus_ERR_TX_DESERIALIZE); // Error deserializing
     }

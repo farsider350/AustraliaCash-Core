@@ -26,14 +26,6 @@
         <translation>Cerrar</translation>
     </message>
     <message>
-        <source>Delete the currently selected address from the list</source>
-        <translation>Eliminar la dirección seleccionada de la lista</translation>
-    </message>
-    <message>
-        <source>Export the data in the current tab to a file</source>
-        <translation>Exportar los datos en la pestaña actual a un archivo</translation>
-    </message>
-    <message>
         <source>&amp;Export</source>
         <translation>Exportar</translation>
     </message>
@@ -64,13 +56,13 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>AustraliaCashGUI</name>
+    <name>BitcoinGUI</name>
     <message>
         <source>Synchronizing with network...</source>
         <translation>Sincronizando con la red...</translation>
     </message>
     <message>
-        <source>&amp;Overview</source>
+        <source>&amp;Wow</source>
         <translation>&amp;Vista previa</translation>
     </message>
     <message>
@@ -110,24 +102,24 @@
         <translation>Cambiar contraseña</translation>
     </message>
     <message>
-        <source>&amp;Sending addresses...</source>
+        <source>&amp;Such sending addresses...</source>
         <translation>Enviando direcciones</translation>
     </message>
     <message>
-        <source>&amp;Receiving addresses...</source>
+        <source>&amp;Much receiving addresses...</source>
         <translation>Recibiendo direcciones</translation>
     </message>
     <message>
-        <source>Send coins to a Australiacash address</source>
-        <translation>Enviar monedas a una dirección Australiacash</translation>
+        <source>Send coins to a AustraliaCash address</source>
+        <translation>Enviar monedas a una dirección AustraliaCash</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
         <translation>Cambie la clave utilizada para el cifrado del monedero</translation>
     </message>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
+        <source>AustraliaCash</source>
+        <translation>AustraliaCash</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -252,10 +244,6 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Australiacash</source>
-        <translation>Australiacash</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Error</translation>
     </message>
@@ -277,16 +265,8 @@
         <translation>Opciones</translation>
     </message>
     <message>
-        <source>Size of &amp;database cache</source>
-        <translation>Tamaño del cache de la &amp;base de datos</translation>
-    </message>
-    <message>
         <source>W&amp;allet</source>
         <translation>Billetera</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>Error</translation>
     </message>
     </context>
 <context>
@@ -304,11 +284,7 @@
     </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>unknown</source>
-        <translation>desconocido</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>QObject::QObject</name>
     </context>
@@ -459,10 +435,6 @@
     </context>
 <context>
     <name>WalletView</name>
-    <message>
-        <source>Export the data in the current tab to a file</source>
-        <translation>Exportar los datos en la pestaña actual a un archivo</translation>
-    </message>
     </context>
 <context>
     <name>bitcoin-core</name>
