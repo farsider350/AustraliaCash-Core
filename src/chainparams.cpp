@@ -82,7 +82,7 @@ public:
         consensus.nMajorityWindow = 2000;
         consensus.BIP16Height = 0;
         consensus.BIP34Height = 1;
-        consensus.BIP34Hash = uint256S("0x4b22bb52e51d5b2f3f7648f61b81b69b3359d8d630d2253b81a92d7948d8676a");
+        consensus.BIP34Hash = uint256S("0xaa43989047f144331fc6400859c691b11c0e111ead1977511d340860c1c5ad1f");
         consensus.BIP65Height = 0;
         consensus.BIP66Height = 0;
         consensus.powLimit = uint256S("0x00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // ~uint256(0) >> 20;
@@ -189,7 +189,7 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (      0, uint256S("0x7f90a957c7c307305924641f651423456cab5d456457d82671927361609d9215"))
+            (      0, uint256S("0xaa43989047f144331fc6400859c691b11c0e111ead1977511d340860c1c5ad1f"))
             (   2100, uint256S("0x0019f21b64cdae0379225a935dfc0f44030f45411eff5a2910b2f391875d872d"))
             (   4957, uint256S("0x7577ff0728fe984476bf2f9fa9261133d78da4f2af6feb036bf7e2a82a2d6055"))
             (  10212, uint256S("0xe004ad1378f39ca06bf0cff572a1c5f7369bb61add1d039f23c082cae9b3c2ea"))
