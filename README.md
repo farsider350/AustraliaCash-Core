@@ -1,6 +1,6 @@
 # AustraliaCash-Core
 AUS-Cash Core Auxilary Proof Of Work Wallet
-v2.01.02.00
+v2.01.03.00
 ####	About
 
 >		Australiacash is a free open source peer-to-peer electronic system that is
@@ -22,9 +22,9 @@ v2.01.02.00
 ####    Install Instructions
 
 >       Proceed to the releases section of this GitHub
->       Find the latest release at top of page (Latest 2.01.02.0)
+>       Find the latest release at top of page (Latest 2.01.03.0)
 >       Download the compressed file for your operating system
 >       Unzip and double click the AustraliaCash-qt file
->       
+>
 >       Open ports 1986-1987 via the routers port forwarding or virtual server option for better peers connectivity.
 >       Start the wallet with australiacash-qt

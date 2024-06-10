@@ -100,7 +100,7 @@ UniValue getnetworkhashps(const JSONRPCRequest& request)
 UniValue generateBlocks(boost::shared_ptr<CReserveScript> coinbaseScript, int nGenerate, uint64_t nMaxTries, bool keepScript, int nMineAuxPow)
 {
     // AustraliaCash: Never mine witness tx
-    // const bool fMineWitnessTx = false;
+    const bool fMineWitnessTx = true;
     static const int nInnerLoopCount = 0x10000;
     int nHeightStart = 0;
     int nHeightEnd = 0;
@@ -108,15 +108,15 @@ UniValue generateBlocks(boost::shared_ptr<CReserveScript> coinbaseScript, int nG
 
     {   // Don't keep cs_main locked
         LOCK(cs_main);
-        nHeight = chainActive.Height();
-        // nHeight = nHeightStart;
+        nHeightStart = chainActive.Height();
+        nHeight = nHeightStart;
         nHeightEnd = nHeightStart+nGenerate;
     }
     unsigned int nExtraNonce = 0;
     UniValue blockHashes(UniValue::VARR);
     while (nHeight < nHeightEnd)
     {
-        std::unique_ptr<CBlockTemplate> pblocktemplate(BlockAssembler(Params()).CreateNewBlock(coinbaseScript->reserveScript));
+        std::unique_ptr<CBlockTemplate> pblocktemplate(BlockAssembler(Params()).CreateNewBlock(coinbaseScript->reserveScript, fMineWitnessTx));
         if (!pblocktemplate.get())
             throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
         CBlock *pblock = &pblocktemplate->block;
@@ -354,7 +354,7 @@ std::string gbt_vb_name(const Consensus::DeploymentPos pos) {
 UniValue getblocktemplate(const JSONRPCRequest& request)
 {
     // AustraliaCash: Never mine witness tx
-    const bool fMineWitnessTx = false;
+    const bool fMineWitnessTx = true;
     if (request.fHelp || request.params.size() > 1)
         throw runtime_error(
             "getblocktemplate ( TemplateRequest )\n"
@@ -585,7 +585,7 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
 
         // Create new block
         CScript scriptDummy = CScript() << OP_TRUE;
-        pblocktemplate = BlockAssembler(Params()).CreateNewBlock(scriptDummy, fSupportsSegwit);
+        pblocktemplate = BlockAssembler(Params()).CreateNewBlock(scriptDummy, fMineWitnessTx);
         if (!pblocktemplate)
             throw JSONRPCError(RPC_OUT_OF_MEMORY, "Out of memory");
 
@@ -1021,7 +1021,7 @@ static UniValue AuxMiningCreateBlock(const CScript& scriptPubKey)
     static unsigned nExtraNonce = 0;
 
     // AustraliaCash: Never mine witness tx
-    // const bool fMineWitnessTx = false;
+    const bool fMineWitnessTx = false;
 
     /* Search for cached blocks with given scriptPubKey and assign it to pBlock
      * if we find a match. This allows for creating multiple aux templates with
@@ -1052,7 +1052,7 @@ static UniValue AuxMiningCreateBlock(const CScript& scriptPubKey)
 
             // Create new block with nonce = 0 and extraNonce = 1
             std::unique_ptr<CBlockTemplate> newBlock
-                = BlockAssembler(Params()).CreateNewBlock(scriptPubKey);
+                = BlockAssembler(Params()).CreateNewBlock(scriptPubKey, fMineWitnessTx);
             if (!newBlock)
                 throw JSONRPCError(RPC_OUT_OF_MEMORY, "out of memory");
 
@@ -1189,7 +1189,7 @@ UniValue getauxblockbip22(const JSONRPCRequest& request)
 
         // Update block
         // AustraliaCash: Never mine witness tx
-        // const bool fMineWitnessTx = false;
+        const bool fMineWitnessTx = false;
         {
             LOCK(cs_main);
             if (pindexPrev != chainActive.Tip()
@@ -1205,7 +1205,7 @@ UniValue getauxblockbip22(const JSONRPCRequest& request)
                 }
 
                 // Create new block with nonce = 0 and extraNonce = 1
-                std::unique_ptr<CBlockTemplate> newBlock(BlockAssembler(Params()).CreateNewBlock(coinbaseScript->reserveScript));
+                std::unique_ptr<CBlockTemplate> newBlock(BlockAssembler(Params()).CreateNewBlock(coinbaseScript->reserveScript, fMineWitnessTx));
                 if (!newBlock)
                     throw JSONRPCError(RPC_OUT_OF_MEMORY, "out of memory");
 
