@@ -18,8 +18,8 @@ static const int INIT_PROTO_VERSION = 209;
 //! In this version, 'getheaders' was introduced.
 static const int GETHEADERS_VERSION = 31800;
 
-//! Can be raised once auxpow is enabled - low version needed for p2pool compatibility
-static const int MIN_PEER_PROTO_VERSION = 31800;
+//! Raising now to boot old clients during initial sync
+static const int MIN_PEER_PROTO_VERSION = 70350;
 
 //! nTime field added to CAddress, starting with this version;
 //! if possible, avoid requesting addresses nodes older than this
