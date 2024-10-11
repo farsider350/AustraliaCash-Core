@@ -20,51 +20,70 @@ int static generateMTRandom(unsigned int s, int range)
     return dist(gen);
 }
 
-// AustraliaCash: Normally minimum difficulty blocks can only occur in between
-// retarget blocks. However, once we introduce Digishield every block is
-// a retarget, so we need to handle minimum difficulty on all blocks.
 bool AllowDigishieldMinDifficultyForBlock(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
-    // check if the chain allows minimum difficulty blocks
     if (!params.fPowAllowMinDifficultyBlocks)
         return false;
 
-    // check if the chain allows minimum difficulty blocks on recalc blocks
     if (!params.fPowAllowDigishieldMinDifficultyBlocks)
         return false;
 
-    // Allow for a minimum block time if the elapsed time > 8*nTargetSpacing = 4mins at 30 sec block times
-    return (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing*8);
+    return (pblock->GetBlockTime() > pindexLast->GetBlockTime() + params.nPowTargetSpacing * 8);
 }
 
 unsigned int CalculateAustraliaCashNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
 {
     int nHeight = pindexLast->nHeight + 1;
-    const int64_t retargetTimespan = params.nPowTargetTimespan;
-    const int64_t nActualTimespan = pindexLast->GetBlockTime() - nFirstBlockTime;
+    int64_t retargetTimespan = params.nPowTargetTimespan;
+    int64_t nActualTimespan = pindexLast->GetBlockTime() - nFirstBlockTime;
     int64_t nModulatedTimespan = nActualTimespan;
     int64_t nMaxTimespan;
     int64_t nMinTimespan;
 
-    if (params.fDigishieldDifficultyCalculation) //DigiShield implementation - thanks to RealSolid & WDC for this code
-    {
-        // amplitude filter - thanks to daft27 for this code
-        nModulatedTimespan = retargetTimespan + (nModulatedTimespan - retargetTimespan) / 8;
+    // Pre-block 1,000,000
+    if (nHeight < 1000000) {
+        if (params.fDigishieldDifficultyCalculation) {
+            nModulatedTimespan = retargetTimespan + (nModulatedTimespan - retargetTimespan) / 8;
+            nMinTimespan = retargetTimespan - (retargetTimespan / 4);
+            nMaxTimespan = retargetTimespan + (retargetTimespan / 2);
+        } else if (nHeight > 10000) {
+            nMinTimespan = retargetTimespan / 4;
+            nMaxTimespan = retargetTimespan * 4;
+        } else if (nHeight > 5000) {
+            nMinTimespan = retargetTimespan / 8;
+            nMaxTimespan = retargetTimespan * 4;
+        } else {
+            nMinTimespan = retargetTimespan / 16;
+            nMaxTimespan = retargetTimespan * 4;
+        }
+    }
+    // Post-block 1,000,000 - Adaptive adjustments
+    else {
+        // Shorter timespan and smoother adjustment
+        retargetTimespan = params.nPowTargetTimespan / 2;
+        nModulatedTimespan = retargetTimespan + (nModulatedTimespan - retargetTimespan) / 4;
 
-        nMinTimespan = retargetTimespan - (retargetTimespan / 4);
-        nMaxTimespan = retargetTimespan + (retargetTimespan / 2);
-    } else if (nHeight > 10000) {
-        nMinTimespan = retargetTimespan / 4;
-        nMaxTimespan = retargetTimespan * 4;
-    } else if (nHeight > 5000) {
-        nMinTimespan = retargetTimespan / 8;
-        nMaxTimespan = retargetTimespan * 4;
-    } else {
-        nMinTimespan = retargetTimespan / 16;
-        nMaxTimespan = retargetTimespan * 4;
+        // Limit difficulty changes to avoid spikes
+        nMinTimespan = retargetTimespan / 2;  // Halve the minimum timespan allowed
+        nMaxTimespan = retargetTimespan * 2;  // Double the maximum timespan allowed
+
+        // Introduce a difficulty averaging filter
+        int64_t nBlockTimeAvg = 0;
+        int nLookbackWindow = 10;
+        const CBlockIndex* pindexWalk = pindexLast;
+        for (int i = 0; i < nLookbackWindow && pindexWalk != nullptr; ++i) {
+            nBlockTimeAvg += pindexWalk->GetBlockTime();
+            pindexWalk = pindexWalk->pprev;
+        }
+        nBlockTimeAvg /= nLookbackWindow;
+
+        // If average block time exceeds 4x the target spacing, use minimum difficulty
+        if (nBlockTimeAvg > pindexLast->GetBlockTime() + params.nPowTargetSpacing * 4) {
+            return params.powLimit.GetCompact();
+        }
     }
 
-    // Limit adjustment step
+    // Apply limits to difficulty adjustments
     if (nModulatedTimespan < nMinTimespan)
         nModulatedTimespan = nMinTimespan;
     else if (nModulatedTimespan > nMaxTimespan)
@@ -79,6 +98,7 @@ unsigned int CalculateAustraliaCashNextWorkRequired(const CBlockIndex* pindexLas
     bnNew *= nModulatedTimespan;
     bnNew /= retargetTimespan;
 
+    // Ensure difficulty doesn't exceed the pow limit
     if (bnNew > bnPowLimit)
         bnNew = bnPowLimit;
 
@@ -87,29 +107,21 @@ unsigned int CalculateAustraliaCashNextWorkRequired(const CBlockIndex* pindexLas
 
 bool CheckAuxPowProofOfWork(const CBlockHeader& block, const Consensus::Params& params)
 {
-    /* Except for legacy blocks with full version 1, ensure that
-       the chain ID is correct.  Legacy blocks are not allowed since
-       the merge-mining start, which is checked in AcceptBlockHeader
-       where the height is known.  */
     if (!block.IsLegacy() && params.fStrictChainId && block.GetChainId() != params.nAuxpowChainId)
         return error("%s : block does not have our chain ID"
                      " (got %d, expected %d, full nVersion %d)",
                      __func__, block.GetChainId(),
                      params.nAuxpowChainId, block.nVersion);
 
-    /* If there is no auxpow, just check the block hash.  */
     if (!block.auxpow) {
         if (block.IsAuxpow())
-            return error("%s : no auxpow on block with auxpow version",
-                         __func__);
+            return error("%s : no auxpow on block with auxpow version", __func__);
 
         if (!CheckProofOfWork(block.GetPoWHash(), block.nBits, params))
             return error("%s : non-AUX proof of work failed", __func__);
 
         return true;
     }
-
-    /* We have auxpow.  Check it.  */
 
     if (!block.IsAuxpow())
         return error("%s : auxpow on block with non-auxpow version", __func__);
@@ -129,13 +141,10 @@ CAmount GetAustraliaCashBlockSubsidy(int nHeight, const Consensus::Params& conse
 
     if (!consensusParams.fSimplifiedRewards)
     {
-        // Old-style rewards - 50 per block
         return (50 * COIN) >> halvings;
     } else if (nHeight < 1480000) {
-        // New-style 10 per block to finish 4 year emission schedule
         return 10 * COIN;
     } else {
-        // Constant inflation
         return (5 * COIN) >> halvings5;
     }
 }
