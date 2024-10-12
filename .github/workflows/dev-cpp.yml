@@ -70,12 +70,20 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: ${{ env.SOURCE_ARTIFACT }}
+    
+    # Debugging: List files in source directory
+    - name: Check source directory content
+      run: ls -R source
+    
     - name: Extract Archives
       run: |
+        # Ensure the file exists before attempting to move it
+        ls -la source
         mv source/australiacash-2.02.01.tar.gz .
         mv source/depends.tar.gz .
         tar -xzf depends.tar.gz
         tar -xzf australiacash-2.02.01.tar.gz --strip-components=1
+
     - name: Install Required Packages
       run: |
         sudo apt-get update
@@ -97,5 +105,6 @@ jobs:
       with:
         name: linux-ubu22-binaries
         path: ${{ env.ARTIFACT_DIR }}
+
 
 # Additional jobs for Windows, macOS, and Linux 20 will follow the same pattern.
