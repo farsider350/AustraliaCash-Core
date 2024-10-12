@@ -53,6 +53,10 @@ jobs:
       with:
         name: ${{ env.SOURCE_ARTIFACT }}
         path: ${{ env.ARTIFACT_DIR }}
+    - name: List Downloaded Files
+      run: |
+        ls -R source
+
 
   build-linux-22:
     name: Build for Linux 22
