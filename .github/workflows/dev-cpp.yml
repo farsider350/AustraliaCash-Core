@@ -70,6 +70,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: ${{ env.SOURCE_ARTIFACT }}
+        path: ${{ env.ARTIFACT_DIR }}
     
     # Debugging: List files in source directory
     - name: Check source directory content
