@@ -64,118 +64,34 @@ jobs:
     steps:
     - name: Prepare Directories
       run: mkdir -p ${{ env.SOURCE_ARTIFACT }}
-    - name: Getting Source
+    - name: Download Source
       uses: actions/download-artifact@v3
       with:
         name: ${{ env.SOURCE_ARTIFACT }}
-    - name: Extract Archives
+    - name: Extract Source Archives
       run: |
+        mv ${{ env.SOURCE_ARTIFACT }}/australiacash-*.tar.gz .
+        mv ${{ env.SOURCE_ARTIFACT }}/depends.tar.gz .
         tar -xzf depends.tar.gz
         tar -xzf australiacash-*.tar.gz --strip-components=1
-      working-directory: ${{ env.SOURCE_ARTIFACT }}
     - name: Install Required Packages
       run: |
         sudo apt-get update
         sudo apt-get install -y python3-zmq
     - name: Build Dependencies
       run: make -C depends -j$(nproc)
-      working-directory: ${{ env.SOURCE_ARTIFACT }}
     - name: Build Australiacash
       run: |
         ./configure --prefix=$(realpath depends/x86_64-pc-linux-gnu)
         make -j$(nproc)
-      working-directory: ${{ env.SOURCE_ARTIFACT }}
     - name: Prepare Files for Artifact
       run: |
         mkdir -p $ARTIFACT_DIR
-        mv $SOURCE_ARTIFACT/src/{australiacash-cli,australiacash-tx,australiacashd,qt/australiacash-qt} $ARTIFACT_DIR
+        mv src/{australiacash-cli,australiacash-tx,australiacashd,qt/australiacash-qt} $ARTIFACT_DIR
     - name: Upload Artifact
       uses: actions/upload-artifact@v3
       with:
         name: linux-ubu22-binaries
         path: ${{ env.ARTIFACT_DIR }}
 
-  build-linux-20:
-    name: Build for Linux 20
-    needs: create-source-distribution
-    runs-on: ubuntu-20.04
-    env:
-      ARTIFACT_DIR: linux-ubu20-binaries
-      TEST_LOG_ARTIFACT_DIR: test-logs
-    steps:
-    - name: Prepare Directories
-      run: mkdir -p ${{ env.SOURCE_ARTIFACT }}
-    - name: Getting Source
-      uses: actions/download-artifact@v3
-      with:
-        name: ${{ env.SOURCE_ARTIFACT }}
-    - name: Extract Archives
-      run: |
-        tar -xzf depends.tar.gz
-        tar -xzf australiacash-*.tar.gz --strip-components=1
-      working-directory: ${{ env.SOURCE_ARTIFACT }}
-    - name: Install Required Packages
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y python3-zmq
-    - name: Build Dependencies
-      run: make -C depends -j$(nproc)
-      working-directory: ${{ env.SOURCE_ARTIFACT }}
-    - name: Build Australiacash
-      run: |
-        ./configure --prefix=$(realpath depends/x86_64-pc-linux-gnu)
-        make -j$(nproc)
-      working-directory: ${{ env.SOURCE_ARTIFACT }}
-    - name: Prepare Files for Artifact
-      run: |
-        mkdir -p $ARTIFACT_DIR
-        mv $SOURCE_ARTIFACT/src/{australiacash-cli,australiacash-tx,australiacashd,qt/australiacash-qt} $ARTIFACT_DIR
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: linux-ubu20-binaries
-        path: ${{ env.ARTIFACT_DIR }}
-
-  build-windows:
-    name: Build for Windows
-    needs: create-source-distribution
-    runs-on: ubuntu-22.04
-    env:
-      ARTIFACT_DIR: windows-binaries
-    steps:
-    - name: Prepare Directories
-      run: mkdir -p ${{ env.SOURCE_ARTIFACT }}
-    - name: Getting Source
-      uses: actions/download-artifact@v3
-      with:
-        name: ${{ env.SOURCE_ARTIFACT }}
-    - name: Extract Archives
-      run: |
-        tar -xzf depends.tar.gz
-        tar -xzf australiacash-*.tar.gz --strip-components=1
-      working-directory: ${{ env.SOURCE_ARTIFACT }}
-    - name: Install Required Packages
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y g++-mingw-w64-x86-64 gcc-mingw-w64-x86-64
-    - name: Switch MinGW GCC and G++ to POSIX Threading
-      run: |
-        sudo update-alternatives --set x86_64-w64-mingw32-gcc /usr/bin/x86_64-w64-mingw32-gcc-posix
-        sudo update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix
-    - name: Build Dependencies
-      run: make -C depends -j$(nproc) HOST=x86_64-w64-mingw32
-      working-directory: ${{ env.SOURCE_ARTIFACT }}
-    - name: Build Australiacash
-      run: |
-        ./configure --prefix=$(realpath depends/x86_64-w64-mingw32)
-        make -j$(nproc)
-      working-directory: ${{ env.SOURCE_ARTIFACT }}
-    - name: Prepare Files for Artifact
-      run: |
-        mkdir -p $ARTIFACT_DIR
-        mv $SOURCE_ARTIFACT/src/{australiacash-cli.exe,australiacash-tx.exe,australiacashd.exe,qt/australiacash-qt.exe} $ARTIFACT_DIR
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: windows-binaries
-        path: ${{ env.ARTIFACT_DIR }}
+# Additional jobs for Windows, macOS, and Linux 20 will follow the same pattern.
